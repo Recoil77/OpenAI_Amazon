@@ -135,7 +135,10 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-
+archive/
+done/
+Download_doc/working/
+test/
 # Spyder project settings
 .spyderproject
 .spyproject
