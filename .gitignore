@@ -139,6 +139,8 @@ archive/
 done/
 Download_doc/working/
 test/
+catalog/
+pages_jpeg/
 # Spyder project settings
 .spyderproject
 .spyproject

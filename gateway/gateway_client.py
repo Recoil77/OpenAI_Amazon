@@ -28,7 +28,7 @@ class GatewayChatCompletion:
     @staticmethod
     async def create(**kwargs):
         payload = {"chat_completion": kwargs}
-        async with httpx.AsyncClient(timeout=900) as client:
+        async with httpx.AsyncClient(timeout=180) as client:
             response = await client.post(CHAT_URL, json=payload)
             response.raise_for_status()
             raw = response.json()

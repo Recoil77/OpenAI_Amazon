@@ -4,8 +4,8 @@ from pathlib import Path
 from PIL import Image
 
 # === Настройки ===
-INPUT_DIR = Path("Download_doc/working/tiff")      # Замените на нужную директорию
-OUTPUT_DIR = Path("Download_doc/working/jpeg") 
+INPUT_DIR = Path("done/30/tiff")      # Замените на нужную директорию
+OUTPUT_DIR = Path("done/30/jpeg") 
 OUTPUT_DIR.mkdir(exist_ok=True)
 
 # === Проход по всем .tiff ===

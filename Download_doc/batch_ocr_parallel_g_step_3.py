@@ -8,14 +8,16 @@ from aiofiles.os import path as aio_path
 from tqdm.asyncio import tqdm_asyncio
 from tqdm import tqdm
 
+number = "22"
+
 # === НАСТРОЙКИ ===
-INPUT_DIR = Path("Download_doc/working/jpeg")
-TMP_DIR = Path("Download_doc/working/tmp")
+INPUT_DIR = Path(f"done/{number}/jpeg")
+TMP_DIR = Path(f"done/{number}/tmp")
 # INPUT_DIR = Path("done/3/jpeg")
 # TMP_DIR = Path("done/3/tmp")
-FINAL_OUTPUT = Path("Download_doc/working/final_output.txt")
-ENDPOINT = "http://127.0.0.1:8000/ocr_main_text_o4mini"
-CONCURRENCY = 8  # Количество потоков
+FINAL_OUTPUT = Path(f"done/{number}/{number}.txt")
+ENDPOINT = "http://127.0.0.1:8000/ocr_main_text"
+CONCURRENCY = 1  # Количество потоков
 
 # === Создание tmp-папки ===
 TMP_DIR.mkdir(exist_ok=True)
@@ -35,7 +37,7 @@ async def process_batch(name, session, batch, total):
             data = aiohttp.FormData()
             data.add_field("file", img_data, filename=img_path.name, content_type="image/jpeg")
 
-            async with session.post(ENDPOINT, data=data, timeout=aiohttp.ClientTimeout(total=300)) as resp:
+            async with session.post(ENDPOINT, data=data, timeout=aiohttp.ClientTimeout(total=900)) as resp:
                 resp.raise_for_status()
                 result = await resp.json()
                 text = result.get("text", "").strip()
