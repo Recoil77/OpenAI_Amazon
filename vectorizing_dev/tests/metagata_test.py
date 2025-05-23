@@ -22,7 +22,7 @@ print(f"Year: {year}")
 print(f"Type: {doc_type}")
 
 # Делаем POST-запрос к локальному эндпоинту FastAPI
-url = "http://localhost:8000/generate_metadata"
+url = "http://192.168.168.5:8000/generate_metadata"
 headers = {"Content-Type": "application/json"}
 response = requests.post(url, headers=headers, json=chunk)
 
