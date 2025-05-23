@@ -5,7 +5,7 @@ API_URL = "https://historictext.org/search_pipeline"
 
 # 1) Настройки для пайплайна
 payload = {
-    "question": "description and location of the village Yaborac (Pepinum)",
+    "question": "description and location of the river Pogubu",
     "k": 16,
     "bge_threshold": 0.1,
     "semantic_threshold": 0.25
