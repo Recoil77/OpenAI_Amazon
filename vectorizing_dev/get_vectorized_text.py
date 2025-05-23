@@ -2,14 +2,15 @@ import asyncio
 import json
 import asyncpg
 from gateway.gateway_client import embedding
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
 # Текст для поиска похожих чанков
 TEXT_TO_SEARCH = """
 During that month, we had covered only about 110 kilometers, and had descended nearly 150 meters—the figures are approximate but fairly accurate
 """
-
-# Конфигурация подключения к PostgreSQL (pgvector)
-DATABASE_URL = "postgresql://postgres:Recoil_post_2002%23@db-dev.fullnode.pro/amazon"
+DATABASE_URL = env = os.getenv("DATABASE_URL")
 
 async def main():
     # 1) Получаем embedding для запроса

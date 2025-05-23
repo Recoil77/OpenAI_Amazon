@@ -1,53 +1,29 @@
-from fastapi import FastAPI, UploadFile, File
-from gateway.gateway_client import chat_completion
-from gateway.gateway_client import response_completion
-import pytesseract
-from PIL import Image
+# ====== Standard library imports ======
+import os
 import io
-from fastapi import FastAPI, Query
-from fastapi import FastAPI, Body
+import json
 import asyncio
-import asyncpg
-from gateway.gateway_client import embedding
-import tiktoken
-import torch
-from transformers import AutoTokenizer, AutoModelForSequenceClassification
+import base64
+import mimetypes
 from concurrent.futures import ThreadPoolExecutor
+
+# ====== Third-party imports ======
+import asyncpg
+import torch
+import tiktoken
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
+from fastapi import FastAPI, UploadFile, File, Query, HTTPException
 from pydantic import BaseModel
+from typing import Optional, List
+
+# ====== Local application imports ======
+from gateway.gateway_client import chat_completion, response_completion, embedding
 from dotenv import load_dotenv
 load_dotenv("/opt2/.env")
 
+DATABASE_URL = env = os.getenv("DATABASE_URL")
 
-DATABASE_URL = "postgresql://postgres:Recoil_post_2002%23@db-dev.fullnode.pro/amazon"
 app = FastAPI()
-
-
-from fastapi import UploadFile, File
-from pdf2image import convert_from_bytes
-import os
-
-from pydantic import BaseModel
-from typing import Optional
-import json 
-
-
-import base64
-import json
-import textwrap
-import mimetypes
-
-from typing import List, Dict, Any
-from fastapi import FastAPI, UploadFile, File, HTTPException
-from pydantic import BaseModel
-from fastapi import UploadFile, File
-from pydantic import BaseModel
-from typing import List
-import base64, mimetypes, json
-import textwrap
-
-from gateway.gateway_client import chat_completion
-
-
 
 def _file_to_data_uri(upload: UploadFile) -> str:
     data = upload.file.read()
@@ -68,7 +44,7 @@ def _file_to_data_uri(upload: UploadFile) -> str:
 @app.post("/ocr_main_text")
 async def ocr_main_text_strict_json(
     file: UploadFile = File(...),
-    model: str = "gpt-4o-2024-11-20" #,   "gpt-4.1-2025-04-14"
+    model: str = "gpt-4.1-2025-04-14" #,    "gpt-4o-2024-11-20"
 ):
     img_uri = _file_to_data_uri(file)
 
@@ -489,6 +465,9 @@ async def rerank_semantic_v5(request: RerankSemanticV5Request):
 
 
 
+# Semaphore to limit concurrent fact extraction calls
+data_fetch_semaphore = asyncio.Semaphore(8)
+
 class PipelineRequest(BaseModel):
     question: str
     k: int = 10
@@ -503,6 +482,7 @@ class ChunkPipelineResult(BaseModel):
     text: str
     bge_score: float
     semantic_score: float
+    facts: List[str]
 
 @app.post("/search_pipeline", response_model=List[ChunkPipelineResult])
 async def search_pipeline(req: PipelineRequest):
@@ -511,17 +491,42 @@ async def search_pipeline(req: PipelineRequest):
         refine_resp = await refine_query(RefineQueryRequest(query=req.question))
         refined = refine_resp["refined_query"]
 
+        # 1.1) Internal knowledge source
+        kn_resp = await general_knowledge(KnowledgeRequest(question=req.question))
+        knowledge_text = kn_resp["knowledge_answer"]
+        knowledge_meta = {
+            "year": "internal",
+            "doc_name": "general_knowledge",
+            "doc_type": "internal",
+            "chunk_index": -1,
+            "text": knowledge_text
+        }
+
         # 2) Vector search
-        vec_resp = await vector_search(VectorSearchRequest(query=refined, k=req.k))
+        if req.k >128:
+            k_ = 128
+        else:
+            k_ = req.k
+        vec_resp = await vector_search(VectorSearchRequest(query=refined, k=k_))
         vec_results = vec_resp["results"]
 
+        # Combine internal knowledge and document chunks
+        docs_meta = [knowledge_meta] + vec_results
+
         # 3) BGE rerank (pre-filter)
-        bge_req = RerankRequest(question=refined, answers=[d["text"] for d in vec_results], threshold=req.bge_threshold)
+        bge_req = RerankRequest(
+            question=refined,
+            answers=[d["text"] for d in docs_meta],
+            threshold=req.bge_threshold
+        )
         bge_resp = await rerank_bge_endpoint(bge_req)
         bge_results = bge_resp["results"]
 
         # 4) LLM semantic rerank
-        semantic_cands = [{"block_id": r["index"], "text": r["text"]} for r in bge_results]
+        semantic_cands = [
+            {"block_id": r["index"], "text": r["text"]}
+            for r in bge_results
+        ]
         sem_req = RerankSemanticV5Request(
             question=refined,
             candidates=semantic_cands,
@@ -529,27 +534,52 @@ async def search_pipeline(req: PipelineRequest):
         )
         sem_resp = await rerank_semantic_v5(sem_req)
 
-        # 5) Assemble final chunks
+        # 5) Assemble final chunks with scores
         final = []
         for item in sem_resp:
             bid = item["block_id"]
             sem_score = item["score"]
-            # find the corresponding BGE entry
             bge_entry = next(r for r in bge_results if r["index"] == bid)
-            meta = vec_results[bid]
-            final.append(ChunkPipelineResult(
-                year=meta["year"],
-                doc_name=meta["doc_name"],
-                doc_type=meta["doc_type"],
-                chunk_index=meta["chunk_index"],
-                text=meta["text"],
-                bge_score=bge_entry["score"],
-                semantic_score=sem_score
-            ))
-        return final
+            meta = docs_meta[bid]
+            final.append({
+                "year": meta["year"],
+                "doc_name": meta["doc_name"],
+                "doc_type": meta["doc_type"],
+                "chunk_index": meta["chunk_index"],
+                "text": meta["text"],
+                "bge_score": bge_entry["score"],
+                "semantic_score": sem_score
+            })
+
+        # 6) Extract facts per chunk in parallel
+        async def fetch_facts(idx, chunk_text):
+            async with data_fetch_semaphore:
+                fact_req = ExtractFactsRequest(
+                    question=req.question,
+                    chunks=[ChunkCandidate(chunk_id=idx, text=chunk_text)]
+                )
+                fr = await extract_facts(fact_req)
+                return (idx, fr[0].facts if fr else [])
+
+        # Launch concurrent fact extraction tasks
+        tasks = [fetch_facts(idx, chunk["text"]) for idx, chunk in enumerate(final)]
+        facts_results = await asyncio.gather(*tasks)
+
+        # 7) Merge facts into final
+        enriched = []
+        for idx, chunk in enumerate(final):
+            # find facts for this chunk
+            facts = next((facts for i, facts in facts_results if i == idx), [])
+            chunk["facts"] = facts
+            enriched.append(chunk)
+
+        # Return enriched results as Pydantic models
+        return [ChunkPipelineResult(**c) for c in enriched]
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+
     
 
 class KnowledgeRequest(BaseModel):
@@ -562,13 +592,16 @@ class KnowledgeResponse(BaseModel):
 async def general_knowledge(req: KnowledgeRequest):
     # System prompt: instruct model to use internal knowledge and limit length to ~3000 characters
     system_prompt = (
-        "You are a domain expert with broad historical and geographical knowledge. "
-        "Answer the user’s question based solely on your internal knowledge. "
-        "Limit your response to approximately 3000 characters. "
-        "If your comprehensive answer exceeds this limit, compress it to fit within 3000 characters, preserving all key points. "
-        "If your full answer is shorter, do not expand unnecessarily. "
-        "Return ONLY the answer text, without any additional formatting, explanations, or metadata."
-    )
+    "You are an LLM specialized in providing general factual answers based solely on your internal knowledge. "
+    "Only answer questions that ask for widely known, context-independent facts. "
+    "If a question depends on user-provided documents, images, or first-person context, immediately return "
+    "{\"knowledge_answer\": \"\"}. "
+    "Limit your reply to approximately 3000 characters. If your full answer would exceed that, compress it "
+    "to fit while preserving all key points. "
+    "If your natural answer is shorter, do not pad or expand it. "
+    "Return exactly a JSON object with a single field \"knowledge_answer\" containing only the answer text—"
+    "no explanations, formatting, or extra fields."
+)
 
     # Prepare messages
     messages = [
@@ -587,3 +620,50 @@ async def general_knowledge(req: KnowledgeRequest):
     # Extract and return the answer
     answer = response.choices[0].message.content.strip()
     return {"knowledge_answer": answer}
+
+class ChunkCandidate(BaseModel):
+    chunk_id: int
+    text: str
+
+class ExtractFactsRequest(BaseModel):
+    question: str
+    chunks: List[ChunkCandidate]
+
+class ChunkFacts(BaseModel):
+    chunk_id: int
+    facts: List[str]
+
+@app.post("/extract_facts", response_model=List[ChunkFacts])
+async def extract_facts(req: ExtractFactsRequest):
+    # System prompt for fact extraction
+    system_prompt = (
+        "You are a fact extraction assistant. "
+        "Given a user question and a text fragment, extract only those facts from the fragment that directly answer or support the question. "
+        "Return a JSON array of objects, each with fields 'chunk_id' and 'facts', where 'facts' is a list of concise fact strings. "
+        "Do not include any additional commentary or formatting."
+    )
+
+    messages = [
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": json.dumps({"question": req.question, "chunks": [{"chunk_id": c.chunk_id, "text": c.text} for c in req.chunks]})}
+    ]
+
+    try:
+        resp = await chat_completion.create(
+            model="gpt-4.1-2025-04-14",
+            messages=messages,
+            temperature=0
+        )
+        content = resp.choices[0].message.content.strip()
+        # Parse the response as JSON
+        parsed = json.loads(content)
+        # Validate and convert to output model
+        results: List[ChunkFacts] = []
+        for entry in parsed:
+            results.append(ChunkFacts(
+                chunk_id=int(entry.get("chunk_id")),
+                facts=entry.get("facts", [])
+            ))
+        return results
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Fact extraction failed: {e}")

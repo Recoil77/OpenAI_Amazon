@@ -2,21 +2,24 @@ import asyncio
 import json
 import uuid
 from pathlib import Path
-
 import asyncpg
 import httpx
 from tqdm import tqdm
-
 from gateway.gateway_client import embedding
+import os
+from dotenv import load_dotenv
+load_dotenv("/opt2/.env")
+
+number = "1"
 
 # 1) Конфигурация
-CHUNKS_DIR = Path("done/19/chunks_json")
-METADATA_URL = "http://localhost:8000/generate_metadata"
-DATABASE_URL = "postgresql://postgres:Recoil_post_2002%23@db-dev.fullnode.pro/amazon"
+CHUNKS_DIR = Path(f"docs/{number}/chunks_json")
+METADATA_URL = "http://192.168.168.5:8000/generate_metadata"
+DATABASE_URL = env = os.getenv("DATABASE_URL")
 
 # 2) Параметры документа (должны быть заданы вручную)
-#DOCUMENT_UUID = uuid.uuid4() # uuid.UUID("123e4567-e89b-12d3-a456-426614174000")
-DOCUMENT_UUID = uuid.UUID("b7a22453-f532-47ea-94f4-f41660d6d188")
+DOCUMENT_UUID = uuid.uuid4() # uuid.UUID("123e4567-e89b-12d3-a456-426614174000")
+#DOCUMENT_UUID = uuid.UUID("b7a22453-f532-47ea-94f4-f41660d6d188")
 
 DOCUMENT_NAME = "Dritte Buch Americae : darinn Brasilia durch Johann Staden auss eigener Erfahrung in teutsch beschrieben"
 YEAR = 1610

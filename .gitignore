@@ -141,6 +141,10 @@ Download_doc/working/
 test/
 catalog/
 pages_jpeg/
+tiff/
+jpeg/
+tmp/
+chunks_json/
 # Spyder project settings
 .spyderproject
 .spyproject

@@ -8,16 +8,15 @@ from aiofiles.os import path as aio_path
 from tqdm.asyncio import tqdm_asyncio
 from tqdm import tqdm
 
-number = "22"
+number = "1"
 
 # === НАСТРОЙКИ ===
-INPUT_DIR = Path(f"done/{number}/jpeg")
-TMP_DIR = Path(f"done/{number}/tmp")
-# INPUT_DIR = Path("done/3/jpeg")
-# TMP_DIR = Path("done/3/tmp")
-FINAL_OUTPUT = Path(f"done/{number}/{number}.txt")
-ENDPOINT = "http://127.0.0.1:8000/ocr_main_text"
-CONCURRENCY = 1  # Количество потоков
+INPUT_DIR = Path(f"docs/{number}/jpeg")
+TMP_DIR = Path(f"docs/{number}/tmp")
+
+FINAL_OUTPUT = Path(f"docs/{number}/{number}.txt")
+ENDPOINT = "http://192.168.168.5:8000/ocr_main_text"
+CONCURRENCY = 8  # Количество потоков
 
 # === Создание tmp-папки ===
 TMP_DIR.mkdir(exist_ok=True)

@@ -3,9 +3,11 @@ import os
 from pathlib import Path
 from PIL import Image
 
+number = "1"
+
 # === Настройки ===
-INPUT_DIR = Path("done/30/tiff")      # Замените на нужную директорию
-OUTPUT_DIR = Path("done/30/jpeg") 
+INPUT_DIR = Path(f"docs/{number}/tiff")      # Замените на нужную директорию
+OUTPUT_DIR = Path(f"docs/{number}/jpeg") 
 OUTPUT_DIR.mkdir(exist_ok=True)
 
 # === Проход по всем .tiff ===

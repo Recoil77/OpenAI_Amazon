@@ -6,7 +6,8 @@ BASE = "http://localhost:8000"
 test_questions = [
     "Who founded the city of Manaus and in which year?",
     "What are the main geographical features of the Amazon Basin?",
-    "What is the significance of the Portuguese fort São José da Barra do Rio Negro?"
+    "What is the significance of the Portuguese fort São José da Barra do Rio Negro?",
+    "we found people near the bridge of Bakska"
 ]
 
 for question in test_questions:

@@ -12,7 +12,7 @@ refined = r1.json()["refined_query"]
 print("Refined query:", refined)
 
 # 3) Vector search
-K = 32
+K = 16
 r2 = requests.post(f"{BASE}/vector_search", json={"query": refined, "k": K})
 r2.raise_for_status()
 cands = r2.json()["results"]
