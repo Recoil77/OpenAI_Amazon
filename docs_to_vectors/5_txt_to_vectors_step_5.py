@@ -10,7 +10,7 @@ import os
 from dotenv import load_dotenv
 load_dotenv("/opt2/.env")
 
-number = "1"
+number = "37"
 
 # 1) Конфигурация
 CHUNKS_DIR = Path(f"docs/{number}/chunks_json")
@@ -19,11 +19,11 @@ DATABASE_URL = env = os.getenv("DATABASE_URL")
 
 # 2) Параметры документа (должны быть заданы вручную)
 DOCUMENT_UUID = uuid.uuid4() # uuid.UUID("123e4567-e89b-12d3-a456-426614174000")
-#DOCUMENT_UUID = uuid.UUID("b7a22453-f532-47ea-94f4-f41660d6d188")
+#DOCUMENT_UUID = uuid.UUID("e1fb581a-651c-4598-8fd8-a6b340e37dae")
 
-DOCUMENT_NAME = "Dritte Buch Americae : darinn Brasilia durch Johann Staden auss eigener Erfahrung in teutsch beschrieben"
-YEAR = 1610
-DOC_TYPE = "book" # , , "map" "book"  "diary"   
+DOCUMENT_NAME = "Tratados da terra e gente do Brasil, Cardim Fernão"
+YEAR = 1583
+DOC_TYPE = "book" # , , "map"   "diary"  "manuscript" 
 
 # 3) Параллелизм: число одновременных задач
 MAX_CONCURRENT = 12

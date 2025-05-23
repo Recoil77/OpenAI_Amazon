@@ -2,7 +2,7 @@
 
 import json, pathlib, sys, requests, tqdm
 from urllib.parse import urlparse
-number = "1"
+number = "31"
 # === НАСТРОЙКИ ===
 MANIFEST = pathlib.Path(f"docs/{number}/{number}.json")
 OUT = pathlib.Path(f"docs/{number}/jpeg")

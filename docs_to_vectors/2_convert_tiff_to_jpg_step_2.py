@@ -3,7 +3,7 @@ import os
 from pathlib import Path
 from PIL import Image
 
-number = "1"
+number = "34"
 
 # === Настройки ===
 INPUT_DIR = Path(f"docs/{number}/tiff")      # Замените на нужную директорию

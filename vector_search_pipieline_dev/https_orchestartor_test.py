@@ -6,7 +6,7 @@ API_URL = "https://historictext.org/search_pipeline"
 # 1) Настройки для пайплайна
 payload = {
     "question": "description and location of the river Pogubu",
-    "k": 16,
+    "k": 128,
     "bge_threshold": 0.1,
     "semantic_threshold": 0.25
 }

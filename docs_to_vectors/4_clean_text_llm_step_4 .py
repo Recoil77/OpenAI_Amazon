@@ -7,7 +7,7 @@ from tqdm import tqdm
 
 # === SETTINGS ===
 WORKERS = 8
-number = "1"
+number = "38"
 INPUT_FILE = Path(f"docs/{number}/{number}.txt")
 OUTPUT_DIR = Path(f"docs/{number}/chunks_json")
 FINAL_OUTPUT = Path(f"docs/{number}/{number}_final.txt")

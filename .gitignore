@@ -145,6 +145,8 @@ tiff/
 jpeg/
 tmp/
 chunks_json/
+docs/
+
 # Spyder project settings
 .spyderproject
 .spyproject

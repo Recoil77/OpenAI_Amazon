@@ -5,15 +5,13 @@ import json
 from pathlib import Path
 from aiofiles import open as aio_open
 from aiofiles.os import path as aio_path
-from tqdm.asyncio import tqdm_asyncio
 from tqdm import tqdm
 
-number = "1"
+number = "37"
 
 # === НАСТРОЙКИ ===
 INPUT_DIR = Path(f"docs/{number}/jpeg")
 TMP_DIR = Path(f"docs/{number}/tmp")
-
 FINAL_OUTPUT = Path(f"docs/{number}/{number}.txt")
 ENDPOINT = "http://192.168.168.5:8000/ocr_main_text"
 CONCURRENCY = 8  # Количество потоков
@@ -21,7 +19,7 @@ CONCURRENCY = 8  # Количество потоков
 # === Создание tmp-папки ===
 TMP_DIR.mkdir(exist_ok=True)
 
-async def process_batch(name, session, batch, total):
+async def process_batch(name, session, batch):
     bar = tqdm(batch, desc=f"Поток {name}", position=name, leave=False)
     for img_path in bar:
         tmp_path = TMP_DIR / (img_path.stem + ".json")
@@ -61,19 +59,25 @@ async def main():
 
     async with aiohttp.ClientSession() as session:
         tasks = [
-            process_batch(i, session, chunk, total)
+            process_batch(i, session, chunk)
             for i, chunk in enumerate(chunks)
         ]
         await asyncio.gather(*tasks)
 
-    # Проверяем, всё ли обработано
+    # Проверяем, что обработано
     tmp_files = sorted(TMP_DIR.glob("*.json"))
-    if len(tmp_files) < total:
-        print(f"⏸ Всего обработано: {len(tmp_files)} из {total}. Итог не собирается.")
+    processed = len(tmp_files)
+
+    if processed < total:
+        print(f"⏸ Всего обработано: {processed} из {total}.")
+        missing = [img.name for img in images if not (TMP_DIR / (img.stem + ".json")).exists()]
+        if missing:
+            print("❗ Не обработаны следующие изображения:")
+            for name in missing:
+                print(f" - {name}")
         return
 
-
-
+    print(f"✅ Все изображения обработаны: {processed} из {total}.")
     print("📦 Собираем финальный файл…")
 
     async with aio_open(FINAL_OUTPUT, "w", encoding="utf-8") as out:
@@ -89,11 +93,9 @@ async def main():
                     "extracted main body text", "respuesta ocr", "json", "output:"
                 ]
                 while lines and any(p in lines[0].lower() for p in junk_prefixes):
-                    lines = lines[1:]
+                    lines.pop(0)
 
                 clean_text = "\n".join(lines).strip()
-
-                # 💾 Записываем без метки filename, только текст
                 await out.write(clean_text + "\n\n")
 
     print(f"✅ Финальный файл сохранён в {FINAL_OUTPUT}")
