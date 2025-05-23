@@ -32,6 +32,7 @@ Unlike most solutions, this is not a Jupyter notebook but a modular, production-
 - `/search_pipeline` — orchestrate the entire pipeline for end-to-end search.
 - `/extract_facts` — extract structured facts from text fragments.
 - `/general_knowledge` — LLM-generated background info (when relevant).
+- `/web_search` — use external web search to augment answers when needed.
 
 ## Examples
 
@@ -42,6 +43,10 @@ https://www.kaggle.com/code/antonsibilev/amazon-data-bridge-v2
 
 - Some images are not fully processed by the LLM — pipeline coverage is not always 100%.
 - Web search module is planned, not yet implemented.
+
+## Roadmap
+
+We are actively developing a controller and research LLM architecture for orchestrating deep search and reasoning across a multi-source pipeline. Upcoming milestones include a mixed-batch fact extractor, dynamic prompt generation, and advanced hypothesis building for historical data exploration.
 
 ## Contacts
 
