@@ -146,6 +146,7 @@ jpeg/
 tmp/
 chunks_json/
 docs/
+lidar/
 
 # Spyder project settings
 .spyderproject

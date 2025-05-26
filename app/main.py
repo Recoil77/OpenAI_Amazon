@@ -166,12 +166,14 @@ class MetadataResponse(BaseModel):
 PROMPT_TEMPLATE = (
     "Analyze the provided text and identify a comprehensive list of unique, meaningful "
     "references useful for semantic search. Include proper names, locations, specialized terms, "
-    "and distinctive contextual markers. Avoid generic or redundant words.\n\n"
+    "and distinctive contextual markers. "
+    "If present, also include terms related to archaeological or historical features or phenomena, "
+    "even if these are not explicitly named as such. "
+    "Avoid generic or redundant words.\n\n"
     "Respond only with valid JSON:\n"
     "{{\n  \"entities\": [\"...\", \"...\", \"...\"]\n}}\n"
     "Text:\n---\n{TEXT}\n---"
 )
-
 @app.post(
     "/generate_metadata",
     response_model=MetadataResponse,
@@ -475,6 +477,8 @@ class PipelineRequest(BaseModel):
     k: int = 10
     bge_threshold: float = 0.25
     semantic_threshold: float = 0.25
+    use_web: bool = False        # **новое**: включить web-поиск
+    use_kb: bool = False         # **новое**: включить internal knowledge
 
 class ChunkPipelineResult(BaseModel):
     year: str
@@ -493,41 +497,49 @@ async def search_pipeline(req: PipelineRequest):
         refine_resp = await refine_query(RefineQueryRequest(query=req.question))
         refined = refine_resp["refined_query"]
 
-        # 1.1) Internal knowledge & web search in parallel
-        kn_task = asyncio.create_task(
-            general_knowledge(KnowledgeRequest(question=req.question))
-        )
-        web_task = asyncio.create_task(
-            web_search_endpoint(WebSearchRequest(query=req.question))
-        )
-        kn_resp, web_resp = await asyncio.gather(kn_task, web_task)
+        # 1.1) Optional internal KB and web search
+        kn_resp = None
+        web_resp = None
 
-        # Build metadata for internal knowledge
-        knowledge_text = kn_resp["knowledge_answer"]
-        knowledge_meta = {
-            "year": "internal",
-            "doc_name": "general_knowledge",
-            "doc_type": "internal",
-            "chunk_index": -1,
-            "text": knowledge_text
-        }
-        # Build metadata for web search
-        web_text = web_resp["answer"]
-        web_meta = {
-            "year": "web",
-            "doc_name": "web_search",
-            "doc_type": "web",
-            "chunk_index": -2,
-            "text": web_text
-        }
+        if req.use_kb and req.use_web:
+            kn_task = asyncio.create_task(
+                general_knowledge(KnowledgeRequest(question=req.question))
+            )
+            web_task = asyncio.create_task(
+                web_search_endpoint(WebSearchRequest(query=req.question))
+            )
+            kn_resp, web_resp = await asyncio.gather(kn_task, web_task)
+
+        elif req.use_kb:
+            kn_resp = await general_knowledge(KnowledgeRequest(question=req.question))
+
+        elif req.use_web:
+            web_resp = await web_search_endpoint(WebSearchRequest(query=req.question))
+
+        # Build docs_meta list in the order of tasks
+        docs_meta = []
+        if kn_resp:
+            docs_meta.append({
+                "year": "internal",
+                "doc_name": "general_knowledge",
+                "doc_type": "internal",
+                "chunk_index": -1,
+                "text": kn_resp["knowledge_answer"]
+            })
+        if web_resp:
+            docs_meta.append({
+                "year": "web",
+                "doc_name": "web_search",
+                "doc_type": "web",
+                "chunk_index": -2,
+                "text": web_resp["answer"]
+            })
 
         # 2) Vector search (cap k at 128)
         k_ = min(req.k, 128)
         vec_resp = await vector_search(VectorSearchRequest(query=refined, k=k_))
         vec_results = vec_resp["results"]
-
-        # Combine all source metadata
-        docs_meta = [knowledge_meta, web_meta] + vec_results
+        docs_meta.extend(vec_results)
 
         # 3) BGE rerank (pre-filter)
         bge_req = RerankRequest(
@@ -577,17 +589,14 @@ async def search_pipeline(req: PipelineRequest):
                 fr = await extract_facts(fact_req)
                 return (idx, fr[0].facts if fr else [])
 
-        tasks = [fetch_facts(idx, chunk["text"]) for idx, chunk in enumerate(final)]
+        tasks = [fetch_facts(i, c["text"]) for i, c in enumerate(final)]
         facts_results = await asyncio.gather(*tasks)
 
         # 7) Merge facts into final
-        enriched = []
-        for idx, chunk in enumerate(final):
-            facts = next((facts for i, facts in facts_results if i == idx), [])
-            chunk["facts"] = facts
-            enriched.append(chunk)
+        for idx, facts in facts_results:
+            final[idx]["facts"] = facts
 
-        return [ChunkPipelineResult(**c) for c in enriched]
+        return [ChunkPipelineResult(**chunk) for chunk in final]
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
