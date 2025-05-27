@@ -8,7 +8,7 @@ import mimetypes
 from concurrent.futures import ThreadPoolExecutor
 from fastapi.concurrency import run_in_threadpool
 from openai import OpenAI
-
+from uuid import UUID
 # ====== Third-party imports ======
 import asyncpg
 import torch
@@ -16,7 +16,7 @@ import tiktoken
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from fastapi import FastAPI, UploadFile, File, Query, HTTPException, Body
 from pydantic import BaseModel
-from typing import Optional, List
+from typing import Optional, List, Dict
 
 # ====== Local application imports ======
 from gateway.gateway_client import chat_completion, response_completion, embedding
@@ -267,9 +267,86 @@ async def vector_search(req: VectorSearchRequest):
     ]
     return {"results": results}
 
+class VectorSearchV2Request(BaseModel):
+    query: str
+    k: Optional[int] = 10
 
+class VectorSearchV2Result(BaseModel):
+    document_id: UUID
+    doc_name: str
+    year: int
+    doc_type: str
+    chunk_index: int
+    text: str
+    score: float  # cosine distance
+    metadata_original: Dict
+    metadata_translated: Dict
 
+@app.post("/vector_search_v2", response_model=List[VectorSearchV2Result])
+async def vector_search_v2(req: VectorSearchV2Request):
+    # 1) Получаем embedding
+    emb_resp = await embedding.create(input=req.query, model="text-embedding-3-small")
+    raw_vector = emb_resp["data"][0]["embedding"]
+    vector_str = "[" + ",".join(str(x) for x in raw_vector) + "]"
 
+    # 2) query database
+    try:
+        conn = await asyncpg.connect(DATABASE_URL)
+        # увеличить число проб в ivfflat для поиска
+        await conn.execute("SET ivfflat.probes = 128")
+        rows = await conn.fetch(
+            """
+            SELECT
+              document_id,
+              doc_name,
+              year,
+              doc_type,
+              chunk_index,
+              cleaned_text   AS text,
+              metadata_original,
+              metadata_translated,
+              embedding <=> $1 AS score
+            FROM public.chunks_metadata_v2
+            ORDER BY embedding <=> $1
+            LIMIT $2
+            """,
+            vector_str,
+            req.k
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"DB error: {e}")
+    finally:
+        await conn.close()
+
+    # 3) build response
+    results: List[VectorSearchV2Result] = []
+    for row in rows:
+        # parse metadata fields if they are JSON strings
+        orig = row["metadata_original"]
+        if isinstance(orig, str):
+            try:
+                orig = json.loads(orig)
+            except json.JSONDecodeError:
+                orig = {}
+        trans = row["metadata_translated"]
+        if isinstance(trans, str):
+            try:
+                trans = json.loads(trans)
+            except json.JSONDecodeError:
+                trans = {}
+
+        results.append(VectorSearchV2Result(
+            document_id=row["document_id"],
+            doc_name=row["doc_name"],
+            year=row["year"],
+            doc_type=row["doc_type"],
+            chunk_index=row["chunk_index"],
+            text=row["text"],
+            score=row["score"],
+            metadata_original=orig,
+            metadata_translated=trans,
+        ))
+    return results
 
 class RefineQueryRequest(BaseModel):
     query: str
@@ -469,19 +546,149 @@ async def rerank_semantic_v5(request: RerankSemanticV5Request):
 
 
 
-# Semaphore to limit concurrent fact extraction calls
-data_fetch_semaphore = asyncio.Semaphore(8)
+# # Semaphore to limit concurrent fact extraction calls
+# data_fetch_semaphore = asyncio.Semaphore(8)
+
+# class PipelineRequest(BaseModel):
+#     question: str
+#     k: int = 10
+#     bge_threshold: float = 0.25
+#     semantic_threshold: float = 0.25
+#     use_web: bool = False        # **новое**: включить web-поиск
+#     use_kb: bool = False         # **новое**: включить internal knowledge
+
+# class ChunkPipelineResult(BaseModel):
+#     year: str
+#     doc_name: str
+#     doc_type: str
+#     chunk_index: int
+#     text: str
+#     bge_score: float
+#     semantic_score: float
+#     facts: List[str]
+
+# @app.post("/search_pipeline", response_model=List[ChunkPipelineResult])
+# async def search_pipeline(req: PipelineRequest):
+#     try:
+#         # 1) Refine the query
+#         refine_resp = await refine_query(RefineQueryRequest(query=req.question))
+#         refined = refine_resp["refined_query"]
+
+#         # 1.1) Optional internal KB and web search
+#         kn_resp = None
+#         web_resp = None
+
+#         if req.use_kb and req.use_web:
+#             kn_task = asyncio.create_task(
+#                 general_knowledge(KnowledgeRequest(question=req.question))
+#             )
+#             web_task = asyncio.create_task(
+#                 web_search_endpoint(WebSearchRequest(query=req.question))
+#             )
+#             kn_resp, web_resp = await asyncio.gather(kn_task, web_task)
+
+#         elif req.use_kb:
+#             kn_resp = await general_knowledge(KnowledgeRequest(question=req.question))
+
+#         elif req.use_web:
+#             web_resp = await web_search_endpoint(WebSearchRequest(query=req.question))
+
+#         # Build docs_meta list in the order of tasks
+#         docs_meta = []
+#         if kn_resp:
+#             docs_meta.append({
+#                 "year": "internal",
+#                 "doc_name": "general_knowledge",
+#                 "doc_type": "internal",
+#                 "chunk_index": -1,
+#                 "text": kn_resp["knowledge_answer"]
+#             })
+#         if web_resp:
+#             docs_meta.append({
+#                 "year": "web",
+#                 "doc_name": "web_search",
+#                 "doc_type": "web",
+#                 "chunk_index": -2,
+#                 "text": web_resp["answer"]
+#             })
+
+#         # 2) Vector search (cap k at 128)
+#         k_ = min(req.k, 128)
+#         vec_resp = await vector_search(VectorSearchRequest(query=refined, k=k_))
+#         vec_results = vec_resp["results"]
+#         docs_meta.extend(vec_results)
+
+#         # 3) BGE rerank (pre-filter)
+#         bge_req = RerankRequest(
+#             question=refined,
+#             answers=[d["text"] for d in docs_meta],
+#             threshold=req.bge_threshold
+#         )
+#         bge_resp = await rerank_bge_endpoint(bge_req)
+#         bge_results = bge_resp["results"]
+
+#         # 4) LLM semantic rerank
+#         semantic_cands = [
+#             {"block_id": r["index"], "text": r["text"]}
+#             for r in bge_results
+#         ]
+#         sem_req = RerankSemanticV5Request(
+#             question=refined,
+#             candidates=semantic_cands,
+#             threshold=req.semantic_threshold
+#         )
+#         sem_resp = await rerank_semantic_v5(sem_req)
+
+#         # 5) Assemble final chunks with scores
+#         final = []
+#         for item in sem_resp:
+#             bid = item["block_id"]
+#             sem_score = item["score"]
+#             bge_entry = next(r for r in bge_results if r["index"] == bid)
+#             meta = docs_meta[bid]
+#             final.append({
+#                 "year": meta["year"],
+#                 "doc_name": meta["doc_name"],
+#                 "doc_type": meta["doc_type"],
+#                 "chunk_index": meta["chunk_index"],
+#                 "text": meta["text"],
+#                 "bge_score": bge_entry["score"],
+#                 "semantic_score": sem_score
+#             })
+
+#         # 6) Extract facts per chunk in parallel
+#         async def fetch_facts(idx, chunk_text):
+#             async with data_fetch_semaphore:
+#                 fact_req = ExtractFactsRequest(
+#                     question=req.question,
+#                     chunks=[ChunkCandidate(chunk_id=idx, text=chunk_text)]
+#                 )
+#                 fr = await extract_facts(fact_req)
+#                 return (idx, fr[0].facts if fr else [])
+
+#         tasks = [fetch_facts(i, c["text"]) for i, c in enumerate(final)]
+#         facts_results = await asyncio.gather(*tasks)
+
+#         # 7) Merge facts into final
+#         for idx, facts in facts_results:
+#             final[idx]["facts"] = facts
+
+#         return [ChunkPipelineResult(**chunk) for chunk in final]
+
+#     except Exception as e:
+#         raise HTTPException(status_code=500, detail=str(e))
+    
+# Семофор для параллельной факт-экстракции
+fact_semaphore = asyncio.Semaphore(8)
 
 class PipelineRequest(BaseModel):
     question: str
-    k: int = 10
+    k: int = 128      # 默认返回 top-128 匹配
     bge_threshold: float = 0.25
     semantic_threshold: float = 0.25
-    use_web: bool = False        # **новое**: включить web-поиск
-    use_kb: bool = False         # **новое**: включить internal knowledge
 
 class ChunkPipelineResult(BaseModel):
-    year: str
+    year: int
     doc_name: str
     doc_type: str
     chunk_index: int
@@ -489,118 +696,84 @@ class ChunkPipelineResult(BaseModel):
     bge_score: float
     semantic_score: float
     facts: List[str]
+    metadata_original: Dict
+    metadata_translated: Dict
 
-@app.post("/search_pipeline", response_model=List[ChunkPipelineResult])
-async def search_pipeline(req: PipelineRequest):
+@app.post("/search_pipeline_v2", response_model=List[ChunkPipelineResult])
+async def search_pipeline_v2(req: PipelineRequest):
     try:
         # 1) Refine the query
         refine_resp = await refine_query(RefineQueryRequest(query=req.question))
         refined = refine_resp["refined_query"]
 
-        # 1.1) Optional internal KB and web search
-        kn_resp = None
-        web_resp = None
+        # 2) Vector search (expects metadata_original & metadata_translated in response)
+        vec_resp = await vector_search_v2(VectorSearchV2Request(query=refined, k=req.k))
 
-        if req.use_kb and req.use_web:
-            kn_task = asyncio.create_task(
-                general_knowledge(KnowledgeRequest(question=req.question))
-            )
-            web_task = asyncio.create_task(
-                web_search_endpoint(WebSearchRequest(query=req.question))
-            )
-            kn_resp, web_resp = await asyncio.gather(kn_task, web_task)
-
-        elif req.use_kb:
-            kn_resp = await general_knowledge(KnowledgeRequest(question=req.question))
-
-        elif req.use_web:
-            web_resp = await web_search_endpoint(WebSearchRequest(query=req.question))
-
-        # Build docs_meta list in the order of tasks
-        docs_meta = []
-        if kn_resp:
-            docs_meta.append({
-                "year": "internal",
-                "doc_name": "general_knowledge",
-                "doc_type": "internal",
-                "chunk_index": -1,
-                "text": kn_resp["knowledge_answer"]
-            })
-        if web_resp:
-            docs_meta.append({
-                "year": "web",
-                "doc_name": "web_search",
-                "doc_type": "web",
-                "chunk_index": -2,
-                "text": web_resp["answer"]
-            })
-
-        # 2) Vector search (cap k at 128)
-        k_ = min(req.k, 128)
-        vec_resp = await vector_search(VectorSearchRequest(query=refined, k=k_))
-        vec_results = vec_resp["results"]
-        docs_meta.extend(vec_results)
-
-        # 3) BGE rerank (pre-filter)
-        bge_req = RerankRequest(
+        # 3) BGE rerank
+        answers = [item.text for item in vec_resp]
+        bge_out = await rerank_bge_endpoint(RerankRequest(
             question=refined,
-            answers=[d["text"] for d in docs_meta],
+            answers=answers,
             threshold=req.bge_threshold
-        )
-        bge_resp = await rerank_bge_endpoint(bge_req)
-        bge_results = bge_resp["results"]
+        ))
+        bge_filtered = [r for r in bge_out.get("results", []) if r.get("score", 0) >= req.bge_threshold]
+        bge_filtered.sort(key=lambda x: x.get("score", 0), reverse=True)
 
-        # 4) LLM semantic rerank
-        semantic_cands = [
-            {"block_id": r["index"], "text": r["text"]}
-            for r in bge_results
+        # 4) Semantic rerank
+        top_bge = bge_filtered[:req.k]
+        sem_candidates = [
+            RerankBlockCandidate(block_id=r["index"], text=r["text"])
+            for r in top_bge
         ]
-        sem_req = RerankSemanticV5Request(
+        sem_out = await rerank_semantic_v5(RerankSemanticV5Request(
             question=refined,
-            candidates=semantic_cands,
+            candidates=sem_candidates,
             threshold=req.semantic_threshold
-        )
-        sem_resp = await rerank_semantic_v5(sem_req)
+        ))
 
-        # 5) Assemble final chunks with scores
-        final = []
-        for item in sem_resp:
-            bid = item["block_id"]
-            sem_score = item["score"]
-            bge_entry = next(r for r in bge_results if r["index"] == bid)
-            meta = docs_meta[bid]
-            final.append({
-                "year": meta["year"],
-                "doc_name": meta["doc_name"],
-                "doc_type": meta["doc_type"],
-                "chunk_index": meta["chunk_index"],
-                "text": meta["text"],
-                "bge_score": bge_entry["score"],
-                "semantic_score": sem_score
+        # 5) Assemble final results
+        results = []
+        for entry in sem_out:
+            ci = entry.get("block_id")
+            bge_score = next((r.get("score") for r in bge_filtered if r.get("index") == ci), None)
+            # src now contains metadata_original & metadata_translated
+            src = next((x for x in vec_resp if x.chunk_index == ci), None)
+            if not src:
+                continue
+            results.append({
+                "year": src.year,
+                "doc_name": src.doc_name,
+                "doc_type": src.doc_type,
+                "chunk_index": ci,
+                "text": src.text,
+                "bge_score": bge_score,
+                "semantic_score": entry.get("score"),
+                "facts": [],
+                "metadata_original": getattr(src, 'metadata_original', {}),
+                "metadata_translated": getattr(src, 'metadata_translated', {})
             })
 
-        # 6) Extract facts per chunk in parallel
-        async def fetch_facts(idx, chunk_text):
-            async with data_fetch_semaphore:
-                fact_req = ExtractFactsRequest(
+        # 6) Fact extraction in parallel
+        async def fetch_facts(idx: int, txt: str):
+            async with fact_semaphore:
+                fr = await extract_facts(ExtractFactsRequest(
                     question=req.question,
-                    chunks=[ChunkCandidate(chunk_id=idx, text=chunk_text)]
-                )
-                fr = await extract_facts(fact_req)
-                return (idx, fr[0].facts if fr else [])
+                    chunks=[ChunkCandidate(chunk_id=idx, text=txt)]
+                ))
+                return idx, (fr[0].facts if fr else [])
 
-        tasks = [fetch_facts(i, c["text"]) for i, c in enumerate(final)]
+        tasks = [fetch_facts(r["chunk_index"], r["text"]) for r in results]
         facts_results = await asyncio.gather(*tasks)
-
-        # 7) Merge facts into final
         for idx, facts in facts_results:
-            final[idx]["facts"] = facts
+            for r in results:
+                if r["chunk_index"] == idx:
+                    r["facts"] = facts
+                    break
 
-        return [ChunkPipelineResult(**chunk) for chunk in final]
+        return [ChunkPipelineResult(**r) for r in results]
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-
 
     
 

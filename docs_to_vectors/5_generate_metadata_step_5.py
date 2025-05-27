@@ -7,7 +7,7 @@ from tqdm import tqdm
 
 # === НАСТРОЙКИ ===
 WORKERS = 8
-number = "10"
+number = "19"
 CHUNKS_DIR = Path(f"docs/{number}/chunks_json")
 OUTPUT_DIR = Path(f"docs/{number}/chunks_with_metadata")
 META_PATH = Path(f"docs/{number}/meta.json")
@@ -39,7 +39,7 @@ async def call_metadata(text: str) -> dict | None:
         "document_id": "unknown",  # значение не используется, но поле нужно
         "text": text
     }
-    async with httpx.AsyncClient(timeout=90) as client:
+    async with httpx.AsyncClient(timeout=900) as client:
         r = await client.post(METADATA_URL, json=payload)
         r.raise_for_status()
         return r.json()
