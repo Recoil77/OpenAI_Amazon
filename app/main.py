@@ -135,6 +135,7 @@ async def clean_ocr_extended(request: ExtendedOCRRequest):
             model="gpt-4.1-2025-04-14", #  "o4-mini-2025-04-16"    "gpt-4o-2024-11-20"
             temperature=0.2,
             messages=messages,
+            max_tokens=2048,
         )
         raw_output = resp.choices[0].message.content.strip()
 
@@ -193,7 +194,8 @@ async def generate_metadata(
         model="o4-mini-2025-04-16",
         input=prompt,
         service_tier=service_tier,
-        reasoning={"effort": effort}
+        reasoning={"effort": effort},
+        max_output_tokens=8196,
     )
 
     # extract the JSON blob from the model's markdown response
@@ -544,139 +546,6 @@ async def rerank_semantic_v5(request: RerankSemanticV5Request):
     sorted_results = sorted(filtered, key=lambda r: r["score"], reverse=True)
     return sorted_results
 
-
-
-# # Semaphore to limit concurrent fact extraction calls
-# data_fetch_semaphore = asyncio.Semaphore(8)
-
-# class PipelineRequest(BaseModel):
-#     question: str
-#     k: int = 10
-#     bge_threshold: float = 0.25
-#     semantic_threshold: float = 0.25
-#     use_web: bool = False        # **новое**: включить web-поиск
-#     use_kb: bool = False         # **новое**: включить internal knowledge
-
-# class ChunkPipelineResult(BaseModel):
-#     year: str
-#     doc_name: str
-#     doc_type: str
-#     chunk_index: int
-#     text: str
-#     bge_score: float
-#     semantic_score: float
-#     facts: List[str]
-
-# @app.post("/search_pipeline", response_model=List[ChunkPipelineResult])
-# async def search_pipeline(req: PipelineRequest):
-#     try:
-#         # 1) Refine the query
-#         refine_resp = await refine_query(RefineQueryRequest(query=req.question))
-#         refined = refine_resp["refined_query"]
-
-#         # 1.1) Optional internal KB and web search
-#         kn_resp = None
-#         web_resp = None
-
-#         if req.use_kb and req.use_web:
-#             kn_task = asyncio.create_task(
-#                 general_knowledge(KnowledgeRequest(question=req.question))
-#             )
-#             web_task = asyncio.create_task(
-#                 web_search_endpoint(WebSearchRequest(query=req.question))
-#             )
-#             kn_resp, web_resp = await asyncio.gather(kn_task, web_task)
-
-#         elif req.use_kb:
-#             kn_resp = await general_knowledge(KnowledgeRequest(question=req.question))
-
-#         elif req.use_web:
-#             web_resp = await web_search_endpoint(WebSearchRequest(query=req.question))
-
-#         # Build docs_meta list in the order of tasks
-#         docs_meta = []
-#         if kn_resp:
-#             docs_meta.append({
-#                 "year": "internal",
-#                 "doc_name": "general_knowledge",
-#                 "doc_type": "internal",
-#                 "chunk_index": -1,
-#                 "text": kn_resp["knowledge_answer"]
-#             })
-#         if web_resp:
-#             docs_meta.append({
-#                 "year": "web",
-#                 "doc_name": "web_search",
-#                 "doc_type": "web",
-#                 "chunk_index": -2,
-#                 "text": web_resp["answer"]
-#             })
-
-#         # 2) Vector search (cap k at 128)
-#         k_ = min(req.k, 128)
-#         vec_resp = await vector_search(VectorSearchRequest(query=refined, k=k_))
-#         vec_results = vec_resp["results"]
-#         docs_meta.extend(vec_results)
-
-#         # 3) BGE rerank (pre-filter)
-#         bge_req = RerankRequest(
-#             question=refined,
-#             answers=[d["text"] for d in docs_meta],
-#             threshold=req.bge_threshold
-#         )
-#         bge_resp = await rerank_bge_endpoint(bge_req)
-#         bge_results = bge_resp["results"]
-
-#         # 4) LLM semantic rerank
-#         semantic_cands = [
-#             {"block_id": r["index"], "text": r["text"]}
-#             for r in bge_results
-#         ]
-#         sem_req = RerankSemanticV5Request(
-#             question=refined,
-#             candidates=semantic_cands,
-#             threshold=req.semantic_threshold
-#         )
-#         sem_resp = await rerank_semantic_v5(sem_req)
-
-#         # 5) Assemble final chunks with scores
-#         final = []
-#         for item in sem_resp:
-#             bid = item["block_id"]
-#             sem_score = item["score"]
-#             bge_entry = next(r for r in bge_results if r["index"] == bid)
-#             meta = docs_meta[bid]
-#             final.append({
-#                 "year": meta["year"],
-#                 "doc_name": meta["doc_name"],
-#                 "doc_type": meta["doc_type"],
-#                 "chunk_index": meta["chunk_index"],
-#                 "text": meta["text"],
-#                 "bge_score": bge_entry["score"],
-#                 "semantic_score": sem_score
-#             })
-
-#         # 6) Extract facts per chunk in parallel
-#         async def fetch_facts(idx, chunk_text):
-#             async with data_fetch_semaphore:
-#                 fact_req = ExtractFactsRequest(
-#                     question=req.question,
-#                     chunks=[ChunkCandidate(chunk_id=idx, text=chunk_text)]
-#                 )
-#                 fr = await extract_facts(fact_req)
-#                 return (idx, fr[0].facts if fr else [])
-
-#         tasks = [fetch_facts(i, c["text"]) for i, c in enumerate(final)]
-#         facts_results = await asyncio.gather(*tasks)
-
-#         # 7) Merge facts into final
-#         for idx, facts in facts_results:
-#             final[idx]["facts"] = facts
-
-#         return [ChunkPipelineResult(**chunk) for chunk in final]
-
-#     except Exception as e:
-#         raise HTTPException(status_code=500, detail=str(e))
     
 # Семофор для параллельной факт-экстракции
 fact_semaphore = asyncio.Semaphore(8)
@@ -892,3 +761,4 @@ async def web_search_endpoint(req: WebSearchRequest):
         return {"answer": response.output_text}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Web search failed: {e}")
+    

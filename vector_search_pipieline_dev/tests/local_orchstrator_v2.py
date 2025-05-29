@@ -47,7 +47,7 @@ def test_search_pipeline(
         print("-" * 80)
 
 if __name__ == "__main__":
-    test_question = "locations and descriptions of old villages"
+    test_question = "What were the main routes of early expeditions in the Amazon?"
     test_search_pipeline(
         test_question,
         k=128,

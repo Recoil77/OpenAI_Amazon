@@ -7,7 +7,7 @@ import asyncpg
 from gateway.gateway_client import embedding
 
 DATABASE_URL = os.getenv("DATABASE_URL") 
-number = "18"
+number = "40"
 CHUNKS_DIR = Path(f"docs/{number}/chunks_with_metadata")
 
 async def chunk_exists(conn, document_id, chunk_index):

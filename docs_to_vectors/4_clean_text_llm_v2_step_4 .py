@@ -7,7 +7,7 @@ from tqdm import tqdm
 
 # === SETTINGS ===
 WORKERS = 8
-number = "19"
+number = "40"
 INPUT_FILE = Path(f"docs/{number}/{number}.txt")
 OUTPUT_DIR = Path(f"docs/{number}/chunks_json")
 ENDPOINT = "http://192.168.168.5:8000/clean_ocr_extended"
@@ -57,6 +57,7 @@ async def process_chunk(index: int, text: str, sem: asyncio.Semaphore, pbar: tqd
             pbar.update()
             return
         try:
+            #print(text)
             result = await call_llm(text)
             cleaned = result.get("cleaned_text", "").strip()
             score = result.get("quality_score", None)

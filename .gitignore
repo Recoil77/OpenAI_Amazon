@@ -147,7 +147,7 @@ tmp/
 chunks_json/
 docs/
 lidar/
-
+agent_logs/
 # Spyder project settings
 .spyderproject
 .spyproject
