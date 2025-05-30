@@ -118,7 +118,7 @@ tools = [{
 @app.post("/llm_reasoning", response_model=ReasoningResponse)
 async def llm_reasoning(
     req: ReasoningRequest,
-    model: str = Query('gpt-4.1-2025-04-14', description="LLM model (e.g., 'gpt-4.1-2025-04-14', 'o3')"),
+    model: str = Query('gpt-4.1-2025-04-14', description="LLM model (e.g., 'gpt-4.1-2025-04-14', 'o3')"), #"o3-2025-04-16"    
     temperature: float = Query(0.25, description="Sampling temperature"),
     max_tokens: int = Query(4096, description="Maximum output tokens"),
 ):
@@ -130,9 +130,9 @@ async def llm_reasoning(
             messages=[
                 {"role": "system", "content": prompt}
             ],
-            temperature=temperature,
+            #temperature=temperature,
             tools = tools,
-            top_p = 0.9,
+            #top_p = 0.9,
             #max_tokens=max_tokens,
 
         )

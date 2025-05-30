@@ -7,7 +7,7 @@ from aiofiles import open as aio_open
 from aiofiles.os import path as aio_path
 from tqdm import tqdm
 
-number = "37"
+number = "47"
 
 # === НАСТРОЙКИ ===
 INPUT_DIR = Path(f"docs/{number}/jpeg")

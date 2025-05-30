@@ -14,6 +14,8 @@ class Action(BaseModel):
     query: str
     reason: Optional[str] = ""
 
+
+
 class ReasoningResponse(BaseModel):
     actions: List[Action] = []
     finalize: bool = False

@@ -34,128 +34,17 @@ Return ONLY JSON:
     return prompt
 
 
-# # --- Prompt builder ---
-# def build_reasoning_prompt(data: ReasoningRequest) -> str:
-#     facts = [f"- [{ev.source}] {ev.value}" for ev in data.context[:8]]
-#     log_lines = [
-#         f"{item.get('iteration', '?')}. [{item.get('action', '')}] {item.get('query', '')} ({item.get('result_count', '?')})"
-#         for item in data.reasoning_log[-5:]
-#     ]
-#     prompt = f"""You are a deep reasoning engine for historical research.
-
-# # Main user question:
-# {data.user_query}
-
-# # Current active question:
-# {data.active_question}
-
-# # Context (facts so far):
-# {chr(10).join(facts) if facts else '(none yet)'}
-
-# # Reasoning log (last steps):
-# {chr(10).join(log_lines) if log_lines else '(empty)'}
-
-# # Previous hypotheses:
-# {chr(10).join(data.previous_hypotheses) if data.previous_hypotheses else '(none yet)'}
-
-# # Instructions:
-# Based on the current context, propose the next best actions for finding the answer. For each action, specify the type ("vector_search", "entity_search", "web_search", etc), a query (short text), and a reason (why this is the best next step).
-# If you have enough evidence to finalize the answer, return "finalize": true, along with "hypothesis", "supporting_evidence", and "confidence".
-# Return ONLY valid JSON. Example:
-# {{
-# "actions": [{{"type": "...", "query": "...", "reason": "..."}}],
-# "finalize": false,
-# "active_question": "...",
-# "hypothesis": "...",
-# "supporting_evidence": [{{...}}],
-# "confidence": 0.8
-# }}
-# """
-#     return prompt
 
 
-# app/func.py
 
-# def build_reasoning_prompt(data):
-#     # data: ReasoningRequest
 
-#     facts = [
-#         f"- [{ev.source}] {ev.value}" 
-#         for ev in getattr(data, "context", [])[:8]
-#     ]
-#     log_lines = [
-#         f"{item.get('iteration', '?')}. [{item.get('action', '')}] {item.get('query', '')} ({item.get('result_count', '?')})"
-#         for item in getattr(data, "reasoning_log", [])[-5:]
-#     ]
-
-#     preferred_order = """
-# Preferred order of actions:
-# 1. Reformulate the question if unclear or ambiguous.
-# 2. Use vector_search for internal document search.
-# 3. Use entity_search for entity statistics.
-# 4. Use general_knowledge and web_search for reference/background, but never for reasoning completion.
-# 5. Only finish reasoning when all reasonable actions are exhausted and a confident hypothesis is formed.
-# """
-
-#     prompt = f"""
-# You are a deep reasoning engine for historical research.
-
-# Sources available:
-# - vector_search: returns detailed fragments from internal documents (summary, facts, year, etc).
-# - web_search: returns relevant fragments from external sources.
-# - entity_search: returns statistics on specified entities.
-# - general_knowledge: provides brief reference facts.
-# - reformulate_question: helps to clarify or rephrase the current question.
-
-# {preferred_order}
-
-# # Main user question:
-# {data.user_query}
-
-# # Current active question:
-# {data.active_question}
-
-# # Context (evidence found so far):
-# {chr(10).join(facts) if facts else '[none yet]'}
-
-# # Reasoning log (last steps):
-# {chr(10).join(log_lines) if log_lines else '[no previous actions]'}
-
-# Respond strictly with a valid JSON object:
-# {{
-#   "actions": [
-#     {{"type": "vector_search"|"web_search"|"entity_search"|"general_knowledge"|"reformulate_question", "query": "<query>", "reason": "<why this action>"}}
-#   ],
-#   "finalize": false,
-#   "active_question": "<updated question if any>",
-#   "hypothesis": "<current hypothesis if any>",
-#   "supporting_evidence": [],
-#   "confidence": null
-# }}
-# Do not include explanations, markdown, or text outside JSON. Do not use real names, facts, or terms—use only abstract reasoning and structure.
-# """
-
-# #     return prompt
 # from textwrap import dedent
 # from app.classes import ReasoningRequest
 
 
 # def build_reasoning_prompt(data: ReasoningRequest) -> str:
-#     """Return a single prompt string that guides the LLM through one
-#     step of the reasoning loop.
-
-#     The prompt is intentionally verbose so the model receives all
-#     necessary state (user question, active sub-question, context
-#     evidence, reasoning log, previous hypotheses) **and** a compact
-#     but precise set of rules that it must follow when producing JSON
-#     output.
-
-#     Args:
-#         data: A `ReasoningRequest` carrying the current reasoning state.
-
-#     Returns:
-#         A fully-formed prompt string ready to be sent as the *user* part
-#         of a ChatCompletion call.
+#     """Construct the prompt for one reasoning step.
+#     Provides the model with current state plus strict rules for JSON output.
 #     """
 
 #     # ---------- Helper blocks ----------
@@ -164,29 +53,23 @@ Return ONLY JSON:
 #     ) or "[none yet]"
 
 #     log_block = "\n".join(
-#         f"{item.get('iteration', '?')}. [{item.get('action', '')}] "
-#         f"{item.get('query', '')} ({item.get('result_count', '?')})"
-#         for item in (data.reasoning_log or [])[-5:]
+#         f"{item.get('iteration')}. [{item.get('action')}] "
+#         f"{item.get('query')} ({item.get('result_count')})"
+#         for item in (data.reasoning_log or [])
 #     ) or "[no previous actions]"
 
 #     hypotheses_block = "\n".join(data.previous_hypotheses) if data.previous_hypotheses else "[none]"
 
-#     evidence_block = "\n".join(
-#         f"- [{ev.source}] {ev.value}" for ev in (data.supporting_evidence or [])
-#     ) or "[none yet]"
-
 #     preferred_order = dedent(
 #         """
 #         Preferred order of actions:
-#         1. Reformulate the question if unclear or ambiguous.
-#         2. Use vector_search for internal document search.
-#         3. Use entity_search for entity statistics.
-#         4. Use general_knowledge and web_search for reference/background, but **never** for reasoning completion.
-#         5. Call finalize only when no further useful actions remain **and** a confident hypothesis is formed.
+#         1. Use vector_search for internal document search.
+#         2. Use entity_search for entity statistics.
+#         3. Use general_knowledge and web_search for reference/background, but **never** for reasoning completion.
+#         4. Call finalize only when no further useful actions remain **and** a confident hypothesis is formed.
 #         """
 #     ).strip()
 
-#     # ---------- Prompt template ----------
 #     prompt = dedent(
 #         f"""
 #         You are a deep reasoning engine for historical research.
@@ -196,7 +79,6 @@ Return ONLY JSON:
 #         - web_search      → returns relevant fragments from external sources.
 #         - entity_search   → returns statistics on specified entities.
 #         - general_knowledge → returns concise reference facts.
-#         - reformulate_question → helps clarify or rephrase the current question.
 
 #         For each reasoning step you may issue **at most one** action of each type.  
 #         If additional calls of the same type are required, ask for them in a subsequent reasoning cycle.
@@ -209,41 +91,69 @@ Return ONLY JSON:
 #         # Current active question:
 #         {data.active_question}
 
-#         # Current supporting evidence:
-#         {evidence_block}
-
 #         # Context (evidence found so far):
 #         {facts_block}
 
-#         # Reasoning log (last steps):
+#         # Recent actions (iteration · type · query → hits):
 #         {log_block}
 
 #         # Previous hypotheses:
 #         {hypotheses_block}
 
 #         # Instructions for investigating abandoned / lost settlements:
-#         - Do **not** rely solely on proper names.  
-#         - Look for descriptions mentioning deserted villages, lost towns, abandoned missions, ruins, etc.  
-#         - Use indirect clues—distances, neighbouring places, geographical features or historical events—to locate the site.  
-#         - State the level of certainty and any limitations in your hypothesis.
+#         - **Select a single candidate object** (abandoned village / mission / settlement) and keep focus on it through the reasoning cycle.
+#         - Do **not** hop between multiple objects unless the current candidate is definitively ruled out.
+#         - Gather every indirect clue to its location — distances, neighbouring places, rivers, landmarks, travel directions, historical events.
+#         - Cross‑check descriptions across sources to strengthen or weaken the hypothesis.
+#         - Clearly state the level of certainty and note limitations if the exact location remains ambiguous.
+
+#         # Object‑focus strategy:
+#         - After choosing a candidate, rewrite `active_question` so it explicitly names that object (e.g., *"Locate the abandoned Jesuit mission of Exaltación"*).
+#         - Accumulate clues step by step and merge them into the aggregated `supporting_evidence` object (e.g., add `details.clues`).
+#         - Switch to a different candidate **only** if new evidence contradicts the current hypothesis or proves the object irrelevant.
 
 #         # Instructions for entity_search & metadata:
-#         - Use entity_search to gauge the prevalence or ambiguity of names / terms in the corpus before committing to a hypothesis.
-#         - Combine entity statistics with context evidence; do **not** rely on counts alone.
+#         - `entity_search` is the **first‑line, low‑cost tool** to see whether a specific **named entity** is actually present in our corpus metadata (settlements, rivers, missions, explorers, tribes, years).  
+#         - Always send a **comma‑separated list of 1‑5 concise names** — *never* descriptive phrases.  Good examples:  
+#           · `Villarico`, `River Moraji`, `Jesuit mission`  
+#           · `Aguirre`, `Mission Exaltación`, `Santo Tomé`  
+#         - Use it aggressively to narrow candidates **before** investing in additional `vector_search`.  Typical loop:
+#             1. Extract 2‑5 plausible names or spellings from the current clue (older texts may vary orthography).  
+#             2. Run `entity_search`; note hit counts.  
+#             3. Keep the top‑hit names and discard zero‑hit variants.
+#         - A rare entity may still be correct — cross‑check with indirect clues (distances, rivers, landmarks).
+#         - Do **not** query phrases like "abandoned village across river"; they yield zero hits.
+
+#         # Guidance for web_search:
+#         - Use web_search **only after** you have at least **one concrete name** *and* a regional pointer (e.g., country, province, nearby river).  
+#         - Form the query as `<name> <region or river>` — e.g., `"Villarico" "Rio Moraji" Brazil`.  
+#         - Avoid generic or overly broad phrases; they add noise and rarely help locate forgotten sites from 17‑18th‑century texts.
+#         - Use web_search **only after** you have at least one well‑defined name or coordinate clue.  
+#         - Query should include that concrete name plus one distinctive qualifier (e.g., `"Exaltación Bolivia" river`).  
+#         - Avoid generic phrases that will return broad, noisy results.
 
 #         # Instructions for supporting_evidence:
-#         - Each item **must** be an object with keys: `source`, `value`, `details`, `meta`.  
-#         - The **details** field **must** be a dictionary/JSON object (e.g., {{"summary": "…"}}); **never** a plain string.  
-#         - Include only evidence that actually exists in *context*; never invent.
-#         - Keep relevant evidence from previous steps unless clearly irrelevant.
+#         - **Condense all evidence into exactly one object** and place it as the sole element of the `supporting_evidence` array.  
+#         - Aggregate multiple facts in this object's `details`/`meta` (e.g., `meta.sources`).  
+#         - Keys required: `source`, `value`, `details`, `meta`.  Details **must** be a dictionary, not a string.  
+#         - Add new facts to this same object; remove only if proven irrelevant.
 
-#         # Instructions for search‑query reformulation:
-#         - Queries must be short, natural phrases typical of historical texts—no Boolean logic or meta-language.
+#         # Instructions for search‑query reformulation (embedding search):
+#         - Generate **exactly one** `vector_search` action per reasoning step.  
+#         - The `query` string **must** be a single phrase of **3–6 meaningful words** (≈5–7 tokens).  
+#         - Avoid lists, commas, Boolean operators, meta‑language.  
+#         - Use a new reasoning step for any substantially different formulation.
+
+#         # Anti‑stall rules:
+#         - Track your last actions (see *Recent actions* above).  
+#         - **Do not** issue a `vector_search` whose query is semantically similar to any query already tried.  
+#         - If two consecutive `vector_search` attempts each returned fewer than **3** new evidence items, your **next** action must be either `entity_search`, `web_search`, or `general_knowledge` instead of another `vector_search`.  
+#         - Aim to collect evidence from **at least two different action types** before finalizing.
 
 #         Respond **strictly** with a valid JSON object:
 #         {{
 #           "actions": [
-#             {{"type": "vector_search"|"web_search"|"entity_search"|"general_knowledge"|"reformulate_question", "query": "<query>", "reason": "<why>"}}
+#             {{"type": "vector_search"|"web_search"|"entity_search"|"general_knowledge", "query": "<query>", "reason": "<why>"}}
 #           ],
 #           "finalize": false,
 #           "active_question": "<updated question if any>",
@@ -257,13 +167,14 @@ Return ONLY JSON:
 
 #     return prompt
 
+
 from textwrap import dedent
 from app.classes import ReasoningRequest
 
 
 def build_reasoning_prompt(data: ReasoningRequest) -> str:
-    """Build the reasoning‑step prompt.
-    Provides all state plus strict instructions for JSON output.
+    """Construct the prompt for one reasoning step.
+    Provides the model with current state plus strict rules for JSON output.
     """
 
     # ---------- Helper blocks ----------
@@ -272,9 +183,9 @@ def build_reasoning_prompt(data: ReasoningRequest) -> str:
     ) or "[none yet]"
 
     log_block = "\n".join(
-        f"{item.get('iteration', '?')}. [{item.get('action', '')}] "
-        f"{item.get('query', '')} ({item.get('result_count', '?')})"
-        for item in (data.reasoning_log or [])[-5:]
+        f"{item.get('iteration')}. [{item.get('action')}] "
+        f"{item.get('query')} ({item.get('result_count')})"
+        for item in (data.reasoning_log or [])
     ) or "[no previous actions]"
 
     hypotheses_block = "\n".join(data.previous_hypotheses) if data.previous_hypotheses else "[none]"
@@ -313,36 +224,67 @@ def build_reasoning_prompt(data: ReasoningRequest) -> str:
         # Context (evidence found so far):
         {facts_block}
 
-        # Reasoning log (last steps):
+        # Recent actions (iteration · type · query → hits):
         {log_block}
 
         # Previous hypotheses:
         {hypotheses_block}
 
         # Instructions for investigating abandoned / lost settlements:
-        - Do **not** rely solely on proper names.  
-        - Look for descriptions mentioning deserted villages, lost towns, abandoned missions, ruins, etc.  
-        - Use indirect clues—distances, neighbouring places, geographical features or historical events—to locate the site.  
-        - State the level of certainty and any limitations in your hypothesis.
+        - **Select a single candidate object** (abandoned village / mission / settlement) and keep focus on it through the reasoning cycle.
+        - Do **not** hop between multiple objects unless the current candidate is definitively ruled out.
+        - Gather every indirect clue to its location — distances, neighbouring places, rivers, landmarks, travel directions, historical events.
+        - Cross‑check descriptions across sources to strengthen or weaken the hypothesis.
+        - Clearly state the level of certainty and note limitations if the exact location remains ambiguous.
+
+        # Object‑focus strategy:
+        - After choosing a candidate, rewrite `active_question` so it explicitly names that object (e.g., *"Locate the abandoned Jesuit mission of Exaltación"*).
+        - Accumulate clues step by step and merge them into the aggregated `supporting_evidence` object (e.g., add `details.clues`).
+        - Switch to a different candidate **only** if new evidence contradicts the current hypothesis or proves the object irrelevant.
 
         # Instructions for entity_search & metadata:
-        - Use entity_search to gauge the prevalence or ambiguity of names / terms in the corpus before committing to a hypothesis.
-        - Combine entity statistics with context evidence; do **not** rely on counts alone.
+        - `entity_search` is the **first‑line, low‑cost tool** to see whether a specific **named entity** is actually present in our corpus metadata (settlements, rivers, missions, explorers, tribes, years).  
+        - Always send a **comma‑separated list of 1‑5 concise names** — *never* descriptive phrases.  Good examples:  
+          · `Villarico`, `River Moraji`, `Jesuit mission`  
+          · `Aguirre`, `Mission Exaltación`, `Santo Tomé`  
+        - Use it aggressively to narrow candidates **before** investing in additional `vector_search`.  Typical loop:
+            1. Extract 2‑5 plausible names or spellings from the current clue (older texts may vary orthography).  
+            2. Run `entity_search`; note hit counts.  
+            3. Keep the top‑hit names and discard zero‑hit variants.
+        - A rare entity may still be correct — cross‑check with indirect clues (distances, rivers, landmarks).
+        - Do **not** query phrases like "abandoned village across river"; they yield zero hits.
+
+        # Guidance for web_search:
+        - Use web_search **only after** you have at least **one concrete name** *and* a regional pointer (e.g., country, province, nearby river).  
+        - Form the query as `<name> <region or river>` — e.g., `"Villarico" "Rio Moraji" Brazil`.  
+        - Avoid generic or overly broad phrases; they add noise and rarely help locate forgotten sites from 17‑18th‑century texts.
+
+        # Variant‑spelling strategy:
+        - Colonial texts often vary orthography (`Muctira`, `Muctirá`, `Muctirae`; `Xiruma` vs. `Jiruma`).  
+        - Before launching a new `vector_search`, consider running `entity_search` with **2‑4 plausible variants** of the same name.  
+        - Pick the variant with the highest hit count, then proceed.
+
+        # Handling early‑modern distance clues:
+        - When you encounter units like *league/legua*, *jornada*, or vague travel times ("two days by canoe"), convert them to approximate kilometres (1 Spanish league ≈ 5.6 km).  
+        - Add these conversions to `supporting_evidence.meta.distances` and use them to bound the search area.
 
         # Instructions for supporting_evidence:
         - **Condense all evidence into exactly one object** and place it as the sole element of the `supporting_evidence` array.  
-        - Preserve every fact by aggregating multiple citations inside that object's `details` or `meta` fields (e.g., `meta.sources`).  
-        - The object must include keys: `source`, `value`, `details`, `meta`. Use a generic `source` such as "aggregated" if necessary.  
-        - The **details** field **must** be a dictionary/JSON object (e.g., {{"summary": "…", "highlights": ["…", "…"]}}); **never** a plain string.  
-        - Include only evidence that actually exists in *context*; never invent.  
-        - On subsequent steps, merge new relevant evidence into this same object instead of adding additional elements.  
-        - Remove data from the aggregate only if it is proven irrelevant.
+        - Aggregate multiple facts in this object's `details`/`meta` (e.g., `meta.sources`).  
+        - Keys required: `source`, `value`, `details`, `meta`.  Details **must** be a dictionary, not a string.  
+        - Add new facts to this same object; remove only if proven irrelevant.
 
         # Instructions for search‑query reformulation (embedding search):
         - Generate **exactly one** `vector_search` action per reasoning step.  
-        - The `query` string **must** be a single short phrase of **3 – 6 meaningful words** (≈5 – 7 tokens).  
-        - Avoid comma‑separated lists, multiple synonyms, Boolean operators, or meta‑language ("find", "ruins OR mission").  
-        - If you need a substantially different formulation, use a new reasoning step.
+        - The `query` string **must** be a single phrase of **3–6 meaningful words** (≈5–7 tokens).  
+        - Avoid lists, commas, Boolean operators, meta‑language.  
+        - Use a new reasoning step for any substantially different formulation.
+
+        # Anti‑stall rules:
+        - Track your last actions (see *Recent actions* above).  
+        - **Do not** issue a `vector_search` whose query is semantically similar to any query already tried.  
+        - If two consecutive `vector_search` attempts each returned fewer than **3** new evidence items, your **next** action must be either `entity_search`, `web_search`, or `general_knowledge` instead of another `vector_search`.  
+        - Aim to collect evidence from **at least two different action types** before finalizing.
 
         Respond **strictly** with a valid JSON object:
         {{
@@ -360,5 +302,6 @@ def build_reasoning_prompt(data: ReasoningRequest) -> str:
     ).strip()
 
     return prompt
+
 
 

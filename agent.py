@@ -10,7 +10,7 @@ WEB_SEARCH_URL = "http://192.168.168.5:8100/web_search"
 REFORMULATE_URL = "http://192.168.168.5:8100/reformulate_question"
 GET_VERDICT_URL = "http://192.168.168.5:8100/get_verdict"
 
-MAX_ITERATIONS = 10
+MAX_ITERATIONS = 16
 
 def get_endpoint_and_payload(action, context):
     """Маппинг типа action к endpoint и payload"""
@@ -37,6 +37,28 @@ def get_endpoint_and_payload(action, context):
     else:
         raise ValueError(f"Unknown action type: {action_type}")
 
+def dedup_log(log: list[dict], limit: int = 8) -> list[dict]:
+    """
+    Вернуть не более `limit` последних *уникальных* записей (action+query).
+    Каждую запись агрегируем: если одинаковые запросы встречались несколько
+    раз, суммируем result_count.
+    """
+    # Копия, чтобы не портить исходный список
+    reversed_log = list(reversed(log))
+    aggregated: dict[tuple[str, str], dict] = {}
+
+    for item in reversed_log:
+        key = (item["action"], item["query"])
+        if key not in aggregated:
+            aggregated[key] = item.copy()
+        else:
+            aggregated[key]["result_count"] += item["result_count"]
+
+    # Берём последние limit ключей в исходном порядке
+    unique_recent = list(reversed(list(aggregated.values())))[:limit]
+    return unique_recent
+
+
 def pretty_evidence(ev, maxlen=120):
     if isinstance(ev, dict):
         src = ev.get('source', '?')
@@ -62,13 +84,15 @@ async def agent_loop(user_query):
     active_question = user_query
 
     for iteration in range(MAX_ITERATIONS):
+        # … до формирования reasoning_request …
+
         reasoning_request = {
             "user_query": user_query,
             "active_question": active_question,
             "context": context,
             "previous_hypotheses": previous_hypotheses,
-            "reasoning_log": reasoning_log,
-            "supporting_evidence": accumulated_supporting,   # <-- отправляем в LLM
+            "supporting_evidence": accumulated_supporting,
+            "reasoning_log": dedup_log(reasoning_log, 8),
             "iteration": iteration,
         }
 
@@ -79,13 +103,16 @@ async def agent_loop(user_query):
         print(f"→ Supporting evidence: {len(reasoning.get('supporting_evidence', []))}")
         print(f"→ Confidence: {reasoning.get('confidence')}")
         print(f"→ Active question: {reasoning.get('active_question')}")
-
+        #print(f"→ Actions log: {dedup_log(reasoning_log, 8)}")
         all_new_evidence = []
         for action in reasoning["actions"]:
             endpoint_url, payload = get_endpoint_and_payload(action, context)
             print(f"  [{action['type']}] Query: {action['query']}")
             try:
                 evidence = await call_fastapi_async(endpoint_url, payload)
+                # print("-"*150)
+                # print(evidence)
+                # print("-"*150)
             except Exception as e:
                 print(f"    !!! Endpoint error: {e}")
                 evidence = []
@@ -143,10 +170,12 @@ async def agent_loop(user_query):
         print(f"[Verdict error] {e}")
 
 if __name__ == "__main__":
-    user_query = "Find and identify a specific abandoned settlement, village, or mission described in the documents. Focus on one such object and collect all possible indirect clues about its location—such as distances, nearby places, and geographical features. Summarize all findings about this object."
+    user_query = """Find the name of any settlement in Brazilia mentioned in documents from the 1500s. For first query use vector search like "village on the bank of river" or like that. Do it while you det docs with villange or settlements names in documnets with 1500s. For the first relevant example you find, determine whether this place still exists today, and if so, provide its modern name, location, or current status. If the place no longer exists, describe what is known about its fate. Use information from both historical and modern sources if possible."""
+    
     asyncio.run(agent_loop(user_query))
 
 #"Find a description of an abandoned or lost objects in the texts and try to determine its location using any indirect information—such as distances, neighboring places, or geographical clues."
 #"Find a settlement or place name in the texts. Determine if it is now abandoned or still known, using any supporting details from context."
+#"Find and identify a specific abandoned settlement, village, or mission described in the documents. Focus on one such object and collect all possible indirect clues about its location—such as distances, nearby places, and geographical features. Summarize all findings about this object."
 
 

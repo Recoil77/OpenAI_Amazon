@@ -51,11 +51,15 @@ async def ocr_main_text_strict_json(
     img_uri = _file_to_data_uri(file)
 
     system_msg_g = (
-        "You are a strict OCR engine for historical manuscripts. "
-        "Extract the main body text from the image. "
-        "Respond ONLY in strict JSON format: {\"text\": \"...\"}. "
-        "Do NOT add explanations, introductions, markdown, or formatting. "
-        "Return only the transcription inside the 'text' field. No code blocks, no commentary."
+        "You are a strict OCR engine for early-20 th-century printed sources. "
+        "Return ONLY JSON: {\"text\": \"...\"}. "
+        "Rules:\n"
+        "1. Transcribe exactly the text that is printed; never invent or repeat lines.\n"
+        "2. If a column is padded with dots or dashes (e.g. '. . . . .'), **collapse the run "
+        "into a single space** or remove it entirely.\n"
+        "3. Never output more than one consecutive dot.\n"
+        "4. Stop when you reach the bottom margin of the page.\n"
+        "5. Total output must stay under 2 000 characters.\n"
     )
 
     messages = [
@@ -63,22 +67,21 @@ async def ocr_main_text_strict_json(
         {
             "role": "user",
             "content": [
-                {"type": "text", "text": "Extract the main body text. Respond only as JSON: {\"text\": \"...\"}"},
-                {
-                    "type": "image_url",
-                    "image_url": {
-                        "url": img_uri,
-                        "detail": "high"
-                    }
-                },
+                {"type": "text",
+                "text": "Extract the main body text. Respond only as JSON: {\"text\": \"...\"}"},
+                {"type": "image_url",
+                "image_url": {"url": img_uri, "detail": "high" }} #"low"   
             ],
         },
     ]
+
 
     try:
         resp = await chat_completion.create(
             model=model,
             temperature=0,
+            response_format={"type": "json_object"},
+            max_tokens=1024,
             messages=messages,
         )
     except Exception as e:
@@ -95,59 +98,102 @@ async def ocr_main_text_strict_json(
         raise HTTPException(status_code=500, detail=f"Invalid JSON returned:\n\n{raw[:500]}\n\nError: {e}")
 
 
-   
-
 class ExtendedOCRRequest(BaseModel):
-    prev: str = ""
-    text: str
-    next: str = ""
+    text: str  # prev/next убраны как неиспользуемые
 
-@app.post("/clean_ocr_extended")
-async def clean_ocr_extended(request: ExtendedOCRRequest):
-    """
-    Очистка и восстановление исторического OCR с контекстом до и после.
-    Возвращает JSON с полями: cleaned_text, quality_score, note.
-    """
-    system_msg_x = (
-        "You are a professional historian and language expert.\n\n"
-        "You are processing OCR fragments from early modern printed or handwritten sources (1600–1700s). "
-        "Your task is to clean and translate the content of a single fragment.\n\n"
-        "The input fragment may begin or end mid-sentence. Do NOT attempt to reconstruct missing parts. "
-        "Only work with the text exactly as provided.\n\n"
-        "Instructions:\n"
-        "1. Clean the OCR text: fix broken hyphenation, remove page numbers, headers, illegible lines, and layout issues.\n"
-        "2. Translate the cleaned text into fluent modern English, preserving historical meaning and tone.\n"
-        "3. Do not invent or assume missing content. Do not continue or complete any incomplete sentences.\n\n"
-        "Return your response as strict JSON in the following format:\n"
-        "{\n"
-        "  \"cleaned_text\": \"<cleaned and translated text in English>\",\n"
-        "  \"quality_score\": <float between 0.0 and 1.0>,\n"
-        "}\n\n"
-        "❗️Do NOT include any commentary, explanation, or markdown outside of this JSON."
-    )
-    user_content = request.text.strip()
+class ExtendedOCRResponse(BaseModel):
+    cleaned_text: str
+    quality_score: float
+
+SYSTEM_PROMPT = (
+    "You are a professional historian and language expert.\n\n"
+    "You process OCR fragments from early‑modern printed or handwritten sources (1600–1700s).\n"
+    "Your task is to CLEAN the fragment and, only if it is **not already English**, translate it into fluent modern English while preserving historical meaning and tone.\n\n"
+    "The fragment may start or end mid‑sentence. Do **NOT** invent missing parts or continue incomplete sentences.\n\n"
+    "Steps:\n"
+    "1. Fix OCR artefacts: broken hyphenation, page numbers, headers, layout noise.\n"
+    "2. Detect source language. If it is English, keep it; otherwise translate to English.\n"
+    "3. Output strict JSON **only** in this form:\n"
+    "{\n  \"cleaned_text\": \"<cleaned (and if needed translated) text>\",\n  \"quality_score\": <float 0.0–1.0>\n}\n\n"
+    "quality_score scale examples: 1.0 (crystal‑clear), 0.8 (minor noise), 0.5 (readable with effort), 0.2 (hard to read), 0.0 (illegible).\n\n"
+    "❗️Return ONLY the JSON. No markdown, no commentary."
+)
+
+@app.post("/clean_ocr_extended", response_model=ExtendedOCRResponse)
+async def clean_ocr_extended(req: ExtendedOCRRequest):
     messages = [
-        {"role": "system", "content": system_msg_x},
-        {"role": "user", "content": user_content}
+        {"role": "system", "content": SYSTEM_PROMPT},
+        {"role": "user", "content": req.text.strip()},
     ]
+
     try:
         resp = await chat_completion.create(
-            model="gpt-4.1-2025-04-14", #  "o4-mini-2025-04-16"    "gpt-4o-2024-11-20"
+            model="gpt-4.1-2025-04-14",
             temperature=0.2,
             messages=messages,
             max_tokens=2048,
+            response_format={"type": "json_object"},  # гарантированный JSON
         )
-        raw_output = resp.choices[0].message.content.strip()
+        parsed = resp.choices[0].message.content
+        return json.loads(parsed)
 
-        # Попробуем распарсить как JSON
-        parsed = json.loads(raw_output)
-        return parsed
-
-    except json.JSONDecodeError:
-        return {"error": "Invalid JSON returned by model", "raw_output": raw_output}
+    except json.JSONDecodeError as e:
+        raise HTTPException(status_code=500, detail=f"Model returned invalid JSON: {e}")
 
     except Exception as exc:
-        raise HTTPException(status_code=502, detail=str(exc))
+        raise HTTPException(status_code=502, detail=str(exc))   
+
+# class ExtendedOCRRequest(BaseModel):
+#     prev: str = ""
+#     text: str
+#     next: str = ""
+
+# @app.post("/clean_ocr_extended")
+# async def clean_ocr_extended(request: ExtendedOCRRequest):
+#     """
+#     Очистка и восстановление исторического OCR с контекстом до и после.
+#     Возвращает JSON с полями: cleaned_text, quality_score, note.
+#     """
+#     system_msg_x = (
+#         "You are a professional historian and language expert.\n\n"
+#         "You are processing OCR fragments from early modern printed or handwritten sources (1600–1700s). "
+#         "Your task is to clean and translate the content of a single fragment.\n\n"
+#         "The input fragment may begin or end mid-sentence. Do NOT attempt to reconstruct missing parts. "
+#         "Only work with the text exactly as provided.\n\n"
+#         "Instructions:\n"
+#         "1. Clean the OCR text: fix broken hyphenation, remove page numbers, headers, illegible lines, and layout issues.\n"
+#         "2. Translate the cleaned text into fluent modern English, preserving historical meaning and tone.\n"
+#         "3. Do not invent or assume missing content. Do not continue or complete any incomplete sentences.\n\n"
+#         "Return your response as strict JSON in the following format:\n"
+#         "{\n"
+#         "  \"cleaned_text\": \"<cleaned and translated text in English>\",\n"
+#         "  \"quality_score\": <float between 0.0 and 1.0>,\n"
+#         "}\n\n"
+#         "❗️Do NOT include any commentary, explanation, or markdown outside of this JSON."
+#     )
+#     user_content = request.text.strip()
+#     messages = [
+#         {"role": "system", "content": system_msg_x},
+#         {"role": "user", "content": user_content}
+#     ]
+#     try:
+#         resp = await chat_completion.create(
+#             model="gpt-4.1-2025-04-14", #  "o4-mini-2025-04-16"    "gpt-4o-2024-11-20"
+#             temperature=0.2,
+#             messages=messages,
+#             max_tokens=2048,
+#         )
+#         raw_output = resp.choices[0].message.content.strip()
+
+#         # Попробуем распарсить как JSON
+#         parsed = json.loads(raw_output)
+#         return parsed
+
+#     except json.JSONDecodeError:
+#         return {"error": "Invalid JSON returned by model", "raw_output": raw_output}
+
+#     except Exception as exc:
+#         raise HTTPException(status_code=502, detail=str(exc))
     
 
 
