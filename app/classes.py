@@ -2,11 +2,35 @@ from pydantic import BaseModel, Field
 from typing import List, Dict, Any, Optional, Literal
 from uuid import UUID
 
+
 class Evidence(BaseModel):
     source: str
     value: str
-    details: Dict[str, Any] = Field(default_factory=dict)
-    meta: Dict[str, Any] = Field(default_factory=dict)
+    details: Dict[str, Any] = {}
+    meta: Dict[str, Any] = {}
+
+class Action(BaseModel):
+    type: str
+    query: str
+    reason: Optional[str] = ""
+
+class ReasoningResponse(BaseModel):
+    actions: List[Action] = []
+    finalize: bool = False
+    active_question: str = ""
+    hypothesis: Optional[str] = ""
+    supporting_evidence: List[Evidence] = []
+    confidence: Optional[float] = None
+
+class ReasoningRequest(BaseModel):
+    user_query: str
+    active_question: str
+    context: List[Evidence]
+    previous_hypotheses: List[str] = []
+    supporting_evidence: List[Evidence] = []   # <-- добавить
+    reasoning_log: List[Dict[str, Any]] = []
+    iteration: int = 0
+
 
 # --- Request/Response schemas ---
 class ReformulateRequest(BaseModel):
@@ -20,27 +44,9 @@ class ReformulateResponse(BaseModel):
     alternatives: List[str] = []
     reason: str = ""
 
-class Action(BaseModel):
-    type: str
-    query: str
-    reason: str
 
-# --- Request/Response schemas ---
-class ReasoningRequest(BaseModel):
-    user_query: str
-    active_question: str
-    context: List[Evidence]
-    previous_hypotheses: List[str] = []
-    reasoning_log: List[Dict[str, Any]] = []
-    iteration: int = 0
 
-class ReasoningResponse(BaseModel):
-    actions: List[Action] = []
-    finalize: bool = False
-    active_question: str = ""
-    hypothesis: Optional[str] = ""
-    supporting_evidence: Optional[List[Evidence]] = []
-    confidence: Optional[float] = None
+
 
 class WebSearchRequest(BaseModel):
     query: str
@@ -119,6 +125,13 @@ class ChunkFacts(BaseModel):
     chunk_id: int
     facts: List[str]
 
-class ChunkFacts(BaseModel):
-    chunk_id: int
-    facts: List[str]
+
+class GetVerdictRequest(BaseModel):
+    hypothesis: str
+    supporting_evidence: Optional[List[Evidence]] = None
+
+class GetVerdictResponse(BaseModel):
+    verdict: str
+    details: str
+    general_knowledge_answer: str
+    web_search_answer: str 

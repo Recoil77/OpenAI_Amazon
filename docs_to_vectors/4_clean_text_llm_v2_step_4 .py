@@ -7,7 +7,7 @@ from tqdm import tqdm
 
 # === SETTINGS ===
 WORKERS = 8
-number = "40"
+number = "49"
 INPUT_FILE = Path(f"docs/{number}/{number}.txt")
 OUTPUT_DIR = Path(f"docs/{number}/chunks_json")
 ENDPOINT = "http://192.168.168.5:8000/clean_ocr_extended"
