@@ -36,13 +36,6 @@ def _file_to_data_uri(upload: UploadFile) -> str:
     return f"data:{mime};base64,{b64}"
 
 
-def _file_to_data_uri(upload: UploadFile) -> str:
-    data = upload.file.read()
-    mime = mimetypes.guess_type(upload.filename)[0] or "image/jpeg"
-    b64 = base64.b64encode(data).decode()
-    return f"data:{mime};base64,{b64}"
-
-
 @app.post("/ocr_main_text")
 async def ocr_main_text_strict_json(
     file: UploadFile = File(...),
