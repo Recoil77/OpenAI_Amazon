@@ -21,7 +21,7 @@ from typing import Optional, List, Dict
 # ====== Local application imports ======
 from gateway.gateway_client import chat_completion, response_completion, embedding
 from dotenv import load_dotenv
-load_dotenv("/opt2/.env")
+load_dotenv()
 
 DATABASE_URL = env = os.getenv("DATABASE_URL")
 

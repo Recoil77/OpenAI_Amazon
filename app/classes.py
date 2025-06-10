@@ -16,13 +16,21 @@ class Action(BaseModel):
 
 
 
+# class ReasoningResponse(BaseModel):
+#     actions: List[Action] = []
+#     finalize: bool = False
+#     active_question: str = ""
+#     hypothesis: Optional[str] = ""
+#     supporting_evidence: List[Evidence] = []
+#     confidence: Optional[float] = None
+
 class ReasoningResponse(BaseModel):
-    actions: List[Action] = []
-    finalize: bool = False
-    active_question: str = ""
-    hypothesis: Optional[str] = ""
-    supporting_evidence: List[Evidence] = []
-    confidence: Optional[float] = None
+    actions: List[Action]              = Field(default_factory=list)
+    finalize: bool                     = False
+    active_question: str               = ""
+    hypothesis: Optional[str]          = ""
+    supporting_evidence: List[Evidence]= Field(default_factory=list)
+    confidence: Optional[float]        = None
 
 class ReasoningRequest(BaseModel):
     user_query: str

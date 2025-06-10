@@ -3,14 +3,16 @@ import json
 from fastapi import FastAPI, Request, HTTPException
 from pydantic import BaseModel, Field
 from typing import List, Dict, Any, Optional
-from openai import OpenAI
+from openai import OpenAI, AsyncOpenAI
 import asyncpg
 import os
 import asyncio
 import traceback
+import structlog
 from starlette.concurrency import run_in_threadpool
 from gateway.gateway_client import chat_completion, response_completion
 from fastapi import APIRouter, HTTPException, Query
+from pydantic import ValidationError
 from app.classes import ReasoningRequest, ReasoningResponse
 from app.classes import ReformulateRequest, ReformulateResponse, ReasoningRequest, ReasoningResponse, Action, Evidence
 from app.classes import WebSearchRequest, GeneralKnowledgeRequest, EntitySearchRequest, ChunkSummaryRequest, ChunkSummaryResponse
@@ -22,9 +24,9 @@ from dotenv import load_dotenv
 load_dotenv("/opt2/.env")
 DATABASE_URL = env = os.getenv("DATABASE_URL")
 client = OpenAI()
-
+openai_client = AsyncOpenAI() 
 app = FastAPI()
-
+log = structlog.get_logger(__name__)
 
 
 @app.post("/reformulate_question", response_model=List[Evidence])
@@ -65,131 +67,168 @@ async def reformulate_question(req: ReformulateRequest):
         )
         return [evidence]
 
-
-
-tools = [{
-    "type": "function",
-    "function": {
-        "name": "reasoning_response",
-        "parameters": {
-            "type": "object",
-            "properties": {
-                "actions": {           # <-- здесь был set
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "type":    {"type": "string", "enum": [
-                                "vector_search", "web_search",
-                                "entity_search", "general_knowledge",
-                                "reformulate_question"
-                            ]},
-                            "query":   {"type": "string"},
-                            "reason":  {"type": "string"}
-                        },
-                        "required": ["type", "query", "reason"]
-                    },
-                    "minItems": 1
-                },
-                "finalize": {"type": "boolean"},
-                "active_question": {"type": "string"},
-                "hypothesis": {"type": "string"},
-                "supporting_evidence": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "source":  {"type": "string"},
-                            "value":   {"type": "string"},
-                            "details": {"type": "object"},   # строго объект!
-                            "meta":    {"type": "object"}
-                        },
-                        "required": ["source", "value", "details", "meta"]
-                    }
-                },
-                "confidence": {"type": ["number", "null"]}
-            },
-            "required": ["actions", "finalize", "supporting_evidence"]
-        }
-    }
-}]
-
-
 @app.post("/llm_reasoning", response_model=ReasoningResponse)
 async def llm_reasoning(
     req: ReasoningRequest,
-    model: str = Query('gpt-4.1-2025-04-14', description="LLM model (e.g., 'gpt-4.1-2025-04-14', 'o3')"), #"o3-2025-04-16"    
-    temperature: float = Query(0.25, description="Sampling temperature"),
-    max_tokens: int = Query(4096, description="Maximum output tokens"),
-):
+    model: str = Query("o3-2025-04-16" ,  description="LLM model"), #  'gpt-4.1-2025-04-14'
+    temperature: float = Query(0.25,     description="Sampling temperature"),
+    max_tokens: int = Query(4096,        description="Maximum output tokens"),
+) -> ReasoningResponse:
+    """
+    Один цикл глубокого рассуждения: отдаём промпт —
+    получаем строго JSON-объект с действиями, гипотезой и т.д.
+    """
     prompt = build_reasoning_prompt(req)
+    log.info("llm_reasoning.start", iteration=req.iteration, model=model)
+
     try:
-        resp =  client.chat.completions.create( #await
+        response = await openai_client.chat.completions.create(
             model=model,
+            messages=[{"role": "system", "content": prompt}],
             response_format={"type": "json_object"},
-            messages=[
-                {"role": "system", "content": prompt}
-            ],
+            reasoning_effort="high",
             #temperature=temperature,
-            tools = tools,
-            #top_p = 0.9,
             #max_tokens=max_tokens,
-
         )
-        #content = resp.choices[0].message.content.strip()
-        choice = resp.choices[0]
+        raw_json_str = response.choices[0].message.content
+        log.debug("llm_reasoning.raw", json=raw_json_str)
 
-        # ➟ правильный путь к строке-JSON с аргументами
-        args_json = choice.message.tool_calls[0].function.arguments
-        data = json.loads(args_json)
-        content = data
-        print("==== RAW LLM OUTPUT ====")
-        print(repr(content))
-
-        try:
-            #data = json.loads(content)
-            data = content
-            print("==== DATA LOADED FROM JSON ====")
-            print(data)
-            # Временно выводим структуру для дебага
-            print("==== KEYS AT TOP LEVEL ====")
-            print(list(data.keys()))
-            if "supporting_evidence" in data:
-                print(f"supporting_evidence type: {type(data['supporting_evidence'])}, len: {len(data['supporting_evidence'])}")
-                for i, ev in enumerate(data["supporting_evidence"]):
-                    print(f"  evidence[{i}] type: {type(ev)}, keys: {ev.keys() if isinstance(ev, dict) else 'not a dict'}")
-            if "actions" in data:
-                print(f"actions type: {type(data['actions'])}, len: {len(data['actions'])}")
-                for i, act in enumerate(data["actions"]):
-                    print(f"  action[{i}] type: {type(act)}, keys: {act.keys() if isinstance(act, dict) else 'not a dict'}")
-        except Exception as e:
-            print("==== LLM PARSE ERROR ====")
-            print("RAW OUTPUT:", repr(content))
-            raise HTTPException(
-                status_code=500,
-                detail=f"LLM reasoning failed: {e}\nRAW OUTPUT:\n{content[:1000]}"
-            )
-
-        # Вот тут дебажим падение на ReasoningResponse
-        try:
-            result = ReasoningResponse(**data)
-        except Exception as e:
-            print("==== PYDANTIC PARSE ERROR ====")
-            print("TRACEBACK:")
-            print(traceback.format_exc())
-            print("==== DATA THAT CAUSED ERROR ====")
-            print(data)
-            raise HTTPException(
-                status_code=500,
-                detail=f"Pydantic ReasoningResponse parse failed: {e}\nTRACEBACK:\n{traceback.format_exc()}\nDATA:\n{str(data)[:1000]}"
-            )
-
+        # Pydantic v2: валидируем сразу из строки, без промежуточного json.loads
+        result = ReasoningResponse.model_validate_json(raw_json_str)
+        log.info("llm_reasoning.ok")
         return result
 
+    except ValidationError as e:
+        log.error("llm_reasoning.validation_error", error=str(e), raw=response.choices[0].message.content)
+        raise HTTPException(status_code=422, detail=f"Pydantic validation failed: {e}")
+
     except Exception as e:
-        print("==== OUTER ERROR IN /llm_reasoning ====")
-        print(traceback.format_exc())
-        raise HTTPException(status_code=500, detail=f"LLM reasoning failed (outer): {e}")
+        log.exception("llm_reasoning.fail")
+        raise HTTPException(status_code=500, detail=f"LLM reasoning failed: {e}")
+
+# tools = [{
+#     "type": "function",
+#     "function": {
+#         "name": "reasoning_response",
+#         "parameters": {
+#             "type": "object",
+#             "properties": {
+#                 "actions": {           # <-- здесь был set
+#                     "type": "array",
+#                     "items": {
+#                         "type": "object",
+#                         "properties": {
+#                             "type":    {"type": "string", "enum": [
+#                                 "vector_search", "web_search",
+#                                 "entity_search", "general_knowledge",
+#                                 "reformulate_question"
+#                             ]},
+#                             "query":   {"type": "string"},
+#                             "reason":  {"type": "string"}
+#                         },
+#                         "required": ["type", "query", "reason"]
+#                     },
+#                     "minItems": 1
+#                 },
+#                 "finalize": {"type": "boolean"},
+#                 "active_question": {"type": "string"},
+#                 "hypothesis": {"type": "string"},
+#                 "supporting_evidence": {
+#                     "type": "array",
+#                     "items": {
+#                         "type": "object",
+#                         "properties": {
+#                             "source":  {"type": "string"},
+#                             "value":   {"type": "string"},
+#                             "details": {"type": "object"},   # строго объект!
+#                             "meta":    {"type": "object"}
+#                         },
+#                         "required": ["source", "value", "details", "meta"]
+#                     }
+#                 },
+#                 "confidence": {"type": ["number", "null"]}
+#             },
+#             "required": ["actions", "finalize", "supporting_evidence"]
+#         }
+#     }
+# }]
+
+
+# @app.post("/llm_reasoning", response_model=ReasoningResponse)
+# async def llm_reasoning(
+#     req: ReasoningRequest,
+#     model: str = Query("o3-2025-04-16", description="LLM model (e.g., 'gpt-4.1-2025-04-14', 'o3')"), # 'gpt-4.1-2025-04-14'   
+#     temperature: float = Query(0.25, description="Sampling temperature"),
+#     max_tokens: int = Query(4096, description="Maximum output tokens"),
+# ):
+#     prompt = build_reasoning_prompt(req)
+#     try:
+#         resp =  client.chat.completions.create( #await
+#             model=model,
+#             response_format={"type": "json_object"},
+#             messages=[
+#                 {"role": "system", "content": prompt}
+#             ],
+#             #temperature=temperature,
+#             tools = tools,
+#             #top_p = 0.9,
+#             #max_tokens=max_tokens,
+
+#         )
+#         #content = resp.choices[0].message.content.strip()
+#         choice = resp.choices[0]
+
+#         # ➟ правильный путь к строке-JSON с аргументами
+#         args_json = choice.message.tool_calls[0].function.arguments
+#         data = json.loads(args_json)
+#         content = data
+#         print("==== RAW LLM OUTPUT ====")
+#         print(repr(content))
+
+#         try:
+#             #data = json.loads(content)
+#             data = content
+#             print("==== DATA LOADED FROM JSON ====")
+#             print(data)
+#             # Временно выводим структуру для дебага
+#             print("==== KEYS AT TOP LEVEL ====")
+#             print(list(data.keys()))
+#             if "supporting_evidence" in data:
+#                 print(f"supporting_evidence type: {type(data['supporting_evidence'])}, len: {len(data['supporting_evidence'])}")
+#                 for i, ev in enumerate(data["supporting_evidence"]):
+#                     print(f"  evidence[{i}] type: {type(ev)}, keys: {ev.keys() if isinstance(ev, dict) else 'not a dict'}")
+#             if "actions" in data:
+#                 print(f"actions type: {type(data['actions'])}, len: {len(data['actions'])}")
+#                 for i, act in enumerate(data["actions"]):
+#                     print(f"  action[{i}] type: {type(act)}, keys: {act.keys() if isinstance(act, dict) else 'not a dict'}")
+#         except Exception as e:
+#             print("==== LLM PARSE ERROR ====")
+#             print("RAW OUTPUT:", repr(content))
+#             raise HTTPException(
+#                 status_code=500,
+#                 detail=f"LLM reasoning failed: {e}\nRAW OUTPUT:\n{content[:1000]}"
+#             )
+
+#         # Вот тут дебажим падение на ReasoningResponse
+#         try:
+#             result = ReasoningResponse(**data)
+#         except Exception as e:
+#             print("==== PYDANTIC PARSE ERROR ====")
+#             print("TRACEBACK:")
+#             print(traceback.format_exc())
+#             print("==== DATA THAT CAUSED ERROR ====")
+#             print(data)
+#             raise HTTPException(
+#                 status_code=500,
+#                 detail=f"Pydantic ReasoningResponse parse failed: {e}\nTRACEBACK:\n{traceback.format_exc()}\nDATA:\n{str(data)[:1000]}"
+#             )
+
+#         return result
+
+#     except Exception as e:
+#         print("==== OUTER ERROR IN /llm_reasoning ====")
+#         print(traceback.format_exc())
+#         raise HTTPException(status_code=500, detail=f"LLM reasoning failed (outer): {e}")
 
 
     

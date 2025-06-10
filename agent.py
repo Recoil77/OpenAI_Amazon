@@ -1,14 +1,21 @@
+import os
 import asyncio
 from utils.calls import call_fastapi_async
+from dotenv import load_dotenv
+load_dotenv()
+
+
+SERVER_IP = os.getenv("SERVER_ADDRESS")
+SERVER_ADDRESS = f"http://{SERVER_IP}:8100"
 
 # Настройки
-LLM_REASONING_URL = "http://192.168.168.5:8100/llm_reasoning"
-VECTOR_SEARCH_URL = "http://192.168.168.5:8100/vector_search"
-ENTITY_SEARCH_URL = "http://192.168.168.5:8100/entity_search"
-GENERAL_KNOWLEDGE_URL = "http://192.168.168.5:8100/general_knowledge"
-WEB_SEARCH_URL = "http://192.168.168.5:8100/web_search"
-REFORMULATE_URL = "http://192.168.168.5:8100/reformulate_question"
-GET_VERDICT_URL = "http://192.168.168.5:8100/get_verdict"
+LLM_REASONING_URL = f"{SERVER_ADDRESS}/llm_reasoning"
+VECTOR_SEARCH_URL = f"{SERVER_ADDRESS}/vector_search"
+ENTITY_SEARCH_URL = f"{SERVER_ADDRESS}/entity_search"
+GENERAL_KNOWLEDGE_URL = f"{SERVER_ADDRESS}/general_knowledge"
+WEB_SEARCH_URL = f"{SERVER_ADDRESS}/web_search"
+REFORMULATE_URL = f"{SERVER_ADDRESS}/reformulate_question"
+GET_VERDICT_URL = f"{SERVER_ADDRESS}/get_verdict"
 
 MAX_ITERATIONS = 16
 
@@ -17,7 +24,7 @@ def get_endpoint_and_payload(action, context):
     action_type = action['type']
     query = action.get('query', '')
     if action_type == "vector_search":
-        return VECTOR_SEARCH_URL, {"query": query, "k": 64, "bge_threshold": 0.2, "semantic_threshold": 0.25 }
+        return VECTOR_SEARCH_URL, {"query": query, "k": 64, "bge_threshold": 0.2, "semantic_threshold": 0.5 }
     elif action_type == "entity_search":
         if isinstance(query, str):
             # Разбиваем строку по запятым и убираем пробелы вокруг
@@ -170,7 +177,7 @@ async def agent_loop(user_query):
         print(f"[Verdict error] {e}")
 
 if __name__ == "__main__":
-    user_query = """Find the name of any settlement in Brazilia mentioned in documents from the 1500s. For first query use vector search like "village on the bank of river" or like that. Do it while you det docs with villange or settlements names in documnets with 1500s. For the first relevant example you find, determine whether this place still exists today, and if so, provide its modern name, location, or current status. If the place no longer exists, describe what is known about its fate. Use information from both historical and modern sources if possible."""
+    user_query = """Find all information and facts related to the object or place named Bararoá."""
     
     asyncio.run(agent_loop(user_query))
 
