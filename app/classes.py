@@ -31,16 +31,18 @@ class ReasoningResponse(BaseModel):
     hypothesis: Optional[str]          = ""
     supporting_evidence: List[Evidence]= Field(default_factory=list)
     confidence: Optional[float]        = None
+    agent_thoughts: Optional[str]          = ""
 
 class ReasoningRequest(BaseModel):
     user_query: str
     active_question: str
+    agent_thoughts: Optional[str]          = ""
     context: List[Evidence]
     previous_hypotheses: List[str] = []
     supporting_evidence: List[Evidence] = []   # <-- добавить
     reasoning_log: List[Dict[str, Any]] = []
     iteration: int = 0
-
+    
 
 # --- Request/Response schemas ---
 class ReformulateRequest(BaseModel):

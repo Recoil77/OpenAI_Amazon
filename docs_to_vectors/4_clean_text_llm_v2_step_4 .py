@@ -7,10 +7,10 @@ from tqdm import tqdm
 
 # === SETTINGS ===
 WORKERS = 16
-number = "51"
+number = "57"
 INPUT_FILE = Path(f"docs/{number}/{number}.txt")
 OUTPUT_DIR = Path(f"docs/{number}/chunks_json")
-ENDPOINT = "http://192.168.168.5:8000/clean_ocr_extended"
+ENDPOINT = "http://192.168.168.10:8000/clean_ocr_extended"
 MAX_CHARS = 3000
 LOW_SCORE_THRESHOLD = 0.8  # Порог для слабых переводов
 

@@ -7,11 +7,11 @@ from tqdm import tqdm
 
 # === НАСТРОЙКИ ===
 WORKERS = 16
-number = "51"
+number = "57"
 CHUNKS_DIR = Path(f"docs/{number}/chunks_json")
 OUTPUT_DIR = Path(f"docs/{number}/chunks_with_metadata")
 META_PATH = Path(f"docs/{number}/meta.json")
-METADATA_URL = "http://192.168.168.5:8000/generate_metadata"
+METADATA_URL = "http://192.168.168.10:8000/generate_metadata"
 
 OUTPUT_DIR.mkdir(exist_ok=True, parents=True)
 

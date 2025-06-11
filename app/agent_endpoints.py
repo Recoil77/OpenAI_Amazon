@@ -18,7 +18,7 @@ from app.classes import ReformulateRequest, ReformulateResponse, ReasoningReques
 from app.classes import WebSearchRequest, GeneralKnowledgeRequest, EntitySearchRequest, ChunkSummaryRequest, ChunkSummaryResponse
 from app.classes import VectorSearchRequest, VectorSearchV2Request, VectorSearchV2Result, RerankRequest, RerankResult
 from app.classes import RerankSemanticV5Request, ExtractFactsRequest, ChunkCandidate, ChunkFacts, GetVerdictRequest, GetVerdictResponse
-from app.func import build_reformulate_prompt, build_reasoning_prompt
+from app.func import build_reformulate_prompt, build_reasoning_prompt_v2
 from app.main import vector_search_v2, rerank_bge_endpoint, rerank_semantic_v5, extract_facts
 from dotenv import load_dotenv
 load_dotenv("/opt2/.env")
@@ -27,7 +27,7 @@ client = OpenAI()
 openai_client = AsyncOpenAI() 
 app = FastAPI()
 log = structlog.get_logger(__name__)
-
+CUTTING = 5
 
 @app.post("/reformulate_question", response_model=List[Evidence])
 async def reformulate_question(req: ReformulateRequest):
@@ -70,41 +70,85 @@ async def reformulate_question(req: ReformulateRequest):
 @app.post("/llm_reasoning", response_model=ReasoningResponse)
 async def llm_reasoning(
     req: ReasoningRequest,
-    model: str = Query("o3-2025-04-16" ,  description="LLM model"), #  'gpt-4.1-2025-04-14'
-    temperature: float = Query(0.25,     description="Sampling temperature"),
-    max_tokens: int = Query(4096,        description="Maximum output tokens"),
+    model: str = Query("o3-2025-04-16", description="LLM model"),  # 'gpt-4.1-2025-04-14'
+    temperature: float = Query(0.25, description="Sampling temperature"),
+    max_tokens: int = Query(4096, description="Maximum output tokens"),
 ) -> ReasoningResponse:
     """
     Один цикл глубокого рассуждения: отдаём промпт —
     получаем строго JSON-объект с действиями, гипотезой и т.д.
     """
-    prompt = build_reasoning_prompt(req)
+    prompt = build_reasoning_prompt_v2(req)
     log.info("llm_reasoning.start", iteration=req.iteration, model=model)
 
     try:
-        response = await openai_client.chat.completions.create(
+        response = await chat_completion.create(
             model=model,
             messages=[{"role": "system", "content": prompt}],
             response_format={"type": "json_object"},
-            reasoning_effort="high",
             #temperature=temperature,
             #max_tokens=max_tokens,
         )
         raw_json_str = response.choices[0].message.content
         log.debug("llm_reasoning.raw", json=raw_json_str)
 
-        # Pydantic v2: валидируем сразу из строки, без промежуточного json.loads
+        # Валидация и возврат через Pydantic v2
         result = ReasoningResponse.model_validate_json(raw_json_str)
         log.info("llm_reasoning.ok")
         return result
 
     except ValidationError as e:
-        log.error("llm_reasoning.validation_error", error=str(e), raw=response.choices[0].message.content)
+        # response.choices[0].message.content может не существовать в случае раннего сбоя
+        raw_content = None
+        try:
+            raw_content = response.choices[0].message.content
+        except Exception:
+            pass
+        log.error("llm_reasoning.validation_error", error=str(e), raw=raw_content)
         raise HTTPException(status_code=422, detail=f"Pydantic validation failed: {e}")
 
     except Exception as e:
         log.exception("llm_reasoning.fail")
         raise HTTPException(status_code=500, detail=f"LLM reasoning failed: {e}")
+
+# @app.post("/llm_reasoning", response_model=ReasoningResponse)
+# async def llm_reasoning(
+#     req: ReasoningRequest,
+#     model: str = Query("o3-2025-04-16" ,  description="LLM model"), #  'gpt-4.1-2025-04-14'
+#     temperature: float = Query(0.25,     description="Sampling temperature"),
+#     max_tokens: int = Query(4096,        description="Maximum output tokens"),
+# ) -> ReasoningResponse:
+#     """
+#     Один цикл глубокого рассуждения: отдаём промпт —
+#     получаем строго JSON-объект с действиями, гипотезой и т.д.
+#     """
+#     prompt = build_reasoning_prompt(req)
+#     log.info("llm_reasoning.start", iteration=req.iteration, model=model)
+
+#     try:
+#         response = await openai_client.chat.completions.create(
+#             model=model,
+#             messages=[{"role": "system", "content": prompt}],
+#             response_format={"type": "json_object"},
+#             reasoning_effort="high",
+#             #temperature=temperature,
+#             #max_tokens=max_tokens,
+#         )
+#         raw_json_str = response.choices[0].message.content
+#         log.debug("llm_reasoning.raw", json=raw_json_str)
+
+#         # Pydantic v2: валидируем сразу из строки, без промежуточного json.loads
+#         result = ReasoningResponse.model_validate_json(raw_json_str)
+#         log.info("llm_reasoning.ok")
+#         return result
+
+#     except ValidationError as e:
+#         log.error("llm_reasoning.validation_error", error=str(e), raw=response.choices[0].message.content)
+#         raise HTTPException(status_code=422, detail=f"Pydantic validation failed: {e}")
+
+#     except Exception as e:
+#         log.exception("llm_reasoning.fail")
+#         raise HTTPException(status_code=500, detail=f"LLM reasoning failed: {e}")
 
 # tools = [{
 #     "type": "function",
@@ -376,6 +420,167 @@ async def entity_search(req: EntitySearchRequest):
         raise HTTPException(status_code=500, detail=f"Entity search failed: {e}")
     
 
+@app.post("/entity_hybrid", response_model=List[Evidence])
+async def entity_hybrid_endpoint(req: VectorSearchRequest):
+    """
+    Entity-based search: вытаскиваем чанки с entity, ранжируем через BGE и LLM.
+    req.query — это entity/топоним/имя.
+    """
+    try:
+        print(f"\n[entity_hybrid] Called with entity: {req.query}, k={req.k}")
+
+        # 1. --- Entity SQL: ищем чанки с этой entity ---
+        conn = await asyncpg.connect(DATABASE_URL)
+        sql = """
+            SELECT id, doc_name, doc_type, chunk_index, cleaned_text AS text, year
+            FROM chunks_metadata_v2
+            WHERE EXISTS (
+                SELECT 1 FROM jsonb_array_elements_text(metadata_original->'entities') ent
+                WHERE LOWER(ent) = LOWER($1)
+            )
+            OR EXISTS (
+                SELECT 1 FROM jsonb_array_elements_text(metadata_translated->'entities') ent
+                WHERE LOWER(ent) = LOWER($1)
+            )
+            LIMIT $2
+        """
+        rows = await conn.fetch(sql, req.query, req.k * 15)
+        await conn.close()
+        print(f"    ↳ {len(rows)} candidate chunks selected by entity")
+
+        if not rows:
+            return []
+
+        # 2. --- Mapping for rerankers ---
+        answers = [row["text"] for row in rows]
+        idx2chunk = {i: row for i, row in enumerate(rows)}
+
+        # 3. --- BGE rerank ---
+        print("  → rerank_bge_endpoint ...")
+        bge_out = await rerank_bge_endpoint(
+            RerankRequest(
+                question=req.query,
+                answers=answers,
+                threshold=getattr(req, "bge_threshold", 0.0),
+            )
+        )
+        print(f"    ↳ BGE rerank: {len(bge_out.get('results', []))} candidates")
+
+        bge_filtered = [
+            r for r in bge_out.get("results", []) if r.get("score", 0) >= getattr(req, "bge_threshold", 0.0)
+        ]
+        print(f"    ↳ BGE filtered: {len(bge_filtered)} remain")
+        bge_filtered.sort(key=lambda x: x.get("score", 0), reverse=True)
+
+        # 4. --- LLM (semantic) rerank ---
+        top_bge = bge_filtered[: req.k * 2]
+        sem_candidates = [
+            {"block_id": r["index"], "text": r["text"]} for r in top_bge
+        ]
+        print("  → rerank_semantic_v5 ...")
+        sem_out = await rerank_semantic_v5(
+            RerankSemanticV5Request(
+                question=req.query,
+                candidates=sem_candidates,
+                threshold=getattr(req, "semantic_threshold", 0.0),
+            )
+        )
+        print(f"    ↳ semantic rerank: {len(sem_out)} blocks after rerank")
+        sem_out = sem_out[:CUTTING] 
+        print(f"    ↳ semantic rerank: {len(sem_out)} blocks after cutting")
+        # 5. --- Собираем shortlist ---
+        results = []
+        for entry in sem_out:
+            list_idx = entry["block_id"]
+            src = idx2chunk.get(list_idx)
+            if src is None:
+                print(f"    [!] List-idx {list_idx} not found! (should not happen)")
+                continue
+
+            bge_score = next(
+                (r["score"] for r in bge_filtered if r["index"] == list_idx), None
+            )
+
+            results.append(
+                {
+                    "year": src["year"],
+                    "doc_name": src["doc_name"],
+                    "doc_type": src["doc_type"],
+                    "chunk_index": src["chunk_index"],
+                    "text": src["text"],
+                    "bge_score": bge_score,
+                    "semantic_score": entry["score"],
+                    "facts": [],
+                }
+            )
+        print(f"    ↳ shortlist after rerank: {len(results)} chunks")
+
+        # 6. --- Факты (параллельно) ---
+        print("  → extract_facts (parallel) ...")
+
+        async def fetch_facts(idx: int, txt: str):
+            async with fact_semaphore:
+                fr = await extract_facts(
+                    ExtractFactsRequest(
+                        question=req.query,
+                        chunks=[ChunkCandidate(chunk_id=idx, text=txt)],
+                    )
+                )
+                return idx, (fr[0].facts[:3] if fr else [])
+
+        fact_tasks = [fetch_facts(r["chunk_index"], r["text"]) for r in results]
+        facts_output = await asyncio.gather(*fact_tasks)
+
+        for idx, facts in facts_output:
+            for r in results:
+                if r["chunk_index"] == idx:
+                    r["facts"] = facts
+                    break
+        print("    ↳ facts extraction complete")
+
+        # 7. --- Summary (параллельно) ---
+        print("  → summarize (parallel) ...")
+
+        async def fetch_summary(idx: int, txt: str):
+            if len(txt.split()) <= 256:
+                return idx, txt
+            async with fact_semaphore:
+                sr = await chunk_summary(ChunkSummaryRequest(text=txt))
+                return idx, sr.get("summary", txt)
+
+        summary_tasks = [fetch_summary(r["chunk_index"], r["text"]) for r in results]
+        summary_output = await asyncio.gather(*summary_tasks)
+
+        for idx, summ in summary_output:
+            for r in results:
+                if r["chunk_index"] == idx:
+                    r["summary"] = summ
+                    break
+        print("    ↳ summary complete")
+
+        # 8. --- Сборка Evidence ---
+        evidences = []
+        for r in results:
+            evidences.append(
+                Evidence(
+                    source="entity_hybrid",
+                    value=r.get("summary", r["text"]),
+                    details={
+                        "facts": r["facts"],
+                        "year": r["year"],
+                        "doc_name": r["doc_name"],
+                    },
+                    meta={},
+                )
+            )
+        print(f"  → returning {len(evidences)} Evidence items")
+        return evidences
+
+    except Exception as e:
+        print("  [ERROR]:", str(e))
+        raise HTTPException(status_code=500, detail=f"entity_hybrid failed: {e}")
+
+
 @app.post("/chunk_summary", response_model=ChunkSummaryResponse)
 async def chunk_summary(req: ChunkSummaryRequest):
     """
@@ -465,7 +670,8 @@ async def vector_search_endpoint(req: VectorSearchRequest):
             )
         )
         print(f"    ↳ semantic rerank: {len(sem_out)} blocks after rerank")
-
+        sem_out = sem_out[:CUTTING] 
+        print(f"    ↳ semantic rerank: {len(sem_out)} blocks after cutting")
         # 4. Собираем shortlist
         results = []
         for entry in sem_out:

@@ -190,6 +190,8 @@ def build_reasoning_prompt(data: ReasoningRequest) -> str:
 
     hypotheses_block = "\n".join(data.previous_hypotheses) if data.previous_hypotheses else "[none]"
 
+    agent_thoughts_block = data.agent_thoughts.strip() if getattr(data, "agent_thoughts", None) else "[none]"
+
     preferred_order = dedent(
         """
         Preferred order of actions:
@@ -208,6 +210,7 @@ def build_reasoning_prompt(data: ReasoningRequest) -> str:
         - vector_search   → returns detailed fragments from internal documents (summary, facts, year, etc.).
         - web_search      → returns relevant fragments from external sources.
         - entity_search   → returns statistics on specified entities.
+        - entity_hybrid   → returns detailed fragments from internal documents (summary, facts, year, etc.) on specified entities.
         - general_knowledge → returns concise reference facts.
 
         For each reasoning step you may issue **at most one** action of each type.  
@@ -230,6 +233,9 @@ def build_reasoning_prompt(data: ReasoningRequest) -> str:
         # Previous hypotheses:
         {hypotheses_block}
 
+        # Agent's internal reasoning (carry this over every step, reformulate and expand as needed):
+        {agent_thoughts_block}
+
         # Instructions for investigating abandoned / lost settlements:
         - **Select a single candidate object** (abandoned village / mission / settlement) and keep focus on it through the reasoning cycle.
         - Do **not** hop between multiple objects unless the current candidate is definitively ruled out.
@@ -241,6 +247,14 @@ def build_reasoning_prompt(data: ReasoningRequest) -> str:
         - After choosing a candidate, rewrite `active_question` so it explicitly names that object (e.g., *"Locate the abandoned Jesuit mission of Exaltación"*).
         - Accumulate clues step by step and merge them into the aggregated `supporting_evidence` object (e.g., add `details.clues`).
         - Switch to a different candidate **only** if new evidence contradicts the current hypothesis or proves the object irrelevant.
+
+        # Instructions for internal reasoning:
+        - Continuously read and update the `agent_thoughts` field as your internal monologue. Write down your current reasoning, doubts, partial insights, evolving hypotheses, and strategies in free-form text.
+        - Each step, reformulate and expand this monologue with new information and analysis, building upon all prior thoughts.
+        - Treat `agent_thoughts` as your personal memory and ongoing thought process. Use it to help yourself (the agent) reason more deeply, keep track of unresolved questions, and avoid repeating mistakes.
+        - Do not simply restate logs or copy hypotheses; instead, explain your actual thinking and planning for the next steps.
+        - Always carry over and expand your previous agent_thoughts. Do not reset or clear this field unless the content is clearly obsolete or you are explicitly instructed to summarize and condense.
+        - Keep this field concise, but rich in context and insight. Summarize earlier content only if it becomes too lengthy or redundant.
 
         # Instructions for entity_search & metadata:
         - `entity_search` is the **first‑line, low‑cost tool** to see whether a specific **named entity** is actually present in our corpus metadata (settlements, rivers, missions, explorers, tribes, years).  
@@ -254,6 +268,9 @@ def build_reasoning_prompt(data: ReasoningRequest) -> str:
         - A rare entity may still be correct — cross‑check with indirect clues (distances, rivers, landmarks).
         - Do **not** query phrases like "abandoned village across river"; they yield zero hits.
 
+        # Instructions for entity_search & metadata:
+        - Same as entity_search but pick only one variant then proceed.  
+                
         # Guidance for web_search:
         - Use web_search **only after** you have at least **one concrete name** *and* a regional pointer (e.g., country, province, nearby river).  
         - Form the query as `<name> <region or river>` — e.g., `"Villarico" "Rio Moraji" Brazil`.  
@@ -269,10 +286,15 @@ def build_reasoning_prompt(data: ReasoningRequest) -> str:
         - Add these conversions to `supporting_evidence.meta.distances` and use them to bound the search area.
 
         # Instructions for supporting_evidence:
-        - **Condense all evidence into exactly one object** and place it as the sole element of the `supporting_evidence` array.  
-        - Aggregate multiple facts in this object's `details`/`meta` (e.g., `meta.sources`).  
-        - Keys required: `source`, `value`, `details`, `meta`.  Details **must** be a dictionary, not a string.  
-        - Add new facts to this same object; remove only if proven irrelevant.
+        - **Condense all supporting evidence into exactly one object**, placed as the sole element of the `supporting_evidence` array.
+        - This object must **accumulate all evidence found across all reasoning steps so far** — never reset or clear this evidence between steps.
+        - **Always** carry over all previously found evidence into the current step, adding new facts and clues as they are discovered.
+        - Only remove or revise evidence if you have found direct proof that it is incorrect or irrelevant; otherwise, keep all prior evidence.
+        - Aggregate multiple facts, clues, distances, dates, and contextual details in the `details` and `meta` fields of this object (e.g., `meta.sources`, `details.clues`, `meta.distances`, etc.).
+        - The required keys for this object are: `source`, `value`, `details`, `meta`. `details` **must** be a dictionary, not a string.
+        - Your hypotheses, actions, and reasoning should **always reference the full, cumulative supporting_evidence**.
+        - If no new evidence is found in this step, **return all previously accumulated evidence unchanged**.
+
 
         # Instructions for search‑query reformulation (embedding search):
         - Generate **exactly one** `vector_search` action per reasoning step.  
@@ -289,8 +311,9 @@ def build_reasoning_prompt(data: ReasoningRequest) -> str:
         Respond **strictly** with a valid JSON object:
         {{
           "actions": [
-            {{"type": "vector_search"|"web_search"|"entity_search"|"general_knowledge", "query": "<query>", "reason": "<why>"}}
+            {{"type": "vector_search"|"web_search"|"entity_search"|"entity_hybrid"|"general_knowledge", "query": "<query>", "reason": "<why>"}}
           ],
+          "agent_thoughts": "<update and expand your internal reasoning here — free-form text, in the agent's own words>",
           "finalize": false,
           "active_question": "<updated question if any>",
           "hypothesis": "<current hypothesis if any>",
@@ -304,4 +327,111 @@ def build_reasoning_prompt(data: ReasoningRequest) -> str:
     return prompt
 
 
+def build_reasoning_prompt_v2(data: "ReasoningRequest") -> str:
+    """Return an improved reasoning‑step prompt.
+
+    Key **changes** vs the original `build_reasoning_prompt`:
+    1. **Removed duplicates / typos** (second "Instructions for entity_search & metadata" block now correctly refers to *entity_hybrid*).
+    2. **Unified formatting** – long blocks are collapsed behind `---` separators so the prompt stays readable yet dense.
+    3. **Explicit schema** – the required/optional JSON keys are spelled out and their expected types indicated, including the previously missing
+       `previous_hypotheses` and `confidence ∈ [0,1]` (float).
+    4. **Stronger safety rails** – added a deterministic *fail‑safe* asking the model to output `{"actions":[],"finalize":false}` when unsure.
+    5. **Token discipline** – reminds the model to keep every `query` ≤ 6 words and to cap `agent_thoughts` at ~120 tokens.
+    6. **Minor tweaks** – clarified anti‑stall rule and emphasised reuse of `supporting_evidence` in every step.
+
+    This function is drop‑in compatible with the rest of the agent – only the name changed.  You can either rename the old one or re‑export
+    this as `build_reasoning_prompt`.
+    """
+
+    # ── Helper blocks ────────────────────────────────────────────────────────────
+    facts_block = "\n".join(
+        f"- [{ev.source}] {ev.value}" for ev in (data.context or [])[:8]
+    ) or "[none yet]"
+
+    log_block = "\n".join(
+        f"{item.get('iteration')}. [{item.get('action')}] {item.get('query')} (hits:{item.get('result_count')})"
+        for item in (data.reasoning_log or [])
+    ) or "[no previous actions]"
+
+    hypotheses_block = "\n".join(data.previous_hypotheses) if data.previous_hypotheses else "[none]"
+
+    agent_thoughts_block = (
+        data.agent_thoughts.strip() if getattr(data, "agent_thoughts", None) else "[none]"
+    )
+
+    preferred_order = (
+        "1. vector_search  – internal archive (main)."  # noqa: E501
+        "2. entity_search – stats / spelling variants."
+        "3. entity_hybrid  – deep dive on a chosen entity (costly)."
+        "4. general_knowledge or web_search  – external check (lowest priority)."
+        "5. finalize        – only when hypothesis is well‑supported and no new actions help."
+    )
+
+    # ── Prompt body ──────────────────────────────────────────────────────────────
+    prompt = dedent(
+        f"""
+        === ROLE ===
+        You are **Deep‑Reason** – a chain‑of‑thought engine that solves historical location puzzles by iteratively querying tools and
+        accumulating evidence.  Work step‑by‑step, keep internal thoughts in *agent_thoughts*, and reply **strictly** with JSON.
+        -----------------------------------------------------------------------------
+        # Main user request
+        {data.user_query}
+        # Focus question
+        {data.active_question}
+        -----------------------------------------------------------------------------
+        ## Context so far (max 8 items)
+        {facts_block}
+        -----------------------------------------------------------------------------
+        ## Recent actions (deduplicated)
+        {log_block}
+        -----------------------------------------------------------------------------
+        ## Previous hypotheses
+        {hypotheses_block}
+        -----------------------------------------------------------------------------
+        ## Agent thoughts (≈ keep ≤120 tokens; extend, never overwrite)
+        {agent_thoughts_block}
+        -----------------------------------------------------------------------------
+        ## Preferred tool order
+        {preferred_order}
+        -----------------------------------------------------------------------------
+        ### Object‑focus policy (abandoned settlements)
+        • Lock on one candidate object and gather clues (distances, rivers, neighbours).
+        • Update *active_question* to name that object explicitly.
+        • Switch only if the hypothesis is falsified.
+        -----------------------------------------------------------------------------
+        ### Tool instructions
+        — *vector_search*: exactly **one** per step, 3‑6 meaningful words.
+        — *entity_search*: comma‑separated list (1‑5 names), no descriptive phrases.
+        — *entity_hybrid*: use only after entity_search shows hits >0; pass exactly **one** name variant.
+        — *web_search* / *general_knowledge*: only after you have a concrete name **and** region.
+        -----------------------------------------------------------------------------
+        ### Anti‑stall
+        • Do **not** repeat a semantically similar vector_search query.
+        • After two low‑yield vector_search (<3 new evidence each) you **must** switch tool type.
+        • Collect evidence from ≥2 different tool types before *finalize*.
+        -----------------------------------------------------------------------------
+        ### Evidence accumulation
+        • Maintain **one** cumulative object in *supporting_evidence[0]* (keys: source, value, details{{dict}}, meta{{dict}}).
+        • Always append, never drop, unless disproven.
+        -----------------------------------------------------------------------------
+        ### Required JSON schema
+        {{
+          "actions"           : [{{"type":"vector_search|entity_search|entity_hybrid|web_search|general_knowledge",
+                                  "query":"<≤6‑word phrase>",
+                                  "reason":"<short justification>"}}],
+          "agent_thoughts"    : "<internal chain‑of‑thought>",
+          "active_question"   : "<possibly rewritten question>",
+          "hypothesis"        : "<current hypothesis or empty>",
+          "previous_hypotheses": ["..."]  ,  # append when you discard / supersede one
+          "supporting_evidence": [],            # see accumulation rule above
+          "confidence"        : null,          # float 0‑1 when confident, else null
+          "finalize"          : false
+        }}
+        • If unsure or no useful action, respond with the same JSON but an empty *actions* list.
+        -----------------------------------------------------------------------------
+        OUTPUT **ONLY** THE JSON OBJECT – no markdown, no extra text.
+        """
+    ).strip()
+
+    return prompt
 
