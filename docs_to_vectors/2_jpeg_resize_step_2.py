@@ -3,7 +3,6 @@ from PIL import Image
 
 number = "54"
 
-# === Настройки ===
 INPUT_DIR = Path(f"docs/{number}/jpeg_")
 OUTPUT_DIR = Path(f"docs/{number}/jpeg")
 OUTPUT_DIR.mkdir(exist_ok=True)

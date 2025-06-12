@@ -4,13 +4,16 @@ import asyncio
 import httpx
 from pathlib import Path
 from tqdm import tqdm
+from dotenv import load_dotenv
+load_dotenv()
+SERVER_ADDRESS = env = os.getenv("SERVER_ADDRESS")
 
 # === SETTINGS ===
 WORKERS = 16
 number = "73"
 INPUT_FILE = Path(f"docs/{number}/{number}.txt")
 OUTPUT_DIR = Path(f"docs/{number}/chunks_json")
-ENDPOINT = "http://192.168.168.10:8000/clean_ocr_extended"
+ENDPOINT = f"http://{SERVER_ADDRESS}:8000/clean_ocr_extended"
 MAX_CHARS = 3000
 LOW_SCORE_THRESHOLD = 0.8  # Порог для слабых переводов
 

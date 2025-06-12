@@ -2,27 +2,27 @@ import os
 import subprocess
 from pathlib import Path
 
-# === НАСТРОЙКИ ===
-number = "54"                  # ← номер документа
-first_page = 17                 # ← начальная страница (включительно)
-last_page = 595                 # ← последняя страница (включительно), None = до конца
-use_pdftoppm = True            # ← True = использовать pdftoppm (иначе pdfimages)
-dpi = 400                      # ← разрешение
-output_format = "jpeg"         # ← 'tiff' или 'jpeg'
-jpeg_quality = "95"            # ← применимо только если output_format = 'jpeg'
+# === SETTINGS ===
+number = "54"                  # ← document number
+first_page = 17                # ← start page (inclusive)
+last_page = 595                # ← end page (inclusive), None = until the end
+use_pdftoppm = True            # ← True = use pdftoppm (otherwise pdfimages)
+dpi = 400                      # ← resolution
+output_format = "jpeg"         # ← 'tiff' or 'jpeg'
+jpeg_quality = "95"            # ← applies only if output_format = 'jpeg'
 
 BASE = Path(f"docs/{number}")
 PDF = BASE / f"{number}.pdf"
 OUT = BASE / output_format
 
-# === ПРОВЕРКИ ===
+# === CHECKS ===
 if not PDF.exists():
-    print(f"❌ PDF не найден: {PDF}")
+    print(f"❌ PDF not found: {PDF}")
     exit(1)
 
 OUT.mkdir(parents=True, exist_ok=True)
 
-# === СБОР КОМАНДЫ ===
+# === COMMAND ASSEMBLY ===
 if use_pdftoppm:
     out_prefix = OUT / number
     cmd = ["pdftoppm", f"-{output_format}", "-r", str(dpi)]
@@ -34,7 +34,7 @@ if use_pdftoppm:
         cmd += ["-l", str(last_page)]
     cmd += [str(PDF), str(out_prefix)]
 else:
-    # pdfimages всегда tiff, независимо от output_format
+    # pdfimages always outputs tiff, regardless of output_format
     cmd = ["pdfimages", "-tiff", "-p"]
     if first_page:
         cmd += ["-f", str(first_page)]
@@ -42,17 +42,17 @@ else:
         cmd += ["-l", str(last_page)]
     cmd += [str(PDF), str(OUT / number)]
 
-# === ЗАПУСК ===
-print(f"📥 Извлекаем страницы {first_page}–{last_page or 'EOF'} из {PDF.name}")
-print("Команда:", " ".join(str(c) for c in cmd))
+# === RUN ===
+print(f"📥 Extracting pages {first_page}–{last_page or 'EOF'} from {PDF.name}")
+print("Command:", " ".join(str(c) for c in cmd))
 subprocess.run(cmd, check=True)
-print(f"✔️ Изображения сохранены в: {OUT.resolve()}")
+print(f"✔️ Images saved to: {OUT.resolve()}")
 
-# === УДАЛЕНИЕ ЛИШНИХ TIFF-файлов (pdfimages: только *-000.tif) ===
+# === REMOVE EXTRA TIFF FILES (pdfimages: only *-000.tif are needed) ===
 if not use_pdftoppm and output_format == "tiff":
     for file in OUT.glob(f"{number}-*.tif"):
         if not file.stem.endswith("-000"):
-            print(f"🗑 Удаляем неосновной TIFF: {file.name}")
+            print(f"🗑 Deleting non-primary TIFF: {file.name}")
             file.unlink()
 
-print("🎯 Готово!")
+print("🎯 Done!")
