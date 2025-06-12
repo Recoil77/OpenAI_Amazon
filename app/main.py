@@ -23,6 +23,8 @@ from gateway.gateway_client import chat_completion, response_completion, embeddi
 from dotenv import load_dotenv
 load_dotenv()
 
+from app.classes import MetadataRequest, MetadataResponse, VectorSearchV2Request, VectorSearchV2Result, RerankRequest, RerankResult, RerankSemanticV5Request, RerankBlockCandidate, RerankMinimalResult
+
 DATABASE_URL = env = os.getenv("DATABASE_URL")
 
 app = FastAPI()
@@ -136,72 +138,7 @@ async def clean_ocr_extended(req: ExtendedOCRRequest):
     except Exception as exc:
         raise HTTPException(status_code=502, detail=str(exc))   
 
-# class ExtendedOCRRequest(BaseModel):
-#     prev: str = ""
-#     text: str
-#     next: str = ""
 
-# @app.post("/clean_ocr_extended")
-# async def clean_ocr_extended(request: ExtendedOCRRequest):
-#     """
-#     Очистка и восстановление исторического OCR с контекстом до и после.
-#     Возвращает JSON с полями: cleaned_text, quality_score, note.
-#     """
-#     system_msg_x = (
-#         "You are a professional historian and language expert.\n\n"
-#         "You are processing OCR fragments from early modern printed or handwritten sources (1600–1700s). "
-#         "Your task is to clean and translate the content of a single fragment.\n\n"
-#         "The input fragment may begin or end mid-sentence. Do NOT attempt to reconstruct missing parts. "
-#         "Only work with the text exactly as provided.\n\n"
-#         "Instructions:\n"
-#         "1. Clean the OCR text: fix broken hyphenation, remove page numbers, headers, illegible lines, and layout issues.\n"
-#         "2. Translate the cleaned text into fluent modern English, preserving historical meaning and tone.\n"
-#         "3. Do not invent or assume missing content. Do not continue or complete any incomplete sentences.\n\n"
-#         "Return your response as strict JSON in the following format:\n"
-#         "{\n"
-#         "  \"cleaned_text\": \"<cleaned and translated text in English>\",\n"
-#         "  \"quality_score\": <float between 0.0 and 1.0>,\n"
-#         "}\n\n"
-#         "❗️Do NOT include any commentary, explanation, or markdown outside of this JSON."
-#     )
-#     user_content = request.text.strip()
-#     messages = [
-#         {"role": "system", "content": system_msg_x},
-#         {"role": "user", "content": user_content}
-#     ]
-#     try:
-#         resp = await chat_completion.create(
-#             model="gpt-4.1-2025-04-14", #  "o4-mini-2025-04-16"    "gpt-4o-2024-11-20"
-#             temperature=0.2,
-#             messages=messages,
-#             max_tokens=2048,
-#         )
-#         raw_output = resp.choices[0].message.content.strip()
-
-#         # Попробуем распарсить как JSON
-#         parsed = json.loads(raw_output)
-#         return parsed
-
-#     except json.JSONDecodeError:
-#         return {"error": "Invalid JSON returned by model", "raw_output": raw_output}
-
-#     except Exception as exc:
-#         raise HTTPException(status_code=502, detail=str(exc))
-    
-
-
-class MetadataRequest(BaseModel):
-    document_id: str
-    year: Optional[int] = None
-    doc_type: Optional[str] = None
-    text: str
-
-class MetadataResponse(BaseModel):
-    document_id: str
-    year: Optional[int] = None
-    doc_type: Optional[str] = None
-    entities: List[str]
-    text: str
 
 PROMPT_TEMPLATE = (
     "Analyze the provided text and identify a comprehensive list of unique, meaningful "
@@ -308,20 +245,7 @@ async def vector_search(req: VectorSearchRequest):
     ]
     return {"results": results}
 
-class VectorSearchV2Request(BaseModel):
-    query: str
-    k: Optional[int] = 10
 
-class VectorSearchV2Result(BaseModel):
-    document_id: UUID
-    doc_name: str
-    year: int
-    doc_type: str
-    chunk_index: int
-    text: str
-    score: float  # cosine distance
-    metadata_original: Dict
-    metadata_translated: Dict
 
 @app.post("/vector_search_v2", response_model=List[VectorSearchV2Result])
 async def vector_search_v2(req: VectorSearchV2Request):
@@ -534,19 +458,6 @@ RERANKER_USER_PROMPT = (
 
 # Request/Response models
 typing_list = list
-class RerankBlockCandidate(BaseModel):
-    block_id: int
-    text: str
-
-class RerankSemanticV5Request(BaseModel):
-    question: str
-    candidates: typing_list[RerankBlockCandidate]
-    threshold: float = 0.25
-
-class RerankMinimalResult(BaseModel):
-    block_id: int
-    score: float
-
 
 
 @app.post("/rerank_semantic_v5", response_model=typing_list[RerankMinimalResult])
@@ -591,7 +502,7 @@ fact_semaphore = asyncio.Semaphore(8)
 
 class PipelineRequest(BaseModel):
     question: str
-    k: int = 128      # 默认返回 top-128 匹配
+    k: int = 128      
     bge_threshold: float = 0.25
     semantic_threshold: float = 0.25
 

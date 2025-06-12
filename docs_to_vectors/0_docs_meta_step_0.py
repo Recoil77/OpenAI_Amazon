@@ -3,13 +3,13 @@ import json
 from pathlib import Path
 
 # === НАСТРОЙКИ ДЛЯ РУЧНОЙ РЕДАКТУРЫ ===
-number = "57"
+number = "73"
 DOC_PATH = Path(f"docs/{number}/meta.json")
 
 meta = {
     "document_id": str(uuid.uuid4()),
-    "doc_name": "Das kaiserreich Brasilien auf der Wiener weltausstellung von 1873",
-    "year": 1873,
+    "doc_name": "Voyages dans l'Amérique du Sud",
+    "year": 1883,
     "doc_type": "book" # "manuscript"
     # Добавь сюда ещё поля, если нужно
 }

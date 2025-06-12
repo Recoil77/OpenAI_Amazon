@@ -4,34 +4,25 @@ from uuid import UUID
 
 
 class Evidence(BaseModel):
-    source: str
-    value: str
+    source: str = ""
+    value: str = ""
     details: Dict[str, Any] = {}
     meta: Dict[str, Any] = {}
+
 
 class Action(BaseModel):
     type: str
     query: str
     reason: Optional[str] = ""
 
-
-
-# class ReasoningResponse(BaseModel):
-#     actions: List[Action] = []
-#     finalize: bool = False
-#     active_question: str = ""
-#     hypothesis: Optional[str] = ""
-#     supporting_evidence: List[Evidence] = []
-#     confidence: Optional[float] = None
-
 class ReasoningResponse(BaseModel):
     actions: List[Action]              = Field(default_factory=list)
     finalize: bool                     = False
     active_question: str               = ""
     hypothesis: Optional[str]          = ""
-    supporting_evidence: List[Evidence]= Field(default_factory=list)
     confidence: Optional[float]        = None
     agent_thoughts: Optional[str]          = ""
+    new_facts: List[Evidence]= Field(default_factory=list)
 
 class ReasoningRequest(BaseModel):
     user_query: str
@@ -43,22 +34,6 @@ class ReasoningRequest(BaseModel):
     reasoning_log: List[Dict[str, Any]] = []
     iteration: int = 0
     
-
-# --- Request/Response schemas ---
-class ReformulateRequest(BaseModel):
-    user_query: str
-    active_question: str
-    context: List[Evidence]
-    reasoning_log: Optional[List[Dict[str, Any]]] = []
-
-class ReformulateResponse(BaseModel):
-    reformulated_question: str
-    alternatives: List[str] = []
-    reason: str = ""
-
-
-
-
 
 class WebSearchRequest(BaseModel):
     query: str
@@ -125,6 +100,16 @@ class RerankSemanticV5Request(BaseModel):
     candidates: typing_list[RerankBlockCandidate]
     threshold: float = 0.25
 
+class RerankBlockCandidate(BaseModel):
+    block_id: int
+    text: str
+
+
+class RerankMinimalResult(BaseModel):
+    block_id: int
+    score: float
+
+
 class ChunkCandidate(BaseModel):
     chunk_id: int
     text: str
@@ -147,3 +132,16 @@ class GetVerdictResponse(BaseModel):
     details: str
     general_knowledge_answer: str
     web_search_answer: str 
+
+class MetadataRequest(BaseModel):
+    document_id: str
+    year: Optional[int] = None
+    doc_type: Optional[str] = None
+    text: str
+
+class MetadataResponse(BaseModel):
+    document_id: str
+    year: Optional[int] = None
+    doc_type: Optional[str] = None
+    entities: List[str]
+    text: str

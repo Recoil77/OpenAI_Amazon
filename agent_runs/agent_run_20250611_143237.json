@@ -1,0 +1,938 @@
+{
+  "user_query": "Find all information and facts related to the object or place named Bararoá.",
+  "final_hypothesis": "Bararoá was a significant mission and trading post on the Rio Negro, with a multiethnic Indigenous population, destroyed and refounded in the mid-18th century, and involved in regional conflicts and demographic changes. Its relationship with local Indigenous groups is key to understanding its historical role.",
+  "supporting_evidence": [
+    {
+      "source": "entity_hybrid, vector_search",
+      "value": "Bararoá was a major mission and trading post on the right bank of the Rio Negro, 2021 leagues above the mouth of the Jamundá River, at 00° 16' S, 29° 33' W of Olinda. It was destroyed in the 1757 rebellion and refounded as the town of Thomar in 1758. Its population (1,500 in 160 households) descended from the Manaos, Bares, Passés, and Ajuanas nations, cultivating crops and producing cotton cloth, hammocks, and ropes. The Bares nation lived on the Japurá River, and their descendants, along with those of the Manaos, formed part of Bararoá's population. The settlement experienced significant depopulation and dispersal, with households dropping from 780 to 13, though many inhabitants lived outside the mission, returning only for religious duties and festivals. The Pará revolution of 1835 saw Bararoá as a site of military organization and conflict. The settlement's decline was marked by dispersal rather than absolute population loss, with many Indigenous people avoiding official registration and service.",
+      "details": {
+        "location": "Right bank of the Rio Negro, 2021 leagues above the mouth of the Jamundá River, 00° 16' S, 29° 33' W of Olinda",
+        "founding and destruction": "Destroyed in 1757 rebellion, refounded as Thomar in 1758",
+        "population": "1,500 people in 160 households (pre-dispersal); later reduced to 13 households",
+        "ethnic composition": "Descendants of Manaos, Bares, Passés, Ajuanas; Bares originally from Japurá River",
+        "economy": "Cultivated crops, produced cotton cloth, hammocks, ropes",
+        "decline": "Depopulation and dispersal, houses fell into ruin, unreliable population counts",
+        "role in conflict": "Site of military organization during Pará revolution of 1835",
+        "social dynamics": "Many natives lived outside the mission, returning for religious duties and festivals; lack of ministers and weakened authority encouraged dispersal"
+      },
+      "meta": {
+        "distances": [
+          {
+            "unit": "league",
+            "value": 2021,
+            "description": "Above mouth of Jamundá River"
+          },
+          {
+            "unit": "coordinates",
+            "value": "00° 16' S, 29° 33' W of Olinda"
+          }
+        ],
+        "sources": [
+          "entity_hybrid: Bararoá",
+          "vector_search: Bararoá trading post Rio Negro",
+          "vector_search: Bararoá parish destroyed 1757 rebellion",
+          "vector_search: Bararoá location Rio Negro coordinates",
+          "vector_search: Bararoá mission history and population",
+          "vector_search: Bararoá indigenous population dispersal",
+          "vector_search: Bararoá settlement decline and dispersal"
+        ],
+        "failed_attempts": [
+          {
+            "type": "entity_search",
+            "queries": [
+              "Bararoá, Bararoa, Bararoá settlement, Bararoá mission, Bararoá village"
+            ],
+            "results": "hits:5"
+          }
+        ]
+      }
+    }
+  ],
+  "reasoning_log": [
+    {
+      "iteration": 0,
+      "action": "entity_search",
+      "query": "Bararoá, Bararoa, Bararoá settlement, Bararoá mission, Bararoá village",
+      "result_count": 5
+    },
+    {
+      "iteration": 1,
+      "action": "entity_hybrid",
+      "query": "Bararoá",
+      "result_count": 5
+    },
+    {
+      "iteration": 2,
+      "action": "vector_search",
+      "query": "Bararoá trading post Rio Negro",
+      "result_count": 1
+    },
+    {
+      "iteration": 3,
+      "action": "vector_search",
+      "query": "Bararoá parish destroyed 1757 rebellion",
+      "result_count": 3
+    },
+    {
+      "iteration": 4,
+      "action": "vector_search",
+      "query": "Bararoá location Rio Negro coordinates",
+      "result_count": 2
+    },
+    {
+      "iteration": 5,
+      "action": "vector_search",
+      "query": "Bararoá mission history and population",
+      "result_count": 3
+    },
+    {
+      "iteration": 6,
+      "action": "vector_search",
+      "query": "Bararoá indigenous population dispersal",
+      "result_count": 2
+    },
+    {
+      "iteration": 7,
+      "action": "vector_search",
+      "query": "Bararoá settlement decline and dispersal",
+      "result_count": 3
+    },
+    {
+      "iteration": 8,
+      "action": "vector_search",
+      "query": "Bararoá mission indigenous nations Rio Negro",
+      "result_count": 5
+    },
+    {
+      "iteration": 9,
+      "action": "vector_search",
+      "query": "Bararoá indigenous nations Rio Negro mission",
+      "result_count": 5
+    },
+    {
+      "iteration": 10,
+      "action": "vector_search",
+      "query": "Bararoá indigenous nations mission context",
+      "result_count": 5
+    },
+    {
+      "iteration": 11,
+      "action": "vector_search",
+      "query": "Bararoá mission indigenous nations relations",
+      "result_count": 5
+    },
+    {
+      "iteration": 12,
+      "action": "vector_search",
+      "query": "Bararoá mission indigenous relations",
+      "result_count": 3
+    },
+    {
+      "iteration": 13,
+      "action": "vector_search",
+      "query": "Bararoá mission relations with indigenous groups",
+      "result_count": 5
+    },
+    {
+      "iteration": 14,
+      "action": "vector_search",
+      "query": "Bararoá mission indigenous relations",
+      "result_count": 3
+    },
+    {
+      "iteration": 15,
+      "action": "vector_search",
+      "query": "Bararoá mission indigenous relations",
+      "result_count": 3
+    }
+  ],
+  "context": [
+    {
+      "source": "entity",
+      "value": "Bararoá",
+      "details": {
+        "count": 56
+      },
+      "meta": {
+        "mode": "substring"
+      }
+    },
+    {
+      "source": "entity",
+      "value": "Bararoa",
+      "details": {
+        "count": 2
+      },
+      "meta": {
+        "mode": "substring"
+      }
+    },
+    {
+      "source": "entity",
+      "value": "Bararoá settlement",
+      "details": {
+        "count": 0
+      },
+      "meta": {
+        "mode": "substring"
+      }
+    },
+    {
+      "source": "entity",
+      "value": "Bararoá mission",
+      "details": {
+        "count": 0
+      },
+      "meta": {
+        "mode": "substring"
+      }
+    },
+    {
+      "source": "entity",
+      "value": "Bararoá village",
+      "details": {
+        "count": 0
+      },
+      "meta": {
+        "mode": "substring"
+      }
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "The Baeta, BaiMri, and Bailractiâ were Indigenous nations of the Solimões, with the BaiMri and Bailractiâ located on the Juruá River. The Baetas River, on the left bank of the Madeira between lakes Saraimo and Maruimtíba, had a native village at its mouth and was near the fourth site of the parish of Araretama. The Bararoá parish (Our Lady of the Rosary) was on the right bank of the Rio Negro, 2021 leagues above the mouth of the Jamundá River, at 00° 16' S, 29° 33' W of Olinda; it was destroyed in the 1757 rebellion and made a town called Thomar in 1758 by Governor Francisco Xavier de Mendonça Furtado. Bararoá was a major trading post between the Upper and Lower Rio Negro, with a population of 1,500 in 160 households, descended from the Manaos, Bares, Passés, and Ajuanas nations, cultivating various crops and producing cotton cloth, hammocks, and ropes. The Bares nation lived on the Japurá River, and their descendants, along with those of the Manaos",
+      "details": {
+        "facts": [
+          "Bararoá (Parish of Our Lady of the Rosary of) is on the right bank of the Rio Negro, 2021 leagues above the mouth of the Jamundá River, under parallel 00° 16' S., crossed by the meridian 29° 33' W. of Olinda.",
+          "Its first location was on the southern bank near the mouth of the Xjuará River, in front of Timoni Island, from where it was moved to the current site.",
+          "Bararoá was completely reduced to ashes by the rebellion of 1757."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "In the interior of Pará, settlements experienced significant depopulation and dispersal during the period described, with the population spreading along rivers, lakes, and streams due to the region’s fertile banks and abundant natural resources. Bararoá, once with 780 households, was reduced to 13 households, though the number of inhabitants did not decrease proportionally, indicating widespread dispersion rather than population loss. Many natives lived outside the settlements, only returning for religious duties and festivals, while the lack of ministers and weakened authority further encouraged this dispersal. The settlements’ houses, often lightly built, quickly fell into ruin as they were abandoned, and some settlements disappeared entirely. Population counts based on settlements became unreliable, as people increasingly resided in remote areas, avoiding official registration and summons for service.",
+      "details": {
+        "facts": [
+          "Bararoá had 780 households and today, according to Baena, has 13.",
+          "Baena states Bararoá has 439 souls, which is considered excessive for so little accommodation.",
+          "There is a great disproportion between households and people in Bararoá, explained by the dispersion of the population."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "The Pará revolution of 1835, led initially by Archpriest Baptista and later by Malcher, resulted in widespread anarchy and social dissolution in the region. The rebel cabanos, though unable to maintain control over the vast territory, were eventually ousted by a restoration movement led by Gregorio Nazianzeno da Costa, which succeeded on August 31, 1836. Captain João Ignacio Rodrigues do Carmo assumed Military Command of the District, and Captain Miguel Nunes Bemfica of the Itarendáua company was noted for his role in liberating settlements. Ambrósio Ayres, a convict, formed a company in Bararoá, fought the cabanos on the Maués River and in Icuipiranga, and became Military Commander of the District. Around this period, Pedro Ayres, claiming to be Ambrósio’s brother and an officer of the United States Navy, explored Guiana, the Rio Branco, and its tributaries, and confronted the British at the fort of St. Joaquim. A tailor from Stabrok, posing as a missionary, attempted to convert Indigenous people along the Pirarára River.",
+      "details": {
+        "facts": [
+          "A convict named Ambrósio Ayres gathered a select company in Bararoá and took this name.",
+          "Ambrósio Ayres descended the Rio Negro and distinguished himself by brilliant feats of arms against the cabanos in the Maués River and in Icuipiranga, to whose surrender he also contributed.",
+          "Ambrósio Ayres was then appointed Military Commander of the District of Bararoá."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "The Directory was an administrative institution that maintained cohesion between Indigenous people and colonial society in the Amazon, countering Jesuit influence, as seen in events like the withdrawal of Indigenous people from Marina and São Paulo, the Mariuá troop desertion, and the rebellions of Lama-Longa, Caboquena, and Bararoá. Governor D. Francisco de Souza Coutinho of Pará, seeking to hinder the progress of the Captaincy of Rio Negro under Governor Manoel da Gama Lobo da Almada, secured the dissolution of the Directory by royal letter, leading to the dispersal and disappearance of several Indigenous settlements. José Bonifacio, in 1823, advocated for merging the Directory's regulations with those of the Missions, suggesting that combining the roles of Missionary and Director could have yielded better results in Indigenous policy. The text distinguishes between Indigenous groups of São Paulo and Minas, who are more nomadic and settle in mountainous valleys, and those of the Amazon, who are more sedentary along rivers and lakes.",
+      "details": {
+        "facts": [
+          "Bararoá was the site of a horrific rebellion involving Indigenous people and troops.",
+          "The rebellion of Bararoá was one of several uprisings and desertions attributed to the machinations of the Jesuits in the Amazon region."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "Our Lady of the Conception was the patroness of Manaus, Villa de Mariuá, Parish of Caboquena on the Rio Negro, Villa de Lusea on the Maués, and settlements on Lake Canomá and the Rio Branco between Santa Maria and St. Philip. Other Marian patronages included Our Lady of Guadalupe at Fonte-Boa, Our Lady of Candlemas and Our Lady of Loreto on the Rio Negro, Our Lady of Nazareth at Curiana, Our Lady of Mount Carmel at Canomá, and Our Lady of the Rosary at Itacoatiara (Amazon), Parauari (Tefé), and Bararoá (Rio Negro). The Omágua, also known as Cambeba, inhabited islands on the Solimões above the Jutahi River. The Pacaraima mountain range in Guiana, at latitude 4° 00' N and longitude 25° 05' to 29° 05' W of Olinda, marks the boundary between Brazil, Venezuela, and European Guiana, and is the source of tributaries forming the Rio Branco. Indigenous nations mentioned include Orinaiáno (Padauari River), Oripãs and Pamma (Mundurucu, Madeira River",
+      "details": {
+        "facts": [
+          "Bararoá is a parish on the Rio Negro.",
+          "Our Lady of the Rosary is the patroness of the parish of Bararoá on the Rio Negro.",
+          "The Padauari River is on the left bank of the Negro, opposite the parish of Bararoá."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "Barra do Rio Negro is located on the east bank of the Rio Negro, about twelve miles above its junction with the Amazon River, and approximately one thousand miles from Para. The settlement stands on uneven ground, about thirty feet above the high-water level, with two small streams crossed by wooden bridges. The population is estimated at five to six thousand, predominantly Indians and people of mixed Portuguese and Indigenous descent, with little to no pure European lineage. The city contains remnants of a fort (\"Barra\"), two poor churches, and serves as a trade center for Brazil nuts, sarsaparilla, and fish, importing European cotton goods and trinkets for trade with local Indian tribes. The journey from Para during the wet season can take two to three months.",
+      "details": {
+        "facts": [
+          "The city of Barra do Rio Negro is situated on the east bank of the Rio Negro, about twelve miles above its junction with the Amazon.",
+          "The 'Barra,' or fort, is now represented by a fragment of wall and a mound of earth.",
+          "The trade at Barra do Rio Negro is chiefly in Brazil nuts, sarsaparilla, and fish."
+        ],
+        "year": 1858,
+        "doc_name": "Travels on the Amazon, Wallace, Alfred Russel"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Baeta, BaiMri, and Bailractiâ were Indigenous nations of the Solimões, with the Baeta located on the river of the same name and the BaiMri and Bailractiâ on the Juruá River. The BaMi5)a nation of Guiana inhabited the Içána and Ixié rivers, giving rise to settlements such as Lama-Longa, Manaos, Guia, Santa Anna, S. Filippo, Mabbé, and S. Marcellino. Bararoá (Parish of Our Lady of the Rosary of) was established on the right bank of the Rio Negro, 2021 leagues above the mouth of the Jamundá River, near the Padauari River, and was destroyed in the 1757 rebellion; it became the town of Thomar in 1758 under Governor Francisco Xavier de Mendonça Furtado. Bararoá served as a major trading post between the Upper and Lower Rio Negro and had a population of 1,500 in 160 households, descended from the Manaos, Bares, Passés, and Ajuanas nations. The Bares nation lived on the Japurá River, and their descendants, along with those of the Mana",
+      "details": {
+        "facts": [
+          "Bararoá (Parish of Our Lady of the Rosary of) was completely reduced to ashes by the rebellion of 1757."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "São José de Iama-IiOaiga was a settlement on the right bank of the Rio Negro, between the Xibarú River and the Anhori Stream, situated between Bararoá and Santa Izabel, 127 leagues above the confluence of the Rio Negro and 205 leagues from the mouth of the Jamundá. It was founded by Principal Dari, who separated from Bararoá, and incorporated the Auacihidá Village, located three leagues further upstream. In 1757, a rebellion led to the destruction by fire of São José de Iama-IiOaiga, Bararoá, and Caboquéna, triggered by an Indigenous man’s resentment toward a missionary. The settlement’s inhabitants were primarily Manáos, Banibas, and Barés, who cultivated manioc, fruits, rice, coffee, and cotton, and produced cloth, hammocks, ropes, pitch, salsaparrilha, and puxiri. The district belonged to Mariuá, and the Tupica language served as the universal interpreter throughout the Province of Pará, spoken by all Indigenous people in settlements and widely used in cities and towns.",
+      "details": {
+        "facts": [
+          "In 1757, a rebellion broke out in the settlement of São José de Iama-IiOaiga, which, together with Bararoá and Caboquéna, was reduced to ashes."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Urubú River (formerly Buriiriiril) in Guiana, on the left bank of the Amazon, receives waters from Lake Canomá and passes the ruins of the Parishes of Our Lady of the Conception, Saint Raymond, and Saint Peter Nolasco. The Rurururii, Guanavena, and Caboquena nations inhabited its banks until Captain Pedro da Costa Favella massacred them in 1664, killing 700, capturing 400, and burning 300 villages; the Caboquena nation was exterminated in this campaign. The area once hosted Mercenary Missions but is now deserted, with ruins serving as hideouts for runaway slaves and deserters. The Parish of Caboquena (Our Lady of Mount Carmel), founded by Principal José Menezes Caboquena of the Manaos nation, stood on the right bank of the Negro River and was destroyed during the Lama-Longa rebellion of 1757. The Caluri River, on the right bank of the Negro, was the site of the second Portuguese settlement on the Negro River, established with Caburicena and Manaos natives in 1694 at the suggestion of Sergeant Guilherme Valente.",
+      "details": {
+        "facts": [
+          "The Parish of Our Lady of Mount Carmel (Caboquena) was reduced to ashes during the Lama-Longa rebellion of 1757.",
+          "Principal José Menezes Caboquena, of the Manaos nation, was killed in the Lama-Longa rebellion of 1757.",
+          "The population of the parish included Manaos and Barés people."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Baeta and BaIMri were Indigenous nations of the Solimões, located respectively on the Baetas and Juruá rivers. The Baetas River, on the left bank of the Madeira between lakes Saraimo and Maruimtíba, had a native village at its mouth and was near the fourth location of the parish of Araretama. Bararoá (Parish of Our Lady of the Rosary of) was situated on the right bank of the Rio Negro, 2021 leagues above the mouth of the Jamundá River, near the Padauari River, and was called the Court of the Rio Negro and of the Manaos Nation. Bararoá was made a town named Thomar in 1758 by Governor Francisco Xavier de Mendonça Furtado but lost this status after territorial division; it was burned in the 1757 rebellion. Its population of 1,500 in 160 households descended from the Manaos, Bares, Passés, and Ajuanas, and engaged in agriculture, weaving, and rope-making.",
+      "details": {
+        "facts": [
+          "Bararoá (Parish of Our Lady of the Rosary of) is located on the right bank of the Rio Negro.",
+          "Bararoá is 2021 leagues above the mouth of the Jamundá River.",
+          "Bararoá is under parallel 00° 16' S."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "Our Lady of the Conception was the patroness of Manaus, Villa de Mariuá, Parish of Caboquena on the Rio Negro, Villa de Lusea on the Maués, and settlements on Lake Canomá and the Rio Branco between Santa Maria and St. Philip. Other patronesses included Our Lady of Guadalupe (Fonte-Boa), Candlemas (on the Rio Negro), Loreto (on the Rio Negro), Nazareth (Curiana, Rio Negro), Mount Carmel (Parish of Canomá), Rosary (Itacoatiara on the Amazon, Parauari on the Tefé, Bararoá on the Rio Negro), Health (Boa Vista, Rio Negro), and Help (Capella, Rio Negro, and Matari Lake). The Omágua, or Cambeba, inhabited islands on the Solimões above the Jutahi River; the Orinaiáno lived on the Padauari River in Guiana; the Oripãs, a Mundurucu nation, were on the Madeira River and are ancestors of Araretama. The Pacaraima mountain range in Guiana, at latitude 4° 00' N, longitude 25° 05' to 29° 05' W",
+      "details": {
+        "facts": [
+          "Bararoá is a parish on the Rio Negro.",
+          "The parish of Bararoá is opposite the Padauari River on the left bank of the Rio Negro."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Baeta, BaiMri, and Bailractiâ were Indigenous nations of the Solimões, with the Baeta located on the river of the same name and the BaiMri and Bailractiâ on the Juruá River. The BaMi5)a nation of Guiana inhabited the Içána and Ixié rivers, contributing to populations in Lama-Longa, Manaos, Guia, Santa Anna, S. Filippo, Mabbé, and S. Marcellino. Bararoá (Parish of Our Lady of the Rosary of) was established on the right bank of the Rio Negro, 2021 leagues above the Jamundá River’s mouth, near the Padauari River, and was destroyed in the 1757 rebellion; it became the town of Thomar in 1758 under Governor Francisco Xavier de Mendonça Furtado. Bararoá served as a major trading post between the Upper and Lower Rio Negro and had a population of 1,500 in 160 households, descended from the Manaos, Bares, Passés, and Ajuanas nations. The Bares nation lived on the Japurá River, and their descendants, along with those of the Manaos and Ban",
+      "details": {
+        "facts": [
+          "Bararoá (Parish of Our Lady of the Rosary of) is located on the right bank of the Rio Negro, 2021 leagues above the mouth of the Jamundá River, under parallel 00° 16' S., crossed by the meridian 29° 33' W. of Olinda.",
+          "The first location of Bararoá was on the southern bank near the mouth of the Xjuará River, in front of Timoni Island, from where it was moved to the current site.",
+          "Bararoá was completely reduced to ashes by the rebellion of 1757."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "In 1759, the village was elevated to town status as Ega by Governor Joaquim de Mello e Povoas, retaining this name until 1833. In 1781, Spanish and Portuguese Demarcation Parties, led by commissioners Chermont (Portugal) and Pizarro (Spain), met in Ega to discuss the Auati-paraná marker; Pizarro was later replaced by Requena. In 1784, João Pereira Caldas (Portugal) and Requena (Spain) met in Ega, resulting in a suspension of demarcations until further instructions. The Spanish Party remained in Ega until 1790, establishing settlements locally and on Lake Cupacá, but was expelled by the Governor of the Captaincy. The town, a trading post for the Jupurá River and future seat of the Province of Solimões, had a population of 840 from tribes including Achouaris, Cocurúnas, Coretús, Janumás, Jauánas, Júmas, Júris, Hiupiuás, Manáos, Passés, Sorimões, Tauáiías, Tupivás, Uaiupis, and Xámas, living in 90 households",
+      "details": {
+        "facts": [
+          "The Bararoá mission was elevated to the status of town with the name Ega in 1759 by Governor Joaquim de Mello e Povoas.",
+          "The town reverted to its original name in 1833.",
+          "The population of the town, originating from the Achouaris, Cocurúnas, Coretús, Janumás, Jauánas, Jumas, Júris, Hiupiuás, Manáos, Passés, Sorimões, Tauáias, Tupivás, Uaiupis, and Xámas, numbers 840 souls in 90 households."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "By the mid-eighteenth century, the Upper Amazon reached its peak population, with about 30,000 households and at least 100,000 people. Despite earlier devastation of Solimões settlements by Spanish Jesuits, the Carmelites restored many communities, notably the Tecúnas’ settlement, and established numerous villages along the Amazon, Solimões, Rio Negro, and Rio Branco rivers. Key settlements included Saracá, Itacoatiara, São Raymundo, Conceição, São Pedro Nolasco, Matari, Coari, Tefé, Parauari, Caiçara, Fonte-Boa, Evirateua, São Paulo, Javari, Maripi, Barra, Jahú, Pedreiras, Aracari, Cumaru, Mariuá, Caboquena, Bararoá, Dari, Santa Izabel, Camanão, Camará, Castanheiro, Coané, Curiana, Guia, Iparaná, Loreto, Mabbé, Maracabi, Santa Anna, Santa Barbara, São Filippo, São Marcellino, São Pedro, Carmo, Santa Maria, São Filippe, Conceição, and São Martinho. The Carmelites, in 55 years, established",
+      "details": {
+        "facts": [
+          "Bararoá was one of the mission settlements established on the Rio Negro below the waterfalls.",
+          "All the mission settlements in the region, including Bararoá, had about 30,000 households, corresponding to no fewer than 100,000 souls in total.",
+          "The Carmelite Mission was responsible for establishing and restoring settlements like Bararoá on both banks of the Rio Negro within 55 years."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "In the interior of Pará, between 30,000 and 40,000 people were reported, but the population was highly dispersed across sites, lakes, and rivers rather than concentrated in settlements. Bararoá, once with 780 households, had declined to 13 households, though the number of inhabitants remained disproportionately high due to this dispersion. The fertile riverbanks and abundance of resources such as hunting, fishing, and wild fruits encouraged people to settle away from formal settlements. Natives maintained houses in settlements mainly for religious duties and festivals but increasingly lived outside, especially as the lack of ministers and weakened authority reduced their obligations to appear in settlements. Many settlements fell into ruin or disappeared as people moved to remote sources of rivers and lakes, making accurate population counts difficult.",
+      "details": {
+        "facts": [
+          "Bararoá's population became dispersed and fell behind in education, moving toward a state of nature.",
+          "Although Bararoá's settlements were reduced from 780 households to 13, the population did not decrease proportionally due to dispersion.",
+          "There is a great disproportion between households and people in Bararoá, explained by the dispersion of the population."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The soldiers’ shelter near Cuyabá was crudely constructed with palm leaves and poles, lacking proper walls and sanitary facilities; huts were clustered at the forest edge with narrow paths leading into the woods. The baitô served as a communal space for Bororó bachelors to work, sleep, and hold ceremonies, with women having access, sometimes forcibly. The colony included about 50 Brazilians (including soldiers’ wives) and an estimated 200 Bororó present, though the total population may have reached 350–450, with earlier claims of over 1,000 Bororó from all villages presenting themselves. Livestock such as cattle and mules roamed freely in the campo, and only a few domestic animals (dogs, chickens, red macaws) were present. The Bororó wore minimal European clothing, with chiefs Moguyokuri and Arateba noted for their occasional use of shirts and trousers, while most men and women wore traditional hip cords and straw cuffs.",
+      "details": {
+        "facts": [
+          "I estimated the number of Bororó present at about 200 with women and children.",
+          "One group was away on a hunting trip, and Duarte had taken about 20 with him to Cuyabá.",
+          "At most, the total population was 350, officially 450."
+        ],
+        "year": 1894,
+        "doc_name": "Unter den naturvölkern Zentral-Brasiliens. Reiseschilderung und ergebnisse der zweiten Schingú-expedition, 1887-1888, Steinen, Karl von denl"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "In the interior of Pará, population estimates in official reports ranged from 30,000 to 40,000 souls, but the inhabitants were highly dispersed across sites, lakes, and rivers rather than concentrated in settlements. Bararoá, once with 780 households, had reportedly declined to 13 households, yet still had a disproportionately high population due to this dispersion. The fertile riverbanks and abundance of natural resources such as hunting, fishing, and wild fruits encouraged people to live outside settlements, only visiting for services, festivals, or religious duties. The lack of ministers and weakened authority led to further abandonment of settlements, with many houses falling into ruin and some settlements disappearing entirely as people moved to remote areas along rivers and lakes. Population counts based on settlements became unreliable, as most inhabitants lived scattered in the countryside.",
+      "details": {
+        "facts": [
+          "Bararoá had 780 households and now, according to Baena, has 13.",
+          "The decline of settlements like Bararoá led to the dispersion of the population.",
+          "Despite the reduction and disappearance of some settlements, the overall population did not comparatively decrease."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Baeta and BaIMri were Indigenous nations of the Solimões, with the Baeta located on the river of the same name and the BaIMri on the Juruá River, along with the Bailractiâ. The BaMi5)a nation of Guiana inhabited the Içána and Ixié rivers, contributing to populations in Lama-Longa, Manaos, Guia, Santa Anna, S. Filippo, Mabbé, and S. Marcellino. Bararoá (Parish of Our Lady of the Rosary of) was situated on the right bank of the Rio Negro, 2021 leagues above the mouth of the Jamundá River, near the Padauari River, and was destroyed in the 1757 rebellion. In 1758, Governor Francisco Xavier de Mendonça Furtado made Bararoá a town named Thomar, which later lost this status. Its population of 1,500 in 160 households descended from the Manaos, Bares, Passés, and Ajuanas nations, engaging in agriculture, weaving, and extraction of local resources; Bararoá served as a key trading post between the Upper and Lower Rio Negro.",
+      "details": {
+        "facts": [
+          "Bararoá's first location was on the southern bank near the mouth of the Xjuará River, in front of Timoni Island, from where it was moved to the current site.",
+          "Bararoá was completely reduced to ashes by the rebellion of 1757.",
+          "Bararoá lost its status as a town due to the division of the territory for the implementation of the Code of Procedure."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "In mid-1839, Carmelite Friar José dos Innocentes was sent as a missionary up the Rio Branco to the territory of Pirarára but withdrew due to local conditions. After Ambrósio Ayres Bararoá, Captain José Antonio d'Oliveira Horta became Military Commander of the district, later joined by Navy Lieutenant Joaquim Sabino da Silva by order of the Command of the Expedition to the Amazon. In March 1840, following internal disputes, Navy Lieutenant Lourenço da Silva Araujo e Amazonas was appointed Military Commander by Lieutenant Colonel Manoel Muniz Tavares. On March 28, 1840, in the town of Lusea, 800 rebels surrendered, marking the pacification of the district. A decree on November 4, 1849, pardoned the rebels, and the district benefited from civil trials for former insurgents and exemptions from corporal punishment and conscription for the National Guards.",
+      "details": {
+        "facts": [
+          "In March 1840, eight hundred men surrendered their arms in the town of Lusea, leading to pacification and the withdrawal of pardoned rebels to other districts.",
+          "The dispersal of individuals from the Bararoá settlement occurred as pardoned rebels withdrew to other districts after surrendering.",
+          "The idea of gathering individuals from different parties in the settlements, who were full of resentment, was a cause for apprehension, but this was overcome by the need to end misfortunes and the efforts of the Expedition Authorities."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Baeta and BaiMri were Indigenous nations of the Solimões, with the Baeta located on the river of the same name and the BaiMri on the Juruá River. The Baetas River, on the left bank of the Madeira between the Saraimo and Maruimtíba lakes, had a native village at its mouth and was near the fourth site of the parish of Araretama. Bararoá, originally on the southern bank of the Rio Negro near the Xjuará River and later relocated in front of the Padauari River, was destroyed in the 1757 rebellion and became the town of Thomar in 1758 under Governor Francisco Xavier de Mendonça Furtado. Bararoá served as a major trading post between the Upper and Lower Rio Negro and had a population of 1,500 in 160 households, descended from Manaos, Bares, Passés, and Ajuanas nations. The Bares nation lived on the Japurá River, and their descendants, along with those of the Manaos and Baníba, formed the populations of settlements such as Araretama, Mariuá, Manaos, Cumarú, Caboquena, Bararoá, Lania-Longa,",
+      "details": {
+        "facts": [
+          "Bararoá (Parish of Our Lady of the Rosary of) is on the right bank of the Rio Negro.",
+          "Bararoá was called the Court of the Rio Negro and of the famous Manaos Nation due to its population.",
+          "Its inhabitants, numbering 1,500 in 160 households, descended from the Manaos, Bares, Passés, and Ajuanas nations."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "By 1660, the village of Saracá had been established on Lake Saracá, the first known mission in the Upper Amazon, later joined by Uatiimá and Anibá. In 1668, under Captain-Major Paulo Martins Garo and Governor Antonio de Albuquerque Coelho de Carvalho, Favella founded the first settlement on the Rio Negro near Aiurim with Tarumás and Aruaquis, under Friar Theodozio, later moved near Jabú and augmented with Manáos and Tacús, forming today’s parish of Santo Elias de Jahú. In 1669, Francisco da Motta Falcão, commissioned by the Governor, founded the Fortress of St. Joseph of Rio Negro, three leagues above the Rio Negro’s confluence, with Angélico de Barros as its first commander; Baníbas, Barés, and Passés, missioned by Carmelites, settled nearby, forming the origin of Manaus. In 1693, Sergeant Guilherme Valente settled Caburicénas, Carahiahis, and Manáos on the eastern bank of the Caburi, creating what is now the parish of Santo Alberto de Aracari, later joined by Paravianas and Uaran",
+      "details": {
+        "facts": [
+          "The first settlement on the Rio Negro was founded near Aiurim with the Tarumás and Aruaquis under the spiritual direction of Friar Theodozio.",
+          "This settlement was later moved near Jabú and augmented with Manáos and Tacús, becoming the parish of Santo Elias de Jahú.",
+          "Under the protection of the Fortress of St. Joseph of Rio Negro, families of Baníbas, Barés, and Passés gathered and were missioned by the Carmelites."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "São José de Iama-IiOaiga was a settlement on the right bank of the Rio Negro, between the Xibarú River and the Anhori Stream, and between Bararoá and Santa Izabel, located 127 leagues above the confluence of the Rio Negro and 205 leagues from the mouth of the Jamundá. It was founded by Principal Dari, who separated from Bararoá and incorporated the Auacihidá Village, three leagues further upstream. In 1757, a rebellion led to the destruction by fire of São José de Iama-IiOaiga, Bararoá, and Caboquéna, triggered by an Indigenous man’s resentment toward a missionary. The inhabitants, from the Manáos, Banibas, and Barés tribes, cultivated manioc, fruits, rice, coffee, and cotton, and produced cloth, hammocks, ropes, pitch, salsaparrilha, and puxiri. The settlement belonged to the district of Mariuá, and its people spoke the Tupica language, which served as a lingua franca throughout the Province of Pará and much of Brazil.",
+      "details": {
+        "facts": [
+          "Bararoá was a settlement on the right bank of the Rio Negro.",
+          "Bararoá was destroyed in 1757 along with São José de Iama-IiOaiga and Caboquéna due to a rebellion.",
+          "The inhabitants of Bararoá originated from the Manáos, Banibas, and Barés indigenous nations."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "Our Lady of the Conception was the patroness of Manaus, Villa de Mariuá, Parish of Caboquena on the Rio Negro, Villa de Lusea on the Maués, and settlements on Lake Canomá and the Rio Branco between Santa Maria and St. Philip. Other Marian patronages included Our Lady of Guadalupe (Fonte-Boa), Candlemas (Rio Negro), Loreto (Rio Negro), Nazareth (Curiana, Rio Negro), Mount Carmel (Canomá), Rosary (Itacoatiara on the Amazon, Parauari on the Tefé, Bararoá on the Rio Negro), Health (Boa Vista, Rio Negro), and Help (Capella, Rio Negro; Matari, Lake Matari). Omágua was the original name of the Cambeba nation, known for cranial deformation, and also referred to islands on the Solimões River above the Jutahi River. The Pacaraima mountain range in Guiana, at latitude 4° 00' N and longitude 25° 05' to 29° 05' W of Olinda, marks the boundary between Brazil, Venezuela, and European Guiana, and is the source of tributaries forming the Rio Branco. Indigenous nations",
+      "details": {
+        "facts": [
+          "Bararoá is a parish on the Rio Negro.",
+          "The parish of Bararoá is opposite the Padauari River.",
+          "The Padauari River, opposite the parish of Bararoá, is inhabited by Aanás, Guaribas, and Orumanãos."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "By the mid-eighteenth century, the Upper Amazon reached its greatest population, with about 30,000 households, estimated at over 100,000 people. Despite earlier devastation of Solimões settlements by Spanish Jesuits, the Carmelites restored many villages, notably the Tecúnas' settlement, and established numerous missions along the Rio Negro, Solimões, Amazon, and Rio Branco. Key settlements included Saracá, Itacoatiara, São Raymundo, Conceição, São Pedro Nolasco, Matari, Trocano, Coari, Tefé, Parauari, Caiçara, Fonte-Boa, Evirateua, São Paulo, Javari, Maripi, Barra, Jahú, Pedreiras, Aracari, Cumaru, Mariuá, Caboquena, Bararoá, Dari, Santa Izabel, Camanão, Camará, Castanheiro, Coané, Curiana, Guia, Iparaná, Loreto, Mabbé, Maracabi, Santa Anna, Santa Barbara, São Filippo, São Marcellino, São Pedro, Carmo, Santa Maria, São Filippe, Conceição, and São Martinho. The Carmelite Mission, over",
+      "details": {
+        "facts": [
+          "Bararoá was one of the mission settlements established on the Rio Negro below the waterfalls.",
+          "The Carmelite Mission was responsible for establishing settlements like Bararoá on both banks of the Rio Negro.",
+          "These settlements were part of a network that, by the mid-18th century, included about 30,000 households and up to 100,000 people."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Baeta and BaiMri were indigenous nations of the Solimões, with the Baeta located on the river of the same name and the BaiMri on the Juruá River, alongside the Bailractiâ. The Baetas River, on the left bank of the Madeira between lakes Saraimo and Maruimtíba, hosted a native village and was near the fourth site of the parish of Araretama. The BaMi5)a nation of Guiana lived on the Içána and Ixié rivers, giving rise to populations in Lama-Longa, Manaos, Guia, Santa Anna, S. Filippo, Mabbé, and S. Marcellino. Bararoá (Parish of Our Lady of the Rosary of) was on the right bank of the Rio Negro, 2021 leagues above the Jamundá River’s mouth, near the Padauari River, and was burned in the 1757 rebellion. In 1758, Governor Francisco Xavier de Mendonça Furtado made Bararoá a town named Thomar; its inhabitants, descended from the Manaos, Bares, Passés, and Ajuanas, numbered 1,500 in 160 households and engaged in agriculture,",
+      "details": {
+        "facts": [
+          "Bararoá (Parish of Our Lady of the Rosary of) is located on the right bank of the Rio Negro, 2021 leagues above the mouth of the Jamundá River.",
+          "Bararoá was called the Court of the Rio Negro and of the famous Manaos Nation due to its population.",
+          "Bararoá was made a town with the name of Thomar in 1758 by Governor Francisco Xavier de Mendonça Furtado."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "By 1660, the village of Saracá had been established on Lake Saracá, the first known mission in the Upper Amazon, later joined by Uatiimá and Anibá. In 1668, under Captain-Major Paulo Martins Garo and Governor Antonio de Albuquerque Coelho de Carvalho, Favella founded the first settlement on the Rio Negro near Aiurim with Tarumás and Aruaquis, under Friar Theodozio, later moved near Jabú and expanded with Manáos and Tacús, forming the parish of Santo Elias de Jahú. In 1669, Francisco da Motta Falcão founded the Fortress of St. Joseph of Rio Negro, three leagues above the river’s confluence, with Angélico de Barros as its first commander; Baníbas, Barés, and Passés, missioned by Carmelites, settled nearby, forming the origin of Manaus. In 1693, Sergeant Guilherme Valente settled Caburicénas, Carahiahis, and Manáos on the eastern bank of the Caburi, later joined by Paravianas and Uaranacoacénas, creating the parish of Santo Alberto de Aracari. In 1695, Carmel",
+      "details": {
+        "facts": [
+          "The Baré (Bararoá) indigenous nation was among the families gathered under the protection of the Fortress of St. Joseph of Rio Negro.",
+          "These families, including the Baré, were missioned by the Carmelites.",
+          "The missioning of the Baré and other groups by the Carmelites explains the origin of the current city of Manaus."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "São José de Iama-IiOaiga was a settlement on the right bank of the Rio Negro, between the Xibarú River and the Anhori Stream, and between Bararoá and Santa Izabel, located 127 leagues above the confluence of the Rio Negro and 205 leagues from the mouth of the Jamundá. It was founded by Principal Dari, who separated from Bararoá and incorporated the Auacihidá Village, three leagues further upstream. In 1757, a rebellion led to the destruction by fire of São José de Iama-IiOaiga, Bararoá, and Caboquéna, triggered by Indigenous resentment toward a missionary. The inhabitants, from the Manáos, Banibas, and Barés tribes, cultivated manioc, fruits, rice, coffee, and cotton, and produced cloth, hammocks, ropes, pitch, salsaparrilha, and puxiri. The settlement belonged to the district of Mariuá, and the Tupica language served as the universal interpreter throughout the Province of Pará and was widely spoken among Indigenous peoples and settlers.",
+      "details": {
+        "facts": [
+          "Bararoá was a settlement on the right bank of the Rio Negro, between the Xibarú River and the Anhori Stream, and between Bararoá and Santa Izabel.",
+          "The settlement was founded by Principal Dari, who separated from Bararoá.",
+          "Upon its founding, the settlement incorporated the Auacihidá Village."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "By the mid-18th century, the Upper Amazon reached its peak population, with about 30,000 households and at least 100,000 inhabitants. Despite earlier devastation of Solimões settlements by Spanish Jesuits, the Carmelites restored many villages, notably the Tecúnas' settlement, and expanded missions along the Rio Negro, establishing numerous settlements both below and above the waterfalls, such as Barra, Mariuá, Santa Izabel, Camanão, and São Filippo. The Amazon region included villages like Saracá, Itacoatiara, São Raymundo, Conceição, São Pedro Nolasco, Matari, Trocano, Coari, Tefé, Parauari, Caiçara, Fonte-Boa, Evirateua, São Paulo, Javari, Maripi, Carmo, Santa Maria, and São Martinho. In 55 years, the Carmelite Mission established settlements along both banks of the Rio Negro and, in less than 40 years, restored those of the Solimões. By this time, only a few Amazon tributaries—such as the Urubu, Saracá lakes, and Madeira—had been explored, while most northern tributaries and rivers like the Purús and J",
+      "details": {
+        "facts": [
+          "Bararoá was one of the settlements established on the Rio Negro below the waterfalls.",
+          "The Carmelite Mission was responsible for establishing settlements like Bararoá on both banks of the Rio Negro.",
+          "By the middle of the eighteenth century, the Carmelite Mission had covered the Rio Negro with settlements, including Bararoá."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "Abaconi was founded at the mouth of the Furo-clos-Tupinambaranas and became a city in 1759. Due to mistreatment by the Mûros, the city of Serpa was relocated to an island where its inhabitants cultivated cacao, sarsaparilla, coffee, clove, and cotton. Near Serpa, the Amazon Steamship Company established an agricultural and industrial colony at Itacoatiara, mainly with Chinese and African settlers, but the project failed, leaving only a sawmill and tile factory. The district of Barcellos or Mariûa, formerly part of Rio-Negro, includes the city of Barcellos or Mariûa and several parishes, with a population of 10,000–12,000. Barcellos, on the right bank of the Rio-Negro between the Uatanari and Baruri rivers, was founded by chief Manâos-Camandri for the Carmelite mission and became the capital of the captaincy of Rio-Negro in 1758; it hosted Spanish-Portuguese boundary commissions in 1754 and 1759 and lost its capital status to Manâos in 1790.",
+      "details": {
+        "facts": [
+          "Bararoá is listed as one of the parishes in the district of Barcellos or Mariúa, which formerly belonged to the district of Rio-Negro.",
+          "Barcellos or Mariúa, with a population almost exclusively composed of descendants of various Indian nations, was given to the Carmelite mission by the chief Manãos-Camandri at his mother's request."
+        ],
+        "year": 1861,
+        "doc_name": "Voyage aux provinces brésiliennes du Pará et des Amazones en 1860, précédé d'une rapide coup d'oeil, sur le littoral du Brésil, Belmar, A. de."
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Baeta and BaiMri were Indigenous nations of the Solimões, located respectively on the Baetas and Juruá rivers. The Baetas River, on the left bank of the Madeira between lakes Saraimo and Maruimtíba, had a native village at its mouth and was near the fourth location of the parish of Araretama. Bararoá (Parish of Our Lady of the Rosary of) was situated on the right bank of the Rio Negro, 2021 leagues above the mouth of the Jamundá River, near the Padauari River, and was destroyed in the rebellion of 1757. In 1758, Governor Francisco Xavier de Mendonça Furtado made Bararoá a town named Thomar, later losing this status. Its population of 1,500 in 160 households descended from the Manaos, Bares, Passés, and Ajuanas nations, engaging in agriculture, weaving, and extraction industries, and the settlement served as a key trading post between the Upper and Lower Rio Negro.",
+      "details": {
+        "facts": [
+          "Bararoá (Parish of Our Lady of the Rosary of) was located on the right bank of the Rio Negro, 2021 leagues above the mouth of the Jamundá River.",
+          "Its first location was near the mouth of the Xjuará River, in front of Timoni Island, before being moved to its current site.",
+          "The mission was completely reduced to ashes by the rebellion of 1757."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Carmelite friars administered villages located far from the city, near cacao harvesting areas, facilitating cacao collection and reducing interference from settlers and royal service demands. Each mission was typically granted twenty-five Indians, though the actual number varied. Capuchin missionaries contributed Indians for one or two canoes to collect cacao, which funded their expenses, while the Piety missionaries rarely sent canoes or provided Indians without compensation. The missions under the friars had few Indians, limiting their benefit to both the State and the missionaries. The Tapuyas were frequently taken for service, and the Jesuit Fathers, though unpopular, maintained temporal governance of their villages, with calls for stricter oversight of Indian distribution.",
+      "details": {
+        "facts": [
+          "The villages administered by the Carmelite friars are far from the city and are founded near places where cacao is harvested, making it easier for them to collect it.",
+          "The missions under the charge of the missionary friars are few and lack enough Indians to serve the convenience of the State or benefit the missionaries.",
+          "The missionaries of the Capuchin provinces contribute Indians for one or two canoes, which their superiors send to collect cacao to cover their expenses."
+        ],
+        "year": 1858,
+        "doc_name": "Corographia historica, Mello Moraes, Alexandre José"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Directory was a colonial administrative institution that maintained cohesion between Indigenous people and broader society in the Amazon, countering Jesuit influence, as seen in events like the withdrawal of Indigenous people from Marina and São Paulo, the uprising and desertion of Mariuá troops, and the rebellions at Lama-Longa, Caboquena, and Bararoá. Governor D. Francisco de Souza Coutinho of Pará, seeking to hinder the progress of the Captaincy of Rio Negro under Manoel da Gama Lobo da Almada, secured the dissolution of the Directory by royal decree, leading to the dispersal and decline of Indigenous settlements. The text references José Bonifacio’s 1823 notes on Indigenous civilization, highlighting differences between Indigenous groups of São Paulo and Minas (mountainous, nomadic, muleteers) and those of the Amazon (riverine, sedentary, fishermen). The fusion of Directory regulations with Mission practices is suggested as a more effective approach for Indigenous administration.",
+      "details": {
+        "facts": [
+          "The Bararoá rebellion was one of several uprisings and desertions involving Indigenous people in the Amazon, linked to Jesuit machinations and resistance to colonial administration.",
+          "The Directory was an institution that kept Indigenous people, including those from Bararoá, united with the rest of society.",
+          "The dissolution of the Directory led to the dispersal and reduction of Indigenous settlements, including Bararoá."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "In 1635, Father Antonio Vieira traveled from Pará to Maranhão and then to the royal court to report obstacles faced by missionaries in converting Indigenous peoples. King ordered three main policies: no offensive war or harm against Gentile Indians without royal consent; Christian and vassal Indians in villages to live freely under their chiefs and parish priests, serving only as law required; and missionaries to conduct interior missions independently from governors, with supportive military assistance as needed. Governor André Vidal of Maranhão implemented these orders, enabling missions into the interior. That year, Fathers Francisco Velloso and Thomé Ribeiro led a mission to the Tupinambás, traveling over three hundred leagues up the Tocantins River, making peace with the Guarajús and Catingus before reaching the Tupinambás.",
+      "details": {
+        "facts": [
+          "Missionaries were sent to convert indigenous nations, including the Bararoá, under orders that no offensive war be waged against Gentile Indians without royal order.",
+          "Indigenous people were to be treated well, with only legitimate captives redeemed from slavery, to encourage acceptance of the faith and vassalage to the Portuguese crown.",
+          "Christian and vassal Indians in villages were not to be forced to serve except as determined by law, and otherwise were to live as free people governed by their own chiefs and parish priests."
+        ],
+        "year": 1858,
+        "doc_name": "Corographia historica, Mello Moraes, Alexandre José"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "Indigenous people in mission villages near Gurupá often fled upon the arrival of officials, sometimes permanently. Officials frequently seized recently settled Indians, undermining the missions and violating regulations. In the previous year, missionaries at Gurupá recorded 8,533 arrobas of cacao, not including 3,626 arrobas transported by convent canoes, while settlers accounted for 10,374 arrobas, plus an additional 2,000 arrobas moved by Captain-Major Caiáto da Cunha Valladares. Cacao was often hidden from official records. Indians were sent on arduous, months-long expeditions to extract goods from the interior, leaving settlements underdeveloped and families disrupted.",
+      "details": {
+        "facts": [
+          "Indians in villages tend to flee when officials arrive, sometimes without returning.",
+          "Officials often seize recently settled Indians, harming the missions and violating regulations.",
+          "Missionaries are accused of taking more cacao than settlers, but records show settlers took more."
+        ],
+        "year": 1858,
+        "doc_name": "Corographia historica, Mello Moraes, Alexandre José"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Carmelite friars administered villages located far from the city, near cacao harvesting areas, facilitating cacao collection and reducing interference from settlers and royal service demands. Missions typically received twenty-five Indians, but those near cacao fields benefited from both proximity and distance, making it harder for outsiders to extract Indians for labor. Capuchin missionaries contributed Indians for one or two canoes to collect cacao, while the Piety missionaries rarely sent canoes inland and were reputed to only provide Indians for personal interest. The missions under friar administration were few and had so few Indians that they were of little benefit to either the State or the missionaries. The Jesuit Fathers, though unpopular, maintained a temporal government in their villages, with recommendations to regulate the generals' authority over Indian distribution.",
+      "details": {
+        "facts": [
+          "Equality between the contracting parties is entirely absent in this Indian negotiation.",
+          "The Indians are coerced into accepting what is given to them and do not choose or receive goods they actually need.",
+          "Indians are threatened with beatings and submit out of fear."
+        ],
+        "year": 1858,
+        "doc_name": "Corographia historica, Mello Moraes, Alexandre José"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Directory was an administrative institution that maintained cohesion between Indigenous people and colonial society in the Amazon, countering the influence of Jesuits, whose actions included the withdrawal of Indigenous people from Marina and São Paulo, and uprisings such as those at Mariuá, Lama-Longa, Caboquena, and Bararoá. Governor D. Francisco de Souza Coutinho of Pará, seeking to hinder the progress of the Captaincy of Rio Negro under Governor Manoel da Gama Lobo da Almada, secured the dissolution of the Directory by royal decree, leading to the dispersal and decline of Indigenous settlements. José Bonifacio, in 1823, advocated for the unification of the Directory and Mission systems, suggesting that combining their regulations and leadership could have yielded better results in integrating Indigenous populations. The text distinguishes between Indigenous groups from São Paulo and Minas, who are more nomadic and settle in valleys, and those from the Amazon, who are more sedentary along rivers and suited to fishing.",
+      "details": {
+        "facts": [
+          "The Bararoá rebellion was one of several uprisings involving Indigenous people, indicating conflict between Indigenous nations and colonial authorities or missions.",
+          "The Jesuits were accused of machinations that led to Indigenous withdrawal and uprisings, including at Bararoá.",
+          "The Directory was described as the only effective bond keeping Indigenous people united with the rest of society."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "In 1639, Fathers Manoel Nunes and Thomé Ribeiro conducted missions along the Tocantins River, targeting the Carajás and Poquiguaras tribes; Father Thomé Ribeiro had previously gone with Father Ricardo Careu. Hostilities erupted when Poquiguaras killed Christian Indians, prompting the governor to wage war, resulting in 300 captives taken as slaves. Father Manoel Nunes converted over a thousand Poquiguaras, relocating them closer to Pará, and also brought 400 Tupinambás and the Catingas, all of whom were baptized. In 1659, Fathers Antonio Vieira and Thomé Ribeiro made peace with the Nheengaibas, Manayanás, and Aroans, and initiated relations with the Tocuias, who swore allegiance to the Portuguese crown. By 1660, seven Nheengaibas villages had settled along rivers with houses and churches, and Father Antonio Vieira undertook a second mission to the Ibiapaba mountains.",
+      "details": {
+        "facts": [
+          "Father Thomé Ribeiro and Father Ricardo Careu went on mission to the Carajás and the Poquiguaras.",
+          "Some Poquiguaras, described as more barbarous, killed Christian Indians who accompanied the priests.",
+          "The governor decided to wage war against the Poquiguaras for hindering the preaching of the gospel."
+        ],
+        "year": 1858,
+        "doc_name": "Corographia historica, Mello Moraes, Alexandre José"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "Indigenous people in Pará and Maranhão were subjected to forced labor and agricultural work, leading to unrest and protests from missionaries such as Father Vieira, superior of a mission college. The missions' regulations allowed the distribution of Indians for two months, extended to six months in Pará and four months in Maranhão. On September 12, 1663, King Afonso VI issued a decree removing the Jesuits’ temporal administration over the Indians due to popular unrest, but this authority was restored to the regular clergy by new regulations on December 21, 1686. Strict penalties were established for unauthorized removal of Indians from villages, including imprisonment in the fortress of Barra and heavy fines. These measures aimed to regulate the distribution of Indians, prevent abuses, and clarify missionary responsibilities.",
+      "details": {
+        "facts": [
+          "Indians at Bararoá mission were made to assist in labor and agriculture and were treated cruelly.",
+          "Father Vieira and other regular clergy protested against the tyrannies inflicted on the Indians.",
+          "Extraordinary measures were issued in favor of the Indians due to their mistreatment."
+        ],
+        "year": 1858,
+        "doc_name": "Corographia historica, Mello Moraes, Alexandre José"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "São José de Iama-IiOaiga was a settlement on the right bank of the Rio Negro, between the Xibarú River and the Anhori Stream, located between Bararoá and Santa Izabel, 127 leagues above the confluence of the Rio Negro and 205 leagues from the mouth of the Jamundá. It was founded by Principal Dari, who separated from Bararoá, and incorporated the Auacihidá Village, three leagues upstream. In 1757, a rebellion led to the destruction by fire of São José de Iama-IiOaiga, Bararoá, and Caboquéna. The inhabitants, from the Manáos, Banibas, and Barés tribes, cultivated manioc, fruits, rice, coffee, and cotton, and produced cloth, hammocks, ropes, pitch, salsaparrilha, and puxiri. The settlement belonged to the district of Mariuá, and its people spoke the Tupica language, which was widely used throughout the Province of Pará and much of Brazil.",
+      "details": {
+        "facts": [
+          "Bararoá was a mission settlement on the right bank of the Rio Negro, between the Xibarú River and the Anhori Stream, and between Bararoá and Santa Izabel.",
+          "The settlement was founded by Principal Dari, who separated from Bararoá due to resentment.",
+          "Upon its founding, the settlement incorporated the Auacihidá Village."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Baeta and BaiMri were Indigenous nations of the Solimões, with the Baeta located on the river of the same name and the BaiMri on the Juruá River. The Baetas River, on the left bank of the Madeira between lakes Saraimo and Maruimtíba, had a native village at its mouth and was near the fourth location of the parish of Araretama. Bararoá (Parish of Our Lady of the Rosary of) was situated on the right bank of the Rio Negro, 2021 leagues above the mouth of the Jamundá River, near the Padauari River, and was made a town named Thomar in 1758 by Governor Francisco Xavier de Mendonça Furtado, but lost this status later. Bararoá was destroyed in the 1757 rebellion and served as a major trading post between the Upper and Lower Rio Negro. Its population of 1,500 in 160 households descended from the Manaos, Bares, Passés, and Ajuanas nations, engaging in agriculture, weaving, and extraction of regional products.",
+      "details": {
+        "facts": [
+          "Bararoá (Parish of Our Lady of the Rosary of) was completely reduced to ashes by the rebellion of 1757.",
+          "Bararoá was called the Court of the Rio Negro and of the famous Manaos Nation due to its population.",
+          "Bararoá's inhabitants, numbering 1,500 in 160 households, descended from the Manaos, Bares, Passés, and Ajuanas nations."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Directory was a colonial administrative institution that maintained cohesion between Indigenous people and broader society in the Amazon, countering Jesuit influence, as seen in Indigenous withdrawals from Marina and São Paulo and uprisings in Mariuá, Lama-Longa, Caboquena, and Bararoá. Governor D. Francisco de Souza Coutinho of Pará, seeking to hinder the Captaincy of Rio Negro under Manoel da Gama Lobo da Almada, secured the Directory's dissolution by royal decree, leading to the dispersal and decline of Indigenous settlements. There was debate about whether merging the Directory's regulations with those of the Missions—combining the roles of Missionary and Director—would have yielded better results. José Bonifacio, in 1823, supported this integration, noting differences between Indigenous groups in São Paulo and Minas (more nomadic, valley dwellers) and those in the Amazon (riverine, settled, inclined to fishing). The text highlights the impact of administrative changes on Indigenous settlement patterns and the interplay between colonial governance, missions, and local uprisings.",
+      "details": {
+        "facts": [
+          "The Bararoá rebellion is mentioned as a horrific indigenous uprising and desertion, associated with the machinations of the Jesuits.",
+          "The Directory was the only effective bond that kept the Indigenous people united with the rest of society.",
+          "The dissolution of the Directory led to the dispersal of the Indigenous people, general reduction, and even the disappearance of some settlements."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "São José de Iama-IiOaiga was a settlement on the right bank of the Rio Negro, located between the Xibarú River and the Anhori Stream, and between Bararoá and Santa Izabel, 127 leagues above the confluence of the Rio Negro and 205 leagues from the mouth of the Jamundá. It was founded by Principal Dari, who separated from Bararoá and incorporated the Auacihidá Village, three leagues further upstream. In 1757, a rebellion led to the destruction by fire of São José de Iama-IiOaiga, Bararoá, and Caboquéna, triggered by Indigenous resentment toward a missionary. The inhabitants, from the Manáos, Banibas, and Barés tribes, cultivated manioc, fruits, rice, coffee, and cotton, and produced cloth, hammocks, ropes, pitch, salsaparrilha, and puxiri. The settlement belonged to the district of Mariuá, and its people spoke the Tupica language, which served as the universal interpreter throughout the Province of Pará and was widely used among Indigenous groups influenced by the Tupinambá.",
+      "details": {
+        "facts": [
+          "Bararoá was a settlement on the right bank of the Rio Negro, between the Xibarú River and the Anhori Stream, and between Bararoá and Santa Izabel.",
+          "The settlement was founded by Principal Dari, who separated from Bararoá due to resentment.",
+          "Upon its founding, the settlement incorporated the Auacihidá Village."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "In 1639, Father Manoel Nunes and Father Thomé Ribeiro conducted a mission along the Tocantins River, targeting the Carajás and Poquiguaras tribes; the previous year, Father Thomé Ribeiro and Father Ricardo Careu had also visited these groups. Hostilities arose when Poquiguaras killed Christian Indians, prompting the governor to wage war, resulting in three hundred captives taken as slaves. Father Manoel Nunes converted over a thousand Poquiguaras and relocated them closer to Pará, and also brought four hundred Tupinambás and the Catingas, all of whom were baptized. In 1659, Fathers Antonio Vieira and Thomé Ribeiro made peace with the Nheengaibas, Manayanás, and Aroans, and began negotiations with the Tocuias, securing their allegiance to the Portuguese crown. By 1660, seven Nheengaibas villages had moved from the forest and built houses and churches along the rivers, following Father Vieira’s mission.",
+      "details": {
+        "facts": [
+          "The Bararoá mission involved interactions with several indigenous groups, including the Carajás, Poquiguaras, Tupinambás, Catingas, Nheengaibas, Manayanás, Aroans, and Tocuias.",
+          "Some Poquiguaras, described as more barbarous, killed Christian Indians accompanying the priests, leading the governor to wage war against them and take three hundred rebels captive as slaves.",
+          "Father Manoel Nunes converted more than a thousand Poquiguaras to Christianity and obedience to the Portuguese crown, and brought four hundred Tupinambás and the Catingas to Christian faith and settlement."
+        ],
+        "year": 1858,
+        "doc_name": "Corographia historica, Mello Moraes, Alexandre José"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "A letter described missionary activity in the Captaincy of Pará, noting that new missionaries of the Company achieved more in fifteen days than previous ecclesiastics had in thirty-eight years since the conquest began. In nearly all villages of free Indians in Pará, except one with a sugar mill, there were no churches or crosses, and Mass was rarely celebrated. Many Indians, both adults and children, were baptized but continued traditional customs, with little knowledge of Christian doctrine and almost no confession or sacramental practice, except in Maranhão, where priests had occasionally visited. The new missionaries divided themselves among the villages in pairs, at least one fluent in the local language, and began by examining baptisms, creating baptismal records, and teaching Christian doctrine daily. They also regularized marriages and immediately built churches upon entering each village.",
+      "details": {
+        "facts": [
+          "The new missionaries of the Company accomplished more in fifteen days than all previous ecclesiastics in thirty-eight years regarding indigenous groups.",
+          "In all villages of free Indians in the Captaincy of Pará, except one, there was neither a church nor, in some cases, even a cross, and years would pass without Mass being said.",
+          "Many indigenous adults and children were baptized but continued to live according to their gentile customs, including polygamy, and lacked knowledge of the faith."
+        ],
+        "year": 1858,
+        "doc_name": "Corographia historica, Mello Moraes, Alexandre José"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "In 1635, Father Antonio Vieira traveled from Pará to Maranhão and then to the royal court to report on obstacles faced by missionaries. King ordered three main regulations: no offensive war or harm against Gentile Indians without royal order; Christian and vassal Indians in villages to live freely under their chiefs and parish priests, only serving as law required; and missionaries to conduct interior missions independently, with governors providing support and allowing the superior of missionaries to select suitable military leaders. Governor André Vidal of Maranhão implemented these orders, enabling missions into the interior. That year, Fathers Francisco Velloso and Thomé Ribeiro led a mission to the Tupinambás, traveling over three hundred leagues up the Tocantins River, making peace with the Guarajús and Catingus before reaching the Tupinambás.",
+      "details": {
+        "facts": [
+          "No offensive war was to be waged against the Gentile Indians without the King's order, nor should any injury, violence, or harm be done to them.",
+          "Only legitimate captives among the indigenous could be redeemed from slavery, aiming to encourage them to accept the faith and become attached to the Portuguese crown.",
+          "Christian and vassal Indians in villages were not to be forced to serve except as determined by law, and otherwise were to live as free people, governed by their own chiefs and parish priests."
+        ],
+        "year": 1858,
+        "doc_name": "Corographia historica, Mello Moraes, Alexandre José"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "Carmelite friars administered villages located far from the city, near cacao-harvesting areas, facilitating cacao collection and reducing interference from settlers and royal service demands. Capuchin missionaries contributed Indians for one or two canoes to collect cacao, which funded their expenses, but did not send boats into the interior. The Piety missionaries were reputed in the city for only providing Indians when it served their interests and did not send canoes to the interior. Missions under missionary friars were few and had so few Indians that they were of little benefit to either the State or the missionaries. The Jesuit Fathers, though unpopular, maintained temporal governance of villages, and there were calls for stricter oversight of the generals’ authority in distributing Indians.",
+      "details": {
+        "facts": [
+          "Indians at Bararoá mission are coerced into accepting goods they do not need through simulation and deceit.",
+          "Indians are threatened with beatings and do not dare to object to the terms of exchange.",
+          "Goods given to the Indians are often useless to them, such as swords, stockings, ribbons, and satin."
+        ],
+        "year": 1858,
+        "doc_name": "Corographia historica, Mello Moraes, Alexandre José"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "On 10 September 1728 in Pará, Miguel de Siqueira Chaves attested that the missionaries of the Society of Jesus (Jesuits) supported numerous Indian villages in the region, more than all other religious orders combined, often at their own expense and without fixed revenues, relying on products like cacao and cloves. The Jesuit Fathers provided large numbers of Indians for royal service, notably in the Solimões and Manãos troops, under the command of João Paes do Amaral. Trade posts in the interior were typically staffed by Jesuits and their Indian converts. Official procedures required notices to be posted at the main church in Belém do Grão-Pará and for Indians in service to be present in the city for wage distribution. Jesuit missionaries were noted for their daily religious instruction, administration of sacraments, and charitable care for orphans, widows, and the sick in the Indian villages of the captaincies.",
+      "details": {
+        "facts": [
+          "Missionaries assist indigenous people with charity.",
+          "Missionaries incur expenses to keep indigenous people content and to bring them out of the forests for the service of the common good.",
+          "There are no certain or annual revenues for these expenses; missionaries rely on their own industry and local products."
+        ],
+        "year": 1858,
+        "doc_name": "Corographia historica, Mello Moraes, Alexandre José"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Baeta, BaiMri, and Bailractiâ were Indigenous nations of the Solimões, with the BaiMri and Bailractiâ located on the Juruá River. The Baetas River, on the left bank of the Madeira between lakes Saraimo and Maruimtíba, had a native village at its mouth and was near the fourth site of the parish of Araretama. The BaMi5)a nation of Guiana lived on the Içána and Ixié rivers, from which populations of Lama-Longa, Manaos, Guia, Santa Anna, S. Filippo, Mabbé, and S. Marcellino originated. Bararoá (Parish of Our Lady of the Rosary of) was on the right bank of the Rio Negro, 2021 leagues above the Jamundá River, near the Padauari River, and was burned in the rebellion of 1757. Bararoá was made a town named Thomar in 1758 by Governor Francisco Xavier de Mendonça Furtado, later losing this status; its population of 1,500 descended from the Manaos, Bares, Passés, and Ajuanas, and engaged in agriculture, weaving, and rope",
+      "details": {
+        "facts": [
+          "Bararoá (Parish of Our Lady of the Rosary of) was completely reduced to ashes by the rebellion of 1757.",
+          "Bararoá was called the Court of the Rio Negro and of the famous Manaos Nation due to its population.",
+          "Bararoá's inhabitants, numbering 1,500 in 160 households, descended from the Manaos, Bares, Passés, and Ajuanas nations."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Directory was a colonial administrative institution that maintained cohesion between Indigenous people and broader society in the Amazon, countering Jesuit influence, as seen in events like the withdrawal of Indigenous people from Marina and São Paulo, the uprising and desertion of Mariuá troops, and the rebellions of Lama-Longa, Caboquena, and Bararoá. Governor D. Francisco de Souza Coutinho of Pará, seeking to limit the progress of the Captaincy of Rio Negro under Manoel da Gama Lobo da Almada, secured the dissolution of the Directory by royal decree, leading to the dispersal and decline of Indigenous settlements. The text notes differing settlement patterns between Indigenous groups of São Paulo and Minas (mountainous, nomadic) and those of the Amazon (riverine, sedentary), with José Bonifacio in 1823 advocating for a fusion of Directory and Mission systems for more effective Indigenous administration.",
+      "details": {
+        "facts": [
+          "The Bararoá rebellion was a horrific uprising involving Indigenous people.",
+          "The Jesuits were accused of machinations that led to the withdrawal of Indigenous people from missions and settlements, including Bararoá.",
+          "The Directory was the only effective bond keeping Indigenous people united with the rest of society."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "São José de Iama-IiOaiga was a settlement on the right bank of the Rio Negro, located between the Xibarú River and the Anhori Stream, and between Bararoá and Santa Izabel, 127 leagues above the confluence of the Rio Negro and 205 leagues from the mouth of the Jamundá. It was founded by Principal Dari, who named it after himself when he separated from Bararoá, and incorporated the Auacihidá Village, three leagues further upstream. In 1757, a rebellion led to the destruction by fire of São José de Iama-IiOaiga, Bararoá, and Caboquéna, triggered by an Indigenous man's resentment over a missionary's interference. The inhabitants, from the Manáos, Banibas, and Barés tribes, cultivated manioc, fruits, rice, coffee, and cotton, and produced cloth, hammocks, ropes, pitch, salsaparrilha, and puxiri. The settlement belonged to the district of Mariuá, and the Tupica language was universally spoken among Indigenous people throughout the Province of Pará.",
+      "details": {
+        "facts": [
+          "Bararoá was a settlement on the right bank of the Rio Negro, between the Xibarú River and the Anhori Stream, and between Bararoá and Santa Izabel.",
+          "The settlement was founded by Principal Dari, who separated from Bararoá due to resentment.",
+          "Upon its founding, the settlement incorporated the Auacihidá Village."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Baeta and BaiMri were Indigenous nations of the Solimões, located respectively on the Baetas and Juruá rivers. The Baetas River, on the left bank of the Madeira between lakes Saraimo and Maruimtíba, had a native village at its mouth and was near the fourth site of the parish of Araretama. Bararoá (Parish of Our Lady of the Rosary of) was situated on the right bank of the Rio Negro, 2021 leagues above the Jamundá River, near the Padauari River, and was destroyed in the 1757 rebellion. Bararoá became the town of Thomar in 1758 under Governor Francisco Xavier de Mendonça Furtado but later lost this status. Its population of 1,500 in 160 households descended from the Manaos, Bares, Passés, and Ajuanas nations, engaged in agriculture, weaving, and rope-making, and the settlement served as a key trading post between the Upper and Lower Rio Negro.",
+      "details": {
+        "facts": [
+          "Bararoá (Parish of Our Lady of the Rosary of) was completely reduced to ashes by the rebellion of 1757.",
+          "Bararoá was called the Court of the Rio Negro and of the famous Manaos Nation due to its population.",
+          "Its inhabitants, numbering 1,500 in 160 households, descended from the Manaos, Bares, Passés, and Ajuanas nations."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Directory was a colonial administrative institution that maintained unity between Indigenous people and broader society in the Amazon, particularly in settlements like Marina, São Paulo, Mariuá, Lama-Longa, Caboquena, and Bararoá. The Jesuits were implicated in Indigenous withdrawals and uprisings, aiming to revert the Amazon to wilderness. Governor D. Francisco de Souza Coutinho of Pará, seeking to hinder the progress of the Captaincy of Rio Negro under Manoel da Gama Lobo da Almada, secured the dissolution of the Directory by royal decree, leading to the dispersal and decline of Indigenous settlements. In 1823, José Bonifacio advocated for merging the Directory’s regulations with those of the Missions, suggesting that combining the roles of Missionary and Director could have yielded better results in Indigenous administration. Distinctions are noted between Indigenous groups of São Paulo and Minas, who are more nomadic, and those of the Amazon, who are more sedentary and riverine.",
+      "details": {
+        "facts": [
+          "The Bararoá rebellion was a horrific uprising involving Indigenous people.",
+          "The Jesuits were accused of machinations that led to the withdrawal of Indigenous people from missions and settlements, including Bararoá.",
+          "The Directory was the only effective bond that kept the Indigenous people united with the rest of society."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "São José de Iama-IiOaiga was a settlement on the right bank of the Rio Negro, between the Xibarú River and the Anhori Stream, situated between Bararoá and Santa Izabel, 127 leagues above the confluence of the Rio Negro and 205 leagues from the mouth of the Jamundá. It was founded by Principal Dari, who separated from Bararoá and incorporated the Auacihidá Village, located three leagues further upstream. In 1757, a rebellion led to the destruction by fire of São José de Iama-IiOaiga, Bararoá, and Caboquéna, triggered by an Indigenous man’s resentment over a missionary’s interference. The inhabitants, from the Manáos, Banibas, and Barés tribes, cultivated manioc, fruits, rice, coffee, and cotton, and produced cloth, hammocks, ropes, pitch, salsaparrilha, and puxiri. The settlement belonged to the district of Mariuá, and the Tupica language served as the universal language among Indigenous peoples throughout the Province of Pará and much of Brazil.",
+      "details": {
+        "facts": [
+          "Bararoá was a settlement on the right bank of the Rio Negro, between the Xibarú River and the Anhori Stream, and between Bararoá and Santa Izabel.",
+          "The settlement was founded by Principal Dari, who separated from Bararoá due to resentment.",
+          "Upon its founding, the settlement incorporated the Auacihidá Village."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    }
+  ],
+  "agent_thoughts": "The accumulated evidence establishes Bararoá as a major mission and trading post on the Rio Negro, with a population descended from the Manaos, Bares, Passés, and Ajuanas nations. It was destroyed in the 1757 rebellion, refounded as Thomar, and played a role in regional conflicts. Previous searches have clarified its demographic and economic context, as well as its decline and dispersal patterns. However, the specifics of Bararoá's relationship with local Indigenous groups—the social, cultural, and missionary dynamics—remain underexplored. I have not yet directly targeted the mission's interaction with these Indigenous nations. To fill this gap, I will now search for information on 'Bararoá mission indigenous relations.' This approach should yield details on how the mission functioned socially and culturally, and its impact on or integration with local Indigenous peoples. If this search is unproductive, I will consider external sources or more specific entity queries. I will avoid repeating previous queries and focus on this new angle.",
+  "previous_hypotheses": []
+}

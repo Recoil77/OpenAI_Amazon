@@ -7,7 +7,7 @@ from tqdm import tqdm
 
 # === НАСТРОЙКИ ===
 WORKERS = 16
-number = "57"
+number = "73"
 CHUNKS_DIR = Path(f"docs/{number}/chunks_json")
 OUTPUT_DIR = Path(f"docs/{number}/chunks_with_metadata")
 META_PATH = Path(f"docs/{number}/meta.json")

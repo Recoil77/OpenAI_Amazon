@@ -3,9 +3,9 @@ import subprocess
 from pathlib import Path
 
 # === НАСТРОЙКИ ===
-number = "73"                  # ← номер документа
-first_page = 11                 # ← начальная страница (включительно)
-last_page = 657                 # ← последняя страница (включительно), None = до конца
+number = "54"                  # ← номер документа
+first_page = 17                 # ← начальная страница (включительно)
+last_page = 595                 # ← последняя страница (включительно), None = до конца
 use_pdftoppm = True            # ← True = использовать pdftoppm (иначе pdfimages)
 dpi = 400                      # ← разрешение
 output_format = "jpeg"         # ← 'tiff' или 'jpeg'

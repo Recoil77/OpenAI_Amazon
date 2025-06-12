@@ -1,76 +1,40 @@
 # app/reformulate_question.py
-import json
 from fastapi import FastAPI, Request, HTTPException
 from pydantic import BaseModel, Field
 from typing import List, Dict, Any, Optional
-from openai import OpenAI, AsyncOpenAI
+
 import asyncpg
 import os
 import asyncio
-import traceback
 import structlog
+import tiktoken
 from starlette.concurrency import run_in_threadpool
 from gateway.gateway_client import chat_completion, response_completion
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import  HTTPException, Query
 from pydantic import ValidationError
-from app.classes import ReasoningRequest, ReasoningResponse
-from app.classes import ReformulateRequest, ReformulateResponse, ReasoningRequest, ReasoningResponse, Action, Evidence
+from app.classes import ReasoningRequest, ReasoningResponse, Evidence
 from app.classes import WebSearchRequest, GeneralKnowledgeRequest, EntitySearchRequest, ChunkSummaryRequest, ChunkSummaryResponse
 from app.classes import VectorSearchRequest, VectorSearchV2Request, VectorSearchV2Result, RerankRequest, RerankResult
-from app.classes import RerankSemanticV5Request, ExtractFactsRequest, ChunkCandidate, ChunkFacts, GetVerdictRequest, GetVerdictResponse
-from app.func import build_reformulate_prompt, build_reasoning_prompt_v2
+from app.classes import RerankSemanticV5Request, ExtractFactsRequest, ChunkCandidate
+from app.func import build_reasoning_prompt_v2
 from app.main import vector_search_v2, rerank_bge_endpoint, rerank_semantic_v5, extract_facts
 from dotenv import load_dotenv
-load_dotenv("/opt2/.env")
-DATABASE_URL = env = os.getenv("DATABASE_URL")
-client = OpenAI()
-openai_client = AsyncOpenAI() 
-app = FastAPI()
-log = structlog.get_logger(__name__)
-CUTTING = 5
+load_dotenv()
 
-@app.post("/reformulate_question", response_model=List[Evidence])
-async def reformulate_question(req: ReformulateRequest):
-    prompt = build_reformulate_prompt(req)
-    try:
-        resp = await chat_completion.create(
-            model="gpt-4.1-2025-04-14",
-            messages=[
-                {"role": "system", "content": "You are a research assistant."},
-                {"role": "user", "content": prompt}
-            ],
-            max_tokens=256,
-            temperature=0.6
-        )
-        import json
-        content = resp.choices[0].message.content.strip()
-        data = json.loads(content)
-        evidence = Evidence(
-            source="reformulate",
-            value=data.get("reformulated_question", ""),
-            details={
-                "alternatives": data.get("alternatives", []),
-                "reason": data.get("reason", "")
-            },
-            meta={}
-        )
-        return [evidence]
-    except Exception as e:
-        evidence = Evidence(
-            source="reformulate",
-            value=req.active_question,
-            details={
-                "alternatives": [],
-                "reason": f"LLM output parsing error: {e} | Content: {content[:200]}"
-            },
-            meta={}
-        )
-        return [evidence]
+DATABASE_URL = env = os.getenv("DATABASE_URL")
+
+app = FastAPI()
+
+log = structlog.get_logger(__name__)
+encoding = tiktoken.get_encoding("cl100k_base")
+
+CUTTING_BGE = 32
+CUTTING_LLM = 8
 
 @app.post("/llm_reasoning", response_model=ReasoningResponse)
 async def llm_reasoning(
     req: ReasoningRequest,
-    model: str = Query("o3-2025-04-16", description="LLM model"),  # 'gpt-4.1-2025-04-14'
+    model: str = Query('gpt-4.1-2025-04-14', description="LLM model"),  #"o3-2025-04-16" 
     temperature: float = Query(0.25, description="Sampling temperature"),
     max_tokens: int = Query(4096, description="Maximum output tokens"),
 ) -> ReasoningResponse:
@@ -81,20 +45,23 @@ async def llm_reasoning(
     prompt = build_reasoning_prompt_v2(req)
     log.info("llm_reasoning.start", iteration=req.iteration, model=model)
 
+    #num_tokens = len(encoding.encode(prompt))
+    #log.info(f"Prompt tokens: {num_tokens}")
     try:
+        #log.debug("llm_reasoning.raw", prompt=prompt )
         response = await chat_completion.create(
             model=model,
-            messages=[{"role": "system", "content": prompt}],
+            messages=prompt,
             response_format={"type": "json_object"},
-            #temperature=temperature,
-            #max_tokens=max_tokens,
+            temperature=temperature,
+            max_tokens=max_tokens,
         )
         raw_json_str = response.choices[0].message.content
         log.debug("llm_reasoning.raw", json=raw_json_str)
 
         # Валидация и возврат через Pydantic v2
         result = ReasoningResponse.model_validate_json(raw_json_str)
-        log.info("llm_reasoning.ok")
+        #log.info("llm_reasoning.ok")
         return result
 
     except ValidationError as e:
@@ -111,198 +78,6 @@ async def llm_reasoning(
         log.exception("llm_reasoning.fail")
         raise HTTPException(status_code=500, detail=f"LLM reasoning failed: {e}")
 
-# @app.post("/llm_reasoning", response_model=ReasoningResponse)
-# async def llm_reasoning(
-#     req: ReasoningRequest,
-#     model: str = Query("o3-2025-04-16" ,  description="LLM model"), #  'gpt-4.1-2025-04-14'
-#     temperature: float = Query(0.25,     description="Sampling temperature"),
-#     max_tokens: int = Query(4096,        description="Maximum output tokens"),
-# ) -> ReasoningResponse:
-#     """
-#     Один цикл глубокого рассуждения: отдаём промпт —
-#     получаем строго JSON-объект с действиями, гипотезой и т.д.
-#     """
-#     prompt = build_reasoning_prompt(req)
-#     log.info("llm_reasoning.start", iteration=req.iteration, model=model)
-
-#     try:
-#         response = await openai_client.chat.completions.create(
-#             model=model,
-#             messages=[{"role": "system", "content": prompt}],
-#             response_format={"type": "json_object"},
-#             reasoning_effort="high",
-#             #temperature=temperature,
-#             #max_tokens=max_tokens,
-#         )
-#         raw_json_str = response.choices[0].message.content
-#         log.debug("llm_reasoning.raw", json=raw_json_str)
-
-#         # Pydantic v2: валидируем сразу из строки, без промежуточного json.loads
-#         result = ReasoningResponse.model_validate_json(raw_json_str)
-#         log.info("llm_reasoning.ok")
-#         return result
-
-#     except ValidationError as e:
-#         log.error("llm_reasoning.validation_error", error=str(e), raw=response.choices[0].message.content)
-#         raise HTTPException(status_code=422, detail=f"Pydantic validation failed: {e}")
-
-#     except Exception as e:
-#         log.exception("llm_reasoning.fail")
-#         raise HTTPException(status_code=500, detail=f"LLM reasoning failed: {e}")
-
-# tools = [{
-#     "type": "function",
-#     "function": {
-#         "name": "reasoning_response",
-#         "parameters": {
-#             "type": "object",
-#             "properties": {
-#                 "actions": {           # <-- здесь был set
-#                     "type": "array",
-#                     "items": {
-#                         "type": "object",
-#                         "properties": {
-#                             "type":    {"type": "string", "enum": [
-#                                 "vector_search", "web_search",
-#                                 "entity_search", "general_knowledge",
-#                                 "reformulate_question"
-#                             ]},
-#                             "query":   {"type": "string"},
-#                             "reason":  {"type": "string"}
-#                         },
-#                         "required": ["type", "query", "reason"]
-#                     },
-#                     "minItems": 1
-#                 },
-#                 "finalize": {"type": "boolean"},
-#                 "active_question": {"type": "string"},
-#                 "hypothesis": {"type": "string"},
-#                 "supporting_evidence": {
-#                     "type": "array",
-#                     "items": {
-#                         "type": "object",
-#                         "properties": {
-#                             "source":  {"type": "string"},
-#                             "value":   {"type": "string"},
-#                             "details": {"type": "object"},   # строго объект!
-#                             "meta":    {"type": "object"}
-#                         },
-#                         "required": ["source", "value", "details", "meta"]
-#                     }
-#                 },
-#                 "confidence": {"type": ["number", "null"]}
-#             },
-#             "required": ["actions", "finalize", "supporting_evidence"]
-#         }
-#     }
-# }]
-
-
-# @app.post("/llm_reasoning", response_model=ReasoningResponse)
-# async def llm_reasoning(
-#     req: ReasoningRequest,
-#     model: str = Query("o3-2025-04-16", description="LLM model (e.g., 'gpt-4.1-2025-04-14', 'o3')"), # 'gpt-4.1-2025-04-14'   
-#     temperature: float = Query(0.25, description="Sampling temperature"),
-#     max_tokens: int = Query(4096, description="Maximum output tokens"),
-# ):
-#     prompt = build_reasoning_prompt(req)
-#     try:
-#         resp =  client.chat.completions.create( #await
-#             model=model,
-#             response_format={"type": "json_object"},
-#             messages=[
-#                 {"role": "system", "content": prompt}
-#             ],
-#             #temperature=temperature,
-#             tools = tools,
-#             #top_p = 0.9,
-#             #max_tokens=max_tokens,
-
-#         )
-#         #content = resp.choices[0].message.content.strip()
-#         choice = resp.choices[0]
-
-#         # ➟ правильный путь к строке-JSON с аргументами
-#         args_json = choice.message.tool_calls[0].function.arguments
-#         data = json.loads(args_json)
-#         content = data
-#         print("==== RAW LLM OUTPUT ====")
-#         print(repr(content))
-
-#         try:
-#             #data = json.loads(content)
-#             data = content
-#             print("==== DATA LOADED FROM JSON ====")
-#             print(data)
-#             # Временно выводим структуру для дебага
-#             print("==== KEYS AT TOP LEVEL ====")
-#             print(list(data.keys()))
-#             if "supporting_evidence" in data:
-#                 print(f"supporting_evidence type: {type(data['supporting_evidence'])}, len: {len(data['supporting_evidence'])}")
-#                 for i, ev in enumerate(data["supporting_evidence"]):
-#                     print(f"  evidence[{i}] type: {type(ev)}, keys: {ev.keys() if isinstance(ev, dict) else 'not a dict'}")
-#             if "actions" in data:
-#                 print(f"actions type: {type(data['actions'])}, len: {len(data['actions'])}")
-#                 for i, act in enumerate(data["actions"]):
-#                     print(f"  action[{i}] type: {type(act)}, keys: {act.keys() if isinstance(act, dict) else 'not a dict'}")
-#         except Exception as e:
-#             print("==== LLM PARSE ERROR ====")
-#             print("RAW OUTPUT:", repr(content))
-#             raise HTTPException(
-#                 status_code=500,
-#                 detail=f"LLM reasoning failed: {e}\nRAW OUTPUT:\n{content[:1000]}"
-#             )
-
-#         # Вот тут дебажим падение на ReasoningResponse
-#         try:
-#             result = ReasoningResponse(**data)
-#         except Exception as e:
-#             print("==== PYDANTIC PARSE ERROR ====")
-#             print("TRACEBACK:")
-#             print(traceback.format_exc())
-#             print("==== DATA THAT CAUSED ERROR ====")
-#             print(data)
-#             raise HTTPException(
-#                 status_code=500,
-#                 detail=f"Pydantic ReasoningResponse parse failed: {e}\nTRACEBACK:\n{traceback.format_exc()}\nDATA:\n{str(data)[:1000]}"
-#             )
-
-#         return result
-
-#     except Exception as e:
-#         print("==== OUTER ERROR IN /llm_reasoning ====")
-#         print(traceback.format_exc())
-#         raise HTTPException(status_code=500, detail=f"LLM reasoning failed (outer): {e}")
-
-
-    
-@app.post("/get_verdict", response_model=GetVerdictResponse)
-async def get_verdict(req: GetVerdictRequest):
-    # 1. general_knowledge
-    gk_evidence = await general_knowledge_endpoint(GeneralKnowledgeRequest(query=req.hypothesis))
-    gk_answer = gk_evidence[0].value.strip() if gk_evidence and gk_evidence[0].value else ""
-
-    # 2. web_search (high)
-    ws_evidence = await web_search_endpoint(WebSearchRequest(query=req.hypothesis, search_context_size="high"))
-    ws_answer = ws_evidence[0].value.strip() if ws_evidence and ws_evidence[0].value else ""
-
-    # 3. Verdict logic
-    if gk_answer:
-        verdict = "trivial"
-        details = "The hypothesis is confirmed in general_knowledge."
-    elif ws_answer:
-        verdict = "publicly_known"
-        details = "The hypothesis is found in web_search but not in general_knowledge."
-    else:
-        verdict = "not_found"
-        details = "The hypothesis is not found in general_knowledge or web_search."
-
-    return GetVerdictResponse(
-        verdict=verdict,
-        details=details,
-        general_knowledge_answer=gk_answer,
-        web_search_answer=ws_answer
-    )
 
 @app.post("/web_search", response_model=List[Evidence])
 async def web_search_endpoint(req: WebSearchRequest):
@@ -311,24 +86,23 @@ async def web_search_endpoint(req: WebSearchRequest):
     return answer(s) as a list of Evidence.
     """
     try:
-        response = await run_in_threadpool(
-            client.responses.create,
+        response = await response_completion.create(
             model="gpt-4.1",
             tools=[{"type": "web_search_preview", "search_context_size": req.search_context_size}],
             input=req.query
         )
-        # Достаем текст ответа — пример, адаптируй под реальный SDK
+        
         answer_text = getattr(response, "output_text", None)
         if not answer_text:
             raise Exception("No output_text in response")
-        # Evidence-формат (source, value, details, meta)
+        
         ev = Evidence(
             source="web",
             value=answer_text,
             details={"search_context_size": req.search_context_size},
             meta={}
         )
-        return [ev]  # всегда список!
+        return [ev]  
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Web search failed: {e}")
     
@@ -407,7 +181,7 @@ async def entity_search(req: EntitySearchRequest):
             total_count = sum([row["count"] for row in rows]) if rows else 0
             result.append(
                 Evidence(
-                    source="entity",
+                    source="entity_search",
                     value=q,
                     details={"count": total_count},
                     meta={"mode": req.mode}
@@ -444,7 +218,7 @@ async def entity_hybrid_endpoint(req: VectorSearchRequest):
             )
             LIMIT $2
         """
-        rows = await conn.fetch(sql, req.query, req.k * 15)
+        rows = await conn.fetch(sql, req.query, req.k)
         await conn.close()
         print(f"    ↳ {len(rows)} candidate chunks selected by entity")
 
@@ -473,7 +247,8 @@ async def entity_hybrid_endpoint(req: VectorSearchRequest):
         bge_filtered.sort(key=lambda x: x.get("score", 0), reverse=True)
 
         # 4. --- LLM (semantic) rerank ---
-        top_bge = bge_filtered[: req.k * 2]
+        top_bge = bge_filtered[:CUTTING_BGE]
+        print(f"    ↳ BGE after cuttingd: {len(top_bge)} remain")
         sem_candidates = [
             {"block_id": r["index"], "text": r["text"]} for r in top_bge
         ]
@@ -486,7 +261,7 @@ async def entity_hybrid_endpoint(req: VectorSearchRequest):
             )
         )
         print(f"    ↳ semantic rerank: {len(sem_out)} blocks after rerank")
-        sem_out = sem_out[:CUTTING] 
+        sem_out = sem_out[:CUTTING_LLM] 
         print(f"    ↳ semantic rerank: {len(sem_out)} blocks after cutting")
         # 5. --- Собираем shortlist ---
         results = []
@@ -656,7 +431,8 @@ async def vector_search_endpoint(req: VectorSearchRequest):
         bge_filtered.sort(key=lambda x: x.get("score", 0), reverse=True)
 
         # 3. Semantic rerank
-        top_bge = bge_filtered[: req.k]
+        top_bge = bge_filtered[:CUTTING_BGE] 
+        print(f"    ↳ BGE after cuttingd: {len(top_bge)} remain")        
         # block_id теперь — ЭТО list-index; мы не трогаем его дальше
         sem_candidates = [
             {"block_id": r["index"], "text": r["text"]} for r in top_bge
@@ -670,7 +446,7 @@ async def vector_search_endpoint(req: VectorSearchRequest):
             )
         )
         print(f"    ↳ semantic rerank: {len(sem_out)} blocks after rerank")
-        sem_out = sem_out[:CUTTING] 
+        sem_out = sem_out[:CUTTING_LLM] 
         print(f"    ↳ semantic rerank: {len(sem_out)} blocks after cutting")
         # 4. Собираем shortlist
         results = []
@@ -773,3 +549,94 @@ async def vector_search_endpoint(req: VectorSearchRequest):
         raise HTTPException(status_code=500, detail=f"vector_search failed: {e}")
 
 
+@app.post("/vector_search_v2", response_model=List[Evidence])
+async def vector_search_v2_endpoint(req: VectorSearchRequest):
+    try:
+        print(f"\n[vector_search_v2] Called with query: {req.query}, k={req.k}")
+
+        # 1. Векторный поиск
+        print("  → vector_search_v2 ...")
+        vec_resp = await vector_search_v2(VectorSearchV2Request(query=req.query, k=req.k))
+        print(f"    ↳ {len(vec_resp)} chunks found")
+
+        # --------------------------------------------------------------
+        #   Готовим ответы для BGE + маппинг list-index → vec_resp obj
+        # --------------------------------------------------------------
+        answers     = [item.text for item in vec_resp]
+        idx2chunk   = {i: ch for i, ch in enumerate(vec_resp)}
+
+        # 2. BGE rerank
+        print("  → rerank_bge_endpoint ...")
+        bge_out = await rerank_bge_endpoint(
+            RerankRequest(
+                question=req.query,
+                answers=answers,
+                threshold=req.bge_threshold,
+            )
+        )
+        bge_filtered = [
+            r for r in bge_out.get("results", []) if r.get("score", 0) >= req.bge_threshold
+        ]
+        bge_filtered.sort(key=lambda x: x.get("score", 0), reverse=True)
+
+        # 3. Semantic rerank
+        top_bge = bge_filtered[:CUTTING_BGE]
+        sem_candidates = [
+            {"block_id": r["index"], "text": r["text"]} for r in top_bge
+        ]
+        print("  → rerank_semantic_v5 ...")
+        sem_out = await rerank_semantic_v5(
+            RerankSemanticV5Request(
+                question=req.query,
+                candidates=sem_candidates,
+                threshold=req.semantic_threshold,
+            )
+        )
+        sem_out = sem_out[:CUTTING_LLM]
+
+        # 4. Собираем shortlist
+        results = []
+        for entry in sem_out:
+            list_idx  = entry["block_id"]
+            src       = idx2chunk.get(list_idx)
+            if src is None:
+                continue
+
+            bge_score = next(
+                (r["score"] for r in bge_filtered if r["index"] == list_idx), None
+            )
+
+            results.append(
+                {
+                    "year": src.year,
+                    "doc_name": src.doc_name,
+                    "chunk_index": src.chunk_index,
+                    "text": src.text,
+                    "bge_score": bge_score,
+                    "semantic_score": entry["score"],
+                }
+            )
+        print(f"    ↳ shortlist after rerank: {len(results)} chunks")
+
+        # --------------------------------------------------------------
+        # 5. Формируем Evidence (без facts и summary)
+        # --------------------------------------------------------------
+        evidences = [
+            Evidence(
+                source="vector_search_v2",
+                value=r["text"],                      # полный текст чанка
+                details={
+                    "doc_name": r["doc_name"],
+                    "year":     r["year"],
+                },
+                meta={},
+            )
+            for r in results
+        ]
+        print(f"  → returning {len(evidences)} Evidence items")
+
+        return evidences
+
+    except Exception as e:
+        print("  [ERROR]:", str(e))
+        raise HTTPException(status_code=500, detail=f"vector_search_v2 failed: {e}")

@@ -7,13 +7,13 @@ from aiofiles import open as aio_open
 from aiofiles.os import path as aio_path
 from tqdm import tqdm
 
-number = "47"
+number = "54"
 
 # === НАСТРОЙКИ ===
 INPUT_DIR = Path(f"docs/{number}/jpeg")
 TMP_DIR = Path(f"docs/{number}/tmp")
 FINAL_OUTPUT = Path(f"docs/{number}/{number}.txt")
-ENDPOINT = "http://192.168.168.5:8000/ocr_main_text"
+ENDPOINT = "http://192.168.168.10:8000/ocr_main_text"
 CONCURRENCY = 8  # Количество потоков
 
 # === Создание tmp-папки ===

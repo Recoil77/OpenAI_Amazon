@@ -1,0 +1,285 @@
+{
+  "user_query": "Find all clues related to the geographical location of the object or place named Bararoá.",
+  "final_hypothesis": "Bararoá was a historically important settlement (later Thomar) located on the right (northwestern) bank of the Rio Negro, in the Amazon basin, approximately 21 leagues above (upstream of) the Jamundá River and close to the Padauari River. It was a major point in indigenous and colonial trading networks and suffered destruction in the mid-18th century.",
+  "supporting_evidence": [],
+  "reasoning_log": [
+    {
+      "iteration": 0,
+      "action": "entity_search",
+      "query": "Bararoá, Bararoa, Bararóa, Bararoã, Bararoan",
+      "result_count": 5
+    },
+    {
+      "iteration": 1,
+      "action": "entity_hybrid",
+      "query": "Bararoá",
+      "result_count": 8
+    },
+    {
+      "iteration": 2,
+      "action": "vector_search",
+      "query": "right bank of the Rio Negro",
+      "result_count": 8
+    }
+  ],
+  "context": [
+    {
+      "source": "entity_search",
+      "value": "Bararoá",
+      "details": {
+        "count": 56
+      },
+      "meta": {
+        "mode": "substring"
+      }
+    },
+    {
+      "source": "entity_search",
+      "value": "Bararoa",
+      "details": {
+        "count": 2
+      },
+      "meta": {
+        "mode": "substring"
+      }
+    },
+    {
+      "source": "entity_search",
+      "value": "Bararóa",
+      "details": {
+        "count": 1
+      },
+      "meta": {
+        "mode": "substring"
+      }
+    },
+    {
+      "source": "entity_search",
+      "value": "Bararoã",
+      "details": {
+        "count": 0
+      },
+      "meta": {
+        "mode": "substring"
+      }
+    },
+    {
+      "source": "entity_search",
+      "value": "Bararoan",
+      "details": {
+        "count": 0
+      },
+      "meta": {
+        "mode": "substring"
+      }
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "The Baeta, BaiMri, and Bailractiâ were Indigenous nations of the Solimões, with the BaiMri and Bailractiâ located on the Juruá River. The Baetas River, on the left bank of the Madeira between lakes Saraimo and Maruimtíba, had a native village at its mouth and was near the fourth location of the parish of Araretama. The BaMi5)a nation of Guiana lived on the Içána and Ixié rivers, giving rise to populations in Lama-Longa, Manaos, Guia, Santa Anna, S. Filippo, Mabbé, and S. Marcellino. Bararoá (Parish of Our Lady of the Rosary) was on the right bank of the Rio Negro, 2021 leagues above the Jamundá River, near the Padauari River, and was burned in the 1757 rebellion; it became the town of Thomar in 1758 under Governor Francisco Xavier de Mendonça Furtado. Bararoá served as a major trading post between the Upper and Lower Rio Negro, with a population descended from the Manaos, Bares, Passés, and Ajuanas, and was involved in the Pará",
+      "details": {
+        "facts": [
+          "Bararoá (Parish of Our Lady of the Rosary of) is on the right bank of the Rio Negro, 2021 leagues above the mouth of the Jamundá River, under parallel 00° 16' S., crossed by the meridian 29° 33' W. of Olinda.",
+          "Bararoá's first location was on the southern bank near the mouth of the Xjuará River, in front of Timoni Island, from where it was moved to the current site.",
+          "Bararoá was completely reduced to ashes by the rebellion of 1757."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "In the interior of Pará, population estimates in official reports ranged from 30,000 to 40,000 souls, but the inhabitants were highly dispersed across sites, lakes, and rivers rather than concentrated in settlements. Settlements such as Bararoá, which once had 780 households, had declined to 13 households, yet the population did not decrease proportionally due to widespread dispersion. The fertile riverbanks and abundance of natural resources like hunting, fishing, and wild fruits encouraged people to settle away from formal settlements. Natives maintained houses in settlements mainly for religious duties and festivals but lived primarily in remote areas, especially as the lack of ministers and weakened authority diminished the settlements' importance. Many settlements fell into ruin or disappeared, making population counts based on settlements unreliable, as most people resided along the sources of rivers, lakes, and streams.",
+      "details": {
+        "facts": [
+          "Bararoá had 780 households and today, according to Baena, has 13.",
+          "Baena states Bararoá has 439 souls, which is considered excessive for so few households.",
+          "There is a great disproportion between households and people in Bararoá, explained by the dispersion of the population."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "The Pará revolution of 1835, led by Archpriest Baptista and later involving Malcher, resulted in widespread anarchy and social dissolution. The rebel cabanos controlled settlements only temporarily, losing them upon retreat. Gregorio Nazianzeno da Costa led a successful restoration on August 31, 1836, after which João Ignacio Rodrigues do Carmo became Military Commander of the District. Captain Miguel Nunes Bemfica of the Itarendáua company and Ambrósio Ayres, who organized a force in Bararoá and fought on the Maués River and in Icuipiranga, played key roles in defeating the cabanos. Around this period, Pedro Ayres, claiming to be Ambrósio's brother and a U.S. Navy officer, along with Ghamburg, explored Guiana, confronted the British at Fort St. Joaquim on the Rio Branco, and fired salutes with captured gunpowder. A tailor from Stabrok, posing as a missionary, attempted to convert Indigenous people along the Pirarára River.",
+      "details": {
+        "facts": [
+          "A convict named Ambrósio Ayres gathered a select company in Bararoá and took this name.",
+          "Ambrósio Ayres descended the Rio Negro and distinguished himself by brilliant feats of arms against the cabanos in the Maués River and in Icuipiranga, to whose surrender he also contributed.",
+          "Ambrósio Ayres was then appointed Military Commander of the District of Bararoá."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "The Directory was an administrative institution that maintained cohesion between Indigenous people and colonial society in the Amazon, countering the influence of Jesuits, whose actions included prompting Indigenous withdrawals from Marina and São Paulo, and uprisings such as those at Mariuá, Lama-Longa, Caboquena, and Bararoá. Governor D. Francisco de Souza Coutinho of Pará, seeking to hinder the development of the Captaincy of Rio Negro under Governor Manoel da Gama Lobo da Almada, secured the dissolution of the Directory by royal decree, leading to the dispersal and decline of Indigenous settlements. The text notes a distinction between Indigenous groups of São Paulo and Minas—more nomadic, mountain-dwelling, and suited for muleteering—and those of the Amazon, who are riverine, more sedentary, and inclined toward fishing. José Bonifacio, in 1823, advocated for the unification of Directory and Missionary roles to improve Indigenous administration. The dissolution of the Directory resulted in the reduction and disappearance of several settlements in the Amazon region.",
+      "details": {
+        "facts": [
+          "Bararoá was the site of a horrific rebellion."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "São José de Iama-IiOaiga was a settlement on the right bank of the Rio Negro, between the Xibarú River and the Anhori Stream, situated between Bararoá and Santa Izabel, 127 leagues above the confluence of the Rio Negro and 205 leagues from the mouth of the Jamundá. It was founded by Principal Dari, who separated from Bararoá, and incorporated the Auacihidá Village, located three leagues further upstream. In 1757, a rebellion led to the destruction by fire of São José de Iama-IiOaiga, Bararoá, and Caboquéna, triggered by an Indigenous man’s resentment over a missionary’s interference. The inhabitants, from the Manáos, Banibas, and Barés tribes, cultivated manioc, fruits, rice, coffee, and cotton, and produced cloth, hammocks, ropes, pitch, salsaparrilha, and puxiri. The settlement belonged to the district of Mariuá, and its people spoke the Tupica language, which served as a lingua franca throughout the Province of Pará and much of Brazil.",
+      "details": {
+        "facts": [
+          "Bararoá is located between São José de Iama-IiOaiga and Santa Izabel, on the right bank of the Rio Negro.",
+          "In 1757, Bararoá, together with São José de Iama-IiOaiga and Caboquéna, was reduced to ashes during a rebellion.",
+          "Bararoá's inhabitants originate from the Manáos, Banibas, and Barés peoples."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "Our Lady of the Conception was the patroness of Manaus, Villa de Mariuá, Parish of Caboquena on the Rio Negro, Villa de Lusea on the Maués, and settlements on Lake Canomá and the Rio Branco between Santa Maria and St. Philip. Other Marian patronesses included Our Lady of Guadalupe (Fonte-Boa), Candlemas (on the Rio Negro), Loreto (on the Rio Negro), Nazareth (Curiana, Rio Negro), Mount Carmel (Parish of Canomá), Rosary (Itacoatiara on the Amazon, Parauari on the Tefé, Bararoá on the Rio Negro), Health (Boa Vista, Rio Negro), and Help (Capella, Rio Negro; Matari, lake of the same name). Omágua was the primitive name of the Cambeba nation and also referred to islands on the Solimões River above the Jutahi River. The Pacaraima mountain range in Guiana, at latitude 4° 00' N, longitude 25° 05' to 29° 05' W of Olinda, marks the boundary between Brazil, Venezuela, and European Guiana, and is the source of tributaries forming the Rio Branco.",
+      "details": {
+        "facts": [
+          "Bararoá is a parish on the Rio Negro.",
+          "Our Lady of the Rosary is the patroness of the parish of Bararoá on the Rio Negro.",
+          "The Padauari River is on the left bank of the Negro, opposite the parish of Bararoá."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "In mid-1839, the Expedition to the Amazon, commanded by Lieutenant Colonel Joaquim José Luiz de Souza, was stationed at the town of Tapajoz with a force including a brig, four schooners, a cutter, two gunboats, riflemen, artillery, and National Guards from both Amazon districts. The stronghold at Icuipiranga was dismantled by Father Antonio Manoel Sanches de Brito before the expedition’s arrival, forcing rebels to retreat to the headwaters of the Maués River, which connected to both Tapajoz and the Amazon. The town of Lusea was fortified to block rebel movements from the Amazon, while forces from Tapajoz conducted continuous operations. On January 30, 1839, a campaign to Maranhão Grande led by the 4th Navy Lieutenant further weakened the rebels. The leader Bararoá, confirmed by the Government of Pará, became increasingly oppressive, causing failed uprisings and forcing prominent families into hiding. Military Commanders were established throughout the Province, including in Manaus, to administer and defend the settlements.",
+      "details": {
+        "facts": [
+          "The command of the leader Bararoá, confirmed a second time by the Government of Pará, had become somewhat oppressive.",
+          "Bararoá's oppressive command resulted in some failed uprisings.",
+          "Due to Bararoá's command, some individuals from the principal families were forced to go into hiding."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "The Senate of the Chamber of Barcellos was transferred to Barra, and the Military Command of Rio Negro was created. The town of Barra was elevated to the town of Manaus, and the Mission of Maués became the town of Lusea; several towns, including Bararoá, Itarendáua, Itacoatiara, Saracá, Araretama, St. Paul, and St. Joseph, were reduced to parishes. Manaus was invaded by the Gabanos and later restored, with military actions centered at Bararoá and an encampment on the Maués River. The English flag was hoisted at Fort St. Joaquim by Ghamburg and Pedro Ayres, and a Protestant Mission was established at Pirarára, which was later invaded by the English. The mouth of the Nhamundá River, the easternmost point of the District of Upper Amazonas, is at latitude 2° 16' S and longitude 21° 50' W, 178 leagues from Cape North, with settlements and rivers such as Parintins Mountain, Tupinambarana River, Andirá River, Maçari, Marari, Maué-miri, Maué-açu, Lusea, Cur",
+      "details": {
+        "facts": [
+          "Bararoá was lowered in category from a town to a parish in the year 18 (likely 1818).",
+          "There were military actions and a Military Command of Bararoá in the year 15 (likely 1815).",
+          "The death of Bararoá occurred in the year 14 (likely 1814)."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "São José de Iama-IiOaiga was a settlement on the right bank of the Rio Negro, located between the Xibarú River and the Anhori Stream, and between Bararoá and Santa Izabel, 127 leagues above the confluence of the Rio Negro and 205 leagues from the mouth of the Jamundá. It was founded by Principal Dari, who separated from Bararoá, and incorporated the Auacihidá Village, three leagues further upstream. In 1757, a rebellion led to the destruction by fire of São José de Iama-IiOaiga, Bararoá, and Caboquéna, triggered by an Indigenous man’s anger at a missionary. The inhabitants, from the Manáos, Banibas, and Barés tribes, cultivated manioc, fruits, rice, coffee, and cotton, and produced cloth, hammocks, ropes, pitch, salsaparrilha, and puxiri. The settlement belonged to the district of Mariuá, and its people spoke the Tupica language, which served as the general lingua franca throughout the Province of Pará and much of Brazil.",
+      "details": {
+        "facts": [
+          "São José de Iama-IiOaiga is a settlement on the right bank of the Rio Negro, between the Xibarú River and the Anhori Stream, and between Bararoá and Santa Izabel."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The river connecting the Orinoco and Amazon systems crosses the watershed and runs about 180 miles from the Orinoco to the Rio Negro, with a width three times that of the Seine at Paris, according to Humboldt. Its whitish waters contrast with the dark Rio Negro. The Rio Branco or Parime, originating in the southeastern mountains of Guyana, floods its valley during high water and is likely the Parime Lake depicted on older maps, also known as El Dorado or Parana Pitinga (White Lake). To the south, branches from this floodplain unite and flow to the Rio Negro. On the right bank of the Rio Negro are the Icanna, Uaupes (Guaupes), Xie, and Guainia rivers, with the Uaupes possibly connected to the Guaviare (Auiyari) via the Canal of Cabuquena, as reported by Monteiro and Martius. The Parime Lake is now believed to be a seasonal floodplain lake in the Branco valley, not the mythical Golden Lake.",
+      "details": {
+        "facts": [
+          "On the right bank of the Rio Negro flow the Icanna, the Uaupes (Guaupes), the Xie, and the Guainia rivers."
+        ],
+        "year": 1839,
+        "doc_name": "Der Amazonas und seine confluenten, Jäger, Friedrich Wilhelm"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Içá River, within the District of Alto-Amazonas, is located at latitude 5° 00' S and longitude 33° 23' W, 282 leagues from the mouth of the Inhamundá, running 80° SE. Settlements and streams along its banks include Boa-Vista Settlement, Carmo Tapera, Mamoré, Acheti, and several named streams such as Hiucurapá, Puruitá, and Utué. The Negro River in the same district is at latitude 3° 09' S, longitude 25° 17' W, 78 leagues from the mouth of the Nhamundá River, with Manaos City and Manaos Igarapé on the left bank. Numerous settlements, parishes, and streams are listed along both rivers, including Jahú Parish, Santa Isabel Parish, Loreto Settlement, Castanheira Settlement, and Maracabi Settlement. Key tributaries and features include the Branco River, Padauari River, and various smaller streams and settlements, with precise coordinates marking significant locations such as latitude 00° 08' S, longitude 31° 15' W, and latitude 00° 9' S, longitude 31",
+      "details": {
+        "facts": [
+          "Within the District of Alto-Amazonas, the right bank of the Negro River includes: Jauanari Canal, Uariau Canal, Xiboréna Stream, Cumarú, Igreginhas Settlement, Pedreira Jahú, Jahú Parish, Jamuhi River, Unini River, Itarendáua River, Aracari Parish, Caburi Parish, Cumaru River, Tapera, Uatanari, Maritiá, Villa, Baruri River, Maranacoá River, Cunimarú River, Quiuini River, Aratahi Stream, Quemeucuri Stream, Caboquena, Uarirá Parish, Bararoá River, Lama-Longa Settlement, Xibarú Stream, Matiqiie Stream, Mabbá Stream, Santa Isabel Parish, Hiurubaxi River, Boa-Vista Settlement, Ajuána River, Inuixi Stream, Xiuará River, Loreto Settlement, Maracaby, Maiuixi River, Ituiá Stream, Castanheira Settlement, Camundé Tapera, Meriá River, Ciiriuriáu River, Cojiibi, Furnas, Curiana Stream, Crocobi, Cubati River, Cuniabí River, Caldeirão."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "After crossing into Brazil, settlements increased along the Upper Rio Negro. The main rapids in this area are the San Gabriel rapids, near the village of San Gabriel, which is situated at the foot of these rapids. San Gabriel contains the ruins of an old fort on a hill, serving as a post for a commandant and soldiers, and is surrounded by high hills. The village is described as dilapidated, with scattered huts, but supports about forty head of cattle and a few sheep grazing on the heights. The riverbank above the rapids is steep, and the waters of the Upper Rio Negro are notably cool.",
+      "details": {
+        "facts": [
+          "The mouth of the chief tributary of the Upper Rio Negro, the Uanpes, is on the right bank."
+        ],
+        "year": 1872,
+        "doc_name": "Rough notes of a journey through the wilderness, from Trinidad to Pará, Henry Alexander"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Quiairi is the indigenous name for the Rio Negro. Quilania refers to native Indians of the Solimões, living on the Juruá River. Quitiriá is a tributary of the Solimões, located above the Içá River in the district of Maturá, between the Xomána and Suacá streams. The Repiumiri River in Guiana rises in the fields of the Branco River at latitude 2° 35' N, longitude 34° 09' W, flows northwest toward the Pacaraima mountains, then north to join the Essequibo at latitude 3° 05' N. The Rio Negro district of the Upper Amazon, defined by the confluence of the Rio Negro to the east, Marabitanas frontier to the west (163 leagues), Guiana mountain range to the north, and lakes between the Japurá and Rio Negro to the south (143 leagues), included the City of Manaus, the town of Mariuá, several parishes, and 27 settlements, with a population of 19,953 and 2,277 households. The Captaincy of St. Joseph of Rio Negro was created by decree on July 11, 1757, and dissolved",
+      "details": {
+        "facts": [
+          "Quinihuit: River of Guiana, on the right bank of the Negro, in the district of Mariuá, between the Cunimaru River and the Ara-tahi stream."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Içá River, also known as the Putumayo at its source in the Pasto mountains of Ecuador, flows west to east for 220 leagues, carrying gold and connecting with the Japurá River via two channels near the Peridá and Pureus waterfalls. Its banks, inhabited by Cacatapúia, Içá, Paiába, Passé, Tumbíra, and Xomana nations, saw a Spanish military post at its mouth during boundary negotiations, abandoned in 1766; São Fernando settlement was founded there in 1768, followed by Boa-Vista. The Ycamiába River, in the district of Iparaná, Guiana, is navigable for 40–50 leagues and inhabited by Baníbas and Uerequénas, with São Miguel de Iparaná at its mouth and the Tunuhi mountain range extending to Ixié. The Islakisie River, on the left bank of the Uraricoera, had a Spanish military post at its mouth in 1776, which was captured by the Portuguese, with its artillery now at Fort São Joaquim. The Icapó stream, on the Solimões' right bank, was the site of a Pacúnas",
+      "details": {
+        "facts": [
+          "Ycamiába is a river of Guiana, on the right bank of the Rio Negro, between the Uaupez and Ixié, in the district of Iparaná, 213 leagues above the confluence with the Rio Negro, and 291 from the mouth of the Jamundá, 4° S. Latitude, 33° 28' W. Longitude from Olinda."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The region between the Madeira and Urariá rivers is divided into three sections: 20 leagues from Madeira to Furo de Maués, 21 leagues to dos Ramos, and 17 leagues to the mouth of the Urariá. The upper part, between the Madeira and Furo de Tupinambaraná (12 leagues above its mouth), includes Lake Maçurani and is noted for its fertility. Cachoeira, on the Rio Negro at the mouth of the Cauaburi River (Lat. 00° 08' S., Long. 31° 15' W. from Olinda), is 17 leagues above Santa Izabel and marks the boundary between the upper and lower Rio Negro; navigation becomes difficult here due to waterfalls. The Maraeam village of Curanáos, on the Rio Negro, had 100 inhabitants in 10 households, who fished, farmed, wove nets, and extracted drugs like puxiri and hinidão. In 1703, the Marapitána nation on the Rio Negro was forcibly relocated by Spaniards to settlements of St. Charles and St. Augustine near the Casiquiare.",
+      "details": {
+        "facts": [
+          "Maranacoá: River of Guiana, on the right bank of the Negro, in the district of Mariuá, between the Bariiri and Cunimarií rivers, inhabited by the Maranacoacénas."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Tacutú River is an affluent of the Essequibo, rising in the Pacaraima mountains and receiving the Pirarára on its left bank. The Majapi River, inhabited by the Arinas, lies on the left bank of the Uraricoéra between Parimá and Caiacaia in Guiana. The Manaca-purá Lake, on the left bank of the Solimões below Codajaz and 18 leagues above the Rio Negro confluence, is notable for turtle butter and Pirarucu fishing and has emerging rural settlements. The llaiiãois were a dominant Indigenous nation on the Rio Negro and its tributaries, between the Uarirá and Xiuará, and gave their name to the capital city of Upper Amazon; they practiced anthropophagy and held Manichaean beliefs. The city of Afaiiáoii (Our Lady of the Conception of), former capital of the Province of Rio Negro, is located at 3° 03' S, 25° 17' W from Olinda, three leagues above the Rio Negro confluence and 81 from the mouth of the Jamundá, and is divided into the neighborhoods of São Vicente, Matriz, and Remédios.",
+      "details": {
+        "facts": [
+          "The city of Afaiiáoii (Our Lady of the Conception of) is located on the northern bank of the Rio Negro, three leagues above its confluence."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    }
+  ],
+  "agent_thoughts": "The entity_hybrid on Bararoá yielded several concrete geographical clues: it was located on the right bank of the Rio Negro, 21 leagues above the Jamundá River (likely a colonial variant for a river in the lower Rio Negro), and near the Padauari River. It was also referenced as a parish that later became the town of Thomar (renamed in 1758, indicating a historical settlement transition). These clues suggest a specific section on the Rio Negro, above the confluence with the Jamundá, and just downstream from the mouth of the Padauari. I have already extracted several candidate clues, but to get further context and perhaps additional supporting details—such as how distances were measured, neighboring settlements, or historical travel descriptions—I'm launching a vector_search with the phrase 'right bank of the Rio Negro', which matches the most concrete physical clue. If this yields unique corroboration or indirect location evidence, I’ll extract it. Otherwise, next steps may involve vector_search with other spatial or historical clues such as 'Padauari River' or the distance above Jamundá. My reasoning is that focusing on the specific riverbank should surface more precise locational narratives or map references from internal sources.",
+  "previous_hypotheses": []
+}

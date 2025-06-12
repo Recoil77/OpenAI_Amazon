@@ -1,7 +1,7 @@
 from pathlib import Path
 from PIL import Image
 
-number = "47"
+number = "54"
 
 # === Настройки ===
 INPUT_DIR = Path(f"docs/{number}/jpeg_")

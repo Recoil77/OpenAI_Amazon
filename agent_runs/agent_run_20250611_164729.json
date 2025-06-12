@@ -1,0 +1,1026 @@
+{
+  "user_query": "Find all clues related to the geographical location of the object or place named Bararoá.",
+  "final_hypothesis": "Bararoá/Thomar was sited on the right bank of the Rio Negro near the mouth of the Padauari (likely an orthographic variant of a modern Amazonian tributary)—identifying the precise modern river is key to reconstructing its exact historic location.",
+  "supporting_evidence": [
+    {
+      "source": "",
+      "value": "",
+      "details": {
+        "clues": [
+          "Bararoá (Parish of Our Lady of the Rosary of) was located on the right bank of the Rio Negro, 2021 leagues above the mouth of the Jamundá River, near the Padauari River, and was destroyed in the rebellion of 1757.",
+          "It was made a town named Thomar in 1758 by Governor Francisco Xavier de Mendonça Furtado, later losing this status.",
+          "Population of 1,500 in 160 households descended from the Manaos, Bares, Passés, and Ajuanas nations; area was a trading post between Upper and Lower Rio Negro.",
+          "São José de Iama-IiOaiga located between Bararoá and Santa Izabel, near the Xibarú River and Anhori Stream, also on right bank, 127 leagues above Rio Negro confluence and 205 leagues from mouth of Jamundá; destroyed in the 1757 rebellion along with Bararoá and Caboquéna.",
+          "Rosary was the patroness for Bararoá on the Rio Negro.",
+          "Grouped with settlements destroyed in 1757 rebellion; clustered with São José de Iama-IiOaiga and Caboquéna.",
+          "Settlements in question belonged to the district of Mariuá."
+        ]
+      },
+      "meta": {
+        "sources": [
+          "vector_search: Bararoá river settlement location",
+          "vector_search: Parish of Our Lady of the Rosary Bararoá",
+          "vector_search: Padauari River near Bararoá",
+          "vector_search: right bank of the Rio Negro near Padauari",
+          "vector_search: Thomar town Rio Negro Padauari",
+          "vector_search: right bank of Rio Negro above Jamundá"
+        ],
+        "failed_attempts": []
+      }
+    }
+  ],
+  "reasoning_log": [
+    {
+      "iteration": 0,
+      "action": "entity_search",
+      "query": "Bararoá, Bararoa, Bararoás, Bararóa",
+      "result_count": 4
+    },
+    {
+      "iteration": 1,
+      "action": "vector_search",
+      "query": "Bararoá river settlement location",
+      "result_count": 6
+    },
+    {
+      "iteration": 2,
+      "action": "vector_search",
+      "query": "Parish of Our Lady of the Rosary Bararoá",
+      "result_count": 3
+    },
+    {
+      "iteration": 3,
+      "action": "vector_search",
+      "query": "Padauari River near Bararoá",
+      "result_count": 4
+    },
+    {
+      "iteration": 4,
+      "action": "vector_search",
+      "query": "right bank of the Rio Negro near Padauari",
+      "result_count": 7
+    },
+    {
+      "iteration": 5,
+      "action": "vector_search",
+      "query": "Thomar town Rio Negro Padauari",
+      "result_count": 1
+    },
+    {
+      "iteration": 6,
+      "action": "vector_search",
+      "query": "town of Thomar near Padauari",
+      "result_count": 1
+    },
+    {
+      "iteration": 7,
+      "action": "vector_search",
+      "query": "right bank of Rio Negro above Jamundá",
+      "result_count": 8
+    },
+    {
+      "iteration": 8,
+      "action": "vector_search",
+      "query": "right bank Rio Negro near Padauari",
+      "result_count": 6
+    },
+    {
+      "iteration": 9,
+      "action": "entity_hybrid",
+      "query": "Padauari",
+      "result_count": 5
+    },
+    {
+      "iteration": 10,
+      "action": "entity_hybrid",
+      "query": "Padauari",
+      "result_count": 5
+    },
+    {
+      "iteration": 11,
+      "action": "entity_hybrid",
+      "query": "Padauari",
+      "result_count": 5
+    },
+    {
+      "iteration": 12,
+      "action": "entity_hybrid",
+      "query": "Padauari",
+      "result_count": 5
+    },
+    {
+      "iteration": 13,
+      "action": "entity_search",
+      "query": "Padauari, Rio Padauari, Padawary",
+      "result_count": 3
+    },
+    {
+      "iteration": 14,
+      "action": "entity_search",
+      "query": "Padauari, Padauary, Padauarí, Rio Padauari, Rio Padauary",
+      "result_count": 5
+    },
+    {
+      "iteration": 15,
+      "action": "entity_search",
+      "query": "Padauari, Padauary, Padahuari, Paduari, Patauari",
+      "result_count": 5
+    }
+  ],
+  "context": [
+    {
+      "source": "entity_search",
+      "value": "Bararoá",
+      "details": {
+        "count": 56
+      },
+      "meta": {
+        "mode": "substring"
+      }
+    },
+    {
+      "source": "entity_search",
+      "value": "Bararoa",
+      "details": {
+        "count": 2
+      },
+      "meta": {
+        "mode": "substring"
+      }
+    },
+    {
+      "source": "entity_search",
+      "value": "Bararoás",
+      "details": {
+        "count": 0
+      },
+      "meta": {
+        "mode": "substring"
+      }
+    },
+    {
+      "source": "entity_search",
+      "value": "Bararóa",
+      "details": {
+        "count": 1
+      },
+      "meta": {
+        "mode": "substring"
+      }
+    },
+    {
+      "source": "vector_search",
+      "value": "The Baeta and BaiMri were Indigenous nations of the Solimões, with the Baeta on the river of the same name and the BaiMri on the Juruá River, alongside the Bailractiâ. The BaMi5)a nation of Guiana lived on the Içána and Ixié rivers, giving rise to populations in Lama-Longa, Manaos, Guia, Santa Anna, S. Filippo, Mabbé, and S. Marcellino. Bararoá (Parish of Our Lady of the Rosary of) was located on the right bank of the Rio Negro, 2021 leagues above the mouth of the Jamundá River, near the Padauari River, and was destroyed in the rebellion of 1757. It was made a town named Thomar in 1758 by Governor Francisco Xavier de Mendonça Furtado, later losing this status. Bararoá's population of 1,500 in 160 households descended from the Manaos, Bares, Passés, and Ajuanas nations, and the area served as a key trading post between the Upper and Lower Rio Negro.",
+      "details": {
+        "facts": [
+          "Bararoá (Parish of Our Lady of the Rosary of) is located on the right bank of the Rio Negro, 2021 leagues above the mouth of the Jamundá River, under parallel 00° 16' S., crossed by the meridian 29° 33' W. of Olinda.",
+          "Bararoá is situated in front of the Padauari River and near the Uarirá, close to the waterfalls of the Rio Negro.",
+          "The first location of Bararoá was on the southern bank near the mouth of the Xjuará River, in front of Timoni Island, before being moved to its current site."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "Barra do Rio Negro is located on the east bank of the Rio Negro, about twelve miles above its junction with the Amazon River. The settlement stands on uneven ground approximately thirty feet above high-water level, with two small streams crossed by wooden bridges. The population in the mid-19th century was five to six thousand, primarily Indians and people of mixed Portuguese and Indigenous descent, with little to no pure European lineage. The city served as a trade center for Brazil nuts, sarsaparilla, and fish, and was the headquarters for commerce with surrounding Indian tribes. The remains of the original fort, or \"Barra,\" consist of a fragment of wall and a mound of earth, and there are two churches, both considered inferior to that of Santarem.",
+      "details": {
+        "facts": [
+          "The city of Barra do Rio Negro is situated on the east bank of that river, about twelve miles above its junction with the Amazon."
+        ],
+        "year": 1858,
+        "doc_name": "Travels on the Amazon, Wallace, Alfred Russel"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "Our Lady of the Conception was the patroness of Manaus, Villa de Mariuá, Parish of Caboquena on the Rio Negro, Villa de Lusea on the Maués, and settlements on Lake Canomá and the Rio Branco between Santa Maria and St. Philip. Other patronesses included Our Lady of Guadalupe (Fonte-Boa), Candlemas (on the Rio Negro), Loreto (on the Rio Negro), Nazareth (Curiana, Rio Negro), Mount Carmel (Parish of Canomá), Rosary (Itacoatiara on the Amazon, Parauari on the Tefé, Bararoá on the Rio Negro), Health (Boa Vista, Rio Negro), and Help (Capella and Matari). Omágua was the primitive name of the Cambeba nation and also referred to islands on the Solimões River above the Jutahi River. The Pacaraima mountain range in Guiana, at latitude 4° 00' N and longitude 25° 05' to 29° 05' W of Olinda, marks the boundary between Brazil, Venezuela, and European Guiana, and is the source of tributaries forming the Rio Branco. Indigenous nations mentioned include Orinaiáno (",
+      "details": {
+        "facts": [
+          "Bararoá is a parish on the Rio Negro.",
+          "The parish of Bararoá is opposite the Padauari River on the left bank of the Rio Negro."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "São José de Iama-IiOaiga was a settlement on the right bank of the Rio Negro, between the Xibarú River and the Anhori Stream, and between Bararoá and Santa Izabel, located 127 leagues above the confluence of the Rio Negro and 205 leagues from the mouth of the Jamundá. It was founded by Principal Dari, who named it after himself when he separated from Bararoá, and incorporated the Auacihidá Village, three leagues further upstream. In 1757, a rebellion led to the destruction by fire of São José de Iama-IiOaiga, Bararoá, and Caboquéna, triggered by an Indigenous man’s resentment toward a missionary. The inhabitants, from the Manáos, Banibas, and Barés tribes, cultivated manioc, fruits, rice, coffee, and cotton, and produced cloth, hammocks, ropes, pitch, salsaparrilha, and puxiri. The settlement belonged to the district of Mariuá, and the Tupica language served as the universal language among Indigenous peoples throughout the Province of Pará and much of Brazil.",
+      "details": {
+        "facts": [
+          "Bararoá is a settlement located between the Xibarú River and the Anhori Stream, and between Bararoá and Santa Izabel, on the right bank of the Rio Negro, 127 leagues above the confluence of the Rio Negro, and 205 from the mouth of the Jamundá."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The settlements of Bararoá, Caiçara, Coari, Cumaru, Fonte-Boa, Manaós, Maripi, Mariuá, Parauari, São Fernando, and Yauari originated from the Baníbas, Manáos, and Barés peoples. The Patlas River is located on the right bank of the Solimões in the district of Maturá, between the Yauivira and Maturacupá streams. The Payilia, Periatis, Peridá, and Peienini are indigenous nations of the Solimões, primarily on the Japurá and Içá rivers, with the Periatis noted for adorning their ears with toucan feathers. The Pucatapaxiri settlement was the first location of the current parish of Maturá, on the right bank of the Solimões, between the Aruti and Maturá streams. In 1842, the English attempted to invade the Pirarara Lake region on the southern slopes of the Rio Branco range, which was declared neutral pending a definitive agreement.",
+      "details": {
+        "facts": [
+          "The settlement of Bararoá comes from the Baníbas, Manáos, and Barés."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "Abaconi was founded at the mouth of the Furo-clos-Tupinambaranas and became a city in 1759. Due to mistreatment by the Mûros, the city of Serpa was relocated to an island, where its inhabitants cultivated cacao, sarsaparilla, coffee, clove, and cotton. Near Serpa, at Itacoatiara, the Amazon Steamship Company established an agricultural and industrial colony of Chinese and Africans, which ultimately failed, leaving only a sawmill and tile factory. The district of Barcellos or Mariûa, formerly part of Rio-Negro, includes the city of Barcellos or Mariûa and several parishes, with a population of 10,000–12,000. Barcellos, located on the right bank of the Rio-Negro between the Uatanari and Baruri rivers, was founded by chief Manâos-Camandri for the Carmelite mission, became a city in 1758, served as the capital of the captaincy of Rio-Negro, and hosted Spanish-Portuguese boundary commissions in 1754 and 1759.",
+      "details": {
+        "facts": [
+          "Bararoa is a parish in the district of Barcellos or Mariúa, which is part of the region above the mouth of the Rio-Branco on the Rio-Negro."
+        ],
+        "year": 1861,
+        "doc_name": "Voyage aux provinces brésiliennes du Pará et des Amazones en 1860, précédé d'une rapide coup d'oeil, sur le littoral du Brésil, Belmar, A. de."
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Baeta, BaiMri, and Bailractiâ were Indigenous nations of the Solimões, with the Baeta located on the river of the same name, and BaiMri and Bailractiâ on the Juruá River. The BaMi5)a nation of Guiana inhabited the Içána and Ixié rivers, giving rise to settlements such as Lama-Longa, Manaos, Guia, Santa Anna, S. Filippo, Mabbé, and S. Marcellino. Bararoá, originally on the southern bank of the Rio Negro near the Xjuará River and later relocated in front of the Padauari River, was destroyed in the 1757 rebellion and became the town of Thomar in 1758 under Governor Francisco Xavier de Mendonça Furtado. Bararoá served as a major trading post between the Upper and Lower Rio Negro, with a population of 1,500 in 160 households descended from the Manaos, Bares, Passés, and Ajuanas nations, engaged in agriculture, weaving, and extraction of local resources. The Bares nation, on the Japurá River, along with the Manaos and Baníba, are ancestors of prominent white families in settlements",
+      "details": {
+        "facts": [
+          "Parish of Our Lady of the Rosary of Bararoá is located on the right bank of the Rio Negro, 2021 leagues above the mouth of the Jamundá River, under parallel 00° 16' S., crossed by the meridian 29° 33' W. of Olinda.",
+          "Its first location was on the southern bank near the mouth of the Xjuará River, in front of Timoni Island, from where it was moved to the current site.",
+          "The parish was completely reduced to ashes by the rebellion of 1757."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "Our Lady of the Conception was the patroness of Manaus, Villa de Mariuá, Parish of Caboquena on the Rio Negro, Villa de Lusea on the Maués, and settlements on Lake Canomá and the Rio Branco between Santa Maria and St. Philip. Other Marian patronages included Our Lady of Guadalupe (Fonte-Boa), Candlemas (on the Rio Negro), Loreto (on the Rio Negro), Nazareth (Curiana, Rio Negro), Mount Carmel (Parish of Canomá), Rosary (Itacoatiara on the Amazon, Parauari on the Tefé, Bararoá on the Rio Negro), Health (Boa Vista, Rio Negro), and Help (Capella, Rio Negro, and Matari on the lake of the same name). The Omágua, also called Cambeba, inhabited islands on the Solimões River above the Jutahi River. The Orinaiáno nation lived on the Padauari River in Guiana, and the Oripãs, a Mundurucu nation, lived on the Madeira River, ancestral to Araretama. The Pacaraima mountain range in Guiana (Latitude 4° 00' N, Longitude 25° 05",
+      "details": {
+        "facts": [
+          "Our Lady of the Rosary is the Patroness of the parish of Bararoá, on the Rio Negro."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "Abaconi was founded at the mouth of the Furo-clos-Tupinambaranas and became a city in 1759. Due to mistreatment by the Mûros, the city of Serpa was relocated to an island, where its inhabitants cultivated cacao, sarsaparilla, coffee, clove, and cotton. Near Serpa, at Itacoatiara, the Amazon Steamship Company established an agricultural and industrial colony of Chinese and Africans, which ultimately failed, leaving only a sawmill and tile factory. The district of Barcellos or Mariûa, formerly part of Rio-Negro, includes the city of Barcellos or Mariûa and several parishes, with a population of 10,000–12,000. Barcellos, located on the right bank of the Rio-Negro between the Uatanari and Baruri rivers (00° 58' S, 28° 23' W of Olinda), was founded through the Carmelite mission at the request of chief Manâos-Camandri and became the capital of the captaincy of Rio-Negro in 1758, serving as a key site for Spanish-Portuguese boundary commissions in 1754, 1759, and",
+      "details": {
+        "facts": [
+          "The district of Barcellos or Mariúa includes the parish of Bararoa."
+        ],
+        "year": 1861,
+        "doc_name": "Voyage aux provinces brésiliennes du Pará et des Amazones en 1860, précédé d'une rapide coup d'oeil, sur le littoral du Brésil, Belmar, A. de."
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "Our Lady of the Conception was the patroness of Manaus, Villa de Mariuá, Parish of Caboquena on the Rio Negro, Villa de Lusea on the Maués, and settlements on Lake Canomá and the Rio Branco between Santa Maria and St. Philip. Other patronesses included Our Lady of Guadalupe (Fonte-Boa), Our Lady of the Candlemas (on the Rio Negro), Our Lady of Loreto (on the Rio Negro), Our Lady of Nazareth (Curiana, on the Rio Negro), Our Lady of Mount Carmel (Parish of Canomá), Our Lady of the Rosary (Itacoatiara on the Amazon, Parauari on the Tefé, Bararoá on the Rio Negro), Our Lady of Health (Boa Vista, on the Rio Negro), and Our Lady of Help (Capella and Matari). The Omágua, also known as Cambeba, inhabited islands on the Solimões River above the Jutahi River. The Pacaraima mountain range in Guiana, at latitude 4° 00' N and longitude 25° 05' to 29° 05' W of Olinda, marks the boundary between Brazil, Venezuela, and European Guiana",
+      "details": {
+        "facts": [
+          "Padauari is a river of Guiana, on the left bank of the Negro, opposite the parish of Bararoá.",
+          "The Padauari River is inhabited by Aanás, Guaribas, and Orumanãos.",
+          "The Padauari River rises in the Maduacáxas mountains, which intercept the Orinoco and Rio Negro."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Baeta, BaiMri, and Bailractiâ were Indigenous nations of the Solimões, with the Baeta on the Baetas River and the BaiMri and Bailractiâ on the Juruá River. The Baetas River, on the left bank of the Madeira between lakes Saraimo and Maruimtíba, had a native village at its mouth and was near the fourth location of the parish of Araretama. The Bararoá parish (Our Lady of the Rosary), on the right bank of the Rio Negro, 2021 leagues above the mouth of the Jamundá River at 00° 16' S, was originally near the Xjuará River and Timoni Island, later moved and destroyed in the 1757 rebellion. Bararoá was made a town named Thomar in 1758 by Governor Francisco Xavier de Mendonça Furtado, later losing this status. Its population of 1,500 in 160 households descended from the Manaos, Bares, Passés, and Ajuanas nations, engaging in agriculture, weaving, and extraction industries, and the settlement served as a major trading post between the Upper and Lower Rio Negro.",
+      "details": {
+        "facts": [
+          "Bararoá is situated on the right bank of the Rio Negro, in front of the Padauari River.",
+          "Bararoá's advantageous location in front of the Padauari River makes it suitable for a large settlement and a trading post between the Upper and Lower Rio Negro.",
+          "The Padauari River is a notable geographic feature near Bararoá, through which many lakes and rivers of Guiana flow."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "Aiiamaplag is a tributary of the Solimões River, located on its right bank immediately below Fonte-Boa. The Anawillijanasii are islands on the Rio Negro near the Aneuene River, situated in an upper bay 4 leagues wide and 26 leagues above the confluence of the Rio Negro. The Aiitlatiaris mountain range lies in Guiana on the right bank of the Branco River, eight leagues from the waterfall of St. Philip. The Apapori River in Guiana, on the left bank of the Japurá, is notable for its rocky bed and several waterfalls (Hiá, Miri, Cupati, Furna), and was historically significant as a contested boundary between Spanish and Portuguese possessions, with demarcation halted until Colombian and Brazilian independence. Several indigenous nations, including the AEidirá, Aueacfni, Aniáiias, Anilia, Anilhas, Anicoré, and Apeiiaris, are associated with specific rivers and regions, often giving their names to local settlements or parishes.",
+      "details": {
+        "facts": [
+          "Padauari River is in the district of Bararuá."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Japurá River lies to the south, with the Branco, Padauari, and Cauaburi rivers to the north, extending to the Guiana mountains. The region’s forests are inhabited by 30 to 40 Indigenous nations, including the Manáos, Cambébas (on the Solimões), Aráras (on the Madeira), and Mundurucús (on the Tapajoz). In 1637, Pedro Teixeira discovered the mouth of the Rio Negro and interacted with the Uaranacoacenas; in 1669, Pedro da Costa Favella founded the first settlement on the Rio Negro with Tarumá and Aruaqui peoples near Aiurim, later moved to Jahú. The Fortress of St. Joseph of the Barra do Rio Negro was established in 1670 by Francisco da Motta Falcão. In 1725, expeditions confirmed the hydrological connection between the Orinoco and Rio Negro via the Casiquiare, Iniridá, Parauá, Paçavicá, and Tumbú rivers. In 1744, Francisco Xavier de Moraes and Jesuit Manoel Romão met at Ávida (Marabitanas), confirming that the Casiquiare",
+      "details": {
+        "facts": [
+          "The Padauari River is located on the northern side of the Japurá River, near the slopes of the Guiana mountains."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Baeta, BaiMri, and Bailractiâ were indigenous nations of the Solimões, with the BaiMri and Bailractiâ located on the Juruá River. The Baetas River, on the left bank of the Madeira between lakes Saraimo and Maruimtíba, had a native village at its mouth and was near the fourth site of the parish of Araretama. The Bararoá parish (Our Lady of the Rosary), on the right bank of the Rio Negro, 2021 leagues above the Jamundá River's mouth, was originally near the Xjuará River and Timoni Island but was relocated and destroyed in the 1757 rebellion. Bararoá was made a town named Thomar in 1758 by Governor Francisco Xavier de Mendonça Furtado and served as a key trading post between Upper and Lower Rio Negro. Its population of 1,500 in 160 households descended from the Manaos, Bares, Passés, and Ajuanas, cultivating crops and producing cotton goods, hammocks, and ropes; the area was notable for its strategic location and economic activities.",
+      "details": {
+        "facts": [
+          "Bararoá (Parish of Our Lady of the Rosary of) is on the right bank of the Rio Negro, in front of the Padauari River.",
+          "Bararoá is situated on elevated, regular, extensive land with abundant water, suitable for a large settlement, favored by its advantageous location in front of the Padauari River."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "In 1841, the settlement of Santa Maria was ordered to be incorporated. The Araruá were an Indigenous nation of the Solimões, living on the Japurá River, known for adorning their ears with toucan feathers; the population of Caiçara descends from them. The Aranstri and Aruanás were Indigenous nations of the Solimões on the Juruá River, while the Aricaitone, Ariauéna, and Aruaquis lived along the Madeira River and its tributaries. The Aruaquis, together with the Turumá, founded the first settlement of the Rio Negro near Aiurim and were noted as warlike and cannibalistic. Several riverbanks, islands, and canals are named, including Aratal (right bank of the Rio Negro), Arattapiáva (right bank of the Madeira above Araxiá), Araxiá (105 leagues above the mouth of the Madeira), and the Aratiana Canal (left bank of the Solimões above Coari).",
+      "details": {
+        "facts": [
+          "Aratal: Riverbank of Guiana, on the right bank of the Rio Negro, below the parish of Caboquena, between the Quiuini River and the Quemeucuri Riverbank.",
+          "Ataili: Seventeen lakes of Guiana, which flow through the river of the same name into the Padauari."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "Leopoldinia Piassaba, a palm species used for fibre, is found abundantly in the Upper Rio Negro region above Sao Carlos, particularly along the rivers Padauari, Jaha, and Daraha (north bank), and Marie and Xie (south bank), but not on the main Rio Negro or on rivers Maravihd, Cababuris, Curicuriari, Uaupes, and Isanna. The fibre is harvested by large groups of locals and is widely used for making cables and ropes for Amazonian canoes and vessels. The palm grows in moist areas, reaches 20–30 feet in height, and has a stem covered in coarse, fibrous material. The village of Tomo and the Atabapo River region are noted as key localities for this palm. Alexander von Humboldt referred to the plant as Chiquichiqui, though he did not observe it directly.",
+      "details": {
+        "facts": [
+          "From the mouth of the Padauari (a branch of the Rio Negro about five hundred miles above Barra), the palm is found on several rivers, but never on the banks of the main stream itself.",
+          "These are the rivers Padauari, Jaha, and Daraha on the north bank of the Rio Negro, and the Marie and Xie on the south.",
+          "The palm (Leopoldinia Piassaba) grows in moist places near the Padauari, Jaha, and Daraha rivers on the north bank of the Rio Negro."
+        ],
+        "year": 1858,
+        "doc_name": "Travels on the Amazon, Wallace, Alfred Russel"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "São José de Iama-IiOaiga was a settlement on the right bank of the Rio Negro, between the Xibarú River and the Anhori Stream, and between Bararoá and Santa Izabel, located 127 leagues above the confluence of the Rio Negro and 205 leagues from the mouth of the Jamundá. It was founded by Principal Dari, who separated from Bararoá, and incorporated the Auacihidá Village, three leagues upstream. In 1757, a rebellion led to the destruction by fire of São José de Iama-IiOaiga, Bararoá, and Caboquéna. The inhabitants, from the Manáos, Banibas, and Barés tribes, cultivated manioc, fruits, rice, coffee, and cotton, and produced cloth, hammocks, ropes, pitch, salsaparrilha, and puxiri. The settlement belonged to the district of Mariuá, and its people spoke the Tupica language, which served as a lingua franca throughout the Province of Pará and much of Brazil.",
+      "details": {
+        "facts": [
+          "São José de Iama-IiOaiga is a settlement on the right bank of the Rio Negro.",
+          "The settlement is located between the Xibarú River and the Anhori Stream, and between Bararoá and Santa Izabel.",
+          "São José de Iama-IiOaiga is 127 leagues above the confluence of the Rio Negro."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Japurá River lies to the south, with the Branco, Padauari, and Cauaburi rivers to the north, reaching the Guiana mountains. The forests between these rivers and lakes are inhabited by 30 to 40 Indigenous nations, including the Manáos, Cambébas (on the Solimões), Aráras (on the Madeira), and Mundurucús (on the Tapajoz). In 1637, Pedro Teixeira discovered the mouth of the Rio Negro and contacted the Uaranacoacenas; in 1669, Pedro da Costa Favella founded the first settlement on the Rio Negro with Tarumá and Aruaqui peoples near Aiurim, later moved to Jahú. The Fortress of St. Joseph of the Barra do Rio Negro was founded in 1670 by Francisco da Motta Falcão, and in 1693, Guilherme Valente founded the village of Aracari with Caburicenas, Carahiahís, and Manáos. The Carmelites established a mission among the Uaranacoacenas in 1695, and in 1725, expeditions confirmed the connection between the Orinoco and Rio Negro via the Casiquiare. In 174",
+      "details": {
+        "facts": [
+          "The Padauari is a river on the northern side of the Rio Negro."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "Between the Camadií and Giparaná rivers in the district of Teffé, indigenous settlements existed on the right bank. The Efiiliiáá (also called Ajuricaba) River, on the left bank of the Negro between the Padauari River and Aujurá stream in Lama-Longa, was the site of villages led by the Manaos chief Ajuricaba, known for resisting the Portuguese. The Hiiiruá River, on the right bank of the Solimões, lies 145 leagues above the confluence with the Rio Negro (latitude 2° 45' S, longitude 31° 29' W of Olinda), with a rocky bed and banks inhabited by over 30 indigenous nations; Pedro de Orsúa traveled this route in 1560, where he was later assassinated. The Iliutalii River, also on the right bank of the Solimões between the Javari and Juruá, is 173 leagues above the Rio Negro confluence (latitude 2° 36' S, longitude 32° 18' W of Olinda), with a mouth 860 varas wide, a waterfall, and plains with Peruvian cattle establishments. Both rivers were important",
+      "details": {
+        "facts": [
+          "Milioréna is a river of the Guianas, on the right bank of the Negro, between Anavilhanas and Jahú."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Rionegro, also called the Black River, is a major tributary of the Amazon, with a course of 1,300 leagues and a mouth one and a half leagues wide at four degrees latitude. Thirty leagues from Basurara, it is the largest river entering the Amazon from the north, and its waters remain distinct from the Amazon for more than twelve leagues. The river is called Curiguarura by local Indians and Urama by the Toupinambous, meaning Black Water; the Amazon is called Pajanaquiris (Great River) and another southern tributary, Pajanamira, enters a league below the Black River. The banks of the Black River are inhabited by various nations, including the Canicuarís, Gurupatabas, and Quaravaquazanas. Some inhabitants near the river reportedly wear clothes and hats similar to Europeans, suggesting proximity to colonial settlements.",
+      "details": {
+        "facts": [
+          "The right bank of the Rio Negro near Padauari is inhabited by people called Canicuarís and Gurupatabas.",
+          "The last nation on the banks of the Rio Negro is that of the Quaravaquazanas."
+        ],
+        "year": 1698,
+        "doc_name": "A relation of the great river of Amazons in South-America. : Containing all the particulars of Father Christopher d'Acugna's voyage, Acuña, Cristóbal"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Baeta, BaiMri, and Bailractiâ were Indigenous nations of the Solimões, with the Baeta on the river of the same name and the BaiMri and Bailractiâ on the Juruá River. The BaMi5)a nation of Guiana inhabited the Içána and Ixié rivers, giving rise to settlements such as Lama-Longa, Manaos, Guia, Santa Anna, S. Filippo, Mabbé, and S. Marcellino. Bararoá, originally on the southern bank of the Rio Negro near the Xjuará River and later relocated in front of the Padauari River, was destroyed in the 1757 rebellion and became the town of Thomar in 1758 under Governor Francisco Xavier de Mendonça Furtado. Bararoá served as a major trading post between the Upper and Lower Rio Negro, with a population of 1,500 in 160 households descended from the Manaos, Bares, Passés, and Ajuanas nations, engaged in agriculture, weaving, and rope-making. The Bares nation lived on the Japurá River, and their descendants, along with those of the Manaos and Baníba, formed prominent families in settlements",
+      "details": {
+        "facts": [
+          "Bararoá was made a town with the name of Thomar in 1758 by the Governor of the State, Francisco Xavier de Mendonça Furtado.",
+          "Thomar (Bararoá) is situated on the right bank of the Rio Negro, in front of the Padauari River.",
+          "Thomar lost its status as a town due to the division of the territory for the implementation of the Code of Procedure."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Baeta, BaiMri, and Bailractiâ were Indigenous nations of the Solimões, with the Baeta on the river of the same name and the BaiMri and Bailractiâ on the Juruá River. The Baetas River, on the left bank of the Madeira between lakes Saraimo and Maruimtíba, had a native village at its mouth and was near the fourth location of the parish of Araretama. The BaMi5)a nation of Guiana lived on the Içána and Ixié rivers, giving rise to populations in Lama-Longa, Manaos, Guia, Santa Anna, S. Filippo, Mabbé, and S. Marcellino. Bararoá, originally on the southern bank of the Rio Negro near the Xjuará River and Timoni Island, was relocated to its current site, where it was destroyed in the 1757 rebellion. In 1758, Governor Francisco Xavier de Mendonça Furtado made Bararoá a town named Thomar; it later lost this status. Bararoá, with 1,500 inhabitants in 160 households descended from Manaos, Bares, Passés, and Ajuanas, was a major trading post",
+      "details": {
+        "facts": [
+          "Bararoá was made a town with the name of Thomar in 1758 by the Governor of the State, Francisco Xavier de Mendonça Furtado.",
+          "Thomar (formerly Bararoá) is situated in front of the Padauari River."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The region described includes several indigenous nations and settlements along major Amazonian rivers such as the Solimões, Japurá, Negro, Içá, Uaupez, and Padauari. Notable indigenous groups include the Itiatoprim (on the Capaná River, Solimões), Macuiclá (on the Japurá), and the Açauiani, Baniba, Capuéna, Mendo, and Uerequéna (on the Jié River). The Jié River, at 2° 32' N, 63° 49' W from Olinda, connects with the Negro River above São Miguel in New Granada via the Teuaporis, Pamma, and Tomon rivers. The parish of S. Elias de Faliii, originally the village of Tarumá founded in 1669 by Pedro da Costa Favella and Friar Theodozio, was the first settlement on the Negro River, predating the Carmelite Mission by 25 years, and is now known as Airão. The area is noted for its agricultural production and riverine resources, with settlements often relocated due to indigenous conflicts and environmental factors.",
+      "details": {
+        "facts": [
+          "Jié: River of the Guiana, on the right bank of the Negro, between Marabitanas and the Içána River, 28 leagues above the confluence of the Negro, and 306 from the mouth of the Jamundá, 2° 32' N latitude, 63° 49' W longitude from Olinda.",
+          "S. Elias de Faliii: parish on the right bank of the Negro, immediately below the stream that gave it its name, 46 leagues above the confluence of the Negro and 124 from the mouth of the Jamundá."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "São José de Iama-IiOaiga was a settlement on the right bank of the Rio Negro, between the Xibarú River and the Anhori Stream, located between Bararoá and Santa Izabel, 127 leagues above the confluence of the Rio Negro and 205 leagues from the mouth of the Jamundá. It was founded by Principal Dari, who separated from Bararoá, and incorporated the Auacihidá Village, three leagues further upstream. In 1757, a rebellion destroyed São José de Iama-IiOaiga, Bararoá, and Caboquéna, triggered by an Indigenous man’s resentment over a missionary’s interference. The inhabitants, from the Manáos, Banibas, and Barés tribes, cultivated manioc, fruits, rice, coffee, and cotton, and produced cloth, hammocks, ropes, pitch, salsaparrilha, and puxiri. The settlement belonged to the district of Mariuá, and its people spoke the Tupica language, which was widely used throughout the Province of Pará and much of Brazil.",
+      "details": {
+        "facts": [
+          "São José de Iama-IiOaiga is a settlement on the right bank of the Rio Negro, between the Xibarú River and the Anhori Stream, and between Bararoá and Santa Izabel, 127 leagues above the confluence of the Rio Negro, and 205 from the mouth of the Jamundá."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Baeta, BaiMri, and Bailractiâ were Indigenous nations of the Solimões, with the Baeta on the river of the same name and the BaiMri and Bailractiâ on the Juruá River. The BaMi5)a were an Indigenous nation of Guiana, located on the Içána and Ixié rivers, with descendant populations in Lama-Longa, Manaos, Guia, Santa Anna, S. Filippo, Mabbé, and S. Marcellino. Bararoá (Parish of Our Lady of the Rosary of) was situated on the right bank of the Rio Negro, 2021 leagues above the mouth of the Jamundá River, near the Padauari River, and was made a town named Thomar in 1758 by Governor Francisco Xavier de Mendonça Furtado. The settlement was destroyed in the rebellion of 1757 and served as a trading post between the Upper and Lower Rio Negro. Its population of 1,500 in 160 households descended from the Manaos, Bares, Passés, and Ajuanas nations, cultivating crops and producing goods such as cotton cloth, hammocks, and piassava ropes.",
+      "details": {
+        "facts": [
+          "Bararoá (Parish of Our Lady of the Rosary of) is on the right bank of the Rio Negro, 2021 leagues above the mouth of the Jamundá River."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The region described is divided into three parts: 20 leagues between the Madeira and Furo de Maués, 21 leagues between Furo de Maués and dos Ramos, and 17 leagues from dos Ramos to the mouth of the Urariá. Cachoeira, located on the Rio Negro at the mouth of the Cauaburi River (Lat. 00° 08' S., Long. 31° 15' W. from Olinda), marks the boundary between the upper and lower Rio Negro and is 17 leagues above Santa Izabel. Maraeam is a Curanáos village on the Rio Negro, with 100 inhabitants in 10 households, engaged in fishing, agriculture, weaving, and drug extraction. The Maranacoacéna and Marapitána are indigenous nations of Guiana, with the latter forcibly relocated by Spaniards in 1703 to St. Charles and St. Augustine near the Casiquiare. The Maratrà nation inhabits the Solimões region on the Juruá, Jutahi, Aucruhi, and Javari rivers, and is noted as anthropophagous.",
+      "details": {
+        "facts": [
+          "Maranacoá: River of Guiana, on the right bank of the Negro, in the district of Mariuá, between the Bariiri and Cunimarií rivers, inhabited by the Maranacoacénas."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The text lists numerous rivers, settlements, forts, missions, and indigenous nations within the Alto Amazonas district, particularly along the Rio Branco, Uaupez, and their tributaries. Notable locations include Castanheira (old), Nova Granada, Marabitánas (with a fort at latitude 1° 38' N, longitude 33° 25' W), and S. Joaquim (fort at latitude 3° 01' N, longitude 26° 05' W). Several missions and settlements are named, such as S. Gabriel, S. Jeronymo, S. Calixto, S. Filippe, S. Marcellino, Santa Barbara, Santa Maria Tapera, Conceição Tapera, S. Martinho Tapera, Santo Antonio Tapera, and S. João Baptista. The text provides precise coordinates for many sites, such as Içána (00° 04' N, 33° 28' W), Ixié (4° 32' N, 33° 49' W), and the confluence of the Uraricoera and Tacutú rivers. It also notes the presence of indigenous nations along rivers like the Abacaxis and Andirá, and mentions an",
+      "details": {
+        "facts": [
+          "Right bank of Rio Negro above Jamundá includes: Castanheira (old), Uacaburú River, Marueni River, Uibarã River, Caçaba River, Miuá River, Camanãu, Cajari, Cauã River, Ciiriána, Imutá, S. Gabriel River, Fort, Mabuabi River, Uaiipez, Coané, S. Jeronymo, S. Calixto, Tiquie, Unhunhan River, Tenari River, Inviari River, Paredão, MacLiamina River, Içána, Iparaná, Coiari, Guia River, S. Filippe"
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Parish of Araretama was originally located at the mouth of a river below the waterfall of Santo Antonio, later moved to Paraxiáu. The Parish of Coary was first established between Taracajá Lake and the Uanori River on the Guajaratuba, moved by Friar Antonio de Miranda, and previously relocated from the eastern bank of the Guananamá by Friar José of Magdalena. Guaiaciilia was a settlement on the left bank of the Rio Negro above Marabitanas, burned by Bobadilha during the 1763 evacuation. The village of Cuvia (Our Lady of) was on the right bank of the Rio Negro, between the Içána and Ixié rivers, 20 leagues above the Rio Negro confluence and 292 from the Jamundá River mouth, inhabited by Banibas descendants. The Guanievena nation on the Urubu River suffered a massacre under Pedro da Costa Tavella in 1664.",
+      "details": {
+        "facts": [
+          "Cuvia (Our Lady of) is a village on the right bank of the Rio Negro, between the Içána and Ixié rivers, and the settlements of São Filipe and Paraná, 20 leagues above the confluence of the Rio Negro, and 292 from the mouth of the Jamundá River."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Içá River, also known as the Putumayo at its source in the Pasto mountains of Ecuador, flows west to east for 220 leagues, joining the Solimões on its left bank at Latitude 3° 00' S, Longitude 33° 23' W from Olinda. Its banks, inhabited by the Cacatapúia, Içá, Paiába, Passé, Tumbíra, and Xomana nations, connect to the Japurá River via two channels, Peridá and Pureus. The Spaniards established a military post at the Içá’s mouth during boundary negotiations but withdrew in 1766; São Fernando settlement was founded there in 1768, followed by Boa-Vista upstream. The Ycamiába River, in the district of Iparaná, is inhabited by Baníbas and Uerequénas, with the settlement of São Miguel de Iparaná at its mouth. The Islakisie River saw a Spanish military post established in 1776 at its mouth on the Uraricoera, which was soon captured by the Portuguese, and its artillery transferred to Fort São Joaquim.",
+      "details": {
+        "facts": [
+          "Ycamiába is a river of Guiana, on the right bank of the Rio Negro, between the Uaupez and Ixié, in the district of Iparaná, 213 leagues above the confluence with the Rio Negro, and 291 from the mouth of the Jamundá.",
+          "At the mouth of the Ycamiába river is the settlement of São Miguel de Iparaná."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Cuculii is a peak in the Guiana Range, located on the left bank of the Rio Negro above Marabitanas, at latitude 2° 00' N and longitude 33° 22' W from Olinda, 242 leagues above the confluence of the Rio Negro and 320 from the mouth of the Nhamundá; the Venezuela border passes over it. The Cuculii settlement, nearby and sharing the name, was burned by Bobadilha during his retreat. The Cumarta (St. Angelo of) village lies on the right bank of the Rio Negro, between Manaos and Jahi, 28 leagues above the confluence of the Rio Negro, originally sited between Aracari and Mariuá and later moved; its population of 200 in 30 households, from Manaos Barés and Passés, cultivated indigo, coffee, and cotton, and engaged in fishing and extraction of salsaparilla, pitch, and fine woods. The C^íianiart River, on the left bank of the Japurá above the waterfalls marking the border with New Granada, was a disputed boundary during Requena’s commission, earning the name \"River of Deceptions.\" The Culsatis River,",
+      "details": {
+        "facts": [
+          "Cumarta (St. Angelo of): Village, on the right bank of the Rio Negro, between Manaos and Jahi, 28 leagues above the confluence of the Rio Negro, and 106 from the mouth of the Nhamundá."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Baeta, BaiMri, and Bailractiâ were Indigenous nations of the Solimões, with the Baeta on the river of the same name and the BaiMri and Bailractiâ on the Juruá River. The BaMi5)a nation of Guiana inhabited the Içána and Ixié rivers, giving rise to populations in Lama-Longa, Manaos, Guia, Santa Anna, S. Filippo, Mabbé, and S. Marcellino. Bararoá (Parish of Our Lady of the Rosary of) was located on the right bank of the Rio Negro, 2021 leagues above the mouth of the Jamundá River, near the Padauari River, and was destroyed in the 1757 rebellion. In 1758, Governor Francisco Xavier de Mendonça Furtado made Bararoá a town named Thomar, later losing this status. Its population of 1,500 in 160 households descended from the Manaos, Bares, Passés, and Ajuanas nations, and engaged in agriculture, weaving, and rope-making; Bararoá served as a key trading post between the Upper and Lower Rio Negro.",
+      "details": {
+        "facts": [
+          "Bararoá (Parish of Our Lady of the Rosary of) is on the right bank of the Rio Negro, in front of the Padauari River.",
+          "Bararoá is situated on elevated, regular, extensive land with abundant water, suitable for a large settlement, favored by its advantageous location in front of the Padauari River."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The palm known as Leopoldinia Piassaba is found abundantly in the Upper Rio Negro region, particularly along the Padauari, Jaha, and Daraha rivers on the north bank, and the Marie and Xie rivers on the south bank, but not on the main Rio Negro or other rivers such as Maravihd, Cababuris, Curicuriari, Uaupes, and Isanna. The fibre from this palm is a major export product, with much of the local population engaged in its collection for use in making cables and ropes for Amazonian vessels. The palm grows in moist areas, reaches 20–30 feet in height, and is characterized by large, pinnate leaves and a stem covered in coarse, fibrous material. The plant is referred to by the native Venezuelan name Chiquichiqui, as noted by Humboldt, and is found only in the Rio Negro region. The village of Tomo and the area above Sao Carlos, as well as the Atabapo and its branches, are noted localities for this palm.",
+      "details": {
+        "facts": [
+          "From the mouth of the Padauari, the palm is found on several rivers, but never on the banks of the main stream itself.",
+          "The rivers Padauari, Jaha, and Daraha on the north bank of the Rio Negro are localities where the palm is found."
+        ],
+        "year": 1858,
+        "doc_name": "Travels on the Amazon, Wallace, Alfred Russel"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Japurá River lies to the south, while the Branco, Padauari, and Cauaburi rivers flow on the northern side up to the Guiana mountains. Between 30 and 40 Indigenous nations inhabit these forests and tributaries, notably the Manáos, Cambébas (on the Solimões), Aráras (on the Madeira), and Mundurucús (on the Tapajoz). In 1637, Pedro Teixeira discovered the mouth of the Rio Negro and contacted the Uaranacoacenas; in 1669, Pedro da Costa Favella founded the first settlement on the Rio Negro with Tarumá and Aruaqui peoples near Aiurim, later moved to Jahú. The Fortress of St. Joseph of the Barra do Rio Negro was established in 1670 by Francisco da Motta Falcão, and in 1693, Guilherme Valente founded the village now called Aracari. In 1725, expeditions revealed the connection between the Orinoco and Rio Negro via the Iniridá, Parauá, Paçavicá, Tumbú, and Casiquiare rivers; in 1744, Francisco Xavier de Moraes confirmed this link at Ávida (",
+      "details": {
+        "facts": [
+          "Padauari is on the northern side of the Rio Negro.",
+          "The right bank of the Rio Negro near Padauari is occupied by forests.",
+          "Between 30 and 40 Indigenous nations inhabit the forests along the Rio Negro and its tributaries, including near Padauari."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Uaupez River, also called Cealari, is a river of Guiana on the right bank of the Rio Negro, 10 leagues above the Fort of St. Gabriel, at latitude 00° 04' S and longitude 33° 20' W of Olinda. Its mouth is divided by the triangular Ucaiari island, 20 leagues in circumference, resulting in two outlets. The river receives the Unhunban and Tenari Rivers on the right and the Iviari on the left, and was explored up to this point in 1784 by Colonel Manoel da Gama Lobo da Almada. Settlements along the Uaupez include Coané, St. Jerome, and St. Callistus, and its banks are inhabited by the Goeuana, Macú, Macucuéna, Uananá, Tariána, Deçána, Urinaná, Timanára, Boanari, Mamengá, Panenuá, and Uaupez nations. The Uereawéna nation, notable for using quipus and Hebrew-derived names such as Thomequi, Mariana, and Davidú, inhabit the Ixié and Içána rivers and contributed to the population of Mariuá",
+      "details": {
+        "facts": [
+          "Uaupez is a river of Guiana, on the right bank of the Negro, 10 leagues above the Fort of St. Gabriel."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "São José de Iama-IiOaiga was a settlement on the right bank of the Rio Negro, between the Xibarú River and the Anhori Stream, and between Bararoá and Santa Izabel, located 127 leagues above the confluence of the Rio Negro and 205 leagues from the mouth of the Jamundá. It was founded by Principal Dari, who separated from Bararoá, and incorporated the Auacihidá Village, three leagues further upstream. In 1757, a rebellion led to the destruction by fire of São José de Iama-IiOaiga, Bararoá, and Caboquéna. The inhabitants, from the Manáos, Banibas, and Barés tribes, cultivated manioc, fruits, rice, coffee, and cotton, and produced cloth, hammocks, ropes, pitch, salsaparrilha, and puxiri. The settlement belonged to the district of Mariuá, and the Tupica language was universally spoken among Indigenous peoples in the Province of Pará and much of Brazil.",
+      "details": {
+        "facts": [
+          "São José de Iama-IiOaiga is a settlement on the right bank of the Rio Negro, between the Xibarú River and the Anhori Stream, and between Bararoá and Santa Izabel.",
+          "São José de Iama-IiOaiga is 127 leagues above the confluence of the Rio Negro.",
+          "São José de Iama-IiOaiga is 205 leagues from the mouth of the Jamundá."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Rionegro, or Black River, is a major tributary of the Amazon, with a course of 1,300 leagues and a mouth one and a half leagues wide at four degrees latitude. Thirty leagues from Basurara, it is the largest river entering the Amazon from the north, and its waters remain distinct from the Amazon for over twelve leagues due to their clarity and depth, appearing black. The river is called Curiguarura by local Indians, Urama by the Toupinambous (meaning Black Water), and the Amazon in this region is called Pajanaquiris (the Great River), while another southern tributary is named Pajanamira. The banks of the Black River are inhabited by various nations, including the Canicuarís, Gurupatabas, and Quaravaquazanas, with some groups adopting European-style clothing and hats. The area is described as densely populated and strategically significant for control of the Amazon.",
+      "details": {
+        "facts": [
+          "The right bank of the Rio Negro near Padauari is inhabited by people called Canicuarís and Gurupatabas.",
+          "The last nation on the banks of the Rio Negro in this area is that of the Quaravaquazanas."
+        ],
+        "year": 1698,
+        "doc_name": "A relation of the great river of Amazons in South-America. : Containing all the particulars of Father Christopher d'Acugna's voyage, Acuña, Cristóbal"
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "The palm known as Leopoldinia Piassaba is found abundantly in the Upper Rio Negro region, particularly on the rivers Padauari, Jaha, and Daraha (north bank), and Marie and Xie (south bank), but not on the main Rio Negro or on the Maravihd, Cababuris, Curicuriari, Uaupes, and Isanna rivers. The fibre from this palm is a major export product, with much of the local population engaged in its collection. The palm grows in moist areas, reaches 20–30 feet in height, and is used extensively for making cables and ropes for Amazonian vessels. The plant is referred to by the native Venezuelan name Chiquichiqui and is believed to be a species of Leopoldinia, found only in the Rio Negro region. The village of Tomo and the area above Sao Carlos, as well as the Atabapo and its branches, are noted as key localities for this palm.",
+      "details": {
+        "facts": [
+          "Padauari is a branch of the Rio Negro about five hundred miles above Barra.",
+          "The palm (Leopoldinia Piassaba) is found on the Padauari river.",
+          "The palm is not found on the banks of the main stream of the Rio Negro."
+        ],
+        "year": 1858,
+        "doc_name": "Travels on the Amazon, Wallace, Alfred Russel"
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "The river described rises in the mountains of Popayan, in New Granada, at approximately 2° 30' north latitude and 36° 49' west longitude from Olinda. Its upper course receives tributaries including the Tombû, Cassiquiaré (which connects with the Orinoco), Démiti, Ixié, Icanâ, and Ucaiari or Vahupé. In its middle course, it is joined by the Seriuini, Araçâ, Padauari (near the Umaouca, a tributary of the Orinoco), Darahâ, Maraviâ, Inebû, Cauaburi, Baruri (near Mariuâ), Maranacoâ, Cunimarû, Uarirâ, Xibarû, Matiqué, Mabâ, Urubaxi, Ajuanâ, Inuixi, Xiurâ, Meriâ, and Curiuriau. The lower course includes the Rio-Branco (noted for its white waters), Jaguapéri, Jacriâu, Curerû, Anavilhâna, Aiurini, and Inuini. The Cauaburi and Branco rivers are especially significant; the Cauaburi provides a navigable",
+      "details": {
+        "facts": [
+          "The Padauari is a navigable river.",
+          "The Padauari is only half a day's journey from the Umaouca, a tributary of the Orinoco.",
+          "The Padauari joins the main river in its middle course."
+        ],
+        "year": 1861,
+        "doc_name": "Voyage aux provinces brésiliennes du Pará et des Amazones en 1860, précédé d'une rapide coup d'oeil, sur le littoral du Brésil, Belmar, A. de."
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "By the early administration of State Governor Francisco Xavier de Mendonça Furtado, major rivers in the Upper Amazon—such as the Rio Negro, Rio Branco, Tacutú, Uraricoéra, Padauari, Cauaburi, Içána, Ixié, Turno, Ake, Tiniuini, and Yauitá—had been explored, and the connection between the Orinoco and Rio Negro was recognized, though accurate hydrographic mapping was lacking. The region transitioned from missionary to secular administration, becoming a Province under the influence of the Marquis of Pombal. The Jesuits, favoring Spanish interests and resisting Portuguese authority, maintained exclusive control over Indigenous settlements, suppressed Portuguese language, and hindered integration with colonial society. Following the Treaty of Madrid in 1750, which sought to fix boundaries between Portugal and Spain, the Jesuits actively obstructed demarcation efforts led by Mendonça Furtado, the First Plenipotentiary Commissioner, resulting in significant conflict and hardship for the Upper Amazon.",
+      "details": {
+        "facts": [
+          "The Padauari is a river on the same side of Guiana as the Rio Negro, Rio Branco, Tacutú, and Uraricoéra."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "The text lists numerous settlements, rivers, regions, and indigenous nations in the Amazon basin, particularly along the Solimões, Japurá, Juruá, Javari, Madeira, Negro, and Uaupez rivers. Key settlements include Itacoatiara, Coari, Teffé, São Fernando, Maripi, Parauari, Fonte-Boa, Manaus, and Mariuá. Indigenous nations mentioned are Juqui, Juri, Jurimaua, Mabiú, Macú, Macuxi, Mura, Mundurucu, Maué, Miranha, Momana, and Tariana. The regions referenced include Guiana, Tupinambarana, and various riverine areas such as Padauari, Cauaburi, and Urubaxi. The repeated mention of settlements and nations along major rivers highlights the dense pre-colonial and colonial occupation and interaction zones in western Amazonia.",
+      "details": {
+        "facts": [
+          "Padauari is listed as a settlement.",
+          "Padauari is listed as a river or region."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "The Japurá River lies to the south, with the Branco, Padauari, and Cauaburi rivers to the north, reaching the slopes of the Guiana mountains. Between 30 and 40 Indigenous nations inhabit these forests, including the Manáos, Cambébas (Solimões), Aráras (Madeira), and Mundurucús (Tapajoz). In 1637, Pedro Teixeira discovered the mouth of the Rio Negro and contacted the Uaranacoacenas; in 1669, Pedro da Costa Favella founded the first settlement on the Rio Negro near Aiurim with Tarumá and Aruaqui peoples, later moved to Jahú. The Fortress of St. Joseph of the Barra do Rio Negro was founded by Francisco da Motta Falcão in 1670, and in 1693, Guilherme Valente established the parish of Aracari with Caburicenas, Carahiahís, and Manáos. In 1725, expeditions confirmed the connection between the Orinoco and Rio Negro via the Casiquiare, and in 1744, Francisco Xavier de Moraes and Jesuit Manoel Romão confirmed that this link makes all of Guiana an island.",
+      "details": {
+        "facts": [
+          "Padauari is a river on the northern side of the Rio Negro.",
+          "The banks of the Padauari river are located up to the slopes of the Guiana mountains."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "The palm known as Leopoldinia Piassaba, called Chiquichiqui by Venezuelan natives, is abundant in the Upper Rio Negro region above Sao Carlos, especially around the Atabapo and its branches, and behind the village of Tomo. It grows on the rivers Padauari, Jaha, and Daraha (north bank of the Rio Negro), and Marie and Xie (south bank), but is absent from the main Rio Negro and from the Maravihd, Cababuris, Curicuriari, Uaupes, and Isanna rivers. The palm reaches 20–30 feet in height, with large pinnate leaves and a stem covered in coarse fibrous material used for making cables and ropes for Amazonian vessels. Large groups of local inhabitants harvest the fibre for export. The author encountered a village about a mile from a cleared field near Tomo, where he met the Capitao, who agreed to assist with porters.",
+      "details": {
+        "facts": [
+          "Padauari is a branch of the Rio Negro about five hundred miles above Barra.",
+          "The palm (Leopoldinia Piassaba) is found on the Padauari river.",
+          "The palm is not found on the banks of the main stream of the Rio Negro."
+        ],
+        "year": 1858,
+        "doc_name": "Travels on the Amazon, Wallace, Alfred Russel"
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "By the early administration of State Governor Francisco Xavier de Mendonça Furtado, the Rio Negro and its tributaries—the Rio Branco, Tacutú, Uraricoéra, Padauari, and Cauaburi—had been explored, as well as the Içána, Ixié, Turno, Ake, Tiniuini, and Yauitá on the southern side. The connection between the Orinoco and the Rio Negro was recognized, though accurate hydrographic mapping was lacking. The region transitioned from missionary to secular administration, becoming a Province under the influence of the Marquis of Pombal. The Jesuits, favoring Spanish interests, resisted Portuguese authority by maintaining exclusive control over Indigenous settlements, suppressing Portuguese language, and impeding integration. The Treaty of Madrid (1750) prompted boundary demarcations between Portugal and Spain, leading to conflict between the Portuguese government and the Jesuit Company, particularly over the involvement of Indigenous people and the authority of Mendonça Furtado as First Plenipotentiary Commissioner.",
+      "details": {
+        "facts": [
+          "The Padauari is a river on the same side of Guiana as the Rio Negro and Rio Branco."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "The river described rises in the mountains of Popayan, in New Granada, at approximately 2° 30' north latitude and 36° 49' west longitude from Olinda. Its upper course receives tributaries such as the Tombû, Cassiquiaré (which connects with the Orinoco), Démiti, Ixié, Icanâ, and Ucaiari or Vahupé. The middle course is joined by the Seriuini, Araçâ, Padauari (near the Umaouca, a tributary of the Orinoco), and several others near the village of Mariuâ. The lower course includes major tributaries like the Rio-Branco, Jaguapéri, Jacriâu, Curerû, Anavilhâna, Aiurini, and Inuini. Notably, the Cauaburi and Branco rivers provide navigable routes, with the Cauaburi enabling a continuous fifteen-day water journey connecting the Amazon and Orinoco via the Rio Negro, Maturaca, Umari-nauhi, Beriâ, Bacimoni, and Cassiquiari.",
+      "details": {
+        "facts": [
+          "The Padauari is a navigable river.",
+          "The Padauari is only half a day's journey from the Umaouca, a tributary of the Orinoco.",
+          "The Padauari is a tributary that joins the middle course of the river described (likely the Rio Negro)."
+        ],
+        "year": 1861,
+        "doc_name": "Voyage aux provinces brésiliennes du Pará et des Amazones en 1860, précédé d'une rapide coup d'oeil, sur le littoral du Brésil, Belmar, A. de."
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "The Japurá River lies to the south, with the Branco, Padauari, and Cauaburi rivers to the north, reaching the Guiana mountains. The region's forests are inhabited by 30 to 40 Indigenous nations, notably the Manáos, Cambébas (on the Solimões), Aráras (on the Madeira), and Mundurucús (on the Tapajoz). In 1637, Pedro Teixeira discovered the mouth of the Rio Negro and contacted the Uaranacoacenas; in 1669, Pedro da Costa Favella founded the first settlement on the Rio Negro with Tarumá and Aruaqui peoples near Aiurim, later moved to Jahú. The Fortress of St. Joseph of the Barra do Rio Negro was founded in 1670 by Francisco da Motta Falcão, and in 1693, Guilherme Valente founded the village of Aracari with Caburicenas, Carahiahís, and Manáos. The Carmelites established a mission among the Uaranacoacenas in 1695, and by 1725, expeditions confirmed the connection between the Orinoco and Rio Negro via the Casiquiare. In 1744, Francisco",
+      "details": {
+        "facts": [
+          "Padauari is a river on the northern side of the Rio Negro.",
+          "The banks of the Padauari river are up to the slopes of the Guiana mountains."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "The text lists numerous settlements, nations (tribes), rivers, and regions in the Amazon basin, particularly along the Solimões, Juruá, Japurá, Madeira, Negro, Javari, and Uaupez rivers. Key settlements include Itacoatiara, Coari, Teffé, São Fernando, Padauari, Maripi, Parauari, Maturá, Fonte-Boa, Mariuá, and Manaus. Indigenous nations mentioned are Juqui, Juri, Jurimaua, Mabiú, Macú, Macucuena, Macuman, Macuxi, Mabú, Pirarara, Saraurú, and Mundurucu, among others. The regions and rivers cited, such as Guiana, Uatumá, Branco, Uraricoera, and Tupinambarana, indicate a broad geographic scope covering both the central and western Amazon. The repeated mention of settlements and nations along major waterways highlights the importance of riverine networks for habitation and interaction in pre-colonial and early colonial Amazonia.",
+      "details": {
+        "facts": [
+          "Padauari is listed as a settlement.",
+          "Padauari is listed as a river or region."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "The palm known as Leopoldinia Piassaba is abundant in the Upper Rio Negro region, particularly above Sao Carlos and around the Atabapo and its branches. It is found on the rivers Padauari, Jaha, and Daraha (north bank of the Rio Negro), and the Marie and Xie (south bank), but is absent from the main Rio Negro and other rivers such as Maravihd, Cababuris, Curicuriari, Uaupes, and Isanna. The fibre from this palm is harvested extensively by local populations for export and is used for making cables and ropes for Amazonian vessels. The palm grows in moist areas, reaches 20–30 feet in height, and is characterized by large, pinnate leaves and a stem covered with coarse fibre. The native Venezuelan name for the plant is Chiquichiqui, as noted by Humboldt.",
+      "details": {
+        "facts": [
+          "Padauari is a branch of the Rio Negro about five hundred miles above Barra.",
+          "The palm (Leopoldinia Piassaba) is found on the Padauari river.",
+          "The palm is not found on the banks of the main stream of the Rio Negro."
+        ],
+        "year": 1858,
+        "doc_name": "Travels on the Amazon, Wallace, Alfred Russel"
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "By the early administration of State Governor Francisco Xavier de Mendonça Furtado, the Rio Negro and its tributaries—the Rio Branco, Tacutú, Uraricoéra, Padauari, and Cauaburi—had been explored, as well as the Içána, Ixié, Turno, Ake, Tiniuini, and Yauitá on the southern side. The connection between the Orinoco and the Rio Negro was recognized, though accurate hydrographic mapping was lacking. The region transitioned from missionary to secular administration, later becoming a Province, under the influence of the Marquis of Pombal. The Jesuits, favoring Spanish interests and resisting Portuguese authority, maintained exclusive control over Indigenous settlements, discouraged Portuguese language, and obstructed integration. The Treaty of Madrid (1750) prompted boundary demarcations between Portugal and Spain, leading to conflict between the Portuguese government and the Jesuit Company, with Mendonça Furtado appointed as First Plenipotentiary Commissioner for these efforts.",
+      "details": {
+        "facts": [
+          "The Padauari is a river on the same side of Guiana as the Rio Negro and Rio Branco."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "The river described rises in the mountains of Popayan, in New Granada, at approximately 2° 30' north latitude and 36° 49' west longitude from Olinda. Its upper course receives tributaries such as the Tombû, Cassiquiaré (which connects with the Orinoco), Démiti, Ixié, Icanâ, and Ucaiari or Vahupé. The middle course is joined by the Seriuini, Araçâ, Padauari (close to the Umaouca, a tributary of the Orinoco), Darahâ, Maraviâ, Inebû, Cauaburi, Baruri (near Mariuâ), Maranacoâ, Cunimarû, Uarirâ, Xibarû, Matiqué, Mabâ, Urubaxi, Ajuanâ, Inuixi, Xiurâ, Meriâ, and Curiuriau. The lower course’s main tributaries are the Rio-Branco, Jaguapéri, Jacriâu, Curerû, Anavilhâna, Aiurini, and Inuini. The Cauaburi and Branco rivers are especially notable; the Cauaburi provides a navigable route connecting the Amazon",
+      "details": {
+        "facts": [
+          "The Padauari is a navigable river.",
+          "The Padauari is only half a day's journey from the Umaouca, a tributary of the Orinoco.",
+          "The Padauari joins the main river in its middle course."
+        ],
+        "year": 1861,
+        "doc_name": "Voyage aux provinces brésiliennes du Pará et des Amazones en 1860, précédé d'une rapide coup d'oeil, sur le littoral du Brésil, Belmar, A. de."
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "The Japurá River lies to the south, with the Branco, Padauari, and Cauaburi rivers to the north, reaching the Guiana mountains. The forests between these rivers host 30 to 40 Indigenous nations, notably the Manáos, Cambébas (on the Solimões), Aráras (on the Madeira), and Mundurucús (on the Tapajoz). In 1637, Pedro Teixeira discovered the mouth of the Rio Negro and contacted the Uaranacoacenas; in 1669, Pedro da Costa Favella founded the first Rio Negro settlement with Tarumá and Aruaqui peoples near Aiurim, later moved to Jahú. In 1670, Francisco da Motta Falcão established the Fortress of St. Joseph of the Barra do Rio Negro. By 1725, expeditions confirmed the hydrological connection between the Orinoco and Rio Negro via the Casiquiare, Iniridá, Parauá, Paçavicá, and Tumbú rivers. In 1744, Francisco Xavier de Moraes met Jesuit Manoel Romão at Ávida (Marabitanas), confirming the link that makes all of Guiana an island.",
+      "details": {
+        "facts": [
+          "Padauari is a river located on the northern side of the Rio Negro, along with the Branco and Cauaburi rivers, up to the slopes of the Guiana mountains."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "The text lists numerous settlements, nations (tribes), rivers, and regions in the Amazon basin, notably along the Solimões, Japurá, Juruá, Javari, Madeira, Negro, Uaupez, and Uraricoera rivers. Key settlements include Itacoatiara, Coari, Teffé, São Fernando, Maripi, Parauari, Fonte-Boa, Manaus, Mariuá, and Tupinambarana. Indigenous nations mentioned are Juqui, Juri, Jurimaua, Mabiú, Macú, Macucuena, Macuman, Macuxi, Mabú, Pirarara, Saraurú, and Mura, among others. The region encompasses both major riverine trade routes and numerous tribal territories, indicating a complex network of habitation and interaction prior to and during early colonial contact. The repeated mention of settlements and rivers highlights their importance as centers of population and communication in pre-modern Amazonia.",
+      "details": {
+        "facts": [
+          "Padauari is listed as a settlement.",
+          "Padauari is listed as a river or region."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "The Leopoldinia Piassaba palm is found abundantly in the Upper Rio Negro region, particularly along the Padauari, Jaha, and Daraha rivers on the north bank, and the Marie and Xie rivers on the south bank, but not on the main Rio Negro or certain other rivers such as Maravihd, Cababuris, Curicuriari, Uaupes, and Isanna. The palm grows in moist areas, reaches 20–30 feet in height, and is notable for its thick coating of fibrous material used locally for making cables and ropes for Amazonian vessels. The fibre is a major export product, with much of the Upper Rio Negro population engaged in its collection. The palm is known by the native Venezuelan name Chiquichiqui, referenced by Humboldt, and is believed to be a species of Leopoldinia unique to the Rio Negro region. The village of Tomo and the area above Sao Carlos, as well as the Atabapo and its branches, are key locations where the palm is abundant.",
+      "details": {
+        "facts": [
+          "Padauari is a branch of the Rio Negro about five hundred miles above Barra.",
+          "The palm (Leopoldinia Piassaba) is found on the Padauari river.",
+          "The palm is not found on the banks of the main stream of the Rio Negro."
+        ],
+        "year": 1858,
+        "doc_name": "Travels on the Amazon, Wallace, Alfred Russel"
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "By the early administration of State Governor Francisco Xavier de Mendonça Furtado, the Rio Negro and its tributaries—the Rio Branco, Tacutú, Uraricoéra, Padauari, and Cauaburi—had been explored, as well as the Içána, Ixié, Turno, Ake, Tiniuini, and Yauitá on the southern side. The connection between the Orinoco and the Rio Negro was recognized, though accurate hydrographic mapping was lacking. Around this period, control of the Upper Amazon shifted from Missionary to secular administration, coinciding with the energetic government of the Marquis of Pombal. The Jesuits, favoring Spanish interests and opposing Portuguese authority, maintained exclusive control over Indigenous settlements, discouraged Portuguese language use, and resisted secular oversight. Following the Treaty of Madrid in 1750, which aimed to fix boundaries between Portugal and Spain, the Jesuits actively obstructed demarcation efforts led by Mendonça Furtado, the First Plenipotentiary Commissioner.",
+      "details": {
+        "facts": [
+          "The Padauari is a river on the same side of Guiana as the Rio Negro and Rio Branco."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "The river described rises in the mountains of Popayan, in New Granada, at approximately 2° 30' north latitude and 36° 49' west longitude from Olinda. Its upper course receives tributaries such as the Tombû, Cassiquiaré (which connects with the Orinoco), Démiti, Ixié, Icanâ, and Ucaiari or Vahupé. In its middle course, it is joined by the Seriuini, Araçâ, Padauari (close to the Umaouca, an Orinoco tributary), Darahâ, Maraviâ, Inebû, Cauaburi, Baruri (near Mariuâ), and several others. The lower course's main tributaries include the Rio-Branco (noted for its white waters), Jaguapéri, Jacriâu, Curerû, Anavilhâna, Aiurini, and Inuini. The Cauaburi and Branco rivers are especially significant; the Cauaburi provides a navigable water route connecting the Amazon and Orinoco via the Rio Negro, Maturaca, Umari-nauhi, Beriâ, Bacimoni, and Cassiquiari, forming a fifteen-day",
+      "details": {
+        "facts": [
+          "The Padauari is a navigable river.",
+          "The Padauari is only half a day's journey from the Umaouca, a tributary of the Orinoco.",
+          "The Padauari joins the main river in its middle course."
+        ],
+        "year": 1861,
+        "doc_name": "Voyage aux provinces brésiliennes du Pará et des Amazones en 1860, précédé d'une rapide coup d'oeil, sur le littoral du Brésil, Belmar, A. de."
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "The Japurá River lies to the south, with the Branco, Padauari, and Cauaburi rivers to the north, reaching the Guiana mountains. The forests between these rivers and lakes are inhabited by 30 to 40 Indigenous nations, including the Manáos, Cambébas (on the Solimões), Aráras (on the Madeira), and Mundurucús (on the Tapajoz). In 1637, Pedro Teixeira discovered the mouth of the Rio Negro and contacted the Uaranacoacenas; in 1669, Pedro da Costa Favella founded the first settlement on the Rio Negro with Tarumá and Aruaqui peoples near Aiurim, later moved to Jahú. The Fortress of St. Joseph of the Barra do Rio Negro was founded in 1670 by Francisco da Motta Falcão, and in 1693, Guilherme Valente established the village of Aracari with Caburicenas, Carahiahís, and Manáos. The Carmelites began missions among the Uaranacoacenas in 1695, and in 1725, expeditions confirmed the hydrological connection between the Orinoco and Rio Negro via the Casiquiare. In",
+      "details": {
+        "facts": [
+          "Padauari is a river located on the northern side of the Rio Negro, along with the Branco and Cauaburi rivers, up to the slopes of the Guiana mountains."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "The text lists numerous settlements, nations, rivers, and regions in the Amazon basin, including Purú, Coari, Teffé, Juruá, Solimões, Itacoatiara, Caldas, Padauari, São Fernando, Maripi, Araretama, Itarendaua, Parauari, Maturá, Javari, Tabatinga, Castanheira, Curiana, Iparaná, and Mariuá. Indigenous nations mentioned include Juqui, Juri, Jurimaua, Mabiú, Macú, Macucuena, Macuman, Macuxi, Mabú, Pirarara, Saraurú, Madauacá, Mamengá, Ajuana, Inixi, Xiuára, Hihiá, Mangerona, Manhana, Marapitana, Moeinon, Momana, Miranha, Mura, and Mundurucu. Major rivers and regions referenced are Madeira, Mundurucu, Japurá, Solimões, Guiana, Uaupez, Cauaburi, Padauari, Urubaxi, Negro, Juruá, Jutahi, Javari, Uatumá, Içá, Branco, Uraricoera,",
+      "details": {
+        "facts": [
+          "Padauari is listed as a settlement.",
+          "Padauari is listed as a river or region."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_search",
+      "value": "Padauari",
+      "details": {
+        "count": 43
+      },
+      "meta": {
+        "mode": "substring"
+      }
+    },
+    {
+      "source": "entity_search",
+      "value": "Rio Padauari",
+      "details": {
+        "count": 12
+      },
+      "meta": {
+        "mode": "substring"
+      }
+    },
+    {
+      "source": "entity_search",
+      "value": "Padawary",
+      "details": {
+        "count": 0
+      },
+      "meta": {
+        "mode": "substring"
+      }
+    },
+    {
+      "source": "entity_search",
+      "value": "Padauari",
+      "details": {
+        "count": 43
+      },
+      "meta": {
+        "mode": "substring"
+      }
+    },
+    {
+      "source": "entity_search",
+      "value": "Padauary",
+      "details": {
+        "count": 0
+      },
+      "meta": {
+        "mode": "substring"
+      }
+    },
+    {
+      "source": "entity_search",
+      "value": "Padauarí",
+      "details": {
+        "count": 0
+      },
+      "meta": {
+        "mode": "substring"
+      }
+    },
+    {
+      "source": "entity_search",
+      "value": "Rio Padauari",
+      "details": {
+        "count": 12
+      },
+      "meta": {
+        "mode": "substring"
+      }
+    },
+    {
+      "source": "entity_search",
+      "value": "Rio Padauary",
+      "details": {
+        "count": 0
+      },
+      "meta": {
+        "mode": "substring"
+      }
+    },
+    {
+      "source": "entity_search",
+      "value": "Padauari",
+      "details": {
+        "count": 43
+      },
+      "meta": {
+        "mode": "substring"
+      }
+    },
+    {
+      "source": "entity_search",
+      "value": "Padauary",
+      "details": {
+        "count": 0
+      },
+      "meta": {
+        "mode": "substring"
+      }
+    },
+    {
+      "source": "entity_search",
+      "value": "Padahuari",
+      "details": {
+        "count": 0
+      },
+      "meta": {
+        "mode": "substring"
+      }
+    },
+    {
+      "source": "entity_search",
+      "value": "Paduari",
+      "details": {
+        "count": 0
+      },
+      "meta": {
+        "mode": "substring"
+      }
+    },
+    {
+      "source": "entity_search",
+      "value": "Patauari",
+      "details": {
+        "count": 0
+      },
+      "meta": {
+        "mode": "substring"
+      }
+    }
+  ],
+  "agent_thoughts": "I've gathered extensive clues that pinpoint Bararoá (later town of Thomar) near the Rio Negro, specifically on the right bank close to the mouth of the Padauari River. There's a high concentration of evidence citing 'Padauari' as the reference river, with all clues indicating an upstream location (2021 leagues above the mouth of the Jamundá, for example, and clustered with settlements such as São José de Iama-IiOaiga and Caboquéna). However, the precise modern identification of 'Padauari' could be hindered by orthographic variations or subsequent renaming, which is a common issue with Amazonian hydronyms. To solidify the geographic anchor for Bararoá/Thomar, I must clarify exactly which modern or historical river corresponds to 'Padauari'. This will validate or potentially correct the bounded region for Bararoá.\n\nFor this step, I will use entity_search with variant spellings (Padauari, Padauary, Padahuari, Paduari, Patauari) to cover the range of plausible colonial and phonetic renderings. This is a critical disambiguation that may allow exact identification with a known river today, which is pivotal for reconstructing detailed location hypotheses. If this yields key hits, I can then assemble Bararoá's position in modern geographic terms, triangulate with nearby settlements, and even look for indigenous names or events tied to this location. If no meaningful hits are found, it will signal the need to pivot strategy, perhaps to directly searching for clusters of destroyed settlements or modern geography overlays. I note that none of these Padauari variants have been previously entity_searched in the log, so this is a necessary next step before deeper or web-based searches.",
+  "previous_hypotheses": []
+}

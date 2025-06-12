@@ -1,0 +1,1252 @@
+{
+  "user_query": "Find all information and facts related to the object or place named Bararoá.",
+  "final_hypothesis": "Bararoá became the town of Thomar after 1758; its fate and demographic continuity in the 19th century remain unclear.",
+  "supporting_evidence": [
+    {
+      "source": "entity_hybrid",
+      "value": "Bararoá, originally on the southern bank of the Rio Negro near the Xjuará River and later moved in front of the Padauari River, was destroyed in the 1757 rebellion and became the town of Thomar in 1758 under Governor Francisco Xavier de Mendonça Furtado. Bararoá served as a major trading post between the Upper and Lower Rio Negro and had a population of 1,500 in 160 households, descended from the Manaos, Bares, Passés, and Ajuanas nations.",
+      "details": {
+        "location": "Southern bank of Rio Negro near Xjuará River, later Padauari River",
+        "date_event": "Destroyed 1757, became Thomar 1758",
+        "population": "1,500 people, 160 households, mixed Indigenous ancestry",
+        "role": "Major trading post",
+        "ethnic_groups": "Manaos, Bares, Passés, Ajuanas"
+      },
+      "meta": {
+        "period": "late colonial (mid-18th century)",
+        "distances": {},
+        "clues": [
+          "Renamed as Thomar",
+          "Population of multiethnic Indigenous descent",
+          "Destroyed and resettled"
+        ],
+        "failed_attempts": []
+      }
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "The Directory was a colonial administrative institution that maintained the cohesion of Indigenous populations in the Amazon, particularly in settlements such as... Bararoá. Its dissolution, ordered by royal letter at the request of D. Francisco de Souza Coutinho, Governor of Pará, led to the dispersal and decline of Indigenous settlements, especially in the Captaincy of Rio Negro governed by Manoel da Gama Lobo da Almada.",
+      "details": {
+        "institution": "Directory system for Indigenous administration",
+        "disbanded": "by royal letter, prompting settlement dispersal and decline",
+        "effect_on_Bararoa": "Likely population dispersal"
+      },
+      "meta": {
+        "period": "late Directory/early 19th century",
+        "clues": [
+          "After Directory end, settlements like Bararoá declined",
+          "Bararoá classified as Indigenous/mission settlement"
+        ],
+        "failed_attempts": []
+      }
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "Our Lady of the Rosary (Itacoatiara on the Amazon, Parauari on the Tefé, Bararoá on the Rio Negro)...",
+      "details": {
+        "patroness": "Our Lady of the Rosary",
+        "religious_structure": "Bararoá Rio Negro",
+        "context": "List of parish dedications"
+      },
+      "meta": {
+        "period": "colonial",
+        "clues": [
+          "Known religious identity"
+        ],
+        "failed_attempts": []
+      }
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "The Pará revolution of 1835... Ambrósio Ayres, a convict, organized a force in Bararoá, fought the cabanos on the Maués River and in Icuipiranga, and became Military Commander of the District.",
+      "details": {
+        "date_event": "1835-1836",
+        "role": "Site of rebel organization and military command",
+        "key_figures": [
+          "Ambrósio Ayres"
+        ],
+        "context": "Cabanagem/civil warfare"
+      },
+      "meta": {
+        "period": "early 19th-century",
+        "clues": [
+          "Still a settlement or recognized site in 1835"
+        ],
+        "failed_attempts": []
+      }
+    }
+  ],
+  "reasoning_log": [
+    {
+      "iteration": 0,
+      "action": "entity_search",
+      "query": "Bararoá, Bararoa, Bararoá Mission, Bararoá village",
+      "result_count": 4
+    },
+    {
+      "iteration": 1,
+      "action": "entity_hybrid",
+      "query": "Bararoá",
+      "result_count": 8
+    },
+    {
+      "iteration": 2,
+      "action": "vector_search",
+      "query": "Bararoá Rio Negro settlement history",
+      "result_count": 6
+    },
+    {
+      "iteration": 3,
+      "action": "vector_search",
+      "query": "Bararoá Indigenous settlement commerce",
+      "result_count": 3
+    },
+    {
+      "iteration": 4,
+      "action": "vector_search",
+      "query": "Bararoá archaeological remains material culture",
+      "result_count": 0
+    },
+    {
+      "iteration": 5,
+      "action": "vector_search",
+      "query": "Bararoá town Thomar 1758 destruction",
+      "result_count": 1
+    },
+    {
+      "iteration": 6,
+      "action": "vector_search",
+      "query": "Bararoá Jesuit mission Indigenous",
+      "result_count": 6
+    },
+    {
+      "iteration": 7,
+      "action": "vector_search",
+      "query": "Bararoá mission Jesuit administration",
+      "result_count": 3
+    },
+    {
+      "iteration": 8,
+      "action": "vector_search",
+      "query": "Bararoá resettlement Directory colonial administration",
+      "result_count": 8
+    },
+    {
+      "iteration": 9,
+      "action": "vector_search",
+      "query": "Bararoá Directory colonial administration",
+      "result_count": 2
+    },
+    {
+      "iteration": 10,
+      "action": "vector_search",
+      "query": "Bararoá Directory dissolution impact",
+      "result_count": 5
+    },
+    {
+      "iteration": 11,
+      "action": "vector_search",
+      "query": "Bararoá Directory dissolution Indigenous aftermath",
+      "result_count": 8
+    },
+    {
+      "iteration": 12,
+      "action": "vector_search",
+      "query": "Bararoá Directory dissolution aftermath",
+      "result_count": 8
+    },
+    {
+      "iteration": 13,
+      "action": "vector_search",
+      "query": "Bararoá Directory dissolution aftermath",
+      "result_count": 8
+    },
+    {
+      "iteration": 14,
+      "action": "vector_search",
+      "query": "Bararoá post-Directory fate and population dispersal",
+      "result_count": 2
+    },
+    {
+      "iteration": 15,
+      "action": "vector_search",
+      "query": "Thomar Rio Negro settlement 19th century",
+      "result_count": 7
+    }
+  ],
+  "context": [
+    {
+      "source": "entity_search",
+      "value": "Bararoá",
+      "details": {
+        "count": 56
+      },
+      "meta": {
+        "mode": "substring"
+      }
+    },
+    {
+      "source": "entity_search",
+      "value": "Bararoa",
+      "details": {
+        "count": 2
+      },
+      "meta": {
+        "mode": "substring"
+      }
+    },
+    {
+      "source": "entity_search",
+      "value": "Bararoá Mission",
+      "details": {
+        "count": 0
+      },
+      "meta": {
+        "mode": "substring"
+      }
+    },
+    {
+      "source": "entity_search",
+      "value": "Bararoá village",
+      "details": {
+        "count": 0
+      },
+      "meta": {
+        "mode": "substring"
+      }
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "The Baeta, BaiMri, and Bailractiâ were Indigenous nations of the Solimões, with the Baeta located on the river of the same name and the BaiMri and Bailractiâ on the Juruá River. The BaMi5)a nation of Guiana inhabited the Içána and Ixié rivers, giving rise to populations in Lama-Longa, Manaos, Guia, Santa Anna, S. Filippo, Mabbé, and S. Marcellino. Bararoá, originally on the southern bank of the Rio Negro near the Xjuará River and later moved in front of the Padauari River, was destroyed in the 1757 rebellion and became the town of Thomar in 1758 under Governor Francisco Xavier de Mendonça Furtado. Bararoá served as a major trading post between the Upper and Lower Rio Negro and had a population of 1,500 in 160 households, descended from the Manaos, Bares, Passés, and Ajuanas nations. The Bares nation lived on the Japurá River, and their descendants, along with those of the Manaos and Baníba, populate settlements such as Araretama, Mariuá, Manaos",
+      "details": {
+        "facts": [
+          "Bararoá (Parish of Our Lady of the Rosary of) is on the right bank of the Rio Negro, 2021 leagues above the mouth of the Jamundá River, under parallel 00° 16' S., crossed by the meridian 29° 33' W. of Olinda.",
+          "Its first location was on the southern bank near the mouth of the Xjuará River, in front of Timoni Island, from where it was moved to the current site.",
+          "Bararoá was completely reduced to ashes by the rebellion of 1757."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "The Pará revolution of 1835, led initially by Archpriest Baptista and later involving Malcher, resulted in widespread anarchy and social dissolution. Rebel forces, known as cabanos, controlled settlements temporarily but were unable to maintain lasting dominance. Gregorio Nazianzeno da Costa led a successful restoration on August 31, 1836, with Captain João Ignacio Rodrigues do Carmo assuming Military Command, and Captain Miguel Nunes Bemfica of the Itarendáua company noted for his valor. Ambrósio Ayres, a convict, organized a force in Bararoá, fought the cabanos on the Maués River and in Icuipiranga, and became Military Commander of the District. Pedro Ayres, claiming to be Ambrósio’s brother and a U.S. Navy officer, along with Ghamburg, explored Guiana, the Rio Branco, and confronted the British at Fort St. Joaquim. A tailor from Stabrok, posing as a missionary, attempted to convert Indigenous people along the Pirarára River.",
+      "details": {
+        "facts": [
+          "A convict named Ambrósio Ayres gathered a select company in Bararoá and took this name.",
+          "Ambrósio Ayres descended the Rio Negro and distinguished himself by feats of arms against the cabanos in the Maués River and in Icuipiranga.",
+          "Ambrósio Ayres contributed to the surrender of Icuipiranga."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "The Directory was a colonial administrative institution that maintained the cohesion of Indigenous populations in the Amazon, particularly in settlements such as Marina, São Paulo, Mariuá, Lama-Longa, Caboquena, and Bararoá. Its dissolution, ordered by royal letter at the request of D. Francisco de Souza Coutinho, Governor of Pará, led to the dispersal and decline of Indigenous settlements, especially in the Captaincy of Rio Negro governed by Manoel da Gama Lobo da Almada. The Jesuits were implicated in uprisings and desertions, aiming to revert the Amazon to its pre-colonial state. In 1823, José Bonifacio advocated for merging the Directory’s regulations with those of the Missions, suggesting that uniting the roles of Missionary and Director could have yielded better results in integrating Indigenous communities. The text distinguishes between Indigenous groups of São Paulo and Minas, who are more nomadic and valley-dwelling, and those of the Amazon, who are riverine and more sedentary.",
+      "details": {
+        "facts": [
+          "Bararoá was the site of a horrific rebellion."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "Our Lady of the Conception was the patroness of several settlements: the City of Manaus, Villa de Mariuá, Parish of Caboquena on the Rio Negro, Villa de Lusea on the Maués, Tapera on Lake Canomá, and Tapera on the Rio Branco between Santa Maria and St. Philip. Other patronesses included Our Lady of Guadalupe (Fonte-Boa), Our Lady of the Candlemas (on the Rio Negro), Our Lady of Loreto (on the Rio Negro), Our Lady of Nazareth (Curiana, on the Rio Negro), Our Lady of Mount Carmel (Parish of Canomá), Our Lady of the Rosary (Itacoatiara on the Amazon, Parauari on the Tefé, Bararoá on the Rio Negro), Our Lady of Health (Boa Vista, Rio Negro), and Our Lady of Help (Capella, Rio Negro; Matari, on the lake of the same name). The Omágua, also known as Cambeba, inhabited islands on the Solimões above the Jutahi River. The Pacaraima mountain range in Guiana (Latitude 4° 00' N, Longitude 25° 05' to 29° 05'",
+      "details": {
+        "facts": [
+          "Bararoá is a parish on the Rio Negro.",
+          "Our Lady of the Rosary is the patroness of the parish of Bararoá on the Rio Negro.",
+          "The Padauari River is on the left bank of the Negro, opposite the parish of Bararoá."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "Upon entering the Nhamundá River district, a tribe of women known as the Icamiaba, living separately from men under their own laws, was reported. Francisco de Orellana encountered the Icamiaba during his descent of the Amazon, marking a significant event in the region’s history. The area comprises two main divisions: Manaus (including the city of Manaus, parishes such as Amatari and Itacoatiara, and settlements like Cumaru and Jatapú) with 15,776 people and 1,600 households; and Mariuá (including the town of Mariuá, parishes like Aracari and Santa Isabel, and settlements such as Boa Vista and S. Gabriel) with 10,811 people and 1,327 households. Including 450 people from Guiana settlements on the Japurá River (district of Tefé), the total population is 27,037 across 2,970 households, making Guiana the most populated region of the Upper Amazon. The region is notable for its agricultural production (cotton, coffee, cacao, tobacco) and abundant fisheries (pirarucu, manatee, turtle), with exports reaching the market of Pará.",
+      "details": {
+        "facts": [
+          "Bararoá is a parish in the town of Mariuá, which is one of the two divisions of the Guiana region in the Upper Amazon."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "In the interior of Pará, population estimates in official reports ranged from 30,000 to 40,000 people, but the inhabitants were widely dispersed across lakes, rivers, and streams rather than concentrated in settlements. Settlements like Bararoá, which once had 780 households, declined to just 13 households, though the actual population did not decrease proportionally due to widespread dispersion. The fertile riverbanks and abundant natural resources encouraged people to live outside settlements, coming to missions only for religious duties and festivals. The lack of ministers and weakened authority further contributed to the abandonment and ruin of settlements, with many inhabitants relocating to remote areas along waterways. Population counts based on settlement households became unreliable as people increasingly avoided registration and official oversight.",
+      "details": {
+        "facts": [
+          "Bararoá had 780 households and today, according to Baena, has 13.",
+          "Baena states Bararoá has 439 souls, which is considered excessive for so few households.",
+          "There is a great disproportion between households and people in Bararoá, explained by the dispersion of the population."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "São José de Iama-IiOaiga was a settlement on the right bank of the Rio Negro, between the Xibarú River and the Anhori Stream, located between Bararoá and Santa Izabel, 127 leagues above the confluence of the Rio Negro and 205 leagues from the mouth of the Jamundá. It was founded by Principal Dari, who separated from Bararoá and incorporated the Auacihidá Village, three leagues upstream. In 1757, a rebellion led to the destruction by fire of São José de Iama-IiOaiga, Bararoá, and Caboquéna. The inhabitants, from the Manáos, Banibas, and Barés tribes, cultivated manioc, fruits, rice, coffee, and cotton, and produced cloth, hammocks, ropes, pitch, salsaparrilha, and puxiri. The settlement belonged to the district of Mariuá, and the Tupica language served as the universal interpreter throughout the Province of Pará and was widely spoken among Indigenous peoples and settlers.",
+      "details": {
+        "facts": [
+          "Bararoá is mentioned as a location near São José de Iama-IiOaiga, a settlement on the right bank of the Rio Negro.",
+          "São José de Iama-IiOaiga is situated between Bararoá and Santa Izabel.",
+          "In 1757, a rebellion broke out in São José de Iama-IiOaiga, which, together with Bararoá and Caboquéna, was reduced to ashes."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "By the mid-eighteenth century, the Upper Amazon reached its peak population, with about 30,000 households and at least 100,000 inhabitants. Despite earlier devastation of Solimões settlements by Spanish Jesuits, the Carmelites restored many communities, notably the Tecúnas' settlement, and established numerous villages along the Amazon, Solimões, Rio Negro, and Rio Branco, including Saracá, Itacoatiara, Tefé, Barra, Mariuá, Santa Izabel, and São Filippe. The Carmelite Mission, over 55 years, established settlements on both banks of the Rio Negro up to above its waterfalls and, in less than 40 years, restored Solimões settlements. By this time, only a few Amazon tributaries had been explored: Urubu and Saracá lakes on the Guiana side, Madeira on the Mundurucania side, and the Purús and Juruá in the Solimões; most northern tributaries remained unexplored above their mouths. Expeditions, often seeking Indigenous people or resources like turtle butter, ventured into these rivers, with 'rescue' parties entering the Japurá.",
+      "details": {
+        "facts": [
+          "Bararoá was one of the villages established on the Rio Negro below the waterfalls during the mid-eighteenth century in the Upper Amazon."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Japurá River lies to the south, with the Branco, Padauari, and Cauaburi rivers to the north, reaching the Guiana mountains. Between 30 and 40 Indigenous nations inhabit these forests, including the Manáos, Cambébas (Solimões), Aráras (Madeira), and Mundurucús (Tapajoz). In 1637, Pedro Teixeira discovered the mouth of the Rio Negro and contacted the Uaranacoacenas; in 1669, Pedro da Costa Favella founded the first settlement on the Rio Negro near Aiurim with Tarumá and Aruaqui peoples, later moved to Jahú. The Fortress of St. Joseph of the Barra do Rio Negro was founded in 1670 by Francisco da Motta Falcão, and in 1693, Guilherme Valente founded the village now called Aracari. The Carmelites began missions among the Uaranacoacenas in 1695. In 1725, expeditions explored the Rio Negro and its tributaries, discovering the connection between the Orinoco and Rio Negro via the Iniridá, Parauá, Paçavicá, Tumbú, and Casiquiare. In",
+      "details": {
+        "facts": [
+          "In 1637, Captain-Major Pedro Teixeira discovered the mouth of the Rio Negro and had dealings with the Uaranacoacenas.",
+          "In 1658, Jesuit Francisco Gonçalves entered the Rio Negro.",
+          "In 1669, Captain Pedro da Costa Favella, with F. Theodosio, founded the first settlement on the Rio Negro with Tarumã and Aruaqui Indigenous people near Aiurim; it was later moved to the vicinity of Jahú."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "On February 7, 1842, a colonel, three officers, and forty English soldiers with three cannons built a fort and raised the British flag at Pirarà on the shores of Lake Amacû. Missionary José dos Santos Innocentes withdrew to the fort of San-Joaquin, and Lake Amacù and its surroundings were declared neutral territory by agreement between the two nations. The insurrection of Praia de Sangues and subsequent measures reduced the population of Brazil’s frontier, prompting many Indians to relocate to Dutch Surinam. The upper Rio Branco region has about a thousand inhabitants, who trade with British and Dutch Guiana. Captain-Major Pedro Texeira was the first to travel the Rio Negro in 1637, discovering its mouth while ascending the Amazon to Peru; since then, missionaries have established settlements among the thirty or forty indigenous nations along its banks.",
+      "details": {
+        "facts": [
+          "Several missionaries have founded settlements on the Rio Negro to convert the wild nations living in large numbers on both banks of the river."
+        ],
+        "year": 1861,
+        "doc_name": "Voyage aux provinces brésiliennes du Pará et des Amazones en 1860, précédé d'une rapide coup d'oeil, sur le littoral du Brésil, Belmar, A. de."
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "São José de Iama-IiOaiga was a settlement on the right bank of the Rio Negro, between the Xibarú River and the Anhori Stream, located between Bararoá and Santa Izabel, 127 leagues above the confluence of the Rio Negro and 205 leagues from the mouth of the Jamundá. It was founded by Principal Dari, who separated from Bararoá, and incorporated the Auacihidá Village, three leagues upstream. In 1757, a rebellion led to the destruction by fire of São José de Iama-IiOaiga, Bararoá, and Caboquéna. The inhabitants, from the Manáos, Banibas, and Barés tribes, cultivated manioc, fruits, rice, coffee, and cotton, and produced cloth, hammocks, ropes, pitch, salsaparrilha, and puxiri. The settlement belonged to the district of Mariuá, and the Tupica language was universally spoken among Indigenous peoples throughout the Province of Pará.",
+      "details": {
+        "facts": [
+          "Bararoá was a settlement on the right bank of the Rio Negro, between the Xibarú River and the Anhori Stream, and between Bararoá and Santa Izabel, 127 leagues above the confluence of the Rio Negro, and 205 from the mouth of the Jamundá.",
+          "São José de Iama-IiOaiga was founded by Principal Dari, who separated from Bararoá.",
+          "Upon its founding, São José de Iama-IiOaiga incorporated the Auacihidá Village, which was three leagues further upstream."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "By the mid-eighteenth century, the Upper Amazon reached its peak population, with about 30,000 households and at least 100,000 people. Despite earlier devastation of Solimões settlements by Spanish Jesuits, the Carmelites restored many villages, notably the Tecúnas' settlement, and expanded missions along the Rio Negro. Key settlements included Saracá, Itacoatiara, São Raymundo, Conceição, São Pedro Nolasco, Matari, Mundurucania, Trocano, Coari, Tefé, Parauari, Caiçara, Fonte-Boa, Evirateua, São Paulo, Javari, Maripi, Barra, Jahú, Pedreiras, Aracari, Cumaru, Mariuá, Caboquena, Bararoá, Dari, Santa Izabel, Camanão, Camará, Castanheiro, Coané, Curiana, Guia, Iparaná, Loreto, Mabbé, Maracabi, Santa Anna, Santa Barbara, São Filippo, São Marcellino, São Pedro, Carmo, Santa Maria, São Filippe, Conceição, and São Martinho. The Carmelites established or restored these settlements in 55 years along",
+      "details": {
+        "facts": [
+          "Bararoá was one of the settlements established on the Rio Negro below the waterfalls in the mid-18th century.",
+          "The settlements on the Rio Negro, including Bararoá, were in a promising state during this period.",
+          "The Carmelite Mission was responsible for establishing and restoring settlements along both banks of the Rio Negro, including Bararoá, over a period of 55 years."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Evirateua area forms the parish of St. Christopher of Maturá. St. Joseph of Javari, once prominent, is now a Tecúna village, while St. Fernando has disappeared, and Tabatinga, Tonantins, and Boa Vista are in decline. In 1716, exploration began along the Madeira River; Jesuits founded a mission that relocated multiple times to escape the Múras, now established as Our Lady of the Rosary of Itacoatiara on the Amazon’s northern bank. In 1720, the government addressed official abuses in trade with a law on August 29, and forced Indigenous relocations reached the Branco River. In 1721, an expedition under Analyst Ferredo destroyed the Júmas’ village at Lake Cupacá after the killing of Friar Antonio de Andrade. In 1725, Francisco de Mello Palheta’s expedition determined the Beni River was the continuation of the Madeira, which then received its current name. Around this time, Ajuricaba, chief of the Manáos of the Hiiáá River, led raids on Negro River missions, abducting neophytes to Dutch Guiana, prompting Governor João da Maia Gama to dispatch Belchior Mendes de Mora",
+      "details": {
+        "facts": [
+          "Ajuricaba, chief of the Manáos of the Hiiáá River, attacked the missions on the Negro River.",
+          "Ajuricaba abducted neophytes from the Negro River missions and transported them by the Branco River to Dutch possessions.",
+          "The attacks on the Negro River missions were instigated by the Dutch from Guiana."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "On April 25, 1838, the Provincial Assembly of Pará created a \"corps of workers,\" subjecting about two-thirds of the district's population to forced labor. On October 15, 1839, a tax of 286 réis out of 509,000 réis was imposed on river and lake traders. In 1840, individuals in Manaus acquired vacant municipal lands, leading to irregular urban development reminiscent of Alfama on the Rio Negro. News of the July 23, 1840 revolution of Dom Pedro II was received in October 1840. In February 1841, Chamburg arrived in Pirarára from Stabroek, confronting missionary Innocentes over British territorial claims, leading to a temporary withdrawal agreement. The garrison at Fort São Joaquim was increased to 50 men, with defensive measures extending to Boraroá. On May 3, 1841, Major Francisco Raymundo Correia de Faria took military command, but later that year, the Pará government withdrew reinforcements from the Rio Branco frontier.",
+      "details": {
+        "facts": [
+          "Measures were taken as far as Bararoá to reinforce the frontier at the slightest news of aggression, with instructions to its commander to use force against any invasion."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "In the Amazon, attempts to set fixed prices and monopolies on products like sugarcane and tobacco led to farmer resistance, as cultivators only grew what they wished and could abandon crops if coerced. The text mentions rare Amazonian products such as vanilla, cinnamon, puxeri, and guaraná, suggesting that cultivation could be encouraged by requiring farmers to plant a certain number annually under threat of losing their land. The establishment of boats and markets on rivers like the Solimões, Napo, and Santiago, connecting settlements such as the City of Borja and Bracamoros, was proposed to improve communication and commerce among missions and settlements. In the Spanish-controlled Amazon, there were only three Spanish settlements, one town, and three cities, with most cities being cities in name only. Regular river transport was seen as essential for Spaniards to access and export the region’s wealth, particularly to Quito.",
+      "details": {
+        "facts": [
+          "Establishing markets in each mission and using boats for transportation are considered the best means to facilitate abundance and low prices in Bararoá Indigenous settlements.",
+          "The system of boats and fairs can be practiced on rivers such as the Solimões, Napo, and others to ensure good communication with missions and settlements.",
+          "Introducing the practice of boats and markets will facilitate communication and commerce in Indigenous settlements."
+        ],
+        "year": 1820,
+        "doc_name": "Quinta parte do Thesouro descoberto no rio maximo Amazonas, Đaniel, João"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The settlement of Manaos features a square, a National Treasury warehouse, a brickworks, employee residences, and the ruins of the Fortress of St. Joseph of Rio Negro and the Hospital of St. Vincent. The population consists of about 900 whites, 2,500 mestizos, 4,080 indigenous people (including Raníbas, Rarés, Passés, Paianas, Urequenas, and Manaos), 640 mixed-race, and 380 slaves, distributed across 900 scattered households. Manaos serves as the district’s administrative center, housing a Vicar General, Military Commander, Judge of Law, Inspector of the Treasury, Judge of Orphans, Prosecutor, Jury Court, Electoral College, and four National Guard companies. The economy is based on commerce, especially fishing for pirarucu, processing turtle and manatee butter, and extracting precious drugs, with limited agriculture (mainly cotton, coffee, and foodstuffs). Beef is consumed mainly on Sundays and during the flood season, supplied by cattle from the Branco River.",
+      "details": {
+        "facts": [
+          "The inhabitants of the Bararoá Indigenous settlement engage very diligently in commerce.",
+          "Commerce includes the fishing of pirarucu, the processing of turtle and manatee butter, and the extraction of precious drugs."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "Upon entering the Nhamundá River in Guiana, a tribe of women known as the Icamiaba, living separately from men under their own laws, was noted by Orellana during his Amazon expedition. The region is divided into Manaus and Mariuá: Manaus includes the city of Manaus, parishes such as Amatari and Itacoatiara, and settlements like Cumaru and Jatapú, totaling 15,776 people in 1,600 households; Mariuá includes the town of Mariuá, parishes like Aracari and Santa Isabel, and settlements such as Boa Vista and S. Gabriel, with 10,811 people in 1,327 households. Including 450 people from Guiana settlements on the Japurá River (district of Tefé), the total population is 27,037 in 2,970 households, making Guiana the most populated region of the Upper Amazon. The area is known for cultivating cotton, coffee, cacao, tobacco, and various other crops, and for exporting fish, turtle oil, and feather-embroidered maqueira nets.",
+      "details": {
+        "facts": [
+          "Bararoá is a parish in the town of Mariuá division of the region.",
+          "The region, including Bararoá, is the most inhabited of the Upper Amazon and has the most plantations.",
+          "Cotton, coffee, cacao, and tobacco are cultivated in the region."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Baeta and BaiMri were Indigenous nations of the Solimões, with the Baeta located on the river of the same name and the BaiMri on the Juruá River. The Baetas River, on the left bank of the Madeira between lakes Saraimo and Maruimtíba, had a native village at its mouth and was near the fourth site of the parish of Araretama. The Bararoá parish (Our Lady of the Rosary), on the right bank of the Rio Negro, 2021 leagues above the Jamundá River mouth (00° 16' S, 29° 33' W of Olinda), was originally near the Xjuará River and Timoni Island before being relocated and destroyed in the 1757 rebellion. In 1758, Governor Francisco Xavier de Mendonça Furtado made Bararoá a town named Thomar, but it later lost this status. Bararoá served as a major trading post between the Upper and Lower Rio Negro, with a population of 1,500 in 160 households descended from the Manaos, Bares, Passés, and Ajuanas nations, cultivating crops and producing goods such as cotton cloth, hammocks, and piassava ropes",
+      "details": {
+        "facts": [
+          "Bararoá (Parish of Our Lady of the Rosary of) was completely reduced to ashes by the rebellion of 1757.",
+          "Bararoá was made a town with the name of Thomar in 1758 by the Governor of the State, Francisco Xavier de Mendonça Furtado."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "Puerto de Exaltación de la Santa Cruz was a mission settlement featuring thatched huts, banana plants, and wind-torn vegetation, inhabited by Mojos Indians. The pueblo had large, grass-grown streets with decaying house-posts, indicating former importance, all leading to a central plaza. The plaza, about 330 feet long on one side, was dominated by a church with a separate bell tower and the former Jesuit college, both featuring wide verandas and finely carved wooden columns. The buildings, constructed by Jesuit fathers, were made of adobe and wood, designed to withstand the climate and had endured for over a century and a half despite later neglect after the Jesuits’ expulsion from Paraguay, Brazil, and Bolivia. The settlement’s architecture included low, whitewashed cottages with projecting roofs, few windows, and numerous crucifixes, contributing to a monastic atmosphere.",
+      "details": {
+        "facts": [
+          "The Bararoá Jesuit mission was inhabited by Indians, specifically referred to as Mojos.",
+          "Indians were seen bathing and women filling jars at the mission.",
+          "Indians at the mission wore long white shirts and moved silently along the corridors."
+        ],
+        "year": 1875,
+        "doc_name": "The Amazon and Madeira rivers : sketches and descriptions from the note-book of an explorer, Keller, Franz"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Baeta, BaiMri, and Bailractiâ were Indigenous nations of the Solimões, with the BaiMri and Bailractiâ located on the Juruá River. The Baetas River, on the left bank of the Madeira between lakes Saraimo and Maruimtíba, had a native village at its mouth and was near the fourth location of the parish of Araretama. The BaMi5)a nation of Guiana lived on the Içána and Ixié rivers, giving rise to populations in Lama-Longa, Manaos, Guia, Santa Anna, S. Filippo, Mabbé, and S. Marcellino. The parish of Bararoá (Our Lady of the Rosary), on the right bank of the Rio Negro, 2021 leagues above the Jamundá River mouth, was founded near the Xjuará River and Timoni Island, destroyed in the 1757 rebellion, and made a town named Thomar in 1758 by Governor Francisco Xavier de Mendonça Furtado. Bararoá was a major trading post between Upper and Lower Rio Negro, with a population of 1,500 in 160 households descended from the Manaos, Bares, Passés,",
+      "details": {
+        "facts": [
+          "Bararoá (Parish of Our Lady of the Rosary of) was located on the right bank of the Rio Negro, 2021 leagues above the mouth of the Jamundá River.",
+          "Bararoá was completely reduced to ashes by the rebellion of 1757.",
+          "Bararoá was called the Court of the Rio Negro and of the famous Manaos Nation due to its population."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "In 1624, Fathers Luiz Figueira and Benedicto Amodei, accompanied by captain-major Antonio Moniz Barreiros under orders from Governor Diogo de Mendonça Furtado, arrived in Maranhão to support Portuguese control against the French and their Tupinambá allies. Their negotiations led to the peaceful submission of the natives and the French surrender of Maranhão. From 1624 to 1642, Jesuit Fathers, including Lopo do Couto, focused on educating and converting both natives and Portuguese settlers in Maranhão, Pará, Camutá, and Gurupá, where many indigenous people had only nominal Christian status. In 1635, Father Figueira reported the spiritual neglect of these communities to King Philip IV, resulting in royal orders for the Jesuits to administer all free Indians in Maranhão and Pará and to establish three churches and supporting houses. In 1642, King João confirmed these provisions.",
+      "details": {
+        "facts": [
+          "Most of the native people on the island of Maranhão and the mainland were Tupinambás.",
+          "Jesuit Fathers, including Father Luiz Figueira and Father Benedicto Amodei, worked on the education of the natives from 1624 to 1642.",
+          "Father Luiz Figueira visited all the Indian villages of the Captaincies of Pará, Camutá, and Gurupá in 1635."
+        ],
+        "year": 1858,
+        "doc_name": "Corographia historica, Mello Moraes, Alexandre José"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Directory was a colonial administrative institution that maintained cohesion between Indigenous people and colonial society in the Amazon, particularly in settlements such as Marina, São Paulo, Mariuá, Lama-Longa, Caboquena, and Bararoá. Its dissolution, ordered by royal letter at the request of D. Francisco de Souza Coutinho, Governor of Pará, and aimed at curbing the progress of the Captaincy of Rio Negro under Manoel da Gama Lobo da Almada, led to the dispersal and decline of Indigenous settlements. The Jesuits were implicated in uprisings and desertions, including the withdrawal of Indigenous people from Marina and São Paulo and the rebellion of Lama-Longa, Caboquena, and Bararoá. In 1823, José Bonifacio argued for merging the Directory and Mission systems, suggesting that such integration could have improved Indigenous administration. The text also notes differences between Indigenous groups of São Paulo and Minas, who are more nomadic, and those of the Amazon, who are more sedentary and riverine.",
+      "details": {
+        "facts": [
+          "The Bararoá rebellion was a horrific uprising involving Indigenous people.",
+          "The Jesuits were involved in machinations that led to the withdrawal of Indigenous people from certain areas and the rebellion of Bararoá.",
+          "The dispersal of Indigenous people followed the dissolution of the Directory, leading to the reduction and disappearance of some settlements."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "São José de Iama-IiOaiga was a settlement on the right bank of the Rio Negro, between the Xibarú River and the Anhori Stream, situated between Bararoá and Santa Izabel, 127 leagues above the confluence of the Rio Negro and 205 from the mouth of the Jamundá. It was founded by Principal Dari, who named it after himself when he separated from Bararoá, and incorporated the Auacihidá Village, three leagues further upstream. In 1757, a rebellion led to the destruction by fire of São José de Iama-IiOaiga, Bararoá, and Caboquéna. The inhabitants, from the Manáos, Banibas, and Barés tribes, cultivated manioc, fruits, rice, coffee, and cotton, and produced cloth, hammocks, ropes, pitch, salsaparrilha, and puxiri. The settlement belonged to the district of Mariuá, and the Tupica language was universally spoken throughout the Province of Pará and among its indigenous peoples.",
+      "details": {
+        "facts": [
+          "Bararoá was a Jesuit mission settlement.",
+          "The inhabitants of Bararoá originated from the Manáos, Banibas, and Barés Indigenous groups.",
+          "In 1757, Bararoá was destroyed in a rebellion involving Indigenous people."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "In 1635, Father Antonio Vieira traveled from Pará to Maranhão and then to the royal court to report mission difficulties directly to His Majesty. The king issued three main directives: no offensive war or harm against Gentile Indians without royal order, Christian and vassal Indians in villages to live freely under their chiefs and parish priests, and missionaries to conduct interior missions independently from governors, with chosen military support when necessary. Governor André Vidal of Maranhão implemented these orders, enabling missionaries to proceed with their work. That same year, Fathers Francisco Velloso and Thomé Ribeiro led a mission to the Tupinambás, traveling over three hundred leagues up the Tocantins River, making peace with the Guarajús and Catingus before reaching the Tupinambás. The missionaries faced significant risks, including dangerous river travel and lack of resources.",
+      "details": {
+        "facts": [
+          "In 1635, the Jesuit mission to the Tupinambás was carried out, more than three hundred leagues up the Tocantins River.",
+          "Fathers Francisco Velloso and Thomé Ribeiro participated in the mission to the Tupinambás.",
+          "The missionaries made peace on the river with the Guarajús and the Catingus Indians before proceeding to the Tupinambás."
+        ],
+        "year": 1858,
+        "doc_name": "Corographia historica, Mello Moraes, Alexandre José"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The regulation assigned the Fathers of the Company both spiritual and political-temporal governance of the villages under their administration, using local languages to ensure effective communication. A dispute occurred involving Eugenio Martins da Camara, director of Souzel, over parish authority. The general of the State issued measures by circular letter, mandating parish priests to instruct girls over nine years old in doctrine within churches, with directors and relatives present. The decree of June 7, 1755, stipulated that ordinary judges and officials should manage temporal government, but in practice, directors exercised broad, often coercive authority. The directory regulated cultivation and commerce between Indians and settlers as essential for the State’s establishment.",
+      "details": {
+        "facts": [
+          "The Fathers of the Company (Jesuits) had not only the spiritual government but also the political and temporal government of the villages under their administration.",
+          "The Jesuits administered seven villages.",
+          "The Jesuits were responsible for both spiritual and temporal ministry in the villages."
+        ],
+        "year": 1858,
+        "doc_name": "Corographia historica, Mello Moraes, Alexandre José"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "On June 1, 1757, the Upper Amazon was elevated to the Captaincy of St. Joseph of Javari. In January 1758, the Governor traveled up the Rio Negro, promoted the village of Mariuá to the town of Barcelos, and designated it as the seat of the Captaincy of St. Joseph of Rio Negro, replacing the name Javari. On May 27, 1758, Colonel Joaquim de Mello e Povoas was installed as the first Governor of the new Captaincy. Leaders of the 1757 Lama-Longa rebellion—Manaos Ambrósio and João Damasceno, and the Indigenous man Domingos—were executed in Caboquena. By this time, the Spanish, aided by Jesuits, had occupied much of the Rio Negro, established the military post of St. Carlos below the Casiquiare, and expelled the Portuguese from the Orinoco waters. In January 1759, a Spanish Expedition led by D. José de Iturriaga, D. Eugénio d'Alvarado, and D. José Solano arrived at the Rio Negro capital with a large contingent. The Law of September 3, 1759, banished the Company (",
+      "details": {
+        "facts": [
+          "The Jesuits, under the pretext of seeking the Portuguese settlement designated for the commissioners’ conferences, entered the country, explored it, ingratiated themselves, and won over the Indigenous people, in whose villages they built huts under the pretext of collecting service for their Expedition.",
+          "The Jesuits used these huts and their presence to later claim possession of the territory.",
+          "The Jesuits established the military post of St. Carlos below the Casiquiare."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "Don Antonio Rolim, appointed governor, established the town of Pouse Alegre—renamed Villa Bella—on 19 March 1752, making it the capital and transferring the cathedral from the hermitage of Santa Anna. Rolim expelled Spanish Jesuits from the right bank of the Guaporé River and promoted navigation initiated by Manoel de Lima in 1742, as well as opening two roads to Rio de Janeiro and Bahia. During his fourteen-year governorship, Rolim developed sugar-cane cultivation, attracted colonists, and defended Portuguese frontiers against Santa Cruz de la Sierra from 1759 to 1764. Luiz de Albuquerque Mello Pereira e Caceres, arriving after a 14-month overland journey from Rio de Janeiro, founded the village of Albuquerque, settled Guatós and Quinqumaolos Indians, and in 1775 demarcated the captaincy’s boundaries, ordering the construction of Forte de Coimbra at Fecho dos Morros. In 1768, the Payagoàs separated from the Guaycurús.",
+      "details": {
+        "facts": [
+          "Don Antonio Rolim had brought instructions to establish a town on a fit site, with the task of expelling the Spanish Jesuits settled on the right bank of the Guaporé.",
+          "The Jesuits were obliged to withdraw from the places which they occupied intrusively and illegally."
+        ],
+        "year": 1873,
+        "doc_name": "Notions on the chorography of Brazil, Joaquim Manuel de"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "In mid-1839, Carmelite Friar José dos Innocentes was sent as a missionary up the Rio Branco to the territory of Pirarára. After Ambrósio Ayres Bararoá, Captain José Antonio d'Oliveira Horta became Military Commander of the district, later joined by Navy Lieutenant Joaquim Sabino da Silva, by order of the Command of the Expedition to the Amazon. In March 1840, following internal disputes, Navy Lieutenant Lourenço da Silva Araujo e Amazonas was appointed Military Commander by Lieutenant Colonel Manoel Muniz Tavares. On March 28, 1840, 800 rebels surrendered in the town of Lusea, leading to widespread pacification. A decree on November 4, 1849, pardoned the rebels, and the district was granted leniency, including civil trials for former insurgents and exemption from corporal punishment and conscription for the National Guards.",
+      "details": {
+        "facts": [
+          "After Bararoá, the administration of the district was assumed, also as Military Commander, by Captain of the National Guard José Antonio d'Oliveira Horta.",
+          "Navy Lieutenant Joaquim Sabino da Silva was later joined to the administration by order of the Command of the Expedition to the Amazon.",
+          "In March 1840, Navy Lieutenant Lourenço da Silva Araujo e Amazonas was appointed to the Military Command of the District by Lieutenant Colonel Manoel Muniz Tavares, Commander of the Expedition."
+        ],
+        "year": 1858,
+        "doc_name": "Corographia historica, Mello Moraes, Alexandre José"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "On March 20, 1719, Governor Bernardo Pereira de Berredo convened a council of missions in Belém do Grão-Pará to address the relocation of Indians from the hinterlands to sugar mills and farms in the State of Maranhão. The council established regulations for the treatment of relocated Indians, including specific provisions for clothing and feeding boys and girls during their service, and mandated their return to their villages after one year. On April 13, 1728, a royal decree was issued in response to these measures, but Governor Alexandre de Sousa Freire encountered difficulties in implementation, leading to another council and new agreement. The appointment of a procurator for the Indians, chosen from among themselves with approval from the Fathers, was strongly recommended to defend their welfare and rights. The matter was further addressed in Lisbon on April 12, 1729, with a directive for review by the Overseas Council.",
+      "details": {
+        "facts": [
+          "A council of missions was convened by Governor Bernardo Pereira de Berredo in Belém do Grão-Pará on March 20, 1719, to address the relocation of Indians from the hinterlands to sugar mills and other farms in the State of Maranhão.",
+          "The agreement from this council included clauses and limitations to ensure the freedom of the Indians.",
+          "A procurator for the Indians was to be appointed by the governor, elected from among the Indians themselves with the approval of the Fathers, to defend their welfare and rights."
+        ],
+        "year": 1858,
+        "doc_name": "Corographia historica, Mello Moraes, Alexandre José"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Directory was a colonial administrative institution that maintained cohesion between Indigenous people and broader society in the Amazon, countering Jesuit influence and uprisings such as those at Mariuá, Lama-Longa, Caboquena, and Bararoá. The Governor of Pará, D. Francisco de Souza Coutinho, sought and obtained the dissolution of the Directory from the court to hinder the progress of the Captaincy of Rio Negro, led by Manoel da Gama Lobo da Almada. The dissolution led to the dispersal and decline of Indigenous settlements, with some disappearing entirely. José Bonifacio, in 1823, advocated for merging the Directory and Mission systems to improve Indigenous integration, noting regional differences between Indigenous groups in São Paulo, Minas, and the Amazon, particularly in settlement patterns and subsistence strategies.",
+      "details": {
+        "facts": [
+          "The Directory was the only effective bond that kept the Indigenous people united with the rest of society.",
+          "The horrific rebellion of Bararoá was one of the events that challenged the Directory's administration.",
+          "The dissolution of the Directory by royal letter resulted in the dispersal of the Indigenous people and the disappearance of some settlements."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "In 1755, the Company was verified, and with diminished threats to trade and law, military officers in the region were reassigned to civil and political duties by Captain General Francisco Xavier Furtado de Mendonça. On January 6, 1756, Furtado de Mendonça issued legislative instructions for founding the town of Borba on the Madeira River, entrusting its execution to Lieutenant Diogo Antonio de Castro. These measures were confirmed by a royal letter on July 7, 1757, and included a regulatory directory of ninety-five paragraphs dated May 3, 1757, which was enacted immediately. The Jesuit Fathers maintained significant influence over the Tapuyas and other Indians, keeping them in lifelong service within their missions. A petition was raised to transfer temporal governance of the villages from missionaries to married white leaders, citing missionary exploitation of Indian labor for private gain and denial of Indian service to the Crown and settlers.",
+      "details": {
+        "facts": [
+          "Captain General Francisco Xavier Furtado de Mendonça established a legislative instruction for the establishment of the new town of Borba on the Madeira River on January 6, 1756.",
+          "The execution of the instruction for Borba was entrusted to Lieutenant Diogo Antonio de Castro.",
+          "A royal letter dated July 7, 1757, confirmed the measures for Borba and ordered the same measures to be applied to other towns."
+        ],
+        "year": 1858,
+        "doc_name": "Corographia historica, Mello Moraes, Alexandre José"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "Ambrósio Ayres Bararoá would have left an illustrious name, if to the brilliance of his military deeds and the dignity of the cause to which he dedicated himself, he had joined the necessary probity and honest conduct. In the middle of 1839, the Carmelite Friar José dos Innocentes was sent as a missionary up the Rio Branco to the territory of Pirarára, whose disposition convinced the dissenting missionary of the convenience of his withdrawal. After Bararoá, the administration of the district was assumed, also as Military Commander, by Captain of the National Guard José Antonio d'Oliveira Horta, to whom was later joined Navy Lieutenant Joaquim Sabino da Silva by order of the Command of the Expedition to the Amazon. The unwise nature of such a partnership soon produced its natural consequences; and in March 1840, two couriers descended the Amazon carrying mutual complaints to the Commander of the Expedition, then Lieutenant Colonel Manoel Muniz Tavares, who replied by communicating the appointment of Navy Lieutenant Lourenço da Silva Araujo e Amazonas to the Military Command of the District. Pardoned by Decree of November 4, 1849, the rebels of that dreadful five-year period presented their submission in the town of Lusea on March 28, 1840. Eight hundred men there surrendered their arms, and soon after, pacification was achieved everywhere, both by the presentation of the pardoned and by their withdrawal to other districts. The idea of gathering in the settlements individuals from different parties, full of resentment from mutual offenses, was indeed a cause for serious apprehension, as such feelings are naturally hard to forget. However, this fear was overcome both by the conviction shared by all of the need to put an end to so many misfortunes, and by the sincere efforts of the Expedition Authorities, in whose orders the following passage can be read: \"I order that wherever such individuals (pardoned) arrive, they shall be treated humanely, as loyal subjects of His Majesty the Emperor Dom Pedro II, and citizens in full enjoyment of all the rights guaranteed by the Political Constitution of the Empire. I forbid anyone to remind them spitefully of their previous conduct.\" That year (1840), the district owed to the benevolent consideration of the Command of the Expedition to the Amazon the tolerance of allowing individuals involved in past military uprisings to be judged in civil courts, for which reason they were returned to their homes; and the tacit exemption from corporal punishment for the National Guards, then called Police, as well as from conscription, which weighed upon other districts—a revolting measure, always observed alongside restorations, and which constitutes their greatest misfortune, apart from the burnings in Bahia. The news of a project in the Chamber of Deputies for the elevation of the district to the status of Province could not be more",
+      "details": {
+        "facts": [],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "On May 29, 1757, the Governor at the Capital published the Law of June 6, 1755, based on the Bull of Benedict XIV (December 20, 1741), restoring freedom and privileges to Indigenous peoples equal to Portuguese subjects. To implement this, the Governor issued the Directory on May 3, 1757, regulating the status of freed Indigenous people. Indigenous groups hindered border demarcation by detaining the Spanish Party in the Orinoco and inciting 130 Portuguese soldiers to desert to Spanish Caribana after looting Marina and sacking a settlement. From June to September 1757, villages Dari, Caboquena, and Bararoá were burned, and Missionary Friar Raymundo de Santo Eliseu and the Chief of Caboquena were killed. By late September, rebels led by Chief Mabbé gathered on Timoni Island, planning to seize Mariuá, but were stopped by Captain Miguel de Siqueira’s expedition from Apeaná with 180 soldiers.",
+      "details": {
+        "facts": [
+          "The Governor drew up a Regulation on May 3, 1757, suited to the circumstances of the Indigenous people freed from slavery, which he called the Directory.",
+          "The Directory was a document displaying administrative ability and philanthropy, intended to make effective the pious measure of restoring freedom to Indigenous peoples.",
+          "From June to September 1757, the villages of Dari, Caboquena, and Bararoá were reduced to ashes during a rebellion."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Rio Branco was noted for its fertility and reputed riches, prompting Fernando da Costa de Athayde, general of the State, to recommend its settlement, contingent on the availability of settlers and royal approval. Missionaries, including the friar Mathias in Mariuá and the renowned Vieira, successfully converted local Indians by integrating into their settlements, respecting their customs, and avoiding coercion, under royal orders. The mission system originally restricted village residency to Indians, excluding whites and mixed descendants, but this separation was later abolished by the directory to promote civility, commerce, and integration. The preservation of Indians in their own settlements was seen as beneficial to both Church and State, preventing their decline when relocated.",
+      "details": {
+        "facts": [
+          "The directory abolished the odious separation that prevented whites or people of mixed descent from residing in Indian villages.",
+          "The directory's abolition of this separation was justified as being contrary to the principles of civility, commerce, and good society.",
+          "The directory promoted communication and alliances between Indians and others to encourage the practice of good and lawful customs, reform rusticity, and teach skills necessary for commerce."
+        ],
+        "year": 1858,
+        "doc_name": "Corographia historica, Mello Moraes, Alexandre José"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "In 1798, settlers ascended the Upper Amazon to found São João do Crato at the mouth of the Jamari River, with Luiz Pinto de Cerqueira ordered to direct it in 1799. That year, the Governor of the State moved the seat of the Captaincy from Rarra to Barcellos, following a request made on August 3, 1798. The Directorate, which linked Indigenous people to colonial society, was abolished by Royal Charter on May 12, 1798, leading many Indigenous people to relocate to remote headwaters and lakes. Brigadier Manoel da Gama Lobo d'Almada, who arrived in Pará in 1770, commanded the Fortress of Macapá in 1771, explored the Negro, Branco, and Japurá rivers, became Governor of the Captaincy of Rio Negro in 1788, and died in Barcellos on October 27, 1799.",
+      "details": {
+        "facts": [
+          "The Directorate was extinguished by Royal Charter of May 12, 1798.",
+          "The extinction of the Directorate was requested by the Governor of the State.",
+          "The Directorate was the link that kept the Indigenous people united with society."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "In mid-1839, Carmelite Friar José dos Innocentes was sent as a missionary up the Rio Branco to the territory of Pirarára but withdrew due to local conditions. After Ambrósio Ayres Bararoá, Captain José Antonio d'Oliveira Horta became Military Commander of the district, later joined by Navy Lieutenant Joaquim Sabino da Silva by order of the Command of the Expedition to the Amazon. In March 1840, following internal disputes, Navy Lieutenant Lourenço da Silva Araujo e Amazonas was appointed Military Commander by Lieutenant Colonel Manoel Muniz Tavares. On March 28, 1840, in the town of Lusea, 800 rebels surrendered, marking the pacification of the district after a five-year conflict. A decree of November 4, 1849, pardoned the rebels, and the authorities emphasized humane treatment and civil rights for the pardoned individuals.",
+      "details": {
+        "facts": [
+          "After Bararoá, the administration of the district was assumed, also as Military Commander, by Captain of the National Guard José Antonio d'Oliveira Horta.",
+          "Navy Lieutenant Joaquim Sabino da Silva was later joined to the administration by order of the Command of the Expedition to the Amazon.",
+          "In March 1840, Navy Lieutenant Lourenço da Silva Araujo e Amazonas was appointed to the Military Command of the District by Lieutenant Colonel Manoel Muniz Tavares, Commander of the Expedition."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Directory was a colonial administrative institution that maintained cohesion between Indigenous people and broader society in the Amazon, countering the influence of Jesuits, whose actions included the withdrawal of Indigenous people from Marina and São Paulo, and instigating uprisings such as those at Mariuá, Lama-Longa, Caboquena, and Bararoá. Governor D. Francisco de Souza Coutinho of Pará, seeking to hinder the development of the Captaincy of Rio Negro under Governor Manoel da Gama Lobo da Almada, secured the dissolution of the Directory by royal decree, leading to the dispersal and decline of Indigenous settlements. There was debate about whether merging the Directory's regulations with those of the Missions, uniting the roles of Missionary and Director, would have yielded better results. José Bonifacio, in 1823, advocated for such a fusion, noting differences between Indigenous groups from São Paulo, Minas, and the Amazon, particularly in settlement patterns and subsistence strategies.",
+      "details": {
+        "facts": [
+          "The Bararoá rebellion was one of several uprisings and desertions that challenged the Directory's colonial administration.",
+          "The Directory was the only effective bond that kept the Indigenous people united with the rest of society.",
+          "The dissolution of the Directory by royal letter led to the dispersal of the Indigenous people and the reduction or disappearance of some settlements."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Directory was an administrative institution that maintained cohesion between Indigenous people and colonial society in the Amazon, countering the influence of Jesuits, whose actions included the withdrawal of Indigenous people from Marina and São Paulo, and uprisings in Mariuá, Lama-Longa, Caboquena, and Bararoá. Governor D. Francisco de Souza Coutinho of Pará, seeking to limit the progress of the Captaincy of Rio Negro under Manoel da Gama Lobo da Almada, secured the dissolution of the Directory by royal decree, leading to the dispersal and decline of Indigenous settlements. The text suggests that merging the Directory's regulations with those of the Missions, uniting the roles of Missionary and Director, might have yielded better results. José Bonifacio, in 1823, advocated for such integration, noting differences between Indigenous groups of São Paulo and Minas (more nomadic, valley dwellers) and those of the Amazon (riverbank settlers, more sedentary).",
+      "details": {
+        "facts": [
+          "The dissolution of the Directory resulted in the dispersal of the Indigenous people.",
+          "The dissolution led to a general reduction and even the disappearance of some settlements.",
+          "The Directory was the only effective bond that kept the Indigenous people united with the rest of society."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "In 1798, settlers ascended the Upper Amazon to found São João do Crato at the mouth of the Jamari River, and in 1799, Luiz Pinto de Cerqueira was ordered to direct the settlement. The seat of the Captaincy was moved from Rarra to Barcellos in 1799 by order of the Governor of the State, D. Francisco de Souza Coutinho, following a request made on August 3, 1798. The Directorate, which linked Indigenous people to colonial society, was extinguished by Royal Charter on May 12, 1798, leading many Indigenous people to relocate to remote river headwaters and lakes. Brigadier Manoel da Gama Lobo d'Almada, who arrived in Pará in 1770, explored the Negro, Branco, and Japurá rivers, became Governor of the Captaincy of Rio Negro in 1788, and died in Barcellos on October 27, 1799.",
+      "details": {
+        "facts": [
+          "The Directorate was extinguished by Royal Charter of May 12, 1798.",
+          "The Directorate was the link that kept the Indigenous people united with society.",
+          "After the dissolution of the Directorate, Indigenous people fled the reach of any Director and settled at the headwaters of rivers, lakes, or other remote places to avoid being summoned for service."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "In the interior of Pará, the population in the early 19th century was estimated between 30,000 and 40,000, but was highly dispersed across sites, lakes, and rivers rather than concentrated in settlements. Settlements like Bararoá declined drastically, from 780 households to 13, yet the actual number of people did not decrease proportionally, due to widespread dispersion. The fertile riverbanks and abundance of natural resources such as hunting, fishing, and wild fruits encouraged inhabitants to live outside formal settlements, only visiting for services, festivals, or religious duties. The lack of ministers and weakened authority further contributed to the abandonment and ruin of settlements, with people moving to remote areas along rivers and lakes, making accurate population counts difficult.",
+      "details": {
+        "facts": [
+          "With the decline and dissolution of the Bararoá Directory, the people became dispersed and fell behind in education, moving toward a state of nature.",
+          "Although the number of households in Bararoá decreased drastically (from 780 to 13), the population did not decrease proportionally, indicating dispersion rather than depopulation.",
+          "The abandonment of the district, lack of ministers for worship and spiritual care, and relaxation of authority led inhabitants to feel excused from appearing in settlements, causing them to move further away."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Pará revolution of 1835, led initially by Archpriest Baptista and later involving Malcher, resulted in widespread anarchy and social dissolution. The rebel cabanos controlled settlements only temporarily, losing them when retreating. Gregorio Nazianzeno da Costa successfully led a restoration on August 31, 1836, after which João Ignacio Rodrigues do Carmo became Military Commander of the District. Captain Miguel Nunes Bemfica of the Itarendáua company and Ambrósio Ayres, who organized a force in Bararoá and fought on the Maués River and in Icuipiranga, played key roles in defeating the cabanos. During this period, Pedro Ayres, claiming to be Ambrósio’s brother and an officer of the United States Navy, along with Ghamburg, explored Guiana, the Rio Branco, and challenged the British at Fort St. Joaquim, while a tailor from Stabrok posed as a missionary among Indigenous people on the Pirarára.",
+      "details": {
+        "facts": [
+          "The dissolution of the Bararoá Directory marked a new era for its inhabitants, who with the restoration gained only in the dignity of the cause: arbitrariness, oppression, and extortion continued almost as under the rule of the cabanos."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "Francisco Xavier de Mendonça Furtado redirected settlement efforts from the Amazon to the village of Mariuá on the Rio Negro, despite concerns about the region's lack of abundance compared to the Amazon. The Captaincy's administrative center was considered to remain in Barcelos for greater advantage to the State. The cessation of the directory in Pará would end the roles of directors, canoe leaders of commerce, and the general treasurer of the Indians, reallocating their fourteen percent profit from Indian trade to fund the new administrative boards in Pará, Maranhão, and the kingdom. The same levy would apply to white residents benefiting from Indian labor and commerce along the rivers. The board would oversee the propagation of the faith, reduction of paganism, and enforcement of relevant laws in these territories.",
+      "details": {
+        "facts": [
+          "With the cessation of the directory, the directors, the canoe leaders of commerce, and the general treasurer of the Indians residing in Pará also cease, and consequently, the profits they received, amounting to fourteen percent of all goods collected and traded by the Indians, should be applied to the expenses of the board.",
+          "The cessation of the directory redirects existing contributions (previously received by directors and others) to fund the new board's activities.",
+          "The same levy (fourteen percent) should remain unchanged for all products and goods obtained or traded by white residents, as they also benefit from Indian labor and commerce."
+        ],
+        "year": 1858,
+        "doc_name": "Corographia historica, Mello Moraes, Alexandre José"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Directory was a colonial administrative institution that maintained cohesion between Indigenous people and broader society in the Amazon, countering Jesuit influence and uprisings such as those at Mariuá, Lama-Longa, Caboquena, and Bararoá. The withdrawal of Indigenous people from Marina and São Paulo, and troop desertions at Mariuá, reflected instability. Governor D. Francisco de Souza Coutinho of Pará, seeking to hinder the Captaincy of Rio Negro under Manoel da Gama Lobo da Almada, secured the Directory's dissolution by royal letter, leading to the dispersal and disappearance of some settlements. José Bonifacio, in 1823, advocated merging Directory and Missionary roles for more effective Indigenous policy, noting regional differences between Indigenous groups in São Paulo, Minas, and the Amazon. The text highlights the impact of administrative changes on Indigenous settlement patterns and regional adaptation strategies.",
+      "details": {
+        "facts": [
+          "The dissolution of the Directory was obtained by the Governor of the State of Pará, D. Francisco de Souza Coutinho, through a royal letter.",
+          "The dissolution of the Directory resulted in the dispersal of the Indigenous people, a general reduction, and even the disappearance of some settlements.",
+          "The Directory was the only effective bond that kept the Indigenous people united with the rest of society."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "More than thirty thousand arrobas of cacao were extracted, while local residents harvested less than five thousand, with much of the produce bought from estates and resold in the city and other settlements of the State. The councils of this city and São Luís do Maranhão complained that missionaries punished Indians indiscriminately and exploited them for estate benefit, often leaving them without spiritual guidance. By royal decree on August 17, 1758, the king approved a regulation that restructured the economy, governance, and family interests of the State’s settlements, appointing directors to advise and persuade local judges and chiefs. These directors, lacking coercive jurisdiction, nonetheless extended their authority, effectively controlling all government and interests in the settlements.",
+      "details": {
+        "facts": [
+          "The regulation called a directory gave a different shape to the economy and governance of the settlements and establishments of the State, affecting the civility and political governance of the Indians and private family interests.",
+          "The directory established directors who were supposed to advise and persuade judges and chiefs, but in practice, these directors extended their authority excessively and became superintendents and masters of all government and interests.",
+          "The dissolution of the previous system and the implementation of the directory subverted many healthy purposes of the laws and postponed the execution and observance of previous laws."
+        ],
+        "year": 1858,
+        "doc_name": "Corographia historica, Mello Moraes, Alexandre José"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "On May 29, 1757, the Governor at the Capital published the Law of June 6, 1755, based on the Bull of Benedict XIV (December 20, 1741), restoring freedom and equal privileges to Indigenous peoples as Portuguese subjects. To implement this, the Governor issued the Directory regulation on May 3, 1757, for the administration of newly freed Indigenous people. Indigenous groups hindered the border demarcation by detaining the Spanish Party in the Orinoco and inciting 130 Portuguese soldiers to desert to Spanish Caribana after looting Marina’s arsenals and sacking the settlement. From June to September 1757, villages of Dari, Caboquena, and Bararoá were burned, and Missionary Friar Raymundo de Santo Eliseu and the Chief of Caboquena were killed following a conflict in Dari. By late September, rebels led by Chief Mabbé gathered on Timoni Island, planning to seize Mariuá, but were stopped by Captain Miguel de Siqueira’s expedition from Apeaná with 180 soldiers.",
+      "details": {
+        "facts": [
+          "The Law of June 6, 1755, restored freedom to Indigenous peoples and enabled them to receive honors and privileges like other Portuguese subjects.",
+          "On May 3, 1757, the Governor drew up a Regulation called the Directory for the circumstances of Indigenous people freed from slavery.",
+          "The Directory was intended to make the pious measure of Indigenous freedom effective."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "In the interior of Pará, between 30,000 and 40,000 people were reported by the Provincial Assembly president, but the population was highly dispersed along rivers, lakes, and streams rather than concentrated in settlements. Bararoá, once with 780 households, had declined to 13 households, though the number of inhabitants remained disproportionately high due to this dispersion. The fertile riverbanks and abundant natural resources encouraged people to settle outside formal settlements, only returning for religious duties or festivals. The lack of ministers and weakened authority led inhabitants to move further from settlements, causing many settlements to fall into ruin or disappear, making accurate population counts difficult.",
+      "details": {
+        "facts": [
+          "After the decline and dissolution of the Bararoá Directory, the indigenous population became dispersed and fell behind in education, moving toward a state of nature.",
+          "Although settlements like Bararoá were reduced (from 780 households to 13), the indigenous population did not comparatively decrease but became scattered.",
+          "Many settlements were reduced or disappeared as indigenous people left to live along rivers, lakes, and streams, attracted by easy subsistence from hunting, fishing, and gathering."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The banks of the Rio Branco were noted for their fertility and reputed riches, prompting Fernando da Costa de Athayde, general of the State, to recommend its settlement if settlers were available and in the absence of contrary royal orders. Missionaries, including the friar Mathias in Mariuá and others in their respective missions, made significant progress in converting local Indians by respecting their customs and avoiding coercion. The missionary approach, supported by royal orders and exemplified by Vieira, aimed to keep Indians in their own settlements to prevent their ruin and death when relocated. Initially, mission villages excluded whites and people of mixed descent, a policy later abolished by the directory to encourage civility, commerce, and integration.",
+      "details": {
+        "facts": [
+          "The directory abolished the odious separation that prevented whites or people of mixed descent from residing in Indian villages.",
+          "The abolition of this separation was justified as being contrary to the principles of civility, commerce, and good society.",
+          "The aftermath of the directory's dissolution included increased communication and alliances, the practice of good and lawful customs, the reform of rusticity, and the abandonment of wilderness customs opposed to political doctrine."
+        ],
+        "year": 1858,
+        "doc_name": "Corographia historica, Mello Moraes, Alexandre José"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "In 1833, the Code of Procedure was promulgated, eliminating Administrative Authorities except in provincial capitals and transferring their powers to Police elected by the people. The district was divided into four jurisdictions: Manaus (between the Jumundá and Aucruhi rivers in Guiana), Mariuá (rest of the Rio Negro and its tributaries), Tefé (entire Solimões and Japurá), and Lusea (all of Mundurucania in the district). Settlements were restored to their original Brazilian names, reversing previous Lusitanian renaming. The National Guard was created at this time. In September 1834, Major Manoel Machado da Silva Santiago assumed military command of the district, but his authority was undermined by a demoralized detachment, abandoned borders, and the independent National Guard, while he faced isolation due to his opposition to the enslavement of Indigenous people.",
+      "details": {
+        "facts": [
+          "The Code of Procedure (1833) was promulgated after the dissolution of the Bararoá Directory.",
+          "The Code eliminated Administrative Authorities everywhere except in the capitals of the provinces and invested such powers in the Police, elected by the people.",
+          "The district was divided into four jurisdictions: Manaus, Mariuá, Tefé, and Lusea."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "Francisco Xavier de Mendonça Furtado redirected settlement plans from the Amazon to the village of Mariuá on the Rio Negro, despite its lesser abundance and importance compared to the Amazon. The debate concerned whether the Captaincy should remain in Barcelos, which was considered more advantageous for the State. Administrative boards were proposed for Pará, Maranhão, and the kingdom, funded by redirecting a fourteen percent levy previously collected from goods traded by Indians and white residents, replacing the profits of the now-defunct directory, directors, canoe leaders, and general treasurer of the Indians in Pará. The board was tasked with overseeing the propagation of the faith, reduction of paganism, and enforcement of relevant laws in these territories.",
+      "details": {
+        "facts": [
+          "With the cessation of the directory, the directors, the canoe leaders of commerce, and the general treasurer of the Indians residing in Pará also cease, and consequently, the profits they received, amounting to fourteen percent of all goods collected and traded by the Indians, should be applied to the expenses of the board.",
+          "The same levy should remain unchanged for all products and goods obtained or traded by white residents, since they also benefit from having Indians for their agriculture.",
+          "Such revenues should be collected in a treasury."
+        ],
+        "year": 1858,
+        "doc_name": "Corographia historica, Mello Moraes, Alexandre José"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Pará revolution of 1835, led by Archpriest Baptista and later involving Malcher, resulted in widespread anarchy and social dissolution. Rebel forces, known as cabanos, controlled settlements only temporarily due to insufficient numbers. Gregorio Nazianzeno da Costa led a successful restoration on August 31, 1836, with João Ignacio Rodrigues do Carmo assuming Military Command, and Captain Miguel Nunes Bemfica distinguished himself in Itarendáua. Ambrósio Ayres, a convict, formed a company in Bararoá, fought cabanos on the Maués River and in Icuipiranga, and became Military Commander. Pedro Ayres, claiming to be Ambrósio’s brother and an officer of the United States Navy, crossed from Lima, explored Guiana and the Rio Branco, and confronted the British at Fort St. Joaquim. A tailor from Stabrok, posing as a missionary, attempted to convert Indigenous people along the Pirarára River.",
+      "details": {
+        "facts": [
+          "After the dissolution of the Bararoá Directory, arbitrariness, oppression, and extortion continued almost as under the rule of the cabanos.",
+          "The restoration marked a new era for the inhabitants, but they gained only in the dignity of the cause, not in improved conditions.",
+          "A tailor from Stabrok, posing as a missionary, was inviting Indigenous people on the banks of the Pirarára to his sect and society with perfidious practices."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Directory was an administrative institution that maintained cohesion between Indigenous people and colonial society in the Amazon, countering Jesuit influence and Indigenous withdrawals from settlements like Marina and São Paulo, as well as uprisings in Mariuá, Lama-Longa, Caboquena, and Bararoá. Governor D. Francisco de Souza Coutinho of Pará, seeking to hinder the development of the Captaincy of Rio Negro under Manoel da Gama Lobo da Almada, secured the dissolution of the Directory by royal decree, leading to the dispersal and decline of Indigenous settlements. There was debate over whether merging the Directory's regulations with those of the Missions—combining the roles of Missionary and Director—would have yielded better results. José Bonifacio, in 1823, supported this integration, noting differences between Indigenous groups in São Paulo and Minas (more nomadic, valley dwellers) and those of the Amazon (riverbank settlers, more sedentary). The dissolution of the Directory marked a significant shift in the administration and settlement patterns of Indigenous populations in the Amazon region.",
+      "details": {
+        "facts": [
+          "After the dissolution of the Directory, there was a dispersal of the Indigenous people.",
+          "The dissolution resulted in a general reduction and even the disappearance of some settlements.",
+          "The Directory was the only effective bond that kept the Indigenous people united with the rest of society."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "In 1798, settlers ascended the Upper Amazon to found São João do Crato at the mouth of the Jamari River, and in 1799, Luiz Pinto de Cerqueira was ordered to direct it. The seat of the Captaincy was moved from Rarra to Barcellos in 1799 by order of the Governor of the State, D. Francisco de Souza Coutinho, following a request from August 3, 1798. The Directorate, which linked Indigenous people to colonial society, was extinguished by Royal Charter on May 12, 1798, leading many Indigenous people to relocate to remote river headwaters and lakes. Brigadier Manoel da Gama Lobo d'Almada, who arrived in Pará in 1770, commanded the Fortress of Macapá in 1771, explored the Negro, Branco, and Japurá rivers, and served as Governor of the Captaincy of Rio Negro from 1788 until his death in Barcellos on October 27, 1799.",
+      "details": {
+        "facts": [
+          "The Directorate was extinguished by Royal Charter of May 12, 1798.",
+          "The extinction of the Directorate was requested by the Governor of the State.",
+          "The Directorate was the link that kept the Indigenous people united with society."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Pará revolution of 1835, led by Archpriest Baptista and later involving Malcher, resulted in widespread anarchy and social dissolution. The cabanos (rebels) controlled settlements temporarily but lost them upon retreat. Gregorio Nazianzeno da Costa led a successful restoration on August 31, 1836, with Captain João Ignacio Rodrigues do Carmo assuming Military Command, and Captain Miguel Nunes Bemfica of the Itarendáua company noted for his valor. Ambrósio Ayres, a convict, formed a company in Bararoá, fought the cabanos on the Maués River and in Icuipiranga, and became Military Commander of the District. Pedro Ayres, claiming to be Ambrósio’s brother and an officer of the United States Navy, explored Guiana, the Rio Branco, and its tributaries, and confronted the British at Fort St. Joaquim. A tailor from Stabrok, posing as a missionary, attempted to convert Indigenous people on the Pirarára River.",
+      "details": {
+        "facts": [
+          "After the dissolution of the Bararoá Directory, Ambrósio Ayres gathered a company in Bararoá, descended the Rio Negro, fought against the cabanos, contributed to the surrender of Icuipiranga, and was appointed Military Commander of the District.",
+          "The restoration marked a new era for Bararoá's inhabitants, but arbitrariness, oppression, and extortion continued almost as under the cabanos.",
+          "The Military Commander of Bararoá was joined by Pedro Ayres, who, with Ghamburg, explored the territory of Guiana and confronted the British flag at the fort of St. Joaquim."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "More than thirty thousand arrobas of cacao were extracted, while local residents harvested less than five thousand, with much of the produce bought from estates and resold in the city and other settlements of the State. The city council and that of São Luís do Maranhão complained that missionaries punished Indians indiscriminately and left them without spiritual guidance when absent. On August 17, 1758, a royal decree approved a new regulation that restructured the economy and governance of the settlements, affecting both Indian civility and family interests. This regulation established directors to advise and persuade judges and chiefs, but these directors extended their authority, effectively controlling all government and interests in the settlements.",
+      "details": {
+        "facts": [
+          "After the dissolution of the Bararoá Directory, the regulation gave a different shape to the economy and governance of the settlements and establishments of the State.",
+          "The regulation affected the civility and political governance of the Indians and the private interests of families.",
+          "The decision subverted many healthy purposes of the laws, whose rules were certain and unchanging."
+        ],
+        "year": 1858,
+        "doc_name": "Corographia historica, Mello Moraes, Alexandre José"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "In the interior of Pará, between 30,000 and 40,000 people were reported in settlements, but the population was highly dispersed along rivers, lakes, and streams due to the region’s geography and fertile banks. Settlements like Bararoá declined dramatically, from 780 households to 13, yet the number of inhabitants did not decrease proportionally, indicating widespread dispersion rather than depopulation. Many natives lived outside settlements, visiting only for services, festivals, or religious duties, while maintaining nominal houses in the settlements. The lack of ministers and weakened authority led inhabitants to move further from settlements, often to remote river sources, causing many settlements to fall into ruin or disappear. Population counts based on settlements became unreliable, as most people lived scattered in the countryside.",
+      "details": {
+        "facts": [
+          "After the dissolution of the Bararoá Directory, the population became dispersed and fell behind in education, moving toward a state of nature.",
+          "The number of people did not comparatively decrease, but the settlements were reduced and some disappeared.",
+          "Bararoá, which had 780 households, was reduced to 13 households according to Baena, but the population did not decrease proportionally."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "In mid-1839, the Expedition to the Amazon, commanded by Lieutenant Colonel Joaquim José Luiz de Souza, was stationed at the town of Tapajoz with a force including a brig, four schooners, a cutter, two gunboats, riflemen, artillery, and National Guards from both Amazon districts. The stronghold at Icuipiranga was dismantled by Father Antonio Manoel Sanches de Brito before the expedition’s arrival, forcing rebels to retreat to the headwaters of the Maués River, which allowed communication with both Tapajoz and the Amazon. The town of Lusea was fortified to prevent rebel incursions from the Amazon, while forces from Tapajoz conducted continuous operations. On January 30, 1839, a campaign to Maranhão Grande led by a 4th Navy Lieutenant further weakened the rebels. Settlements were restored and rebels pursued to the headwaters of Maués and Autazes, with military commanders established in key locations such as Manaus, subordinate to the Expedition to the Amazon.",
+      "details": {
+        "facts": [
+          "After the dissolution of the Bararoá Directory, the command of Bararoá, confirmed a second time by the Government of Pará, became somewhat oppressive, resulting in failed uprisings and some individuals from principal families being forced to go into hiding.",
+          "Once the settlements were restored and the rebels pursued to the headwaters of Maués and Autazes, Military Commanders were created throughout the Province under the pretext of defending the settlements.",
+          "Despite the restoration, Military Commanders were retained either because of the delicate situation or the supposed lack of qualified personnel."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The district of Mariuá includes the town of Mariuá, parishes such as Itarendaua, Carmo, Aracari, Caboquena, Bararoá, Santa Izabel, and Marabitanas, and settlements like Boavista, Caldas, Camanão, Camará, Capella, Castanheiro, Coané, Curiana, Guia, Íparana, Lama-Longa, Loreto, Mabbé, Maracaby, Santa Anna, Santa Barbara, St. Philip, St. Gabriel, St. Joachim, St. Joseph, St. Marcellinus, St. Mary, and St. Peter. The region comprises 4 cities, 3 towns, 48 parishes, and 35 settlements, with a total population of 40,584. Each district capital has a municipal council and a subdelegate of police, while Manaus has a delegate. The districts of Teffé and Mariuá join Manaus for juror selection, with the council meeting in Manaus; Luséa has its own council. Settlements are set to resume their original indigenous names during this administrative reorganization.",
+      "details": {
+        "facts": [
+          "After the dissolution of the Governing Junta, the government of Pará established a military command in the Upper Amazon district.",
+          "The military commander was responsible for internal administration, policing, and defense of the borders.",
+          "The establishment of military command was due to the need to address discontent among people accustomed to being governed by authorities of importance and prestige, who rejected those imposed by the new order."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "Francisco Xavier de Mendonça Furtado redirected settlement plans from the Amazon to the village of Mariuá on the Rio Negro, despite concerns about its lesser abundance and strategic value compared to the Amazon. The Captaincy was proposed to remain in Barcelos, considered more advantageous to the State. Administrative boards were suggested for Pará, Maranhão, and the kingdom, funded by redirecting the fourteen percent profit previously collected by directors, canoe leaders, and the general treasurer of the Indians in Pará from all goods traded by Indians, except their own foodstuffs. This levy was to be extended to white residents benefiting from Indian labor and commerce. The board would oversee religious propagation, the reduction of paganism, and the enforcement of relevant laws.",
+      "details": {
+        "facts": [
+          "With the cessation of the directory, the directors, the canoe leaders of commerce, and the general treasurer of the Indians residing in Pará also cease.",
+          "The profits previously received by these officials, amounting to fourteen percent of all goods collected and traded by the Indians (except foodstuffs from their own farms), should be applied to the expenses of the board.",
+          "The same levy should remain unchanged for all products and goods obtained or traded by white residents."
+        ],
+        "year": 1858,
+        "doc_name": "Corographia historica, Mello Moraes, Alexandre José"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Directory was an administrative institution that maintained cohesion between Indigenous people and colonial society in the Amazon, countering the influence of Jesuits, whose actions included the withdrawal of Indigenous groups from Marina and São Paulo, and uprisings such as those at Mariuá, Lama-Longa, Caboquena, and Bararoá. Governor D. Francisco de Souza Coutinho of Pará, seeking to hinder the development of the Captaincy of Rio Negro under Governor Manoel da Gama Lobo da Almada, secured the dissolution of the Directory by royal decree, leading to the dispersal and decline of Indigenous settlements. There was contemporary debate about whether merging the Directory’s regulations with those of the Missions, uniting the roles of Missionary and Director, would have yielded better results. José Bonifacio, in 1823, advocated for such a fusion, noting differences between Indigenous groups of São Paulo and Minas—who were more nomadic and valley-dwelling—and those of the Amazon, who were more sedentary and riverine.",
+      "details": {
+        "facts": [
+          "After the dissolution of the Directory, there was a dispersal of the Indigenous people.",
+          "The dissolution resulted in a general reduction and even the disappearance of some settlements.",
+          "The Directory was the only effective bond that kept the Indigenous people united with the rest of society."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "In 1798, settlers ascended the Upper Amazon to found São João do Crato at the mouth of the Jamari River. In 1799, Luiz Pinto de Cerqueira was ordered to direct this settlement, and the seat of the Captaincy was moved from Rarra to Barcellos by order of the Governor of the State, D. Francisco de Souza Coutinho, following a request from August 3, 1798. The Directorate, which linked Indigenous people to colonial society, was extinguished by Royal Charter on May 12, 1798, causing many Indigenous people to relocate to remote river headwaters. Brigadier Manoel da Gama Lobo d'Almada, who arrived in Pará in 1770, commanded the Fortress of Macapá in 1771, explored the Negro, Branco, and Japurá rivers, and served as Governor of the Captaincy of Rio Negro from 1788 until his death in Barcellos on October 27, 1799.",
+      "details": {
+        "facts": [
+          "The Directorate was extinguished by Royal Charter of May 12, 1798.",
+          "The extinction of the Directorate was requested by the Governor of the State.",
+          "The Directorate was the link that kept the Indigenous people united with society."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Pará revolution of 1835, led by Archpriest Baptista and later involving Malcher, resulted in widespread anarchy and social dissolution. Rebel forces known as cabanos controlled settlements temporarily but were unable to maintain lasting dominance. Gregorio Nazianzeno da Costa successfully led a restoration effort, culminating on August 31, 1836, after which João Ignacio Rodrigues do Carmo assumed Military Command of the District. Captain Miguel Nunes Bemfica of the Itarendáua company and Ambrósio Ayres, who organized a force in Bararoá and fought on the Maués River and at Icuipiranga, played key roles in defeating the cabanos. During this period, Pedro Ayres, claiming to be Ambrósio’s brother and an officer of the United States Navy, explored Guiana, the Rio Branco, and confronted the British at Fort St. Joaquim, while a tailor from Stabrok attempted to convert Indigenous people along the Pirarára River.",
+      "details": {
+        "facts": [
+          "After the dissolution of the Bararoá Directory, Ambrósio Ayres gathered a company in Bararoá, descended the Rio Negro, fought against the cabanos, contributed to the surrender of Icuipiranga, and was appointed Military Commander of the District.",
+          "The restoration following the Bararoá Directory's dissolution marked a new era for its inhabitants, but arbitrariness, oppression, and extortion continued almost as under the cabanos.",
+          "After the Directory's dissolution, the Military Commander of Bararoá was joined by Pedro Ayres, who, with Ghamburg, explored the territory of Guiana and confronted the British flag at the fort of St. Joaquim."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "More than thirty thousand arrobas of cacao were extracted, while local residents harvested less than five thousand, with much of the produce bought from estates and resold in the city and other settlements of the State. The city council and that of São Luís do Maranhão complained that missionaries punished Indians indiscriminately and exploited them for estate benefit, often leaving them without spiritual guidance. The governor, recognized for his talent, was ordered by the king to investigate the causes of revolts in the State, receiving royal approval by decree on August 17, 1758. This regulation, known as the \"directory,\" restructured the economy and governance of settlements, affecting both Indian civility and family interests, and established directors to advise local officials, though these directors often exceeded their authority and dominated governance.",
+      "details": {
+        "facts": [
+          "After the dissolution of the Bararoá Directory, the regulation gave a different shape to the economy and governance of the settlements and establishments of the State.",
+          "The regulation affected the civility and political governance of the Indians and the private interests of families.",
+          "The decision subverted many healthy purposes of the laws, whose rules were certain and unchanging."
+        ],
+        "year": 1858,
+        "doc_name": "Corographia historica, Mello Moraes, Alexandre José"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "In mid-1839, the Expedition to the Amazon, commanded by Lieutenant Colonel Joaquim José Luiz de Souza, was stationed at the town of Tapajoz with a fleet and military forces including riflemen, artillery, and National Guards from both Amazon districts. The stronghold at Icuipiranga was dismantled by Father Antonio Manoel Sanches de Brito before the expedition's arrival, and rebels retreated to the headwaters of the Maués River, facilitating communication with Tapajoz and the Amazon. The town of Lusea was fortified to block rebel movements from the Amazon, while forces from Tapajoz conducted continuous operations. On January 30, 1839, a campaign to Maranhão Grande, led by the 4th Navy Lieutenant, further weakened the rebels. Settlements were restored and rebels pursued to the headwaters of Maués and Autazes, with military commanders established throughout the province, including in Manaus, to administer and defend the districts.",
+      "details": {
+        "facts": [
+          "After the dissolution of the Bararoá Directory, the command of the leader Bararoá, confirmed a second time by the Government of Pará, had become somewhat oppressive, resulting in some failed uprisings and forcing some individuals from principal families to go into hiding.",
+          "Once the settlements were restored and the rebels pursued to the headwaters of Maués and Autazes, Military Commanders were created throughout the Province under the pretext of defending the settlements.",
+          "Despite the restoration, Military Commanders were retained either because of the delicate situation or the supposed lack of qualified personnel for the positions prescribed by the Code."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The district of Mariuá, along with the town of Mariuá, the parishes of Itarendaua, Carmo, Aracari, Caboquena, Bararoá, Santa Izabel, and Marabitanas, and settlements such as Boavista, Caldas, Camanão, Camará, Capella, Castanheiro, Coané, Curiana, Guia, Íparana, Lama-Longa, Loreto, Mabbé, Maracaby, Santa Anna, Santa Barbara, St. Philip, St. Gabriel, St. Joachim, St. Joseph, St. Marcellinus, St. Mary, and St. Peter, together account for 40,814 inhabitants. The region comprises 4 cities, 3 towns, 48 parishes, and 35 settlements, with 40,584 inhabitants. Each district capital has a municipal council and a subdelegate of police, while Manaus has a delegate. The districts of Teffé and Mariuá join Manaus for the selection of jurors, whose council meets in Manaus; Luséa has its own council. Settlements are to resume their original indigenous names during this administrative reorganization.",
+      "details": {
+        "facts": [
+          "After the dissolution of the Governing Junta, the government of Pará established a military command in the Upper Amazon district.",
+          "The military commander was responsible for internal administration, policing, and defense of the borders.",
+          "This arrangement led to jurisdictional conflicts between the military commander and police officials, weakening authority and causing relaxation of discipline among the people."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "In the interior of Pará, settlements such as Bararoá experienced significant population dispersion due to the region's geography, characterized by numerous rivers, lakes, and fertile banks. Bararoá, once with 780 households, was reported by Baena to have only 13 households and 439 souls, though this figure is considered excessive given the few remaining houses. The indigenous population often lived scattered along waterways, coming to settlements only for services, festivals, and religious duties, while maintaining houses there as required. The decline of settlements was exacerbated by a lack of ministers and weakened authority, prompting inhabitants to move further into remote areas, making accurate population counts difficult. Some settlements were abandoned and fell into ruin, with the population relocating to the sources of lakes and rivers.",
+      "details": {
+        "facts": [
+          "After the dissolution of the Bararoá Directory, the population became dispersed and fell behind in education, moving toward a state of nature.",
+          "The number of people did not comparatively decrease, but the settlements were reduced and some disappeared.",
+          "Bararoá, which had 780 households, was reduced to 13 households, but the population did not decrease proportionally due to dispersion."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "Francisco Xavier de Mendonça Furtado redirected settlement efforts from the Amazon to the village of Mariuá on the Rio Negro, despite concerns about the region's lack of abundance compared to the Amazon. The Captaincy's location in Barcelos was considered more advantageous for the State. Administrative boards were proposed in Pará, Maranhão, and the kingdom, funded by redirecting the fourteen percent profit previously collected by directors, canoe leaders, and the general treasurer of the Indians in Pará from goods traded by Indians, except for their own foodstuffs. This levy was to be extended to white residents, who also benefited from Indian labor and commerce. The board was tasked with overseeing the propagation of the faith, reduction of paganism, and enforcement of relevant laws.",
+      "details": {
+        "facts": [
+          "With the cessation of the directory, the directors, the canoe leaders of commerce, and the general treasurer of the Indians residing in Pará also cease, and consequently, the profits they received, amounting to fourteen percent of all goods collected and traded by the Indians, should be applied to the expenses of the board.",
+          "The same levy should remain unchanged for all products and goods obtained or traded by white residents.",
+          "Such revenues should be collected in a treasury."
+        ],
+        "year": 1858,
+        "doc_name": "Corographia historica, Mello Moraes, Alexandre José"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "In the interior of Pará, between 30,000 and 40,000 people were reported by the Provincial Assembly President in one year, though the population was highly dispersed across sites, lakes, and rivers rather than concentrated in settlements. Bararoá, once with 780 households, was reduced to 13 households, yet still had 439 inhabitants according to Baena, illustrating a disproportion between households and population due to dispersion. The fertile riverbanks and abundance of natural resources led natives to settle outside official settlements, only returning for services, festivals, and religious duties. The decline of settlements was exacerbated by a lack of ministers and weakened authority, causing further abandonment and ruin of settlement structures. Population counts based on settlements became unreliable as people moved to remote sources of rivers and lakes, avoiding official registration and obligations.",
+      "details": {
+        "facts": [
+          "Bararoá, which had 780 households, now has 13 households according to Baena.",
+          "Despite the reduction in households, the population of Bararoá has not comparatively decreased.",
+          "There is a great disproportion between households and people in Bararoá due to population dispersion."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Directory was a colonial administrative institution that maintained unity between Indigenous people and broader society in the Amazon, countering Jesuit efforts that led to Indigenous withdrawals from settlements like Marina and São Paulo, and uprisings in Mariuá, Lama-Longa, Caboquena, and Bararoá. Governor D. Francisco de Souza Coutinho of Pará, seeking to hinder the Captaincy of Rio Negro under Manoel da Gama Lobo da Almada, secured the Directory's dissolution by royal letter, resulting in the dispersal and decline of Indigenous settlements. The text suggests that merging the Directory's regulations with those of the Missions, uniting the roles of Missionary and Director, might have yielded better outcomes. José Bonifacio, in 1823, advocated for such integration, noting differences between Indigenous groups in São Paulo, Minas, and the Amazon, particularly in settlement patterns and subsistence strategies.",
+      "details": {
+        "facts": [
+          "The dissolution of the Directory resulted in the dispersal of the Indigenous people, a general reduction, and even the disappearance of some settlements, including Bararoá.",
+          "The horrific rebellion of Bararoá was part of the unrest that contributed to the Directory's dissolution.",
+          "After the Directory was dissolved, the Indigenous population of Bararoá and other settlements dispersed."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The city of Barra is located about seven or eight miles within the mouth of the river, built on elevated but uneven ground on the left bank of the Rio Negro. In 1850, Barra had approximately 3,000 inhabitants and had grown to be, after Santarem, the main settlement on the banks of the Amazon. Originally, a small Portuguese fort was established here to protect slave-hunting expeditions among local Indian tribes, notably the Manãos, who were warlike and enslaved prisoners from neighboring tribes. The Manãos shared cultural traits with the Omaguas or Cambevas of the Upper Amazon, the Mundurucús of the Tapajos, the Jurúnas of the Xingú, and other Tupí branches. In 1809, Barra became the chief town of the Rio Negro district, attracting Portuguese and Brazilian settlers and leading to the construction of spacious houses and warehouses.",
+      "details": {
+        "facts": [
+          "In 1850, the town of Barra (now Manaus) on the left bank of the Rio Negro had about 3,000 inhabitants.",
+          "Originally, there was a small fort at Barra, built by the Portuguese to protect their slave-hunting expeditions among Indian tribes along the river.",
+          "The Manãos were a distinguished and warlike tribe in the Rio Negro region, often at war with neighboring tribes and enslaving prisoners."
+        ],
+        "year": 1863,
+        "doc_name": "The naturalist on the River Amazons, Bates, Henry Walter"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "On April 25, 1838, the Provincial Assembly of Pará created a \"corps of workers,\" subjecting about two-thirds of the population to forced labor. On October 15, 1839, a tax of 286 réis per 509,000 réis was imposed on river and lake traders. In 1840, individuals in Manaus acquired all vacant municipal lands, leading to irregular urban development reminiscent of Alfama on the Rio Negro. News of the July 23, 1840 revolution in Rio de Janeiro for Dom Pedro II reached the district in October 1840. In February 1841, Chamburg arrived in Pirarára from Stabroek, confronting missionary Innocentes over British claims, resulting in a mutual withdrawal agreement and a call for government commissioners to demarcate the territory. The garrison at Fort São Joaquim was increased from 30 to 50 bayonets, and defensive measures extended to Boraroá. On May 3, 1841, Major Francisco Raymundo Correia de Faria took military command, but later that year, the Pará government withdrew reinforcements from the Rio Branco frontier.",
+      "details": {
+        "facts": [
+          "In the 19th century, individuals in Manaus acquired all the vacant lands in the town and its surroundings from the Municipality, contributing to the emergence of a new Alfama on the Rio Negro.",
+          "The Municipality agreed to the land acquisitions without a plan or attention to the beautification of the future city.",
+          "This process occurred around 1840."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "Maripi (Santo Antonio de) was a parish on the northern bank of the Japurá River, in Delmari territory, between lakes Aiamá and Anamá, where the submission of the Múra nation occurred in 1784. Its population of 400 in 35 households included Barés, Macús, Mariaranas, Mepuris, Passés, and Xomanas, who practiced subsistence agriculture, fishing, and extraction of local resources. Mariuá (Our Lady of the Conception of), later named Barcellos, was located on the southern bank of the Rio Negro between the Uatanari and Baruri rivers, opposite Buhibuhi, at latitude 00° 58' S, longitude 28° 23' W of Olinda, 91 leagues above the Rio Negro confluence and 169 from the mouth of the Jamundá. Originally a Manáos-Camandri village, it was granted to the Carmelite Mission and became the seat of the Captaincy of Rio Negro in 1758 under Governor Francisco Xavier de Mendonça Furtado. Barcellos hosted the mixed Portuguese-Spanish boundary commission in 1759 and was the capital until 1804, after which",
+      "details": {
+        "facts": [
+          "Barcellos (formerly Mariuá) was elevated to a town in 1758 and made the seat of the Government of the Captaincy of Rio Negro, created in 1757.",
+          "Barcellos served as the capital of the province until 1790, when the capital was transferred to Lugar da Barra.",
+          "In 1798, Barcellos temporarily reclaimed its status as capital with the withdrawal of Governor Manoel da Gama Lobo da Almada."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Pará revolution of 1835, led initially by Archpriest Baptista and later involving Malcher, resulted in widespread anarchy and social dissolution. Rebel forces known as cabanos controlled settlements temporarily but were unable to maintain lasting dominance. Gregorio Nazianzeno da Costa led a successful restoration on August 31, 1836, after which João Ignacio Rodrigues do Carmo became Military Commander of the District. Ambrósio Ayres, assembling a force in Bararoá, fought the cabanos along the Rio Negro, Maués River, and Icuipiranga, contributing to their surrender and becoming Military Commander. Pedro Ayres, claiming to be Ambrósio’s brother and a U.S. Navy officer, explored Guiana, the Rio Branco, and confronted the British at Fort St. Joaquim. A tailor from Stabrok, posing as a missionary, attempted to convert Indigenous people along the Pirarára River.",
+      "details": {
+        "facts": [
+          "In 1836, Gregorio Nazianzeno da Costa led a successful restoration against rebel control in the settlements along the Rio Negro.",
+          "João Ignacio Rodrigues do Carmo, Captain of the National Guard, assumed the Military Command of the District after the restoration.",
+          "Other settlements along the Rio Negro also freed themselves from rebel control following this example."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "In February 1842, about seventy Black men in red uniforms, led by an English Colonel, invaded the Amazon frontier near the Pirarára River, built a sandbag redoubt, and placed boundary markers, sending a letter to the Government of Pará. In October 1842, Francisco Sergio d'Oliveira, Commander of Arms of the Province, inspected the last settlements of the Rio Branco below the waterfalls and ordered minor repairs to the Fortresses of St. Joaquim do Rio Branco and St. José de Marabitánas. The Diocesan Bishop, D. José Affonso de Moraes Torres, visited in 1848, and Manaus was elevated to city status in October 1848, later becoming a second-order province in 1850. The settlements along the Solimões and Rio Negro rivers declined after 1840, while only Manaus and Lusea experienced some growth. The rivers Uatumá, Urubu, Hiauapiri, Padauari, Araçá, Cauaburi, Uaupez, Japurá, Jutahi, and Juruá remained largely isolated.",
+      "details": {
+        "facts": [
+          "In the 19th century, the settlements of the Solimões and Rio Negro declined considerably, both in size and number, compared to their state in 1840.",
+          "Since the restoration, only the city of Manaus and the village of Lusea have seen some growth; the settlements of the Rio Negro have otherwise declined.",
+          "Education and social conditions in the Rio Negro settlements declined alongside the population and settlement decrease."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Rio Branco was noted for its fertility, riches, and promise, leading Fernando da Costa de Athayde, general of the State, to recommend its settlement, pending royal approval. Missionaries, including the friar Mathias in Mariuá and others in their respective missions, made significant progress in converting local Indians by respecting their customs and avoiding coercion. The missionary plan, supported by royal orders and advocated by Vieira, aimed to keep Indians in their own settlements to prevent their ruin and deaths when relocated. Initially, mission villages excluded whites and people of mixed descent, but this separation was later abolished by the directory to promote civility, commerce, and integration.",
+      "details": {
+        "facts": [
+          "The sober friar Mathias made great progress in converting the natives in Mariuá (Thomar) in the Rio Negro region in the 19th century.",
+          "Missionaries in the Rio Negro region followed a method of gently introducing themselves into native settlements, studying their customs, and gradually introducing useful and honest practices.",
+          "The directory abolished the separation between Indians and residents of white or mixed descent in the villages, promoting civility, commerce, and good society."
+        ],
+        "year": 1858,
+        "doc_name": "Corographia historica, Mello Moraes, Alexandre José"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "On February 7, 1842, a colonel, three officers, and forty English soldiers with three cannons built a fort and raised the British flag at Pirarà on the shores of Lake Amacû. Missionary José dos Santos Innocentes withdrew to the fort of San-Joaquin following this event. Lake Amacù and its surroundings were subsequently declared neutral territory by agreement between the two nations. The upper Rio Branco region, affected by the insurrection of Praia de Sangues, saw its population drop to about a thousand, with many Indians relocating to Dutch Surinam. The Rio Negro, called Gruriquacurû by the Indians, is over 300 leagues long, navigable for 160 leagues above its confluence, and obstructed by cataracts such as Maracabi, Cojubi, Turnas, Crocobi, Caldeirão, Paredão, and Caranguejo; its banks are home to thirty or forty still wild nations. Captain-Major Pedro Texeira first traveled the Rio Negro in 1637, discovering its mouth while ascending the Amazon to Peru, after which missionaries founded settlements along its banks.",
+      "details": {
+        "facts": [
+          "Since the time of Pedro Texeira's exploration in 1637, several missionaries have founded settlements on the Rio Negro to convert the indigenous populations.",
+          "In the 19th century, the banks of the Rio Negro were home to thirty or forty still wild nations.",
+          "Beautiful rice fields were beginning to be established near the lagoons on the banks of the Rio Negro in the 19th century."
+        ],
+        "year": 1861,
+        "doc_name": "Voyage aux provinces brésiliennes du Pará et des Amazones en 1860, précédé d'une rapide coup d'oeil, sur le littoral du Brésil, Belmar, A. de."
+      },
+      "meta": {}
+    }
+  ],
+  "agent_thoughts": "Previous cycles established Bararoá as a large multiethnic mission and trading post on the Rio Negro, destroyed in 1757 and reconstituted as Thomar in 1758. It was a significant node in the Directory system but declined after its abolition. So far, I have not found precise details on the post-mission, post-Directory trajectory—whether the settlement persisted, was reabsorbed, depopulated, or renamed again. I am now targeting information about Thomar in the 19th century, seeking evidence of any surviving population, administration, or subsequent fate of the location.",
+  "previous_hypotheses": []
+}
