@@ -124,7 +124,7 @@ def build_reasoning_prompt_v2(data: "ReasoningRequest") -> str:
 
     ## Instructions for Investigating Abandoned / Lost Settlements
 
-    - **Select a single candidate object** (abandoned village / mission / settlement) and keep focus on it through the reasoning cycle.
+    - **Select a single candidate object** (abandoned village / mission / settlement) and keep focus on it with multiple spelling variants through the reasoning cycle.
     - Do **not** hop between multiple objects unless the current candidate is definitively ruled out.
     - Gather every indirect clue to its location—distances, neighbouring places, rivers, landmarks, travel directions, historical events.
     - Cross‑check descriptions across sources to strengthen or weaken the hypothesis.
@@ -168,7 +168,7 @@ def build_reasoning_prompt_v2(data: "ReasoningRequest") -> str:
 
     - Colonial and historical texts often contain multiple spelling variants for the same place, person, or entity (e.g., Muctira, Muctirá, Muctirae; Xiruma vs. Jiruma).
     - Systematically explore spelling variants — do **not** rely on a single name or variant!
-    - Before launching a new `vector_search` or `entity_hybrid`, **always** run `entity_search` with at least 2–4 plausible variants or transliterations of the term.
+    - Before launching a new `vector_search` or `entity_hybrid`, run `entity_search` with at least 2–4 plausible variants or transliterations of the term.
         - Use results from `entity_search` to find which variant gives the most hits; use these for further searches.
     - **Actively scan the text of all results, logs, and document fragments for names and terms that are visually or phonetically similar to your target.**
         - If you see a name in a result that looks like a variant, test it: add it to your candidate list and check it with `entity_search`.
@@ -208,7 +208,7 @@ def build_reasoning_prompt_v2(data: "ReasoningRequest") -> str:
 
     ## Anti-Stall Rules (avoiding loops and wasted actions)
 
-    - **Never repeat the same action (type + query) more than twice in total, even if your hypothesis has changed.** If an action/query pair already appears two or more times in the recent log, **do not repeat it again** in this or future steps.
+    - Always strive to formulate each action (type + query) differently from previous ones. Repeating identical queries is discouraged — for best results, make each query unique and relevant to the current reasoning step.
     - Carefully read the full action log. If you see that any action (e.g., entity_hybrid Bararoá) has been repeated multiple times with no new evidence, **explicitly avoid repeating it** and write in agent_thoughts why further attempts are unproductive.
     - If your last two steps produced fewer than 3 new evidence items combined, you **must** change your action type, your query wording, or your reasoning strategy.
     - If you have exhausted all plausible actions and cannot get new evidence, finalize reasoning with a summary of your findings and dead ends.

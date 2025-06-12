@@ -57,15 +57,13 @@ async def llm_reasoning(
             max_tokens=max_tokens,
         )
         raw_json_str = response.choices[0].message.content
-        log.debug("llm_reasoning.raw", json=raw_json_str)
+        #log.debug("llm_reasoning.raw", json=raw_json_str)
 
-        # Валидация и возврат через Pydantic v2
         result = ReasoningResponse.model_validate_json(raw_json_str)
         #log.info("llm_reasoning.ok")
         return result
 
     except ValidationError as e:
-        # response.choices[0].message.content может не существовать в случае раннего сбоя
         raw_content = None
         try:
             raw_content = response.choices[0].message.content
@@ -175,9 +173,6 @@ async def entity_search(req: EntitySearchRequest):
                 """
                 param = f"%{q}%"
             rows = await conn.fetch(sql, param)
-            # Если найдено много вариантов (подстрочный режим) — ищем только те, что максимально похожи
-            # Оставляем только ровно то, что искали, если режим "exact"
-            # В любом случае: агрегируем count по entity (может быть несколько строк если подстрочный режим)
             total_count = sum([row["count"] for row in rows]) if rows else 0
             result.append(
                 Evidence(
@@ -203,7 +198,6 @@ async def entity_hybrid_endpoint(req: VectorSearchRequest):
     try:
         print(f"\n[entity_hybrid] Called with entity: {req.query}, k={req.k}")
 
-        # 1. --- Entity SQL: ищем чанки с этой entity ---
         conn = await asyncpg.connect(DATABASE_URL)
         sql = """
             SELECT id, doc_name, doc_type, chunk_index, cleaned_text AS text, year
@@ -263,7 +257,7 @@ async def entity_hybrid_endpoint(req: VectorSearchRequest):
         print(f"    ↳ semantic rerank: {len(sem_out)} blocks after rerank")
         sem_out = sem_out[:CUTTING_LLM] 
         print(f"    ↳ semantic rerank: {len(sem_out)} blocks after cutting")
-        # 5. --- Собираем shortlist ---
+
         results = []
         for entry in sem_out:
             list_idx = entry["block_id"]
@@ -290,7 +284,7 @@ async def entity_hybrid_endpoint(req: VectorSearchRequest):
             )
         print(f"    ↳ shortlist after rerank: {len(results)} chunks")
 
-        # 6. --- Факты (параллельно) ---
+        # 6. --- Facts ---
         print("  → extract_facts (parallel) ...")
 
         async def fetch_facts(idx: int, txt: str):
@@ -313,7 +307,7 @@ async def entity_hybrid_endpoint(req: VectorSearchRequest):
                     break
         print("    ↳ facts extraction complete")
 
-        # 7. --- Summary (параллельно) ---
+        # 7. --- Summary  ---
         print("  → summarize (parallel) ...")
 
         async def fetch_summary(idx: int, txt: str):
@@ -333,7 +327,7 @@ async def entity_hybrid_endpoint(req: VectorSearchRequest):
                     break
         print("    ↳ summary complete")
 
-        # 8. --- Сборка Evidence ---
+        # 8. --- Evidence ---
         evidences = []
         for r in results:
             evidences.append(

@@ -9,12 +9,12 @@ load_dotenv()
 SERVER_IP = os.getenv("SERVER_ADDRESS")
 SERVER_ADDRESS = f"http://{SERVER_IP}:8100"
 
-LLM_REASONING_URL = f"{SERVER_ADDRESS}/llm_reasoning"
-VECTOR_SEARCH_URL = f"{SERVER_ADDRESS}/vector_search"
-ENTITY_SEARCH_URL = f"{SERVER_ADDRESS}/entity_search"
-HYBRID_SEARCH_URL = f"{SERVER_ADDRESS}/entity_hybrid"
+LLM_REASONING_URL =     f"{SERVER_ADDRESS}/llm_reasoning"
+VECTOR_SEARCH_URL =     f"{SERVER_ADDRESS}/vector_search"
+ENTITY_SEARCH_URL =     f"{SERVER_ADDRESS}/entity_search"
+HYBRID_SEARCH_URL =     f"{SERVER_ADDRESS}/entity_hybrid"
 GENERAL_KNOWLEDGE_URL = f"{SERVER_ADDRESS}/general_knowledge"
-WEB_SEARCH_URL = f"{SERVER_ADDRESS}/web_search"
+WEB_SEARCH_URL =        f"{SERVER_ADDRESS}/web_search"
 MAX_ITERATIONS = 16
 
 
@@ -50,15 +50,10 @@ def dedup_log(log: list[dict], limit: int = 16) -> list[dict]:
     return unique_recent
 
 def dedup_supporting_evidence(evidences: list[dict]) -> list[dict]:
-    """
-    Оставляет только уникальные объекты определяя эквивалентность
-    по (source, value, details) — details сортируем, чтобы «Rio Negro» и
-    тот же dict с другой перестановкой ключей считались равными.
-    """
     seen = set()
     unique = []
     for ev in evidences:
-        # canonical form: (source, value, json(details))
+        
         key = (
             ev.get("source"),
             ev.get("value", "").strip(),
@@ -70,11 +65,11 @@ def dedup_supporting_evidence(evidences: list[dict]) -> list[dict]:
     return unique
 
 
-def pretty_evidence(ev, maxlen=120):
+def pretty_evidence(ev, maxlen=75):
     if isinstance(ev, dict):
         src = ev.get('source', '?')
         val = ev.get('value', '')[:maxlen]
-        details = ev.get('details', {})
+        details = ev.get('details', {})[:maxlen-50]
         meta = ev.get('meta', {})
         if src == "entity_search":
             count = details.get('count')
@@ -105,25 +100,27 @@ async def agent_loop(user_query):
             "reasoning_log": dedup_log(reasoning_log, 16),
             "iteration": iteration,
         }
-        #print(reasoning_request)
+
         reasoning = await call_fastapi_async(LLM_REASONING_URL, reasoning_request)
+        new_evidence = reasoning.get("new_facts", [])
+        supporting_evidence.extend(new_evidence)
+        supporting_evidence[:] = dedup_supporting_evidence(supporting_evidence)  
+
         print(f"ITERATION:   {iteration}")
         print(f"→ Actions: {[a['type'] for a in reasoning['actions']]}")
         print(f"→ Hypothesis: {reasoning.get('hypothesis')}")
         print(f"→ Memory: {reasoning.get('agent_thoughts')}")
-        print(f"→ Supporting evidence: {len(reasoning.get('new_facts', []))}")
+        print(f"→ Supporting evidence new: {len(reasoning.get('new_facts', []))}")
         print(f"→ Confidence: {reasoning.get('confidence')}")
         print(f"→ Active question: {reasoning.get('active_question')}")
-        print("*"*150)    
-        print("Added new_facts : ", len(reasoning.get('new_facts')))
-        new_evidence = reasoning.get("new_facts", [])
-        supporting_evidence.extend(new_evidence)
-        supporting_evidence[:] = dedup_supporting_evidence(supporting_evidence)
-        print("Total supporting_evidences : ", len(supporting_evidence))
-        print(supporting_evidence)
-        print("*"*150)
-        print(dedup_log(reasoning_log, 8)) 
-        print("*"*150) 
+        print(f"→ Total supporting_evidences : {len(supporting_evidence)}")
+
+        # print("*"*150)        
+        # print(supporting_evidence)
+        # print("*"*150)
+        # print(dedup_log(reasoning_log, 8)) 
+        # print("*"*150) 
+
         all_new_evidence = []
         for action in reasoning["actions"]:
             endpoint_url, payload = get_endpoint_and_payload(action, context)
@@ -164,7 +161,7 @@ async def agent_loop(user_query):
     for xxx in supporting_evidence:
         print(f"Supp: {xxx}")
 
-    # Просто сохраняем всё в JSON
+
     
     output = {
         "user_query": user_query,
@@ -183,10 +180,17 @@ async def agent_loop(user_query):
 
 
 if __name__ == "__main__":
-    user_query = """
-    Find all information and facts related to the object or place named Bararoá.
-    Note: The name may have alternative spellings or variants in the documents (e.g., Bararoa, Bararoã, Bararóa, Bararua, Bararoá parish, etc.). 
-    Please check for different spellings and similar-looking names, and include relevant facts for any such variants referring to the same place.
-    """
+    user_query = """Find all information and facts related to the object or place named Bararoá."""
     
     asyncio.run(agent_loop(user_query))
+
+
+    # user_query = """
+    # Find all information and facts related to the object or place named Bararoá.
+    # Note: The name may have alternative spellings or variants in the documents (e.g., Bararoa, Bararoã, Bararóa, Bararua, Bararoá parish, etc.). 
+    # Please check for different spellings and similar-looking names, and include relevant facts for any such variants referring to the same place.
+    # """
+
+#   user_query = """Find all information and facts related to the object or place named Thomar. Please check for different spellings and similar-looking names, and include relevant facts for any such variants referring to the same place."""
+#   user_query = """Find and extract all information and facts related to abandoned settlements, remains of fortifications, artificial mounds, earthworks, old or ruined structures, and any other traces of former human activity (e.g., deserted villages, ruins, old roads, ancient clearings, embankments, etc.). Focus on any evidence or descriptions of abandoned or ancient sites that could serve as a basis for further investigation."""
+ 
