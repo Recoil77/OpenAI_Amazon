@@ -273,7 +273,7 @@ def build_reasoning_prompt_v2(data: "ReasoningRequest") -> str:
     - Keep this field concise, but rich in context and insight. Summarize earlier content only if it becomes too lengthy or redundant. 
     - Additionally, if you identify important clues, facts, or leads during your reasoning, write them to the `new_facts` field. Everything you add there will be preserved and passed to you in every subsequent step, helping you accumulate discoveries and avoid losing valuable information as you progress.
     - As your reasoning progresses, it is natural for each new search step to yield fewer major discoveries. Do not wait for only “big” pieces of evidence—collect and record all relevant clues, even small or partial ones, in the `new_facts` field. Systematically gathering every useful detail increases your chances of reaching a meaningful conclusion, especially when strong evidence becomes scarce.
-    **- Regularly alternate and combine multiple action types in your reasoning steps, especially when progress stalls or new evidence is sparse. Avoid relying too heavily on a single search function.**  
+    **- Regularly alternate and combine multiple action types in your reasoning steps, especially when progress stalls or new evidence is sparse. Avoid relying too heavily on a single search function.**  <!-- NEW -->
 
     ## Instructions for Investigating Abandoned / Lost Settlements
 
@@ -295,7 +295,7 @@ def build_reasoning_prompt_v2(data: "ReasoningRequest") -> str:
 
     ## Instructions for entity_search & metadata
 
-    - `entity_search` is the **low-cost tool** (just not on the first iteration) to see whether a specific **named entity** is actually present in our corpus metadata (settlements, rivers, missions, explorers, tribes, years).
+    - `entity_search` is the **first-line, low-cost tool** to see whether a specific **named entity** is actually present in our corpus metadata (settlements, rivers, missions, explorers, tribes, years).
     - Always send a **comma-separated list of 1-5 concise names** — never descriptive phrases. Good examples:  
     · Villarico, River Moraji, Jesuit mission  
     · Aguirre, Mission Exaltación, Santo Tomé  
@@ -315,13 +315,13 @@ def build_reasoning_prompt_v2(data: "ReasoningRequest") -> str:
 
     - Treat web_search as an additional source of information, just like other available tools.
     - Avoid generic or broad queries to reduce noise in the results.
-    **- Use web_search especially when internal sources provide insufficient, conflicting, or outdated information. When progress using internal tools slows, proactively consult external sources via web_search.** 
+    **- Use web_search especially when internal sources provide insufficient, conflicting, or outdated information. When progress using internal tools slows, proactively consult external sources via web_search.** <!-- NEW -->
 
     ## Guidance for general_knowledge
 
     - Treat general_knowledge as another source of concise reference facts, alongside other tools.
     - Use general_knowledge when you need brief, factual context or verification that may not be present in internal documents.
-    **- If you are unsure about a general historical or geographical fact, or if your reasoning seems stalled due to lack of background context, query general_knowledge as a supplementary step.** 
+    **- If you are unsure about a general historical or geographical fact, or if your reasoning seems stalled due to lack of background context, query general_knowledge as a supplementary step.** <!-- NEW -->
 
     ## Variant-Spelling Strategy
 
@@ -367,7 +367,7 @@ def build_reasoning_prompt_v2(data: "ReasoningRequest") -> str:
     - The `query` string **must** be a single phrase like a part of text from historic documents with **3–6 meaningful words** (~5–7 tokens).
     - Avoid lists, commas, Boolean operators, meta-language.
     - Use a new reasoning step for any substantially different formulation.
-    **- Do not rely solely on vector_search for the majority of reasoning cycles; if progress becomes slow or new findings are minor, switch to or combine other action types (entity_hybrid, web_search, general_knowledge) before returning to vector_search.** 
+    **- Do not rely solely on vector_search for the majority of reasoning cycles; if progress becomes slow or new findings are minor, switch to or combine other action types (entity_hybrid, web_search, general_knowledge) before returning to vector_search.** <!-- NEW -->
 
     ## Anti-Stall Rules (avoiding loops and wasted actions)
 
@@ -378,7 +378,7 @@ def build_reasoning_prompt_v2(data: "ReasoningRequest") -> str:
     - In every step, always explain in agent_thoughts why you choose a new direction — or, if forced to stop, state clearly why further search is unhelpful or impossible.
     - Actively use all available action types and information sources—not just vector_search and entity_search, but also hybrid_search, general_knowledge, and web_search if available. This diversity increases your chances of finding new evidence and avoiding unproductive loops.
     - Make a deliberate effort to include hybrid_search in your reasoning process, especially when standard searches repeat or provide diminishing returns. Hybrid queries often reveal information missed by single-mode searches.
-    **- If you notice that you are repeating any one function (especially web_search or entity_search) without significant progress, you must deliberately pause and switch to at least one other search or knowledge function before continuing.** 
+    **- If you notice that you are repeating any one function (especially web_search or entity_search) without significant progress, you must deliberately pause and switch to at least one other search or knowledge function before continuing.** <!-- NEW -->
 
     ## Output Format
 
@@ -397,6 +397,7 @@ def build_reasoning_prompt_v2(data: "ReasoningRequest") -> str:
     }
     Do **not** output anything outside this JSON—no markdown, headings, or explanations.
     """).strip()
+
 
     # ── USER PROMPT ──────────────────────────────────────────────
 
