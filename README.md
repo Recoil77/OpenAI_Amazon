@@ -1,4 +1,4 @@
-# Amazonia DeepScan
+# Amazonia DeepSearch
 
 **AI-powered pipeline for digitizing, analyzing, and exploring lost settlements and historic documents from the Amazon.**
 
@@ -6,7 +6,7 @@
 
 ## Project Overview
 
-Amazonia DeepScan is a modular research platform for discovering and analyzing historical settlements, events, and artifacts in the Amazon basin. It combines OCR, LLM-based text cleaning, translation, semantic chunking, entity extraction, vector search, and multi-step reasoning in a fully transparent and reproducible pipeline. Designed for historians, archaeologists, and data scientists, it allows automated exploration of large-scale archival data to surface evidence and generate new research leads.
+Amazonia DeepSearch is a modular research platform for discovering and analyzing historical settlements, events, and artifacts in the Amazon basin. It combines OCR, LLM-based text cleaning, translation, semantic chunking, entity extraction, vector search, and multi-step reasoning in a fully transparent and reproducible pipeline. Designed for historians, archaeologists, and data scientists, it allows automated exploration of large-scale archival data to surface evidence and generate new research leads.
 
 ---
 
