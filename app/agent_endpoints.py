@@ -34,8 +34,8 @@ CUTTING_LLM = 8
 @app.post("/llm_reasoning", response_model=ReasoningResponse)
 async def llm_reasoning(
     req: ReasoningRequest,
-    model: str = Query('gpt-4.1-2025-04-14', description="LLM model"),  #"o3-2025-04-16" 
-    temperature: float = Query(0.25, description="Sampling temperature"),
+    model: str = Query('gpt-4.1-2025-04-14', description="LLM model"),  # "o3-2025-04-16"
+    temperature: float = Query(0.4, description="Sampling temperature"),
     max_tokens: int = Query(4096, description="Maximum output tokens"),
 ) -> ReasoningResponse:
     """
@@ -77,33 +77,65 @@ async def llm_reasoning(
         raise HTTPException(status_code=500, detail=f"LLM reasoning failed: {e}")
 
 
+# @app.post("/web_search", response_model=List[Evidence])
+# async def web_search_endpoint(req: WebSearchRequest):
+#     """
+#     Perform a web search using OpenAI SDK's web_search_preview tool,
+#     return answer(s) as a list of Evidence.
+#     """
+#     try:
+#         response = await response_completion.create(
+#             model="gpt-4.1",
+#             tools=[{"type": "web_search_preview", "search_context_size": req.search_context_size}],
+#             input=req.query
+#         )
+#         print("DEBUG: response =", response)  # или log.info
+
+
+#         answer_text = getattr(response, "output_text", None)
+#         if not answer_text:
+#             raise Exception("No output_text in response")
+        
+#         ev = Evidence(
+#             source="web",
+#             value=answer_text,
+#             details={"search_context_size": req.search_context_size},
+#             meta={}
+#         )
+#         return [ev]  
+#     except Exception as e:
+#         raise HTTPException(status_code=500, detail=f"Web search failed: {e}")
+
 @app.post("/web_search", response_model=List[Evidence])
 async def web_search_endpoint(req: WebSearchRequest):
-    """
-    Perform a web search using OpenAI SDK's web_search_preview tool,
-    return answer(s) as a list of Evidence.
-    """
     try:
         response = await response_completion.create(
             model="gpt-4.1",
             tools=[{"type": "web_search_preview", "search_context_size": req.search_context_size}],
             input=req.query
         )
-        
-        answer_text = getattr(response, "output_text", None)
+
+        def extract_answer_text(response):
+            for block in response.get("output", []):
+                if block.get("type") == "message":
+                    content = block.get("content", [])
+                    if content and "text" in content[0]:
+                        return content[0]["text"]
+            return None
+
+        answer_text = extract_answer_text(response)
         if not answer_text:
             raise Exception("No output_text in response")
-        
+
         ev = Evidence(
             source="web",
             value=answer_text,
             details={"search_context_size": req.search_context_size},
             meta={}
         )
-        return [ev]  
+        return [ev]
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Web search failed: {e}")
-    
+        raise HTTPException(status_code=500, detail=f"Web search failed: {e}")   
 
 @app.post("/general_knowledge", response_model=List[Evidence])
 async def general_knowledge_endpoint(req: GeneralKnowledgeRequest):
@@ -357,16 +389,29 @@ async def chunk_summary(req: ChunkSummaryRequest):
     В резюме только факты: названия, даты, события, описания мест. 
     Никаких вводных фраз («В этом документе…»).
     """
+    # system_msg = (
+    #     "You are a historical research assistant. "
+    #     "Return only the distilled facts — no preambles, no framing."
+    # )
+    # user_prompt = (
+    #     "Extract the most relevant archaeological-historical information "
+    #     "from the text below. Write 3–5 crisp sentences (≤200 tokens). "
+    #     "Keep every proper noun (people, settlements, rivers, missions, "
+    #     "tribes) and any clear dates or distances. Omit commentary, "
+    #     "source references, and meta-phrases.\n\n"
+    #     "Text:\n" + req.text
+    # )
+
     system_msg = (
         "You are a historical research assistant. "
         "Return only the distilled facts — no preambles, no framing."
     )
     user_prompt = (
         "Extract the most relevant archaeological-historical information "
-        "from the text below. Write 3–5 crisp sentences (≤200 tokens). "
-        "Keep every proper noun (people, settlements, rivers, missions, "
-        "tribes) and any clear dates or distances. Omit commentary, "
-        "source references, and meta-phrases.\n\n"
+        "from the text below. Write 5-8 crisp sentences (≤300 tokens). "
+        "Keep all essential information from the text. "
+        "Omit commentary, source references, and meta-phrases. "
+        "Do not start with any framing or introductory phrase.\n\n"
         "Text:\n" + req.text
     )
 

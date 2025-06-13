@@ -313,6 +313,51 @@ async def vector_search_v2(req: VectorSearchV2Request):
         ))
     return results
 
+class RefineQueryRequest(BaseModel):
+    query: str
+
+@app.post("/refine_query")
+async def refine_query(req: RefineQueryRequest):
+    # Tokenize the user's query
+    encoding = tiktoken.get_encoding("cl100k_base")
+    token_count = len(encoding.encode(req.query))
+
+    # Choose system prompt based on token count
+    if token_count < 12:
+        system_prompt = (
+            "You are an LLM prompt optimizer for embedding-based search over a multimodal archive. "
+            "Generate a single, coherent noun phrase of approximately 15 tokens that preserves key entities and the user's intent. "
+            "Avoid lists, bullet points, or comma-separated items—use a concise search phrase."
+        )
+    elif token_count <= 30:
+        system_prompt = (
+            "You are an LLM prompt optimizer for embedding-based search over a multimodal archive. "
+            "Rephrase the query into one coherent sentence of 12–30 tokens optimized for embeddings. "
+            "Maintain natural language flow and preserve meaning without using lists or comma-separated items."
+        )
+    else:
+        system_prompt = (
+            "You are an LLM prompt optimizer for embedding-based search over a multimodal archive. "
+            "Condense the query into one concise sentence of about 20 tokens optimized for embeddings. "
+            "Ensure it reads as natural language and retains all key entities, without list formatting."
+        )
+
+    # Prepare messages for LLM
+    messages = [
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": req.query}
+    ]
+
+    # Call GPT-4.1 to refine the query
+    resp = await chat_completion.create(
+        model="gpt-4.1-2025-04-14",
+        messages=messages,
+        temperature=0
+    )
+
+    # Extract and return the refined query
+    refined_query = resp.choices[0].message.content.strip()
+    return {"refined_query": refined_query}
 
 
 def sigmoid(x):
@@ -455,6 +500,100 @@ async def rerank_semantic_v5(request: RerankSemanticV5Request):
 # Семофор для параллельной факт-экстракции
 fact_semaphore = asyncio.Semaphore(8)
 
+class PipelineRequest(BaseModel):
+    question: str
+    k: int = 128      
+    bge_threshold: float = 0.25
+    semantic_threshold: float = 0.25
+
+class ChunkPipelineResult(BaseModel):
+    year: int
+    doc_name: str
+    doc_type: str
+    chunk_index: int
+    text: str
+    bge_score: float
+    semantic_score: float
+    facts: List[str]
+    metadata_original: Dict
+    metadata_translated: Dict
+
+@app.post("/search_pipeline_v2", response_model=List[ChunkPipelineResult])
+async def search_pipeline_v2(req: PipelineRequest):
+    try:
+        # 1) Refine the query
+        refine_resp = await refine_query(RefineQueryRequest(query=req.question))
+        refined = refine_resp["refined_query"]
+
+        # 2) Vector search (expects metadata_original & metadata_translated in response)
+        vec_resp = await vector_search_v2(VectorSearchV2Request(query=refined, k=req.k))
+
+        # 3) BGE rerank
+        answers = [item.text for item in vec_resp]
+        bge_out = await rerank_bge_endpoint(RerankRequest(
+            question=refined,
+            answers=answers,
+            threshold=req.bge_threshold
+        ))
+        bge_filtered = [r for r in bge_out.get("results", []) if r.get("score", 0) >= req.bge_threshold]
+        bge_filtered.sort(key=lambda x: x.get("score", 0), reverse=True)
+
+        # 4) Semantic rerank
+        top_bge = bge_filtered[:req.k]
+        sem_candidates = [
+            RerankBlockCandidate(block_id=r["index"], text=r["text"])
+            for r in top_bge
+        ]
+        sem_out = await rerank_semantic_v5(RerankSemanticV5Request(
+            question=refined,
+            candidates=sem_candidates,
+            threshold=req.semantic_threshold
+        ))
+
+        # 5) Assemble final results
+        results = []
+        for entry in sem_out:
+            ci = entry.get("block_id")
+            bge_score = next((r.get("score") for r in bge_filtered if r.get("index") == ci), None)
+            # src now contains metadata_original & metadata_translated
+            src = next((x for x in vec_resp if x.chunk_index == ci), None)
+            if not src:
+                continue
+            results.append({
+                "year": src.year,
+                "doc_name": src.doc_name,
+                "doc_type": src.doc_type,
+                "chunk_index": ci,
+                "text": src.text,
+                "bge_score": bge_score,
+                "semantic_score": entry.get("score"),
+                "facts": [],
+                "metadata_original": getattr(src, 'metadata_original', {}),
+                "metadata_translated": getattr(src, 'metadata_translated', {})
+            })
+
+        # 6) Fact extraction in parallel
+        async def fetch_facts(idx: int, txt: str):
+            async with fact_semaphore:
+                fr = await extract_facts(ExtractFactsRequest(
+                    question=req.question,
+                    chunks=[ChunkCandidate(chunk_id=idx, text=txt)]
+                ))
+                return idx, (fr[0].facts if fr else [])
+
+        tasks = [fetch_facts(r["chunk_index"], r["text"]) for r in results]
+        facts_results = await asyncio.gather(*tasks)
+        for idx, facts in facts_results:
+            for r in results:
+                if r["chunk_index"] == idx:
+                    r["facts"] = facts
+                    break
+
+        return [ChunkPipelineResult(**r) for r in results]
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
     
 
 class KnowledgeRequest(BaseModel):
@@ -532,7 +671,7 @@ async def extract_facts(req: ExtractFactsRequest):
         resp = await chat_completion.create(
             model="gpt-4.1-2025-04-14",
             messages=messages,
-            temperature=0
+            temperature=0.25
         )
         content = resp.choices[0].message.content.strip()
         # Parse the response as JSON
