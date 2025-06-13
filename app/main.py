@@ -511,18 +511,18 @@ class ChunkFacts(BaseModel):
 @app.post("/extract_facts", response_model=List[ChunkFacts])
 async def extract_facts(req: ExtractFactsRequest):
     # System prompt for fact extraction
-    # system_prompt = (
-    #     "You are a fact extraction assistant. "
-    #     "Given a user question and a text fragment, extract only those facts from the fragment that directly answer or support the question. "
-    #     "Return a JSON array of objects, each with fields 'chunk_id' and 'facts', where 'facts' is a list of concise fact strings. "
-    #     "Do not include any additional commentary or formatting."
-    # )
     system_prompt = (
         "You are a fact extraction assistant. "
-        "Given a user question and a text fragment, extract every fact that could help answer or clarify the question, whether the connection is direct or indirect. "
-        "Return a JSON array of objects, each with fields 'chunk_id' and 'facts', where 'facts' is a list of clear, concise fact strings. "
-        "Do not include any commentary or formatting outside the JSON."
+        "Given a user question and a text fragment, extract only those facts from the fragment that directly answer or support the question. "
+        "Return a JSON array of objects, each with fields 'chunk_id' and 'facts', where 'facts' is a list of concise fact strings. "
+        "Do not include any additional commentary or formatting."
     )
+    # system_prompt = (
+    #     "You are a fact extraction assistant. "
+    #     "Given a user question and a text fragment, extract every fact that could help answer or clarify the question, whether the connection is direct or indirect. "
+    #     "Return a JSON array of objects, each with fields 'chunk_id' and 'facts', where 'facts' is a list of clear, concise fact strings. "
+    #     "Do not include any commentary or formatting outside the JSON."
+    # )
     messages = [
         {"role": "system", "content": system_prompt},
         {"role": "user", "content": json.dumps({"question": req.question, "chunks": [{"chunk_id": c.chunk_id, "text": c.text} for c in req.chunks]})}

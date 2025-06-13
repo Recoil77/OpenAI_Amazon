@@ -15,7 +15,7 @@ ENTITY_SEARCH_URL =     f"{SERVER_ADDRESS}/entity_search"
 HYBRID_SEARCH_URL =     f"{SERVER_ADDRESS}/entity_hybrid"
 GENERAL_KNOWLEDGE_URL = f"{SERVER_ADDRESS}/general_knowledge"
 WEB_SEARCH_URL =        f"{SERVER_ADDRESS}/web_search"
-MAX_ITERATIONS = 16
+MAX_ITERATIONS = 8
 
 
 def get_endpoint_and_payload(action, context):
@@ -69,7 +69,7 @@ def pretty_evidence(ev, maxlen=75):
     if isinstance(ev, dict):
         src = ev.get('source', '?')
         val = ev.get('value', '')[:maxlen]
-        details = ev.get('details', {})[:maxlen-50]
+        details = ev.get('details', {})
         meta = ev.get('meta', {})
         if src == "entity_search":
             count = details.get('count')

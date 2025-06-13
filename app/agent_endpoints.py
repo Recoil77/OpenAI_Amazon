@@ -35,7 +35,7 @@ CUTTING_LLM = 8
 async def llm_reasoning(
     req: ReasoningRequest,
     model: str = Query('gpt-4.1-2025-04-14', description="LLM model"),  # "o3-2025-04-16"
-    temperature: float = Query(0.4, description="Sampling temperature"),
+    temperature: float = Query(0.25, description="Sampling temperature"),
     max_tokens: int = Query(4096, description="Maximum output tokens"),
 ) -> ReasoningResponse:
     """

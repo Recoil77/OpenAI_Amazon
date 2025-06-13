@@ -1,0 +1,465 @@
+{
+  "user_query": "Find all information and facts related to the object or place named Bararoá.",
+  "final_hypothesis": "Bararoá was a major Indigenous settlement and trading post on the Rio Negro, destroyed in the mid-18th century and later replaced by the town of Thomar. Its archaeological status or modern identification remains unclear, and further research is needed to determine if any physical remains or recent studies exist.",
+  "supporting_evidence": [
+    {
+      "source": "entity_search",
+      "value": "'Bararoá' yields 56 hits in the corpus, making it the most common variant.",
+      "details": {
+        "variant": "Bararoá",
+        "hits": 56
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_search",
+      "value": "'Bararoa' (without accent) yields only 2 hits, suggesting it is a less common variant.",
+      "details": {
+        "variant": "Bararoa",
+        "hits": 2
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_search",
+      "value": "Descriptive forms like 'Bararoá mission', 'Bararoá village', and 'Bararoá settlement' yield zero hits, indicating the entity is not labeled this way in the metadata.",
+      "details": {
+        "variants": [
+          "Bararoá mission",
+          "Bararoá village",
+          "Bararoá settlement"
+        ],
+        "hits": 0
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "Bararoá was originally on the southern bank of the Rio Negro near the Xjuará River, was relocated and destroyed in the 1757 rebellion, and later became the town of Thomar in 1758 before losing its status due to administrative changes.",
+      "details": {
+        "location": "southern bank of the Rio Negro near the Xjuará River",
+        "event": "destroyed in 1757 rebellion, became Thomar in 1758"
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "Bararoá was a major trading post between the Upper and Lower Rio Negro due to its strategic location near important rivers and waterfalls.",
+      "details": {
+        "role": "major trading post",
+        "location": "between Upper and Lower Rio Negro"
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "Inhabitants of Bararoá, numbering 1,500 in 160 households, descended from the Manaos, Bares, Passés, and Ajuanas nations, cultivated crops like cacao, coffee, tobacco, cotton, and manioc.",
+      "details": {
+        "population": 1500,
+        "households": 160,
+        "descendants": [
+          "Manaos",
+          "Bares",
+          "Passés",
+          "Ajuanas"
+        ],
+        "crops": [
+          "cacao",
+          "coffee",
+          "tobacco",
+          "cotton",
+          "manioc"
+        ]
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "Settlements like Bararoá, which once had 780 households, declined to only 13 households, yet the number of inhabitants did not decrease proportionally, indicating widespread dispersion.",
+      "details": {
+        "households_peak": 780,
+        "households_decline": 13,
+        "pattern": "population dispersion"
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "Ambrósio Ayres, a convict, formed a militia in Bararoá and played a key role in defeating the cabanos along the Maués River and at Icuipiranga during the Pará revolution of 1835.",
+      "details": {
+        "event": "Pará revolution of 1835",
+        "person": "Ambrósio Ayres",
+        "role": "formed militia in Bararoá"
+      },
+      "meta": {}
+    }
+  ],
+  "reasoning_log": [
+    {
+      "iteration": 0,
+      "action": "entity_search",
+      "query": "Bararoá, Bararoa, Bararoá mission, Bararoá village, Bararoá settlement",
+      "result_count": 5
+    },
+    {
+      "iteration": 1,
+      "action": "entity_hybrid",
+      "query": "Bararoá",
+      "result_count": 8
+    },
+    {
+      "iteration": 2,
+      "action": "vector_search",
+      "query": "Bararoá near the Rio Negro",
+      "result_count": 8
+    },
+    {
+      "iteration": 3,
+      "action": "web_search",
+      "query": "Bararoá Rio Negro history location",
+      "result_count": 1
+    },
+    {
+      "iteration": 4,
+      "action": "web_search",
+      "query": "Bararoá Rio Negro Indigenous settlement history",
+      "result_count": 1
+    },
+    {
+      "iteration": 5,
+      "action": "web_search",
+      "query": "Bararoá Indigenous settlement Rio Negro history",
+      "result_count": 1
+    },
+    {
+      "iteration": 6,
+      "action": "web_search",
+      "query": "Bararoá Indigenous Rio Negro archaeological site",
+      "result_count": 1
+    },
+    {
+      "iteration": 7,
+      "action": "web_search",
+      "query": "Bararoá archaeological site Rio Negro Brazil",
+      "result_count": 1
+    }
+  ],
+  "context": [
+    {
+      "source": "entity_search",
+      "value": "Bararoá",
+      "details": {
+        "count": 56
+      },
+      "meta": {
+        "mode": "substring"
+      }
+    },
+    {
+      "source": "entity_search",
+      "value": "Bararoa",
+      "details": {
+        "count": 2
+      },
+      "meta": {
+        "mode": "substring"
+      }
+    },
+    {
+      "source": "entity_search",
+      "value": "Bararoá mission",
+      "details": {
+        "count": 0
+      },
+      "meta": {
+        "mode": "substring"
+      }
+    },
+    {
+      "source": "entity_search",
+      "value": "Bararoá village",
+      "details": {
+        "count": 0
+      },
+      "meta": {
+        "mode": "substring"
+      }
+    },
+    {
+      "source": "entity_search",
+      "value": "Bararoá settlement",
+      "details": {
+        "count": 0
+      },
+      "meta": {
+        "mode": "substring"
+      }
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "The Baeta were an Indigenous nation of the Solimões, residing on the river named after them, with a village at its mouth near the fourth site of the current parish of Araretama. The BaiMri and Bailractiâ were Indigenous nations of the Solimões, both located on the Juruá River. The BaMi5)a were an Indigenous nation of Guiana, living on the Içána and Ixié rivers, and their descendants populate settlements such as Lama-Longa, Manaos, Guia, Santa Anna, S. Filippo, Mabbé, and S. Marcellino. Bararoá, originally on the southern bank of the Rio Negro near the Xjuará River, was relocated and destroyed in the 1757 rebellion, later becoming the town of Thomar in 1758 before losing its status due to administrative changes. Bararoá was a major trading post between the Upper and Lower Rio Negro due to its strategic location near important rivers and waterfalls. Inhabitants of Bararoá, numbering 1,500 in 160 households, descended from the Manaos, Bares, Passés, and Ajuanas nations, cultivated crops like cacao, coffee, tobacco, cotton, and manioc,",
+      "details": {
+        "facts": [
+          "Bararoá (Parish of Our Lady of the Rosary of) is located on the right bank of the Rio Negro, 2021 leagues above the mouth of the Jamundá River, under parallel 00° 16' S., crossed by the meridian 29° 33' W. of Olinda.",
+          "The first location of Bararoá was on the southern bank near the mouth of the Xjuará River, in front of Timoni Island, before being moved to its current site.",
+          "Bararoá was completely reduced to ashes by the rebellion of 1757."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "In the interior of Pará, population estimates in the early 19th century ranged between 30,000 and 40,000 people. The population was highly dispersed across sites, lakes, and rivers rather than concentrated in settlements. Settlements like Bararoá, which once had 780 households, declined to only 13 households, yet the number of inhabitants did not decrease proportionally, indicating widespread dispersion. The geography of Pará, with its fertile riverbanks and abundant natural resources, encouraged people to live scattered for easier access to hunting, fishing, and gathering. Natives maintained houses in settlements mainly for religious duties and festivals but resided primarily outside them. The decline of settlements was exacerbated by a lack of religious ministers and weakened authority, leading inhabitants to distance themselves further from settlements. Many settlement houses fell into ruin due to abandonment and light construction, causing some settlements to disappear entirely. Population counts based on settlements became unreliable, as most people lived dispersed in remote areas, avoiding official registration and census efforts.",
+      "details": {
+        "facts": [
+          "Bararoá once had 780 households.",
+          "According to Baena, Bararoá currently has 13 households.",
+          "Baena claims Bararoá has 439 souls (inhabitants), but this number is considered excessive for so few households."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "The Pará revolution of 1835, led initially by Archpriest Baptista and later by Malcher, resulted in widespread anarchy and social dissolution in the region. The rebel forces, known as cabanos, lacked the numbers to maintain control over the vast territory and lost ground whenever they retreated. Restoration efforts, notably led by Gregorio Nazianzeno da Costa, succeeded on August 31, 1836, with João Ignacio Rodrigues do Carmo assuming military command of the district. Other settlements soon followed, with Captain Miguel Nunes Bemfica recognized for his leadership and valor. Ambrósio Ayres, a convict, formed a militia in Bararoá and played a key role in defeating the cabanos along the Maués River and at Icuipiranga, after which he was appointed Military Commander. Despite the restoration, arbitrary rule and oppression persisted. Pedro Ayres, claiming to be Ambrósio's brother and an officer of the U.S. Navy, arrived from Lima and, with Ghamburg, explored the Guiana region, even confronting the British at Fort St. Joaquim. Concurrently, a tailor from Stabrok, posing as a missionary, attempted to convert Indigenous people along the Pirarára River to his sect",
+      "details": {
+        "facts": [
+          "Bararoá was a location involved in the events following the Parà revolution of 1835.",
+          "A convict named Ambrósio Ayres gathered a select company in Bararoá, took the name Bararoá, and descended the Rio Negro.",
+          "Ambrósio Ayres distinguished himself by feats of arms against the cabanos in the Maués River and in Icuipiranga, contributing to their surrender."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "The Directory was an administrative institution that maintained cohesion between Indigenous peoples and broader colonial society in the Amazon. Its dissolution, orchestrated by Governor D. Francisco de Souza Coutinho of Pará to hinder the progress of the Captaincy of Rio Negro, led to the dispersal and decline of Indigenous settlements. The Jesuits were implicated in fomenting unrest, including Indigenous withdrawals from Marina and São Paulo, troop uprisings in Mariuá, and rebellions in Lama-Longa, Caboquena, and Bararoá, aiming to return the region to a state of wilderness. Some contemporaries believed that merging the Directory’s regulations with those of the Missions—combining the roles of Missionary and Director—would have yielded better results in integrating Indigenous communities. José Bonifacio, in 1823, supported this view, noting differences between Indigenous groups in regions like São Paulo and Minas versus those in the Amazon, with the former being more nomadic and the latter more settled due to abundant waterways. The dissolution of the Directory resulted in the reduction or disappearance of several Indigenous settlements. The text suggests that a more effective policy could have been achieved by synthesizing the Directory’s and Mission’s approaches, tailored to regional Indigenous lifestyles.",
+      "details": {
+        "facts": [
+          "Bararoá is mentioned as the site of a horrific rebellion.",
+          "The rebellion at Bararoá was part of a series of uprisings and desertions involving Indigenous people and troops in the Amazon region.",
+          "The Jesuits are described as having machinations that contributed to uprisings and desertions, including the rebellion at Bararoá."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "Numerous settlements and parishes along the Amazon, Rio Negro, Solimões, Madeira, and related rivers were named for or placed under the patronage of various Marian titles, such as Our Lady of the Conception, Guadalupe, Candlemas, Loreto, Nazareth, Mount Carmel, Rosary, Health, and Help. The Omágua, also known as Cambeba, were an indigenous nation on the Solimões River, notable for their practice of artificial cranial shaping, and inhabited islands above the Jutahi River. The Orinaiáno and Oripãs were indigenous nations located on the Padauari and Madeira Rivers, respectively, with the latter being ancestors of the Araretama population. The Pacaraima mountain range in Guiana marks a significant boundary between Brazil, Venezuela, and European Guiana, and is the source of several tributaries forming the Rio Branco. The Pachinas and Paeuri were indigenous nations on the Icapó and other rivers, ancestral to the populations of Fonte-Boa and Saracá. The Padauari River, inhabited by Aanás, Guaribas, and Orumanáos, originates in the Maduacáxas mountains and nearly connects to the Orinoco via a short",
+      "details": {
+        "facts": [
+          "Bararoá is a parish located on the Rio Negro.",
+          "Our Lady of the Rosary is the patroness of the parish of Bararoá on the Rio Negro.",
+          "The Padauari River is located in Guiana, on the left bank of the Rio Negro, opposite the parish of Bararoá."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "Upon entering the Nhamundá River district, a notable tribe of women, the Icamiaba, lived separately from men under their own laws, attracting the attention of early explorers like Orellana. The region, known as Guiana, was divided into Manaus and Mariuá. Manaus included the city of Manaus and several parishes and settlements, totaling 15,776 inhabitants and 1,600 households. Mariuá comprised a town, multiple parishes, and settlements, with 10,811 inhabitants and 1,327 households. Including 450 people from Guiana settlements on the Japurá River, the total population reached 27,037 with 2,970 households, making Guiana the most populated and agriculturally productive region of the Upper Amazon. Main crops included cotton, coffee, cacao, and tobacco, with additional cultivation of corn, rice, manioc, vegetables, fruits, and spices. Wild products such as indigo, vanilla, pitch, and various native plants were also gathered and exported, along with feather-embroidered maqueira nets. The region’s rivers and lakes provided abundant pirarucu and manatee, the latter also yielding oil, as did turtles, whose products were exported to Pará.",
+      "details": {
+        "facts": [
+          "Bararoá is listed as one of the parishes in the town of Mariuá.",
+          "The town of Mariuá includes the parishes of Aracari, Bararoá, Caboquéna, Carmo, Itarendáua, Marabitanas, and Santa Isabel.",
+          "The town of Mariuá is part of the Mariuá division in the Guiana region."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "São José de Iama-IiOaiga was a settlement on the right bank of the Rio Negro, located between the Xibarú River and the Anhori Stream, and between Bararoá and Santa Izabel, 127 leagues above the confluence of the Rio Negro and 205 leagues from the mouth of the Jamundá. It was founded by Principal Dari, who named it after himself following a separation from Bararoá, and incorporated the Auacihidá Village, three leagues upstream. In 1757, a rebellion led to the destruction by fire of this settlement, along with Bararoá and Caboquéna, reportedly triggered by an Indigenous man’s anger at a missionary’s interference in his personal life. The inhabitants, primarily Manáos, Banibas, and Barés, cultivated manioc, fruits, rice, coffee, and cotton, and produced cloth, hammocks, ropes, pitch, salsaparrilha, and puxiri. The settlement belonged to the district of Mariuá. The Tupica language was widely spoken, serving as a lingua franca throughout the Province of Pará and much of Brazil, especially among Indigenous groups influenced by the Tupinambá. Tupica was used in homes, settlements, and towns, with",
+      "details": {
+        "facts": [
+          "Bararoá is mentioned as a location near São José de Iama-IiOaiga, a settlement on the right bank of the Rio Negro, between the Xibarú River and the Anhori Stream, and between Bararoá and Santa Izabel.",
+          "São José de Iama-IiOaiga was founded by Principal Dari, who separated from Bararoá.",
+          "In 1757, a rebellion broke out in São José de Iama-IiOaiga, which, together with Bararoá and Caboquéna, was reduced to ashes."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "entity_hybrid",
+      "value": "By the mid-18th century, the Upper Amazon reached its highest population, with approximately 30,000 households and at least 100,000 inhabitants. Despite earlier devastation caused by Spanish Jesuit invasions, which ruined most Solimões settlements and relocated many people to Marañón and Gualhaga, Carmelite missionaries restored and expanded settlements. The Tecúnas' settlement became regionally significant, and Rio Negro establishments flourished, offsetting losses from Jesuit conflicts. Numerous villages existed across the Amazon, Solimões, Rio Negro, and Rio Branco, including Saracá, Itacoatiara, Tefé, Barra, Mariuá, Santa Izabel, and many others. The Carmelite Mission, over 55 years, established settlements along both banks of the Rio Negro above its waterfalls and, in less than 40 years, restored Solimões settlements. Government involvement was minimal, limited to orders for Indigenous resettlement, with most credit for regional development attributed to the Carmelites. Exploration of Amazon tributaries was limited: only the Urubu, Saracá lakes, and Madeira rivers were well-known, while most northern tributaries remained unexplored. In the Solimões, only the Purús and parts of the J",
+      "details": {
+        "facts": [
+          "Bararoá was one of the villages established on the Rio Negro, below the waterfalls, during the middle of the eighteenth century.",
+          "The Upper Amazon region, including Bararoá, had about 30,000 households and not fewer than 100,000 people at that time.",
+          "The settlements, including Bararoá, were largely restored and established through the efforts of the Carmelite Mission."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Baeta were an Indigenous nation of the Solimões, residing on the river named after them, with a village at the mouth of the Baetas River, situated between the lakes Saraimo and Maruimtíba. The BaiMri and Bailractiâ were Indigenous nations of the Solimões on the Juruá River. The BaMi5)a were an Indigenous nation of Guiana, living on the Içána and Ixié rivers, and their descendants populated settlements such as Lama-Longa, Manaos, Guia, Santa Anna, S. Filippo, Mabbé, and S. Marcellino. Bararoá, originally located near the mouth of the Xjuará River, was moved to its current site on the right bank of the Rio Negro, 2021 leagues above the Jamundá River, and was destroyed in the rebellion of 1757. In 1758, Bararoá was made a town named Thomar by Governor Francisco Xavier de Mendonça Furtado but later lost this status. The settlement was a key trading post between the Upper and Lower Rio Negro due to its strategic location near major rivers and waterfalls. Inhabitants, numbering 1,500 in 160 households, descended from",
+      "details": {
+        "facts": [
+          "Bararoá (Parish of Our Lady of the Rosary of) is located on the right bank of the Rio Negro, 2021 leagues above the mouth of the Jamundá River, under parallel 00° 16' S., crossed by the meridian 29° 33' W. of Olinda.",
+          "Bararoá's first location was on the southern bank near the mouth of the Xjuará River, in front of Timoni Island, before being moved to its current site.",
+          "Bararoá was completely reduced to ashes by the rebellion of 1757."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "Numerous settlements and parishes along the Amazon, Rio Negro, Solimões, Madeira, and related rivers were named after and dedicated to various Marian titles, such as Our Lady of the Conception, Guadalupe, Candlemas, Loreto, Nazareth, Mount Carmel, the Rosary, Health, and Help. The Omágua, also called Cambeba, were an indigenous nation known for artificially shaping their heads and inhabited islands on the Solimões River above the Jutahi River. The Orinaiáno were an indigenous nation of Guiana on the Padauari River, while the Oripãs, a Mundurucu nation on the Madeira River, were ancestors of the Araretama population. The Pacaraima mountain range, at latitude 4° N, forms part of the boundary between Brazil, Venezuela, and European Guiana, and is the source of several tributaries of the Uraricoera and Rio Branco. The Pachinas, on the Icapó River, were ancestors of Fonte-Boa’s population; the Paeuri, of Saracá’s; and the Palpumãs, on the Juruá River, were another Solimões nation. The Padauari River, rising in the Maduac",
+      "details": {
+        "facts": [
+          "Bararoá is a parish located on the Rio Negro.",
+          "Our Lady of the Rosary is the patroness of the parish of Bararoá on the Rio Negro.",
+          "Padauari is a river of Guiana on the left bank of the Rio Negro, opposite the parish of Bararoá."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "Barra do Rio Negro is located on the east bank of the Rio Negro, about twelve miles above its junction with the Amazon River, on uneven ground approximately thirty feet above high-water level. The city features two small streams crossed by wooden bridges and has regularly laid out but unpaved and uneven streets. Most houses are single-story with red-tiled roofs, brick floors, and white- or yellow-washed walls, with green doors and shutters. The original fort is now reduced to a fragment of wall and a mound of earth; there are two churches, both considered poor compared to that of Santarem. The population numbers five to six thousand, predominantly Indians and people of mixed descent, with little to no pure European lineage remaining due to extensive intermarriage. The main exports are Brazil nuts, sarsaparilla, and fish, while imports include inferior European cotton goods, coarse cutlery, beads, mirrors, and trinkets for trade with local tribes. The city serves as a trade headquarters for the region, with a difficult supply line from Para, about a thousand miles away, making many goods expensive and scarce. Social life is centered on trade, with little intellectual activity, and Sunday mass is a key occasion for elaborate dress and social visits.",
+      "details": {
+        "facts": [
+          "Barra do Rio Negro is situated on the east bank of the Rio Negro, about twelve miles above its junction with the Amazon.",
+          "The city is on uneven ground, about thirty feet above the high-water level.",
+          "There are two small streams or gullies running through Barra do Rio Negro, which rise during the wet season."
+        ],
+        "year": 1858,
+        "doc_name": "Travels on the Amazon, Wallace, Alfred Russel"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "Barra de Rio Negro is a town situated on uneven land along the Rio Negro, where the river is about four miles wide at high water and drops thirty feet during the dry season. The riverbank features both steep bluffs and gently sloping shores, providing safe anchorage due to the deep channel close to shore. The town has a population of just over three thousand, with a significant proportion being Indians. Houses are typically one story, occasionally two or three, and resemble those found in more developed towns further down the river. The town is built near a small bay protected by two points, with a narrow inlet and a high, green hill beyond. Behind the town lies a flat plateau, contributing to the area's scenic beauty. On the riverbank once stood the fort of San Jose, now a ruin with only remnants of its walls remaining, overgrown with lichens and grass. The name \"Barra\" comes from the Portuguese word for fort, and the town is commonly called Barra de Rio Negro.",
+      "details": {
+        "facts": [
+          "Barra is a town located on the Rio Negro.",
+          "At Barra, the Rio Negro is about four miles wide at high water and much less during the dry season.",
+          "The flood at Barra can fall thirty feet during the dry season."
+        ],
+        "year": 1847,
+        "doc_name": "A voyage up the river Amazon : including a residence at Pará, Edwards, William Henry"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The city of Barra, located about seven or eight miles within the mouth of the Rio Negro, was built on elevated but uneven ground on the river’s left bank. In 1850, Barra had approximately 3,000 inhabitants. The settlement originated as a small Portuguese fort, established to protect slave-hunting expeditions targeting local Indian tribes. The Manãos, a prominent and warlike tribe in the area, frequently waged war on neighboring groups and enslaved captured prisoners. The Portuguese justified their slave-trading activities by claiming to ransom (resgatar) captives, a term that persisted in local trade for the illegal purchase of Indian children. Older residents recalled expeditions that brought back hundreds of captives at a time. Barra became the chief town of the Rio Negro district in 1809, attracting settlers from Portugal and other Brazilian provinces, leading to the construction of spacious houses and warehouses. Over the next thirty to forty years, Barra grew to become the main settlement on the Amazon after Santarem, though it was in decline by the time of the account.",
+      "details": {
+        "facts": [
+          "The city of Barra is located about seven or eight miles within the mouth of the river.",
+          "Barra is built on elevated but very uneven ground on the left bank of the Rio Negro.",
+          "In 1850, Barra had about 3,000 inhabitants."
+        ],
+        "year": 1863,
+        "doc_name": "The naturalist on the River Amazons, Bates, Henry Walter"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "São José de Iama-IiOaiga was a settlement on the right bank of the Rio Negro, between the Xibarú River and the Anhori Stream, 127 leagues above the confluence of the Rio Negro and 205 from the mouth of the Jamundá. It was founded by Principal Dari, who named it after himself following a separation from Bararoá, and incorporated the Auacihidá Village, located three leagues upstream. In 1757, a rebellion led to the destruction by fire of this settlement, along with Bararoá and Caboquéna, triggered by an Indigenous man’s resentment over a missionary’s interference in his personal life. The inhabitants, from the Manáos, Banibas, and Barés groups, cultivated manioc, fruits, rice, coffee, and cotton, and produced cloth, hammocks, ropes from piassava, and extracted pitch, salsaparrilha, and puxiri. The settlement belonged to the district of Mariuá. The Tupica language was widely spoken in the district, throughout the Province of Pará, and much of Brazil, serving as a lingua franca among Indigenous peoples and even in urban households. The language featured unconjugable verbs and indeclinable nouns, with a phon",
+      "details": {
+        "facts": [
+          "Bararoá is located near the Rio Negro.",
+          "São José de Iama-IiOaiga is a settlement on the right bank of the Rio Negro, between the Xibarú River and the Anhori Stream, and between Bararoá and Santa Izabel.",
+          "Bararoá is 127 leagues above the confluence of the Rio Negro."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "The Rio Negro marks the boundary between the empire and the Republic of Venezuela, starting from the Pacaraima mountains to Cucuhi, and with New Granada, from the same mountains to the rapids of the Cunhari River. The Rio Negro region includes the City of Manaus, the town of Mariuá, several parishes, and numerous settlements, totaling 19,953 inhabitants and 2,307 households. The area is agriculturally productive, cultivating coffee, rice, tobacco, cotton, indigo, manioc, fruits, and edible roots. Exported goods from the Rio Negro include andiroba, indigo, rice, vanilla, pitch, piassava fiber, cacao, coffee, Brazil nuts, cloves, cumaru, kapok, fine wood, turtle and manatee butter, cupuaçu oil, cotton cloth, pirarucu, puxiri, hammocks, tobacco, annatto, medicinal herbs, and other products. The Nhamundá River, on the left bank of the Amazon, rises in the Guiana mountains and divides Brazilian Guiana into eastern and western regions, entering the Amazon by two mouths. The river is historically significant as the site where Orellana encountered the so-called Amazons, or Icamiabas",
+      "details": {
+        "facts": [
+          "The Rio Negro contains the town of Mariuá.",
+          "The Rio Negro contains the parish of Rararoá.",
+          "Rararoá is listed among the parishes on the Rio Negro."
+        ],
+        "year": 1852,
+        "doc_name": "Diccionario topographico, historico, descriptivo da comarca do Alto-Amazonas, Lourenço da Silva Araújo"
+      },
+      "meta": {}
+    },
+    {
+      "source": "vector_search",
+      "value": "Abaconi, located at the mouth of the Furo-clos-Tupinambaranas, became a city in 1759. Due to ongoing mistreatment by the Mûros, the city of Serpa was relocated to an island, where inhabitants cultivated cacao, sarsaparilla, coffee, clove, and cotton. The Amazon Steamship Company established an agricultural and industrial colony near Serpa at Itacoatiara, mainly with Chinese and African settlers, but the colony failed, leaving only a sawmill and tile factory. The district of Barcellos or Mariûa, formerly part of the Rio-Negro district, included the upper Rio-Negro region above the Rio-Branco, with a population of 10,000 to 12,000. Barcellos (Mariûa), with about 2,000 inhabitants mostly descended from various Indian nations, is situated on the right bank of the Rio-Negro between the Uatanari and Baruri rivers. The town was originally given to the Carmelite mission by chief Manâos-Camandri and became the seat of the Spanish-Portuguese boundary commission in 1754. Barcellos was granted city status and made capital of the Rio-Negro captaincy in 175",
+      "details": {
+        "facts": [
+          "The district of Barcellos or Mariúa formerly belonged to the district of Rio-Negro.",
+          "The district includes the part of the Rio-Negro above the mouth of the Rio-Branco.",
+          "The district contains the parishes of Altarendaúa, Aracari, Carmo, Coboquéna, Bararoa, Santa-Izabel, Marabitanas, and a few others."
+        ],
+        "year": 1861,
+        "doc_name": "Voyage aux provinces brésiliennes du Pará et des Amazones en 1860, précédé d'une rapide coup d'oeil, sur le littoral du Brésil, Belmar, A. de."
+      },
+      "meta": {}
+    },
+    {
+      "source": "web",
+      "value": "\n## [Bararuá, Rio Negro](https://www.google.com/maps/search/Bararu%C3%A1%2C+Rio+Negro)\n\n\nBararuá, also known as Bararoá, is a historical settlement located along the Rio Negro in the Amazon region of Brazil. Established in the 18th century, it was one of several villages founded by merchants and Carmelite missionaries during that period. The village was part of a network of settlements that included Santo Elias do Jaú, Aracari, Cumaru, Mariuá, São Caetano, Cabuquena, and Dari. ([academia.edu](https://www.academia.edu/49213801/Indigenous_Activism_Territorialization_and_Ethnicity_in_the_Middle_Rio_Negro?utm_source=openai))\n\nIn 1758, the Portuguese colonial administration elevated Bararuá to the status of a vila (town) and renamed it Thomar. However, in 1833, the settlement reverted to its original name, Bararuá. ([catadordepapeis.blogspot.com](https://catadordepapeis.blogspot.com/2013/03/ambrosio-aires-o-bararoa.html?utm_source=openai))\n\nDuring the Cabanagem revolt (1835–1840), a significant regional uprising in the Amazon, Bararuá played a notable role. Ambrósio Aires, a deportee to the Rio Negro region, settled in Bararuá and became a prominent figure in the defense against the Cabanagem rebels. He was known for his commitment to protecting the local population and was willing to use his personal resources to fund defense efforts. His dedication earned him the nickname \"Bararoá,\" derived from the village's name. ([catadordepapeis.blogspot.com](https://catadordepapeis.blogspot.com/2013/03/ambrosio-aires-o-bararoa.html?utm_source=openai))\n\nBy the mid-19th century, Bararuá, like many other settlements along the Rio Negro, experienced decline. Travel accounts from that era describe it as a small, half-ruined, and almost uninhabited village. ([people.wku.edu](https://people.wku.edu/charles.smith/wallace/S011.htm?utm_source=openai))\n\nToday, Bararuá stands as a testament to the complex history of colonization, indigenous interactions, and regional conflicts in the Amazon basin. ",
+      "details": {
+        "search_context_size": "medium"
+      },
+      "meta": {}
+    },
+    {
+      "source": "web",
+      "value": "The Bararuá settlement, established in the 18th century along the Rio Negro, was part of a broader colonial effort by Portuguese authorities and Carmelite missionaries to assert control over the region. During this period, various forts and villages were constructed, including Bararuá, to facilitate trade, religious conversion, and territorial expansion. ([academia.edu](https://www.academia.edu/49213801/Indigenous_Activism_Territorialization_and_Ethnicity_in_the_Middle_Rio_Negro?utm_source=openai))\n\nThe establishment of settlements like Bararuá was accompanied by prolonged conflicts with indigenous groups who resisted colonial encroachment. Notably, the Manao, Tarumã, and Baré peoples, who inhabited the lower Rio Negro, engaged in sustained resistance against Portuguese forces. ([academia.edu](https://www.academia.edu/49213801/Indigenous_Activism_Territorialization_and_Ethnicity_in_the_Middle_Rio_Negro?utm_source=openai))\n\nThe colonial presence in the Rio Negro region led to significant disruptions for indigenous communities. The construction of forts and villages facilitated the capture and forced labor of indigenous peoples, contributing to population declines due to violence, displacement, and exposure to European diseases. The establishment of settlements like Bararuá played a role in these processes, as they served as centers for colonial administration and missionary activities aimed at assimilating indigenous populations.\n\nIn summary, Bararuá was one of several settlements established during the 18th century as part of Portuguese colonial expansion along the Rio Negro. Its history is intertwined with the broader context of colonial efforts to control the region and the resulting impacts on indigenous communities, including conflict, forced labor, and cultural disruption. ",
+      "details": {
+        "search_context_size": "medium"
+      },
+      "meta": {}
+    },
+    {
+      "source": "web",
+      "value": "The Bararoá Indigenous settlement, also known as Bararuá, was one of several villages established along the Rio Negro during the 18th century. These settlements were founded by merchants and Carmelite missionaries as part of the Portuguese colonial expansion into the Amazon region. Other villages from this period include Santo Elias do Jaú, Aracari, Cumaru, Mariuá, São Caetano, Cabuquena, and Dari. ([academia.edu](https://www.academia.edu/49213801/Indigenous_Activism_Territorialization_and_Ethnicity_in_the_Middle_Rio_Negro?utm_source=openai))\n\nThe 18th century was marked by prolonged conflicts between Portuguese colonizers and Indigenous groups in the Rio Negro area. Peoples such as the Manao, Tarumã, and Baré resisted colonial incursions, leading to wars and significant upheaval. In 1728, the Carmelite monk Matias São Boa Ventura founded the village of Nossa Senhora da Conceição do Mariuá, which later became known as Barcelos. This settlement became a central hub in the captaincy of São José do Rio Negro, reflecting the strategic importance of the region during colonial times. ([academia.edu](https://www.academia.edu/49213801/Indigenous_Activism_Territorialization_and_Ethnicity_in_the_Middle_Rio_Negro?utm_source=openai))\n\nThe establishment of settlements like Bararoá was part of a broader strategy by the Portuguese to assert control over the Amazon and integrate Indigenous populations into colonial society. This period saw the construction of forts, the founding of missions, and the relocation of Indigenous communities, often leading to significant cultural and demographic changes among the native populations. ",
+      "details": {
+        "search_context_size": "medium"
+      },
+      "meta": {}
+    },
+    {
+      "source": "web",
+      "value": "\n## [Bararoá Indigenous Archaeological Site](https://www.google.com/maps/search/Bararo%C3%A1+Indigenous+Archaeological+Site)\n\n\nThe Bararoá Indigenous Archaeological Site is located in the Rio Negro Basin, a region rich in archaeological significance and indigenous history. This area has been inhabited for thousands of years, with evidence of settlements dating back up to 9,000 years. The region is known for its ancient settlements and the presence of petroglyphs, which are rock carvings that hold cultural and historical importance. ([socioambiental.org](https://www.socioambiental.org/en/socio-environmental-news/archeology-and-indigenous-narratives-meet-in-the-history-of-the-Rio-Negro?utm_source=openai), [academia.edu](https://www.academia.edu/7274004/Petroglyphs_in_the_Lower_Negro_River_Basin_NW_Brazilian_Amazon_A_Preliminary_View?utm_source=openai))\n\nThe Rio Negro Basin has been a crossroads of various indigenous cultures, leading to a diverse and complex history. Archaeological studies in the area have uncovered artifacts and sites that provide insights into the lives of the indigenous peoples who have lived there over millennia. These findings include evidence of longhouses, communal structures that were central to the social and cultural practices of the communities. ([academia.edu](https://www.academia.edu/12338625/Paths_in_Dark_Waters_Archaeology_as_Indigenous_History_in_the_Upper_Rio_Negro_Basin_Northwest_Amazon_PhD_Dissertation?utm_source=openai))\n\nIn recent years, efforts have been made to map and document sacred indigenous sites along the Rio Negro, aiming to preserve and protect these culturally significant locations. These initiatives involve collaboration between indigenous leaders, environmental activists, and researchers to ensure that the rich heritage of the region is recognized and safeguarded. ([ictnews.org](https://ictnews.org/archive/mapping-sacred-indigenous-sites-along-the-black-river-in-brazil?utm_source=openai))\n\nThe Bararoá site, along with other archaeological locations in the Rio Negro Basin, continues to be a focal point for research and preservation, contributing to our understanding of the deep and diverse history of indigenous peoples in the Amazon. ",
+      "details": {
+        "search_context_size": "medium"
+      },
+      "meta": {}
+    },
+    {
+      "source": "web",
+      "value": "\n## [Bararuá, Rio Negro, Brazil](https://www.google.com/maps/search/Bararu%C3%A1%2C+Rio+Negro%2C+Brazil)\n\n\nThe Bararuá archaeological site is located along the Rio Negro in Brazil. Historical records from 1756 mention Bararuá as one of the notable villages in the region, alongside Camarâ and Dari. ([academia.edu](https://www.academia.edu/28648956/Results_from_Pilot_Archaeological_Fieldwork_at_the_Carrazedo_Site_Lower_Xingu_River_Amazonia?utm_source=openai)) This area is part of the Upper Rio Negro basin, a region rich in archaeological significance, with evidence of human occupation dating back up to 9,000 years. Studies indicate that ancient settlements in this basin engaged in intense exchanges between various indigenous peoples. ([socioambiental.org](https://www.socioambiental.org/en/socio-environmental-news/archeology-and-indigenous-narratives-meet-in-the-history-of-the-Rio-Negro?utm_source=openai))\n\nThe region's archaeological findings, including those from sites like Bararuá, contribute to understanding the diverse and multilingual history of the Upper Rio Negro. Research has revealed a sequence of occupations with distinct ceramic traditions, such as the Amanã phases (1500–800 BC), Pocó (600–400 BC), Caiambé (640–1100 AD), and Tefé (800 AD). These findings suggest complex inter-ethnic relations and cultural exchanges over millennia. ([pmc.ncbi.nlm.nih.gov](https://pmc.ncbi.nlm.nih.gov/articles/PMC9732643/?utm_source=openai))\n\nAdditionally, the region is home to indigenous groups like the Bará, who inhabit areas around the headwaters of the Tiquié River and are known for their craftsmanship in making feather adornments used in significant ceremonies. ([pib.socioambiental.org](https://pib.socioambiental.org/en/Povo%3ABarasana?utm_source=openai))\n\nOverall, the Bararuá site and its surrounding areas offer valuable insights into the rich cultural and historical tapestry of the Upper Rio Negro region. ",
+      "details": {
+        "search_context_size": "medium"
+      },
+      "meta": {}
+    }
+  ],
+  "agent_thoughts": "The internal evidence has established Bararoá as a significant historical settlement on the Rio Negro, with details about its destruction, population, and economic importance. However, there is a gap regarding its archaeological status or modern identification. Previous web_searches yielded minimal new information, possibly due to language barriers or the specificity of the topic. By refining the web search to 'Bararoá archaeological site Rio Negro Brazil,' I hope to uncover Brazilian academic sources, archaeological reports, or local initiatives that may not be indexed in broader English-language databases. If this search produces new place names, alternate spellings, or related sites (such as Xjuará or Thomar), I will follow up with entity_search or entity_hybrid queries on those terms. If the search is again unproductive, I will consider using general_knowledge or focusing on the Xjuará/Thomar connection to expand the investigation.",
+  "previous_hypotheses": []
+}
