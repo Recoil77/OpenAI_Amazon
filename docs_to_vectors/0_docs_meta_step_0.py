@@ -2,14 +2,14 @@ import uuid
 import json
 from pathlib import Path
 
-number = "73"
+number = "76"
 DOC_PATH = Path(f"docs/{number}/meta.json")
 
 meta = {
     "document_id": str(uuid.uuid4()),
-    "doc_name": "Voyages dans l'Amérique du Sud",
-    "year": 1883,
-    "doc_type": "book"  # or "manuscript"
+    "doc_name": "Relación del descubrimiento del río de las Amazonas, hoy San Francisco de Quito",
+    "year": 1693,
+    "doc_type": "manuscript"  # or"book" 
 }
 
 DOC_PATH.parent.mkdir(parents=True, exist_ok=True)

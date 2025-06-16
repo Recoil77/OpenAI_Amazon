@@ -10,7 +10,7 @@ SERVER_ADDRESS = env = os.getenv("SERVER_ADDRESS")
 
 # === SETTINGS ===
 WORKERS = 16
-number = "73"
+number = "76"
 INPUT_FILE = Path(f"docs/{number}/{number}.txt")
 OUTPUT_DIR = Path(f"docs/{number}/chunks_json")
 ENDPOINT = f"http://{SERVER_ADDRESS}:8000/clean_ocr_extended"

@@ -3,9 +3,9 @@ import subprocess
 from pathlib import Path
 
 # === SETTINGS ===
-number = "54"                  # ← document number
-first_page = 17                # ← start page (inclusive)
-last_page = 595                # ← end page (inclusive), None = until the end
+number = "76"                  # ← document number
+first_page = 5                # ← start page (inclusive)
+last_page = 64                # ← end page (inclusive), None = until the end
 use_pdftoppm = True            # ← True = use pdftoppm (otherwise pdfimages)
 dpi = 400                      # ← resolution
 output_format = "jpeg"         # ← 'tiff' or 'jpeg'

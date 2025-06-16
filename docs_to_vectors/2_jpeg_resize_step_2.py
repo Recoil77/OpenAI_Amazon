@@ -1,7 +1,7 @@
 from pathlib import Path
 from PIL import Image
 
-number = "54"
+number = "76"
 
 INPUT_DIR = Path(f"docs/{number}/jpeg_")
 OUTPUT_DIR = Path(f"docs/{number}/jpeg")

@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 load_dotenv()
 SERVER_ADDRESS = env = os.getenv("SERVER_ADDRESS")
 
-number = "74"
+number = "76"
 
 # === SETTINGS ===
 INPUT_DIR = Path(f"docs/{number}/jpeg")

@@ -17,6 +17,10 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from fastapi import FastAPI, UploadFile, File, Query, HTTPException, Body
 from pydantic import BaseModel
 from typing import Optional, List, Dict
+from typing import Literal, List, Optional, Dict
+
+from fastapi import APIRouter, UploadFile, File, HTTPException
+from pydantic import BaseModel, Field, ValidationError
 
 # ====== Local application imports ======
 from gateway.gateway_client import chat_completion, response_completion, embedding
@@ -577,4 +581,104 @@ async def web_search_endpoint(req: WebSearchRequest):
         return {"answer": response.output_text}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Web search failed: {e}")
-    
+
+
+
+class Box(BaseModel):
+    id: str
+    type: Literal["text", "table", "column"]
+    x0: float = Field(ge=0, le=1)
+    y0: float = Field(ge=0, le=1)
+    x1: float = Field(ge=0, le=1)
+    y1: float = Field(ge=0, le=1)
+
+class Complexity(BaseModel):
+    score: float = Field(ge=0, le=1)
+    text_density: float = Field(ge=0, le=1)
+    noise_index: float = Field(ge=0, le=1)
+    old_print_prob: float = Field(ge=0, le=1)
+
+class PageAssessment(BaseModel):
+    status: Literal["ok", "error"]
+    message: Optional[str] = None
+    rotation: Optional[int] = None  # 0 / 90 / 180 / 270
+    has_text: bool
+    complexity: Optional[Complexity] = None
+    layout: Optional[Dict[str, List[Box]]] = None
+
+# ───────────────────────────── setup ─────────────────────────────
+
+
+# helper
+
+def _file_to_data_uri(upload: UploadFile) -> str:
+    data = upload.file.read()
+    mime = mimetypes.guess_type(upload.filename)[0] or "image/jpeg"
+    return f"data:{mime};base64,{base64.b64encode(data).decode()}"
+
+# system‑prompt
+_SYSTEM_PROMPT = (
+    "You are an OCR-preflight assistant. Respond with a single valid JSON object and nothing else.\n\n"
+    "JSON keys (no extras):\n"
+    "  status: always 'ok'\n"
+    "  rotation: one of 0, 90, 180, 270\n"
+    "  has_text: true or false\n"
+    "  complexity: object with keys: score, text_density, noise_index, old_print_prob (include only if has_text is true, otherwise omit or null)\n"
+    "  layout: object with key 'boxes': array of box objects (include only if has_text is true, otherwise omit)\n\n"
+    "If has_text is true:\n"
+    "- Each box must represent a significant and logically distinct block of text suitable for separate OCR processing (such as a paragraph, main column, or long section). Do not create boxes for isolated lines, single captions, or labels unless they are substantial in size or content.\n"
+    "- Avoid creating multiple tiny boxes. Do not create a box for every line, word, or small caption. Group text into the fewest meaningful blocks possible.\n"
+    "- If the main text is interrupted by images, create one box for each uninterrupted main text region, but ignore tiny fragments or insignificant labels.\n"
+    "If has_text is false, do not include 'layout' or 'boxes', and omit or set complexity to null.\n"
+    "Never include any fields except those listed above. Never output comments, markdown, or explanations—only the JSON object.\n\n"
+    "Example (main text only):\n"
+    "{\"status\": \"ok\", \"rotation\": 0, \"has_text\": true, \"complexity\": {\"score\": 0.41, \"text_density\": 0.77, \"noise_index\": 0.09, \"old_print_prob\": 0.97}, \"layout\": {\"boxes\": [{\"id\": \"b1\", \"type\": \"text\", \"x0\": 0.10, \"y0\": 0.05, \"x1\": 0.90, \"y1\": 0.98}]}}\n"
+    "Example (no text):\n"
+    "{\"status\": \"ok\", \"rotation\": 0, \"has_text\": false}\n"
+)
+
+# ─────────────────────────── endpoint ───────────────────────────
+@app.post("/page_assess", response_model=PageAssessment)
+async def page_assess(
+    file: UploadFile = File(...),
+    model: str = "gpt-4.1-2025-04-14",
+):
+    img_uri = _file_to_data_uri(file)
+
+    messages = [
+        {"role": "system", "content": _SYSTEM_PROMPT},
+        {
+            "role": "user",
+            "content": [
+                {"type": "text", "text": "Describe page strictly as JSON."},
+                {"type": "image_url", "image_url": {"url": img_uri, "detail": "low"}},
+            ],
+        },
+    ]
+
+    resp = await chat_completion.create(
+        model=model,
+        temperature=0,
+        max_tokens=512,
+        messages=messages,
+        response_format={"type": "json_object"},
+    )
+
+    raw = resp.choices[0].message.content.strip()
+    try:
+        data = json.loads(raw)
+    except json.JSONDecodeError:
+        return PageAssessment(status="error", message="invalid_json", has_text=False)
+
+    data.setdefault("status", "ok")
+
+    try:
+        assessment = PageAssessment.model_validate(data)
+    except ValidationError as err:
+        return PageAssessment(status="error", message=f"validation_error: {err}", has_text=False)
+
+    if not assessment.has_text:
+        assessment.complexity = None
+        assessment.layout = None
+
+    return assessment
