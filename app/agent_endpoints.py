@@ -17,7 +17,7 @@ from app.classes import WebSearchRequest, GeneralKnowledgeRequest, EntitySearchR
 from app.classes import VectorSearchRequest, VectorSearchV2Request, VectorSearchV2Result, RerankRequest, RerankResult
 from app.classes import RerankSemanticV5Request, ExtractFactsRequest, ChunkCandidate
 from app.func import build_reasoning_prompt_v2
-from app.main import vector_search_v2, rerank_bge_endpoint, rerank_semantic_v5, extract_facts
+from app.main import vector_search_v2, rerank_bge_endpoint, rerank_semantic_v5, extract_facts, rerank_bge_v2_endpoint
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -28,8 +28,8 @@ app = FastAPI()
 log = structlog.get_logger(__name__)
 encoding = tiktoken.get_encoding("cl100k_base")
 
-CUTTING_BGE = 32
-CUTTING_LLM = 8
+CUTTING_BGE = 16
+CUTTING_LLM = 4
 
 @app.post("/llm_reasoning", response_model=ReasoningResponse)
 async def llm_reasoning(
@@ -57,7 +57,7 @@ async def llm_reasoning(
             max_tokens=max_tokens,
         )
         raw_json_str = response.choices[0].message.content
-        #log.debug("llm_reasoning.raw", json=raw_json_str)
+        log.debug("llm_reasoning.raw", json=raw_json_str)
 
         result = ReasoningResponse.model_validate_json(raw_json_str)
         #log.info("llm_reasoning.ok")
@@ -257,7 +257,7 @@ async def entity_hybrid_endpoint(req: VectorSearchRequest):
 
         # 3. --- BGE rerank ---
         print("  → rerank_bge_endpoint ...")
-        bge_out = await rerank_bge_endpoint(
+        bge_out = await rerank_bge_v2_endpoint(
             RerankRequest(
                 question=req.query,
                 answers=answers,
@@ -454,7 +454,7 @@ async def vector_search_endpoint(req: VectorSearchRequest):
 
         # 2. BGE rerank
         print("  → rerank_bge_endpoint ...")
-        bge_out = await rerank_bge_endpoint(
+        bge_out = await rerank_bge_v2_endpoint( #rerank_bge_v2_endpoint
             RerankRequest(
                 question=req.query,
                 answers=answers,
@@ -565,22 +565,29 @@ async def vector_search_endpoint(req: VectorSearchRequest):
         # --------------------------------------------------------------
         # 7. Собрать Evidence (используем r["summary"] если есть)
         # --------------------------------------------------------------
-        evidences = []
+        evidences: list[Evidence] = []
+
+        # ─── graceful-fallback ───────────────────────────────────
+        if not results:
+            log.warning("vector_search: 0 hits → returning empty evidence list")
+            return evidences            # []  → агент поймёт, что данных нет
+        # ─────────────────────────────────────────────────────────
+
         for r in results:
             evidences.append(
                 Evidence(
                     source="vector_search",
-                    value=r.get("summary", r["text"]),
+                    value=r.get("summary", r.get("text", "")),
                     details={
-                        "facts": r["facts"],
-                        "year": r["year"],
-                        "doc_name": r["doc_name"],
+                        "facts":     r.get("facts", []),
+                        "year":      r.get("year"),
+                        "doc_name":  r.get("doc_name"),
                     },
-                    meta={},
+                    meta=r.get("meta", {}),
                 )
             )
-        print(f"  → returning {len(evidences)} Evidence items")
 
+        log.debug("  → returning %d Evidence items", len(evidences))
         return evidences
 
     except Exception as e:

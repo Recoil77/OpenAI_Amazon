@@ -3,27 +3,31 @@ from typing import List, Dict, Any, Optional, Literal
 from uuid import UUID
 
 
+from typing import List, Optional, Dict, Any
+from pydantic import BaseModel, Field, ConfigDict
+
 class Evidence(BaseModel):
     source: str = ""
     value: str = ""
-    details: Dict[str, Any] = {}
-    meta: Dict[str, Any] = {}
-
+    details: Dict[str, Any] = Field(default_factory=dict)
+    meta:   Dict[str, Any] = Field(default_factory=dict)
 
 class Action(BaseModel):
     type: str
-    query: str
-    reason: Optional[str] = ""
+    query: Optional[str] = None
 
 class ReasoningResponse(BaseModel):
-    actions: List[Action]              = Field(default_factory=list)
-    finalize: bool                     = False
+    actions:         List[Action]      = Field(default_factory=list)
+    finalize:        bool              = False
     active_question: str               = ""
-    hypothesis: Optional[str]          = ""
-    confidence: Optional[float]        = None
-    agent_thoughts: Optional[str]          = ""
-    new_facts: List[Evidence]= Field(default_factory=list)
+    hypothesis:      Optional[str]     = ""
+    confidence:      Optional[float]   = None
+    agent_thoughts:  Optional[str]     = ""
+    new_facts:       List[Evidence]    = Field(default_factory=list)
 
+    # ── ключевая строка ─────────────────────────────
+    model_config = ConfigDict(extra='ignore')
+    # ────────────────────────────────────────────────
 class ReasoningRequest(BaseModel):
     user_query: str
     active_question: str

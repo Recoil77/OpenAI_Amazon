@@ -58,7 +58,7 @@ async def ocr_main_text_strict_json(
         "into a single space** or remove it entirely.\n"
         "3. Never output more than one consecutive dot.\n"
         "4. Stop when you reach the bottom margin of the page.\n"
-        "5. Total output must stay under 2 000 characters.\n"
+        "5. Total output must stay under 3 000 characters.\n"
     )
 
     messages = [
@@ -69,7 +69,7 @@ async def ocr_main_text_strict_json(
                 {"type": "text",
                 "text": "Extract the main body text. Respond only as JSON: {\"text\": \"...\"}"},
                 {"type": "image_url",
-                "image_url": {"url": img_uri, "detail": "high" }} #"low"   
+                "image_url": {"url": img_uri, "detail": "high" }} #  "low" 
             ],
         },
     ]
@@ -80,7 +80,7 @@ async def ocr_main_text_strict_json(
             model=model,
             temperature=0,
             response_format={"type": "json_object"},
-            max_tokens=1024,
+            max_tokens=1536,
             messages=messages,
         )
     except Exception as e:
@@ -397,6 +397,97 @@ async def rerank_bge_endpoint(req: RerankRequest):
 
 
 
+def sigmoid(x: torch.Tensor) -> torch.Tensor:
+    return 1 / (1 + torch.exp(-x))
+
+# ------------------------ v1 (старый код — без изменений)
+# class BGERerankFunction …  @app.post("/rerank_bge") …
+
+# ------------------------ v2  (M3, 8 k токенов)
+class BGERerankFunctionM3:
+    def __init__(
+        self,
+        model_name: str = "BAAI/bge-reranker-v2-m3",
+        num_threads: int | None = None,
+    ):
+        if num_threads:
+            torch.set_num_threads(num_threads)
+
+        self.device = (
+            torch.device("cuda")
+            if torch.cuda.is_available()
+            else torch.device("cpu")
+        )
+        self.tokenizer = AutoTokenizer.from_pretrained(model_name)
+        self.model = AutoModelForSequenceClassification.from_pretrained(
+            model_name,
+            torch_dtype=torch.float16 if self.device.type == "cuda" else torch.float32,
+        ).to(self.device)
+        self.model.eval()
+
+        # CPU-batching даёт прирост, особенно с 16 threads
+        self.executor = ThreadPoolExecutor()
+
+    def _score_batch(self, query: str, docs: list[str]) -> list[float]:
+        with torch.inference_mode():
+            inputs = self.tokenizer(
+                [query] * len(docs),
+                docs,
+                padding=True,
+                truncation=True,            # теперь обрежет только >8192 токенов
+                return_tensors="pt",
+            ).to(self.device)
+
+            logits = self.model(**inputs).logits.squeeze(-1)
+            return sigmoid(logits).cpu().tolist()
+
+    async def __call__(
+        self, query: str, docs: list[str], batch_size: int = 4
+    ) -> list[float]:
+        loop = asyncio.get_running_loop()
+        tasks = [
+            loop.run_in_executor(
+                self.executor,
+                self._score_batch,
+                query,
+                docs[i : i + batch_size],
+            )
+            for i in range(0, len(docs), batch_size)
+        ]
+        results = await asyncio.gather(*tasks)
+        return [score for batch in results for score in batch]
+
+
+# инициализируем при старте приложения
+bge_reranker_v2 = BGERerankFunctionM3(num_threads=16)
+
+
+class RerankRequest(BaseModel):
+    question: str
+    answers: list[str]
+    threshold: float = 0.25
+    # batch_size: int | None = None   # опционно переопределить
+
+class RerankResult(BaseModel):
+    index: int
+    score: float
+    text: str
+
+@app.post("/rerank_bge_v2")
+async def rerank_bge_v2_endpoint(req: RerankRequest):
+    try:
+        scores  = await bge_reranker_v2(req.question, req.answers, batch_size=4)
+        passed  = [
+            RerankResult(index=i, score=float(s), text=req.answers[i])
+            for i, s in enumerate(scores)
+            if s >= req.threshold
+        ]
+        # ⬇️  приводим к dict точно так же, как в v1
+        return {"results": [r.dict() for r in sorted(passed, key=lambda r: r.score, reverse=True)]}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 # Configuration
 MAX_CONCURRENT_RERANK = 8
 semaphore = asyncio.Semaphore(MAX_CONCURRENT_RERANK)
@@ -682,3 +773,111 @@ async def page_assess(
         assessment.layout = None
 
     return assessment
+
+SYSTEM_PROMPT_ =  (
+    "Read the text below. "
+    "Return a JSON object: {\"score\": N}, where N is a floating-point value from 0 to 1 reflecting your confidence that the text meaningfully references a specific, local, or lesser-known place, locality, or site of real or historical geographic interest—especially those that could potentially be identified, rediscovered, or further researched (such as abandoned settlements, old missions, forts, obscure villages, lost towns, or similarly distinctive objects). "
+    "Assign a high score (close to 1) only if the text clearly names or describes such a site, in a way that allows precise localization or further investigation (for example, includes a unique name, detailed location, specific event, or direct association with a lesser-known people, group, or event). "
+    "Assign a low score (below 0.3) if the text consists only of general background, ethnographic, cultural, botanical, zoological, economic, or social information, or mentions only famous, well-known, or modern locations, without a specific, localizable object of interest. "
+    "If the text primarily describes food, plants, cultural practices, society, nature, travel, or events with no link to a concrete, localizable, or obscure place, assign a low score. "
+    "Use the full range between 0 and 1."
+)
+
+class ObjectCheckRequest(BaseModel):
+    text: str
+
+class ObjectCheckResponse(BaseModel):
+    score: float
+
+@app.post("/check_object", response_model=ObjectCheckResponse)
+async def check_object(req: ObjectCheckRequest):
+    messages = [
+        {"role": "system", "content": SYSTEM_PROMPT_},
+        {"role": "user", "content": req.text.strip()},
+    ]
+
+    try:
+        resp = await chat_completion.create(
+            model="gpt-4.1-2025-04-14",
+            temperature=0.2,
+            messages=messages,
+            max_tokens=32,
+            response_format={"type": "json_object"},
+        )
+        parsed = resp.choices[0].message.content
+        result = json.loads(parsed)
+        if "score" not in result:
+            raise ValueError("Key 'has_object' or 'score' missing in model response")
+        # Приводим score к float с fallback на 0.0
+        try:
+            score = float(result["score"])
+        except Exception:
+            score = 0.0
+        return ObjectCheckResponse(
+            score=score
+        )
+
+    except json.JSONDecodeError as e:
+        raise HTTPException(status_code=500, detail=f"Model returned invalid JSON: {e}")
+
+    except Exception as exc:
+        raise HTTPException(status_code=502, detail=str(exc))
+
+
+
+
+
+SYSTEM_PROMPT_HYPOTHESIS = (
+    "You are a historical research assistant. "
+    "Given up to three text fragments: CONTEXT_ABOVE, MAIN_CHUNK, and CONTEXT_BELOW, "
+    "generate a single, comprehensive hypothesis about any historical settlement, site, or object described in the MAIN_CHUNK, starting directly with the hypothesis itself, without any introductory phrases. "
+    "Use CONTEXT_ABOVE and CONTEXT_BELOW only to clarify ambiguous details, names, or locations, but do not generate hypotheses about objects mentioned only in those contexts. "
+    "The hypothesis should be as rich and detailed as possible, including all unique names, toponyms, clues, and relationships—even those that seem minor or only indirectly relevant. "
+    "Your output should be a JSON object: "
+    "{\"hypothesis\": <full hypothesis>, \"confidence\": <confidence_score>} "
+    "where 'hypothesis' is a detailed English summary, and 'confidence' is a number between 0 and 1 reflecting your confidence that the hypothesis is both meaningful and complete, based primarily on the MAIN_CHUNK."
+)
+
+class HypothesisRequest(BaseModel):
+    context_above: str | None = None
+    main_chunk: str
+    context_below: str | None = None
+
+class HypothesisResponse(BaseModel):
+    hypothesis: str
+    confidence: float
+
+@app.post("/generate_hypothesis", response_model=HypothesisResponse)
+async def generate_hypothesis(req: HypothesisRequest):
+    # Формируем вход для LLM
+    user_content = (
+        f"CONTEXT_ABOVE:\n{req.context_above or ''}\n\n"
+        f"MAIN_CHUNK:\n{req.main_chunk}\n\n"
+        f"CONTEXT_BELOW:\n{req.context_below or ''}"
+    )
+
+    messages = [
+        {"role": "system", "content": SYSTEM_PROMPT_HYPOTHESIS},
+        {"role": "user", "content": user_content},
+    ]
+
+    try:
+        resp = await chat_completion.create(
+            model="gpt-4.1-2025-04-14",
+            temperature=0.2,
+            messages=messages,
+            max_tokens=1024,
+            response_format={"type": "json_object"},
+        )
+        parsed = resp.choices[0].message.content
+        result = json.loads(parsed)
+        # Минимальная валидация
+        hypothesis = result.get("hypothesis", "").strip()
+        confidence = float(result.get("confidence", 0.0))
+        return HypothesisResponse(hypothesis=hypothesis, confidence=confidence)
+
+    except json.JSONDecodeError as e:
+        raise HTTPException(status_code=500, detail=f"Model returned invalid JSON: {e}")
+
+    except Exception as exc:
+        raise HTTPException(status_code=502, detail=str(exc))

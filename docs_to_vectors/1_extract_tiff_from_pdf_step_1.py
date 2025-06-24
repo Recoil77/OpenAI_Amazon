@@ -3,9 +3,9 @@ import subprocess
 from pathlib import Path
 
 # === SETTINGS ===
-number = "76"                  # ← document number
-first_page = 5                # ← start page (inclusive)
-last_page = 64                # ← end page (inclusive), None = until the end
+number = "91"                  # ← document number
+first_page = 9               # ← start page (inclusive)
+last_page = 39              # ← end page (inclusive), None = until the end
 use_pdftoppm = True            # ← True = use pdftoppm (otherwise pdfimages)
 dpi = 400                      # ← resolution
 output_format = "jpeg"         # ← 'tiff' or 'jpeg'
@@ -13,7 +13,7 @@ jpeg_quality = "95"            # ← applies only if output_format = 'jpeg'
 
 BASE = Path(f"docs/{number}")
 PDF = BASE / f"{number}.pdf"
-OUT = BASE / output_format
+OUT = BASE / "jpeg_"
 
 # === CHECKS ===
 if not PDF.exists():

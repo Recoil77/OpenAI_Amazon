@@ -22,9 +22,9 @@ def get_endpoint_and_payload(action, context):
     action_type = action['type']
     query = action.get('query', '')
     if action_type == "vector_search":
-        return VECTOR_SEARCH_URL, {"query": query, "k": 128, "bge_threshold": 0.2, "semantic_threshold": 0.25 }
+        return VECTOR_SEARCH_URL, {"query": query, "k": 128, "bge_threshold": 0.25, "semantic_threshold": 0.5 }
     elif action_type == "entity_hybrid":
-        return HYBRID_SEARCH_URL, {"query": query, "k": 128, "bge_threshold": 0.2, "semantic_threshold": 0.25 }
+        return HYBRID_SEARCH_URL, {"query": query, "k": 128, "bge_threshold": 0.25, "semantic_threshold": 0.5 }
     elif action_type == "entity_search":
         if isinstance(query, str):
             entities = [e.strip() for e in query.split(",")]
@@ -180,7 +180,7 @@ async def agent_loop(user_query):
 
 
 if __name__ == "__main__":
-    user_query = """Find all information and facts related to the object or place named Bararoá."""
+    user_query = """Find all information and facts related to the object or place named Antipas."""
     
     asyncio.run(agent_loop(user_query))
 

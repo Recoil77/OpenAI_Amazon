@@ -10,7 +10,7 @@ SERVER_ADDRESS = env = os.getenv("SERVER_ADDRESS")
 
 # === НАСТРОЙКИ ===
 WORKERS = 16
-number = "76"
+number = "78"
 CHUNKS_DIR = Path(f"docs/{number}/chunks_json")
 OUTPUT_DIR = Path(f"docs/{number}/chunks_with_metadata")
 META_PATH = Path(f"docs/{number}/meta.json")
